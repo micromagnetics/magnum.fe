@@ -9,6 +9,9 @@ namespace magnumfe {
     const dolfin::FunctionSpace& V1,
     const dolfin::FunctionSpace& V2);
 
+  void init_mapping(const dolfin::FunctionSpace& VV,
+      const dolfin::FunctionSpace& VS);
+
   void assemble_scalar_product(const dolfin::GenericVector& x,
       const dolfin::FunctionSpace& VV,
       const dolfin::FunctionSpace& VS,

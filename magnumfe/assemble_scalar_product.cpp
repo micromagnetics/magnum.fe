@@ -36,6 +36,17 @@ namespace magnumfe {
     }
   }
 
+  void init_mapping(const dolfin::FunctionSpace& VV,
+      const dolfin::FunctionSpace& VS)
+  {
+    //dolfin::FunctionSpace Vx();
+    boost::unordered_map<uint, uint> Mx, My, Mz;
+
+    dolfin::FunctionSpace Vx = VV.sub(0).collapse(Mx);
+    //Vy = VV.sub(1).collapse(My);
+    //Vz = VV.sub(2).collapse(Mz);
+  }
+
   void assemble_scalar_product(const dolfin::GenericVector& x, const dolfin::FunctionSpace& VV, const dolfin::FunctionSpace& VS, dolfin::GenericMatrix& A) {
     //TODO assert VV.mesh == VS.mesh
     boost::shared_ptr<dolfin::TensorLayout> tensor_layout = A.factory().create_layout(2);
