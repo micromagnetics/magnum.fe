@@ -40,9 +40,9 @@ namespace magnumfe {
       const dolfin::FunctionSpace& VS)
   {
     //dolfin::FunctionSpace Vx();
-    boost::unordered_map<uint, uint> Mx, My, Mz;
+    //boost::unordered_map<uint, uint> Mx, My, Mz;
 
-    dolfin::FunctionSpace Vx = VV.sub(0).collapse(Mx);
+    //dolfin::FunctionSpace Vx = VV.sub(0).collapse(Mx);
     //Vy = VV.sub(1).collapse(My);
     //Vz = VV.sub(2).collapse(Mz);
   }

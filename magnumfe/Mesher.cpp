@@ -163,10 +163,10 @@ namespace magnumfe {
     std::vector<GFace*>   outer_faces;
 
     double shell_width = std::min(sample_size[0], std::min(sample_size[1], sample_size[2])) + margin;
+
     dolfin::Array<double> size(sample_size.size());
-    
     for (uint i=0; i<size.size(); ++i) {
-      size[i] += sample_size[i] + shell_width;
+      size[i] = sample_size[i] + shell_width;
     }
     create_cuboid_geo(size, nn, outer_vertices, outer_edges, outer_faces);
 
