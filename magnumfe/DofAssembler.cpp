@@ -1,5 +1,6 @@
 #include "DofAssembler.h"
 #include <dolfin.h>
+#include <memory>
 
 namespace magnumfe {
   /*
@@ -13,25 +14,61 @@ namespace magnumfe {
   */
 
   void DofAssembler::getMapping(boost::unordered_map<uint, uint>& dofmap,
-      const dolfin::FunctionSpace V1,
-      const dolfin::FunctionSpace V2)
+      const dolfin::FunctionSpace& V1,
+      const dolfin::FunctionSpace& V2)
   {
-    //const std::pair<uint, uint> local_range = V1.dofmap().ownership_range();
-    dolfin::Function f1(V1);
+    boost::unordered_map<uint, uint> map1;
+    const dolfin::FunctionSpace V1_collapsed = V1.dofmap()->is_view() ? *V1.collapse(map1) : V1;
 
-    // prepare vector
-    for (uint i=0; i<f1.vector()->size(); ++i) {
+    boost::unordered_map<uint, uint> map2;
+    const dolfin::FunctionSpace V2_collapsed = V2.dofmap()->is_view() ? *V2.collapse(map2) : V2;
+
+
+    // setup function in V2
+    dolfin::Function f2(V2_collapsed);
+    for (uint i=0; i<f2.vector()->size(); ++i) {
       const double value = i;
-      f1.vector()->set(&value, 1, &i);
+      f2.vector()->set(&value, 1, &i);
     }
-    f1.vector()->apply("insert");
+    f2.vector()->apply("insert");
 
-    // interpolate
-    dolfin::Vector v2;
-    V2.interpolate(v2, f1);
+    // interpolate to V1
+    dolfin::Vector v1(f2.vector()->size());
+    V1_collapsed.interpolate(v1, f2);
 
     // create map
-    std::vector<uint> map(v2.size());
-    for (uint i=0; i<v2.size(); ++i) map[i] = floor(v2[i] + 0.5);
+    // TODO throw error if value is not a natural number
+    std::vector<uint> map(v1.size());
+    for (uint i=0; i<v1.size(); ++i) map[i] = floor(v1[i] + 0.5);
+
+    // modify map for collapsed spaces
+    dofmap.clear();
+    if (V1.dofmap()->is_view()) {
+      for (boost::unordered_map<uint, uint>::iterator it = map1.begin(); it != map1.end(); ++it) {
+        dofmap[it->second] = map[it->first];
+      }
+    }
+    else {
+      for (uint i=0; i<map.size(); ++i) {
+        dofmap[i] = map[i];
+      }
+    }
+
+    if (V2.dofmap()->is_view()) {
+      for (boost::unordered_map<uint, uint>::iterator it = dofmap.begin(); it != dofmap.end(); ++it) {
+        it->second = map2[it->second];
+      }
+    }
+
+    // some debug output
+    /*
+    std::cout << "Collapse map:" << std::endl;
+    for (boost::unordered_map<uint, uint>::iterator it = map1.begin(); it != map1.end(); ++it) {
+      std::cout << it->first << " -> " << it->second << std::endl;
+    }
+    for (boost::unordered_map<uint, uint>::iterator it = map2.begin(); it != map2.end(); ++it) {
+      std::cout << it->first << " -> " << it->second << std::endl;
+    }
+    */
   }
 }
