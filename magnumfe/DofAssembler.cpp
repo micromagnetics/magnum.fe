@@ -26,7 +26,11 @@ namespace magnumfe {
 
     // setup function in V2
     dolfin::Function f2(V2_collapsed);
-    for (uint i=0; i<f2.vector()->size(); ++i) {
+    const std::pair<uint, uint> local_range = V2_collapsed.dofmap()->ownership_range();
+    std::cout << "Range: " << local_range.first << ", " << local_range.second << std::endl;
+
+    //for (uint i=0; i<f2.vector()->size(); ++i) {
+    for (uint i=local_range.first; i<local_range.second; ++i) {
       const double value = i;
       f2.vector()->set(&value, 1, &i);
     }
