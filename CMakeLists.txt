@@ -92,7 +92,9 @@ include_directories(
   #  ${NUMPY_INCLUDE_DIRS}
 )
 
-#message(${DOLFIN_CFLAGS_OTHER})
+link_directories(
+  ${DOLFIN_LIBRARY_DIRS}
+)
 
 add_library(magnumfe SHARED ${MAGNUMFE_SRC})
 target_link_libraries(magnumfe ${DOLFIN_LIBRARIES})
