@@ -20,6 +20,8 @@ namespace magnumfe {
         boost::unordered_map<uint, uint> dofmap;
         getMapping(dofmap, V1, V2);
 
+        if (dolfin::MPI::process_number() != 0) return;
+
         std::cout << "VIEW, V1: " << V1.dofmap()->is_view() << ", V2: " << V2.dofmap()->is_view() << std::endl;
         for (boost::unordered_map<uint, uint>::iterator it = dofmap.begin(); it != dofmap.end(); ++it) {
           std::cout << it->first << " -> " << it->second << std::endl;
