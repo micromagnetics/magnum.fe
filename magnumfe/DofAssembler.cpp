@@ -18,29 +18,17 @@ namespace magnumfe {
       const dolfin::FunctionSpace& V2)
   {
     // collapse function spaces and store mapping
-    boost::unordered_map<uint, uint> map1;
+    boost::unordered_map<uint, uint> cmap1;
+    const dolfin::FunctionSpace V1_collapsed = V1.dofmap()->is_view() ? *V1.collapse(cmap1) : V1;
+    const std::pair<uint, uint> local_range1 = V1_collapsed.dofmap()->ownership_range();
 
-    //boost::shared_ptr<const dolfin::GenericDofMap> hallo = V1.dofmap();
-    //dolfin::DofMap bla(map1, *static_cast<const dolfin::DofMap*>(hallo.get()), *V1.mesh(), false);
-
-    //const dolfin::FunctionSpace V1_collapsed = V1.dofmap()->is_view() ? dolfin::DofMap(map1, static_cast<dolfin::DofMap>(*V1.dofmap()), *V1.mesh(), false) : V1;
-    const dolfin::FunctionSpace V1_collapsed = V1.dofmap()->is_view() ? *V1.collapse(map1) : V1;
-
-    std::cout << "MAP 1 size: " << map1.size() << std::endl;
-    for (boost::unordered_map<uint, uint>::iterator it = map1.begin(); it != map1.end(); ++it) {
-      std::cout << "map1: " << it->first << " -> " << it->second << std::endl;
-    }
-
-    boost::unordered_map<uint, uint> map2;
-    const dolfin::FunctionSpace V2_collapsed = V2.dofmap()->is_view() ? *V2.collapse(map2) : V2;
-    std::cout << "MAP 2 size: " << map1.size() << std::endl;
+    boost::unordered_map<uint, uint> cmap2;
+    const dolfin::FunctionSpace V2_collapsed = V2.dofmap()->is_view() ? *V2.collapse(cmap2) : V2;
+    const std::pair<uint, uint> local_range2 = V2_collapsed.dofmap()->ownership_range();
 
     // setup function in V2
     dolfin::Function f2(V2_collapsed);
-    const std::pair<uint, uint> local_range = V2_collapsed.dofmap()->ownership_range();
-
-    //for (uint i=0; i<f2.vector()->size(); ++i) {
-    for (uint i=local_range.first; i<local_range.second; ++i) {
+    for (uint i=local_range2.first; i<local_range2.second; ++i) {
       const double value = i;
       f2.vector()->set(&value, 1, &i);
     }
@@ -51,23 +39,39 @@ namespace magnumfe {
     dolfin::Vector v1(f2.vector()->size());
     V1_collapsed.interpolate(v1, f2);
 
+    // create a vector with all indices for gathering
+    std::vector<uint> gather_all(v1.size());
+    for (uint i=0; i<v1.size(); ++i) gather_all[i] = i;
+
     // create map
-    // TODO throw error if value is not a natural number
     std::vector<uint> map(v1.size());
 
     // gather value in v1
-    for (uint i=0; i<v1.size(); ++i) map[i] = i;
     dolfin::Vector v1_local(v1.size());
-    v1.gather(v1_local, map);
+    v1.gather(v1_local, gather_all);
+
     for (uint i=0; i<v1.size(); ++i) {
+      // TODO throw error if value is not a natural number
       map[i] = floor(v1_local[i] + 0.5);
     }
 
     // modify map for collapsed spaces
     dofmap.clear();
     if (V1.dofmap()->is_view()) {
-      for (boost::unordered_map<uint, uint>::iterator it = map1.begin(); it != map1.end(); ++it) {
-        dofmap[it->second] = map[it->first];
+      // distribute cmap via a dolfin::Vector
+      boost::shared_ptr<dolfin::GenericVector> cmap = dolfin::Function(V1_collapsed).vector();
+      for (uint i=local_range1.first; i<local_range1.second; ++i) {
+        const double value = cmap1[i];
+        cmap->set(&value, 1, &i);
+      }
+      cmap->apply("insert");
+
+      dolfin::Vector cmap_local(cmap->size());
+      cmap->gather(cmap_local, gather_all);
+
+      // Apply mapping
+      for (uint i=0; i<cmap_local.size(); ++i) {
+        dofmap[cmap_local[i]] = map[i];
       }
     }
     else {
@@ -77,20 +81,22 @@ namespace magnumfe {
     }
 
     if (V2.dofmap()->is_view()) {
+      // distribute cmap via a dolfin::Vector
+      boost::shared_ptr<dolfin::GenericVector> cmap = dolfin::Function(V2_collapsed).vector();
+      for (uint i=local_range2.first; i<local_range2.second; ++i) {
+        const double value = cmap2[i];
+        cmap->set(&value, 1, &i);
+      }
+      cmap->apply("insert");
+
+      dolfin::Vector cmap_local(cmap->size());
+      cmap->gather(cmap_local, gather_all);
+
+      // Apply mapping
       for (boost::unordered_map<uint, uint>::iterator it = dofmap.begin(); it != dofmap.end(); ++it) {
-        it->second = map2[it->second];
+        //it->second = map2[it->second];
+        it->second = cmap_local[it->second];
       }
     }
-
-    // some debug output
-    /*
-    std::cout << "Collapse map:" << std::endl;
-    for (boost::unordered_map<uint, uint>::iterator it = map1.begin(); it != map1.end(); ++it) {
-      std::cout << it->first << " -> " << it->second << std::endl;
-    }
-    for (boost::unordered_map<uint, uint>::iterator it = map2.begin(); it != map2.end(); ++it) {
-      std::cout << it->first << " -> " << it->second << std::endl;
-    }
-    */
   }
 }
