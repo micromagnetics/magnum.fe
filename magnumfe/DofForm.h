@@ -33,7 +33,7 @@ namespace magnumfe {
     // Virtual functions
     virtual uint coefficient_number(const std::string & name) const;
     virtual std::string coefficient_name(uint i) const;
-    virtual void eval(double* A, const double * const * w);
+    //virtual void eval(double* A, const double * const * w);
 
   protected:
     // Function spaces (one for each argument)

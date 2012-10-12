@@ -28,21 +28,5 @@ namespace magnumfe {
         }
       }
   };
-
-  /*
-  class DofForm {
-
-    public:
-      dolfin::FunctionSpace V1, V2;
-
-      DofForm(dolfin::FunctionSpace V1, dolfin::FunctionSpace V2);
-
-      virtual void eval(Array<double>& values,
-          const Array<double>& a,
-          const Array<double>& b);
-
-    private:
-  }
-  */
 }
 #endif
