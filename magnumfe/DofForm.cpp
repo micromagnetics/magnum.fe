@@ -93,3 +93,8 @@ std::string DofForm::coefficient_name(uint i) const
   name << "w" << i;
   return name.str();
 }
+
+boost::shared_ptr<const dolfin::Mesh> DofForm::mesh() const
+{
+  return function_space(0)->mesh();
+}

@@ -4,6 +4,7 @@
 #include <dolfin.h>
 #include <map>
 #include <vector>
+#include <boost/multi_array.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
@@ -33,9 +34,12 @@ namespace magnumfe {
     // Virtual functions
     virtual uint coefficient_number(const std::string & name) const;
     virtual std::string coefficient_name(uint i) const;
+    virtual boost::shared_ptr<const dolfin::Mesh> mesh() const;
 
     virtual void eval(double* A, const double * const * w) const = 0;
-    virtual void cell_sparsity(std::vector<std::vector<uint> >& entries) const = 0;
+    //virtual void cell_sparsity(uint** entries) const = 0;                      // TODO add cell_index?
+    virtual void cell_sparsity(boost::multi_array<uint, 2>& entries) const = 0; // TODO add cell_index?
+    virtual uint non_zero_entries() const = 0;                                 // TODO add cell_index?
 
   protected:
     // Function spaces (one for each argument)
