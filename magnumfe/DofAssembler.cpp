@@ -10,6 +10,7 @@ namespace magnumfe {
       bool reset_sparsity)
   {
     const uint form_rank = a.rank();
+    const uint num_coefficients = a.num_coefficients();
 
     // INITIALIZE SPARSITY PATTERN
     boost::shared_ptr<dolfin::TensorLayout> tensor_layout = A.factory().create_layout(form_rank);
@@ -50,13 +51,31 @@ namespace magnumfe {
     std::vector<uint> num_rows(a.non_zero_entries(), 1);
     std::vector<const uint *> rows(form_rank);
 
+    std::vector<double> values(a.non_zero_entries());
+    std::vector<double *> w(num_coefficients);
+
+    std::vector<std::vector<double> > vector_w(num_coefficients);
+    for (uint i=0; i<num_coefficients; ++i)
+      vector_w[i].resize(a.function_space(i + form_rank)->dofmap()->max_cell_dimension());
+
     for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
+      // get cell dofs for each rank
       for (uint i=0; i<form_rank; ++i)
         dofs[i] = &(a.function_space(i)->dofmap()->cell_dofs(cell->index()));
 
+      // create w
+      for (uint i=0; i<num_coefficients; ++i) {
+        dolfin::Function coeff(a.function_space(i + form_rank));
+        coeff.interpolate(*a.coefficient(i));
+        const uint* coeff_dofs = &(coeff.function_space()->dofmap()->cell_dofs(cell->index())[0]);
+        coeff.vector()->get_local(&vector_w[i][0], coeff.function_space()->dofmap()->cell_dimension(cell->index()), coeff_dofs);
+        w[i] = &vector_w[i][0];
+      }
+      a.eval(&values[0], &w[0]);
+
       //const double value = a.eval() TODO should take dofs somehow
       for (uint i=0; i<a.non_zero_entries(); ++i) {
-        const double value = 1.0; // TODO real value
+        const double value = values[i];
         for (uint j=0; j<form_rank; ++j) {
           const uint* row = &(*dofs[j])[cell_sparsity[i][j]];
           rows[j] = row;

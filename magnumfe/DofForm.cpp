@@ -4,7 +4,7 @@
 using namespace magnumfe;
 
 DofForm::DofForm(uint rank, uint num_coefficients)
-  : _function_spaces(rank), _coefficients(num_coefficients), _rank(rank)
+  : _function_spaces(rank + num_coefficients), _coefficients(num_coefficients), _rank(rank)
 {
   // Do nothing
 }

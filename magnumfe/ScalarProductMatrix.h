@@ -19,6 +19,7 @@ namespace magnumfe {
       std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > function_spaces;
       _function_spaces[0] = V1;
       _function_spaces[1] = V2;
+      _function_spaces[2] = V2; // first coefficient
       set_coefficient(0, a);
     }
 
@@ -45,13 +46,27 @@ namespace magnumfe {
 
     virtual void eval(double* A, const double * const * w) const
     {
-      // do something
+      A[0]  = w[0][0];
+      A[1]  = w[0][1];
+      A[2]  = w[0][2];
+
+      A[3]  = w[0][3];
+      A[4]  = w[0][4];
+      A[5]  = w[0][5];
+
+      A[6]  = w[0][6];
+      A[7]  = w[0][7];
+      A[8]  = w[0][8];
+
+      A[9]  = w[0][9];
+      A[10] = w[0][10];
+      A[11] = w[0][11];
     }
 
     //virtual void cell_sparsity(uint** entries) const
     virtual void cell_sparsity(boost::multi_array<uint, 2>& entries) const
     {
-      const uint dim = _function_spaces[1]->dofmap()->max_cell_dimension();
+      const uint dim = _function_spaces[0]->dofmap()->max_cell_dimension();
       if (entries.shape()[0] != non_zero_entries() ||
           entries.shape()[1] != rank())
       {
@@ -61,15 +76,15 @@ namespace magnumfe {
 
       for (uint i=0; i<dim; ++i) {
         for (uint j=0; j<3; ++j) { // TODO get dimension from function space
-          entries[i + j*dim][0] = i + j*dim;
-          entries[i + j*dim][1] = i;
+          entries[i + j*dim][0] = i;
+          entries[i + j*dim][1] = i + j*dim;
         }
       }
     }
 
     virtual uint non_zero_entries() const
     {
-      const uint dim = _function_spaces[0]->dofmap()->max_cell_dimension();
+      const uint dim = _function_spaces[1]->dofmap()->max_cell_dimension();
       return dim; // TODO get dimension from function space
     }
 
