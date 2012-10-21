@@ -47,16 +47,25 @@ namespace magnumfe {
     A.zero();
 
     // WRITE VALUES
+    std::vector<uint> num_rows(a.non_zero_entries(), 1);
+    std::vector<const uint *> rows(form_rank);
+
     for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
       for (uint i=0; i<form_rank; ++i)
         dofs[i] = &(a.function_space(i)->dofmap()->cell_dofs(cell->index()));
 
-      //for (uint i=0; i<a.non_zero_entries(); ++i) {
-      //  for (uint j=0; j<form_rank; ++j) {
-      //    const uint value = (*dofs[j])[cell_sparsity[i][j]];
-      //  }
-      //}
+      //const double value = a.eval() TODO should take dofs somehow
+      for (uint i=0; i<a.non_zero_entries(); ++i) {
+        const double value = 1.0; // TODO real value
+        for (uint j=0; j<form_rank; ++j) {
+          const uint* row = &(*dofs[j])[cell_sparsity[i][j]];
+          rows[j] = row;
+        }
+        //(const double* block, const uint* num_rows, const uint * const * rows)
+        A.set(&value, &num_rows[0], &rows[0]);
+      }
     }
+    A.apply("insert");
   }
 
   void DofAssembler::init_tensor_layout(dolfin::TensorLayout& tensor_layout,
