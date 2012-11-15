@@ -12,7 +12,7 @@ namespace magnumfe {
     dolfin::Function fsub(Vsub);
 
     std::vector<double> cell_coefficients(Vsuper.dofmap()->max_cell_dimension());
-    dolfin::UFCCell ufc_cell(*Vsuper.mesh(), false);
+    dolfin::UFCCell ufc_cell(*Vsuper.mesh());
 
     // iterate over cells of submesh
     for (dolfin::CellIterator subcell(*Vsub.mesh()); !subcell.end(); ++subcell) {
@@ -23,7 +23,7 @@ namespace magnumfe {
 
       // iterate over dofs of submesh cell
       for (size_t i=0; i<Vsub.dofmap()->max_cell_dimension(); ++i) {
-        const uint subdof   = Vsub.dofmap()->cell_dofs(subindex)[i];
+        const size_t subdof   = Vsub.dofmap()->cell_dofs(subindex)[i];
 
         fsub.vector()->zero();
         fsub.vector()->set(&one, 1, &subdof);
@@ -53,7 +53,7 @@ namespace magnumfe {
   }
 
   void SubMeshInterpolator::cut(const dolfin::GenericVector& src, dolfin::GenericVector& target) {
-    for (uint i=0; i<mapping.size(); ++i) {
+    for (size_t i=0; i<mapping.size(); ++i) {
       const double value = src[mapping[i]];
       target.set(&value, 1, &i);
     }
@@ -64,7 +64,7 @@ namespace magnumfe {
     target.zero();
     for (uint i=0; i<mapping.size(); ++i) {
       const double value = src[i];
-      const uint j = mapping[i];
+      const size_t j = mapping[i];
       target.set(&value, 1, &j);
     }
     target.apply("insert");

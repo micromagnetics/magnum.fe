@@ -1,7 +1,6 @@
 %module(package="magnumfe") cpp
 
 %{
-#include "assemble_scalar_product.h"
 #include "Mesher.h"
 #include "SubMeshInterpolator.h"
 #include "DofForm.h"
@@ -39,7 +38,6 @@ import_array();
 //%shared_ptr(boost::unordered_map<uint, uint>)
 
 // Include headers
-%include "assemble_scalar_product.h"
 %include "Mesher.h"
 %include "SubMeshInterpolator.h"
 %include "DofForm.h"

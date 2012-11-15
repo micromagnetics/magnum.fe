@@ -1,5 +1,4 @@
 set(SRC
-  assemble_scalar_product.cpp
   Mesher.cpp
   SubMeshInterpolator.cpp
   DofForm.cpp

@@ -269,7 +269,7 @@ namespace magnumfe {
     model->getEntities(entities);       
     dolfin::Point p;
 
-    int index = 0;
+    unsigned int index = 0;
     for(unsigned int i = 0; i < entities.size(); i++) {
       for(unsigned int j = 0; j < entities[i]->mesh_vertices.size(); j++) {
         MVertex *v = entities[i]->mesh_vertices[j];
@@ -298,7 +298,7 @@ namespace magnumfe {
     std::cout << "Nodes Total:        " << model->getNumMeshVertices() << std::endl;
     */
 
-    std::vector<unsigned int> v(4);
+    std::vector<size_t> v(4);
     index = 0;
     for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
       for(unsigned int i = 0; i < (*it)->tetrahedra.size(); i++) {
@@ -317,7 +317,7 @@ namespace magnumfe {
     editor.close();
 
     // physical regions
-    dolfin::MeshFunction<unsigned int> subdomains(mesh, 3);
+    dolfin::MeshFunction<size_t> subdomains(mesh, 3);
     //subdomains.init(mesh, 3); // TODO need the tetcount?
     index = 0;
     for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
@@ -331,8 +331,8 @@ namespace magnumfe {
     // https://answers.launchpad.net/dolfin/+question/174566
 
     mesh.domains().init(3);
-    dolfin::MeshValueCollection<unsigned int> &domains = *mesh.domains().markers(3);
-    domains = dolfin::MeshValueCollection<unsigned int>(subdomains);
+    dolfin::MeshValueCollection<size_t> &domains = *mesh.domains().markers(3);
+    domains = dolfin::MeshValueCollection<size_t>(subdomains);
 
     //domains = subdomains();
 
