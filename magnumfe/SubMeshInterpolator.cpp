@@ -8,41 +8,29 @@ namespace magnumfe {
     // TODO assert that Vsuper and Vsub use the same elements
     // TODO assert that mesh of Vsub is submesh of Vsuper mesh
 
-    const double one = 1.0;
+    //std::cout << "Setup Interpolator ... " << std::flush;
+
+    // do it right
+    dolfin::Function fsuper(Vsuper);
     dolfin::Function fsub(Vsub);
 
-    std::vector<double> cell_coefficients(Vsuper.dofmap()->max_cell_dimension());
-    dolfin::UFCCell ufc_cell(*Vsuper.mesh());
-
-    // iterate over cells of submesh
-    for (dolfin::CellIterator subcell(*Vsub.mesh()); !subcell.end(); ++subcell) {
-
-      const int subindex            = subcell->index();
-      const int superindex          = Vsuper.mesh()->intersected_cell(subcell->midpoint());
-      const dolfin::Cell& supercell = dolfin::Cell(*Vsuper.mesh(), superindex);
-
-      // iterate over dofs of submesh cell
-      for (size_t i=0; i<Vsub.dofmap()->max_cell_dimension(); ++i) {
-        const dolfin::DolfinIndex subdof   = Vsub.dofmap()->cell_dofs(subindex)[i];
-
-        fsub.vector()->zero();
-        fsub.vector()->set(&one, 1, &subdof);
-        fsub.vector()->apply("insert");
-
-        ufc_cell.update(supercell);
-        fsub.restrict(&cell_coefficients[0], *Vsuper.element(), supercell, ufc_cell);
-
-        // find matching dof in supermesh cell
-        for (size_t j=0; i<Vsuper.dofmap()->cell_dimension(subindex); ++j) {
-          if (cell_coefficients[j] > 0.5) {
-            const uint superdof = Vsuper.dofmap()->cell_dofs(superindex)[j];
-
-            mapping[subdof] = superdof;
-            break;
-          }
-        }
-      }
+    std::pair<size_t, size_t> local_range = Vsuper.dofmap()->ownership_range();
+    for (size_t i = local_range.first; i < local_range.second; ++i) {
+      const double value = i;
+      const dolfin::DolfinIndex idx = i;
+      fsuper.vector()->set(&value, 1, &idx);
     }
+    fsuper.vector()->apply("insert");
+
+    Vsub.interpolate(*fsub.vector(), fsuper);
+
+    // TODO MPIifize the following
+    for (size_t i = 0; i<mapping.size(); ++i) {
+      const dolfin::DolfinIndex idx = i;
+      mapping[i] = floor((*fsub.vector())[idx] + 0.5);
+    }
+
+    //std::cout << "done" << std::endl;
 
     /*
     for (size_t i=0; i<mapping.size(); ++i) {
