@@ -18,14 +18,14 @@ namespace magnumfe {
     dolfin::GenericSparsityPattern& pattern = *tensor_layout->sparsity_pattern();
 
     // fill sparsity pattern
-    std::vector<const std::vector<size_t>* > dofs(form_rank);
+    std::vector<const std::vector<dolfin::DolfinIndex>* > dofs(form_rank);
     boost::multi_array<uint, 2> cell_sparsity(boost::extents[1][1]);
     a.cell_sparsity(cell_sparsity);
 
     // prepare for filling sparsity pattern
-    std::vector<std::vector<size_t> > entries(form_rank);
+    std::vector<std::vector<dolfin::DolfinIndex> > entries(form_rank);
     for (size_t i=0; i<form_rank; ++i) entries[i].resize(1);
-    std::vector<const std::vector<size_t>* > ptr_entries(form_rank);
+    std::vector<const std::vector<dolfin::DolfinIndex>* > ptr_entries(form_rank);
 
     // iterate over cells
     for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
@@ -48,8 +48,8 @@ namespace magnumfe {
     A.zero();
 
     // WRITE VALUES
-    std::vector<size_t> num_rows(a.non_zero_entries(), 1);
-    std::vector<const size_t*> rows(form_rank);
+    std::vector<dolfin::DolfinIndex> num_rows(a.non_zero_entries(), 1);
+    std::vector<const dolfin::DolfinIndex*> rows(form_rank);
 
     std::vector<double> values(a.non_zero_entries());
     std::vector<double *> w(num_coefficients);
@@ -67,7 +67,7 @@ namespace magnumfe {
       for (size_t i=0; i<num_coefficients; ++i) {
         dolfin::Function coeff(a.function_space(i + form_rank));
         coeff.interpolate(*a.coefficient(i));
-        const size_t* coeff_dofs = &(coeff.function_space()->dofmap()->cell_dofs(cell->index())[0]);
+        const dolfin::DolfinIndex* coeff_dofs = &(coeff.function_space()->dofmap()->cell_dofs(cell->index())[0]);
         coeff.vector()->get_local(&vector_w[i][0], coeff.function_space()->dofmap()->cell_dimension(cell->index()), coeff_dofs);
         w[i] = &vector_w[i][0];
       }
@@ -77,7 +77,7 @@ namespace magnumfe {
       for (size_t i=0; i<a.non_zero_entries(); ++i) {
         const double value = values[i];
         for (size_t j=0; j<form_rank; ++j) {
-          const size_t* row = &(*dofs[j])[cell_sparsity[i][j]];
+          const dolfin::DolfinIndex* row = &(*dofs[j])[cell_sparsity[i][j]];
           rows[j] = row;
         }
         //(const double* block, const uint* num_rows, const uint * const * rows)

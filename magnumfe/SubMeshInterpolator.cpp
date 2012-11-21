@@ -23,7 +23,7 @@ namespace magnumfe {
 
       // iterate over dofs of submesh cell
       for (size_t i=0; i<Vsub.dofmap()->max_cell_dimension(); ++i) {
-        const size_t subdof   = Vsub.dofmap()->cell_dofs(subindex)[i];
+        const dolfin::DolfinIndex subdof   = Vsub.dofmap()->cell_dofs(subindex)[i];
 
         fsub.vector()->zero();
         fsub.vector()->set(&one, 1, &subdof);
@@ -55,7 +55,8 @@ namespace magnumfe {
   void SubMeshInterpolator::cut(const dolfin::GenericVector& src, dolfin::GenericVector& target) {
     for (size_t i=0; i<mapping.size(); ++i) {
       const double value = src[mapping[i]];
-      target.set(&value, 1, &i);
+      const dolfin::DolfinIndex idx = i;
+      target.set(&value, 1, &idx);
     }
     target.apply("insert");
   }
@@ -64,7 +65,7 @@ namespace magnumfe {
     target.zero();
     for (uint i=0; i<mapping.size(); ++i) {
       const double value = src[i];
-      const size_t j = mapping[i];
+      const dolfin::DolfinIndex j = mapping[i];
       target.set(&value, 1, &j);
     }
     target.apply("insert");
