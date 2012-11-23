@@ -46,24 +46,11 @@ namespace magnumfe {
 
     virtual void eval(double* A, const double * const * w) const
     {
-      A[0]  = w[0][0];
-      A[1]  = w[0][1];
-      A[2]  = w[0][2];
-
-      A[3]  = w[0][3];
-      A[4]  = w[0][4];
-      A[5]  = w[0][5];
-
-      A[6]  = w[0][6];
-      A[7]  = w[0][7];
-      A[8]  = w[0][8];
-
-      A[9]  = w[0][9];
-      A[10] = w[0][10];
-      A[11] = w[0][11];
+      for (size_t i=0; i<non_zero_entries(); ++i) {
+        A[i] = w[0][i];
+      }
     }
 
-    //virtual void cell_sparsity(uint** entries) const
     virtual void cell_sparsity(boost::multi_array<uint, 2>& entries) const
     {
       const uint dim = _function_spaces[0]->dofmap()->max_cell_dimension();
