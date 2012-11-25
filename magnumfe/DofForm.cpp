@@ -22,7 +22,7 @@ DofForm::~DofForm()
   // Do nothing
 }
 //-----------------------------------------------------------------------------
-uint DofForm::rank() const
+unsigned int DofForm::rank() const
 {
   return _rank;
 }

@@ -28,7 +28,7 @@ namespace magnumfe {
     boost::shared_ptr<const dolfin::GenericFunction> coefficient(uint i) const;
     boost::shared_ptr<const dolfin::GenericFunction> coefficient(std::string name) const;
     std::vector<boost::shared_ptr<const dolfin::GenericFunction> > coefficients() const;
-    uint rank() const;
+    unsigned int rank() const;
     uint num_coefficients() const;
 
     // Virtual functions

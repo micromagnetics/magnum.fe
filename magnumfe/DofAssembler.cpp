@@ -15,35 +15,38 @@ namespace magnumfe {
     // INITIALIZE SPARSITY PATTERN
     boost::shared_ptr<dolfin::TensorLayout> tensor_layout = A.factory().create_layout(form_rank);
     init_tensor_layout(*tensor_layout, a);
-    dolfin::GenericSparsityPattern& pattern = *tensor_layout->sparsity_pattern();
 
     // fill sparsity pattern
     std::vector<const std::vector<dolfin::DolfinIndex>* > dofs(form_rank);
     boost::multi_array<uint, 2> cell_sparsity(boost::extents[1][1]);
     a.cell_sparsity(cell_sparsity);
 
-    // prepare for filling sparsity pattern
-    std::vector<std::vector<dolfin::DolfinIndex> > entries(form_rank);
-    for (size_t i=0; i<form_rank; ++i) entries[i].resize(1);
-    std::vector<const std::vector<dolfin::DolfinIndex>* > ptr_entries(form_rank);
+    if (tensor_layout->sparsity_pattern()) {
+      dolfin::GenericSparsityPattern& pattern = *tensor_layout->sparsity_pattern();
 
-    // iterate over cells
-    for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
-      // get cell dofs
-      for (size_t i=0; i<form_rank; ++i)
-        dofs[i] = &(a.function_space(i)->dofmap()->cell_dofs(cell->index()));
+      // prepare for filling sparsity pattern
+      std::vector<std::vector<dolfin::DolfinIndex> > entries(form_rank);
+      for (size_t i=0; i<form_rank; ++i) entries[i].resize(1);
+      std::vector<const std::vector<dolfin::DolfinIndex>* > ptr_entries(form_rank);
 
-      // write global sparsity pattern for cell
-      for (size_t i=0; i<a.non_zero_entries(); ++i) {
-        for (size_t j=0; j<form_rank; ++j) {
-          const uint value = (*dofs[j])[cell_sparsity[i][j]];
-          entries[j][0]  = value;
-          ptr_entries[j] = &entries[j];
+      // iterate over cells
+      for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
+        // get cell dofs
+        for (size_t i=0; i<form_rank; ++i)
+          dofs[i] = &(a.function_space(i)->dofmap()->cell_dofs(cell->index()));
+
+        // write global sparsity pattern for cell
+        for (size_t i=0; i<a.non_zero_entries(); ++i) {
+          for (size_t j=0; j<form_rank; ++j) {
+            const uint value = (*dofs[j])[cell_sparsity[i][j]];
+            entries[j][0]  = value;
+            ptr_entries[j] = &entries[j];
+          }
+          pattern.insert(ptr_entries);
         }
-        pattern.insert(ptr_entries);
       }
+      pattern.apply();
     }
-    pattern.apply();
     A.init(*tensor_layout);
     A.zero();
 

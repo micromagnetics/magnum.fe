@@ -1,5 +1,5 @@
-#ifndef _SCALAR_PRODUCT_MATRIX_H_
-#define _SCALAR_PRODUCT_MATRIX_H_
+#ifndef _NORMALIZED_VECTOR_H_
+#define _NORMALIZED_VECTOR_H_
 
 #include "CGDofForm.h"
 #include <dolfin.h>
@@ -7,19 +7,16 @@
 #include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
-  class ScalarProductMatrix: public CGDofForm
+  class NormalizedVector: public CGDofForm
   {
     public:
 
-    ScalarProductMatrix(
+    NormalizedVector(
         boost::shared_ptr<const dolfin::FunctionSpace> V1,
-        boost::shared_ptr<const dolfin::FunctionSpace> V2,
-        boost::shared_ptr<const dolfin::GenericFunction> a) : CGDofForm(2, 1)
+        boost::shared_ptr<const dolfin::GenericFunction> a) : CGDofForm(1, 1)
     {
-      std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > function_spaces;
       _function_spaces[0] = V1;
-      _function_spaces[1] = V2;
-      _function_spaces[2] = V2; // first coefficient
+      _function_spaces[1] = V1;
       set_coefficient(0, a);
     }
 
@@ -47,10 +44,16 @@ namespace magnumfe {
     virtual void nodeEval(double* A, const double * const * w) const
     {
       const uint dim = _function_spaces[1]->element()->value_dimension(0);
+
+      double norm = 0.0;
       for (size_t i=0; i<dim; ++i) {
-        A[i] = w[0][i];
+        norm += w[0][i] * w[0][i];
       }
-      //std::cout << "Vec: " << A[0] << "," << A[1] << "," << A[2] << std::endl;
+      norm = sqrt(norm);
+
+      for (size_t i=0; i<dim; ++i) {
+        A[i] = w[0][i] / norm;
+      }
     }
   };
 }
