@@ -13,7 +13,8 @@ namespace magnumfe {
 
     NormalizedVector(
         boost::shared_ptr<const dolfin::FunctionSpace> V1,
-        boost::shared_ptr<const dolfin::GenericFunction> a) : CGDofForm(1, 1)
+        boost::shared_ptr<const dolfin::GenericFunction> a,
+        double length = 1.0) : CGDofForm(1, 1), _length(length)
     {
       _function_spaces[0] = V1;
       _function_spaces[1] = V1;
@@ -52,9 +53,12 @@ namespace magnumfe {
       norm = sqrt(norm);
 
       for (size_t i=0; i<dim; ++i) {
-        A[i] = w[0][i] / norm;
+        A[i] = w[0][i] / norm * _length;
       }
     }
+
+    protected:
+    double _length;
   };
 }
 
