@@ -3,39 +3,38 @@ from dolfin import *
 from magnumfe import *
 import numpy
 
-class DofMapMeshTest(unittest.TestCase):
-  def setUp(self):
-    mesh = UnitCubeMesh(1, 1, 1)
-    self.VS = FunctionSpace(mesh, "CG", 1)
-    self.VV = VectorFunctionSpace(mesh, "CG", 1)
-    self.fa = interpolate(Expression(('x[0]*x[1]+1.0', 'x[1]*x[2]+1.0', '1.0')), self.VV)
-    self.fb = interpolate(Expression(('x[1]*x[2]+1.0', '1.0', 'x[0]*x[1]+1.0')), self.VV)
+mesh = UnitCubeMesh(1, 1, 1)
+VS = FunctionSpace(mesh, "CG", 1)
+VV = VectorFunctionSpace(mesh, "CG", 1)
+fa = interpolate(Expression(('x[0]*x[1]+1.0', 'x[1]*x[2]+1.0', '1.0')), VV)
+fb = interpolate(Expression(('x[1]*x[2]+1.0', '1.0', 'x[0]*x[1]+1.0')), VV)
 
+class DofMapMeshTest(unittest.TestCase):
   def test_scalar_product_matrix(self):
     mesh = UnitCubeMesh(1, 1, 1)
 
-    scalar_product = ScalarProductMatrix(self.VS, self.VV, self.fa)
+    scalar_product = ScalarProductMatrix(VS, VV, fa)
     A = DofAssembler.assemble(scalar_product)
 
-    c = A*self.fb.vector()
-    fc = Function(self.VS, c)
+    c = A*fb.vector()
+    fc = Function(VS, c)
 
     # check scalar product on nodes of the unit cube
-    self.assertSPEqualAtPoint(self.fa, self.fb, fc, (0.0, 0.0, 0.0))
-    self.assertSPEqualAtPoint(self.fa, self.fb, fc, (0.0, 0.0, 1.0))
-    self.assertSPEqualAtPoint(self.fa, self.fb, fc, (0.0, 1.0, 0.0))
-    self.assertSPEqualAtPoint(self.fa, self.fb, fc, (1.0, 1.0, 1.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (0.0, 0.0, 0.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (0.0, 0.0, 1.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (0.0, 1.0, 0.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (1.0, 1.0, 1.0))
 
   def test_normalized_vector(self):
-    normalized_vector = NormalizedVector(self.VV, self.fa)
+    normalized_vector = NormalizedVector(VV, fa)
     c = DofAssembler.assemble(normalized_vector)
-    fc = Function(self.VV, c)
+    fc = Function(VV, c)
 
     # check norm on nodes of the unit cube
-    self.assertNormalizedAtPoint(self.fa, fc, (0.0, 0.0, 0.0))
-    self.assertNormalizedAtPoint(self.fa, fc, (0.0, 0.0, 1.0))
-    self.assertNormalizedAtPoint(self.fa, fc, (0.0, 1.0, 0.0))
-    self.assertNormalizedAtPoint(self.fa, fc, (1.0, 1.0, 1.0))
+    self.assertNormalizedAtPoint(fa, fc, (0.0, 0.0, 0.0))
+    self.assertNormalizedAtPoint(fa, fc, (0.0, 0.0, 1.0))
+    self.assertNormalizedAtPoint(fa, fc, (0.0, 1.0, 0.0))
+    self.assertNormalizedAtPoint(fa, fc, (1.0, 1.0, 1.0))
 
   def assertSPEqualAtPoint(self, f1, f2, f12, point):
     v1  = numpy.zeros((3,), dtype="d")

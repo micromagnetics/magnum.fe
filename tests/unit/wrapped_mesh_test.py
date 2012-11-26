@@ -3,24 +3,22 @@ from dolfin import *
 from magnumfe import *
 import numpy
 
+mesher = Mesher()
+mesher.create_cuboid((1,1,1), (7,7,7))
+mesher.create_shell(2)
+complete_mesh = mesher.mesh()
+
+mesh = WrappedMesh.create(complete_mesh, 0)
+
 class WrappedMeshTest(unittest.TestCase):
 
-    def setUp(self):
-      mesher = Mesher()
-      mesher.create_cuboid((1,1,1), (7,7,7))
-      mesher.create_shell(2)
-      complete_mesh = mesher.mesh()
-
-      self.mesh = WrappedMesh.create(complete_mesh, 0)
-
-
     def test_cut(self):
-      V    = FunctionSpace(self.mesh.with_shell, "Lagrange", 2)
+      V    = FunctionSpace(mesh.with_shell, "Lagrange", 2)
       expr = Expression("sin(x[0])")
       f    = interpolate(expr, V)
 
 
-      f_cut = self.mesh.cut(f)
+      f_cut = mesh.cut(f)
       
       self.assertOnSuperMesh(f)
       self.assertOnSubMesh(f_cut)
@@ -30,11 +28,11 @@ class WrappedMeshTest(unittest.TestCase):
       self.assertEqualAtPoint(f, f_cut, (-0.1, -0.2, 0.3))
 
     def test_expand(self):
-      V    = FunctionSpace(self.mesh, "Lagrange", 2)
+      V    = FunctionSpace(mesh, "Lagrange", 2)
       expr = Expression("sin(x[0])")
       f    = interpolate(expr, V)
 
-      f_expanded = self.mesh.expand(f)
+      f_expanded = mesh.expand(f)
       
       self.assertOnSubMesh(f)
       self.assertOnSuperMesh(f_expanded)
@@ -58,10 +56,10 @@ class WrappedMeshTest(unittest.TestCase):
       self.assertEqual(0, v[0])
 
     def assertOnSuperMesh(self, f):
-      self.assertEqual(self.mesh.with_shell.size(0), f.function_space().mesh().size(0))
+      self.assertEqual(mesh.with_shell.size(0), f.function_space().mesh().size(0))
 
     def assertOnSubMesh(self, f):
-      self.assertEqual(self.mesh.size(0), f.function_space().mesh().size(0))
+      self.assertEqual(mesh.size(0), f.function_space().mesh().size(0))
 
 if __name__ == '__main__':
     unittest.main()

@@ -5,9 +5,6 @@ import numpy
 
 class DemagFieldTest(unittest.TestCase):
 
-    def setUp(self):
-      pass
-
     def test_create_mesh(self):
       mesh = DemagField.create_mesh((0.5, 0.5, 0.5), (11, 11, 11))
       self.assertEqual(mesh.size(0), 1331)
