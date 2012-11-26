@@ -1,5 +1,5 @@
-#ifndef _SCALAR_PRODUCT_H_
-#define _SCALAR_PRODUCT_H_
+#ifndef _SCALAR_PRODUCT_MATRIX2_H_
+#define _SCALAR_PRODUCT_MATRIX2_H_
 
 #include "DofForm.h"
 #include <dolfin.h>
@@ -7,11 +7,11 @@
 #include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
-  class ScalarProductMatrix: public DofForm
+  class ScalarProductMatrix2: public DofForm
   {
     public:
 
-    ScalarProductMatrix(
+    ScalarProductMatrix2(
         boost::shared_ptr<const dolfin::FunctionSpace> V1,
         boost::shared_ptr<const dolfin::FunctionSpace> V2,
         boost::shared_ptr<const dolfin::GenericFunction> a) : DofForm(2, 1)

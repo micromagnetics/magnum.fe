@@ -7,6 +7,8 @@
 #include "CGDofForm.h"
 #include "DofAssembler.h"
 #include "ScalarProductMatrix.h"
+#include "ScalarProductMatrix2.h"
+#include "TransScalarProductMatrix.h"
 #include "NormalizedVector.h"
 %}
 
@@ -48,6 +50,8 @@ import_array();
 %include "CGDofForm.h"
 %include "DofAssembler.h"
 %include "ScalarProductMatrix.h"
+%include "ScalarProductMatrix2.h"
+%include "TransScalarProductMatrix.h"
 %include "NormalizedVector.h"
 
 // vim:ft=cpp:

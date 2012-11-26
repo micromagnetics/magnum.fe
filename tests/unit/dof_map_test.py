@@ -10,6 +10,23 @@ fa = interpolate(Expression(('x[0]*x[1]+1.0', 'x[1]*x[2]+1.0', '1.0')), VV)
 fb = interpolate(Expression(('x[1]*x[2]+1.0', '1.0', 'x[0]*x[1]+1.0')), VV)
 
 class DofMapMeshTest(unittest.TestCase):
+
+  def test_trans_scalar_product_matrix(self):
+    mesh = UnitCubeMesh(1, 1, 1)
+
+    scalar_product = TransScalarProductMatrix(VS, VV, fa)
+    A = DofAssembler.assemble(scalar_product)
+
+    c = Function(VS).vector()
+    A.transpmult(fb.vector(), c)
+    fc = Function(VS, c)
+
+    # check scalar product on nodes of the unit cube
+    self.assertSPEqualAtPoint(fa, fb, fc, (0.0, 0.0, 0.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (0.0, 0.0, 1.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (0.0, 1.0, 0.0))
+    self.assertSPEqualAtPoint(fa, fb, fc, (1.0, 1.0, 1.0))
+
   def test_scalar_product_matrix(self):
     mesh = UnitCubeMesh(1, 1, 1)
 

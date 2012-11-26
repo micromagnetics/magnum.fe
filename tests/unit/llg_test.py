@@ -28,8 +28,8 @@ class LlgTest(unittest.TestCase):
 #    f = File("dm.pvd")
 #    f << dm
   def test_integrate(self):
-    mesh  = DemagField.create_mesh((500, 125, 3), (100, 25, 3), d=3)
-    #mesh  = DemagField.create_mesh((500, 125, 3), (40, 10, 1), d=2)
+    #mesh  = DemagField.create_mesh((500, 125, 3), (100, 25, 3), d=3)
+    mesh  = DemagField.create_mesh((500, 125, 3), (40, 10, 1), d=2)
     VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
     m0    = interpolate(Constant((1.0, 0.01, 0.0)), VV)
 

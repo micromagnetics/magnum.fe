@@ -21,6 +21,8 @@ namespace magnumfe {
     boost::multi_array<uint, 2> cell_sparsity(boost::extents[1][1]);
     a.cell_sparsity(cell_sparsity);
 
+
+    //std::cout << "Build sparsity ... " << std::flush;
     if (tensor_layout->sparsity_pattern()) {
       dolfin::GenericSparsityPattern& pattern = *tensor_layout->sparsity_pattern();
 
@@ -48,6 +50,7 @@ namespace magnumfe {
       pattern.apply();
     }
     A.init(*tensor_layout);
+    //std::cout << "done" << std::endl;
     A.zero();
 
     // WRITE VALUES
@@ -58,9 +61,18 @@ namespace magnumfe {
     std::vector<double *> w(num_coefficients);
 
     std::vector<std::vector<double> > vector_w(num_coefficients);
-    for (size_t i=0; i<num_coefficients; ++i)
+    std::vector<boost::shared_ptr<dolfin::Function> > coefficients(num_coefficients);
+    for (size_t i=0; i<num_coefficients; ++i) {
+      // init value containers
       vector_w[i].resize(a.function_space(i + form_rank)->dofmap()->max_cell_dimension());
 
+      // interpolate coefficients
+      boost::shared_ptr<dolfin::Function> coeff(new dolfin::Function(a.function_space(i + form_rank)));
+      coeff->interpolate(*a.coefficient(i));
+      coefficients[i] = coeff;
+    }
+
+    //std::cout << "Calculate values ... " << std::flush;
     for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
       // get cell dofs for each rank
       for (size_t i=0; i<form_rank; ++i)
@@ -68,10 +80,8 @@ namespace magnumfe {
 
       // create w
       for (size_t i=0; i<num_coefficients; ++i) {
-        dolfin::Function coeff(a.function_space(i + form_rank));
-        coeff.interpolate(*a.coefficient(i));
-        const dolfin::DolfinIndex* coeff_dofs = &(coeff.function_space()->dofmap()->cell_dofs(cell->index())[0]);
-        coeff.vector()->get_local(&vector_w[i][0], coeff.function_space()->dofmap()->cell_dimension(cell->index()), coeff_dofs);
+        const dolfin::DolfinIndex* coeff_dofs = &(coefficients[i]->function_space()->dofmap()->cell_dofs(cell->index())[0]);
+        coefficients[i]->vector()->get_local(&vector_w[i][0], coefficients[i]->function_space()->dofmap()->cell_dimension(cell->index()), coeff_dofs);
         w[i] = &vector_w[i][0];
       }
       a.eval(&values[0], &w[0]);
@@ -88,6 +98,7 @@ namespace magnumfe {
       }
     }
     A.apply("insert");
+    //std::cout << " done" << std::endl;
   }
 
   void DofAssembler::init_tensor_layout(dolfin::TensorLayout& tensor_layout,
