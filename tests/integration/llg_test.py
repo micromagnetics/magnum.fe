@@ -42,16 +42,17 @@ class LlgTest(unittest.TestCase):
     field = Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))
 
     scalar_file = open("data/sp4.dat","w",0)
-    dt = 1e-13
+    dt = 5e-14
     T  = 1e-9
 
     t  = 0.0
+    print "Total Steps: %d" % int(T / dt)
     for i in range(int(T / dt)):
       t = i * dt
       
-      # write magnetization configuration (only each 10th step)
-      if (i % 10 == 0):
-        f = File("data/m_%d.pvd" % int(i/10))
+      # write magnetization configuration (only each 20th step)
+      if (i % 20 == 0):
+        f = File("data/m_%d.pvd" % int(i/20))
         f << m
 
       # write scalar information
