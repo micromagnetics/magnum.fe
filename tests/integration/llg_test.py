@@ -3,29 +3,14 @@ from dolfin import *
 from magnumfe import *
 import numpy
 
+mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=4)
+VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
+
 class LlgTest(unittest.TestCase):
 
-  def ttest_dm(self):
-    mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=3) #, scale=1e-9)
-    VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
-
-    arg = "sqrt((3.141592*(x[0]/1e-6))*(3.141592*(x[0]/1e-6)))"
-    m   = interpolate(Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0")), VV)
-
-    material = Material.py()
-    #material.alpha = 1.0
-
-    llg = LLG(mesh, material, scale=1e-9)
-    dm = llg.calculate_dm(m, 1e-9)
-
-    f = File("data/m.pvd")
-    f << m
-    f = File("data/dm.pvd")
-    f << dm
-
   def prepare_s_state(self):
-    mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=3) #, scale=1e-9)
-    VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
+    #mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=2)
+    #VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
 
     filename = "data/s-state.xml"
     try:
@@ -36,17 +21,19 @@ class LlgTest(unittest.TestCase):
     except IOError as e:
       material = Material.py()
       material.alpha = 1.0
-      llg = LLG2(mesh, material, scale=1e-9)
+      llg = LLG2(mesh, material, scale=1e-9, demag_order=3)
 
       # File does not exists, calculate s-state and return
       arg = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
       m   = llg.interpolate(Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0")))
 
 
-      for i in range(60):
+      volume = 187500
+      for i in range(400):
         m = llg.step(m, 1e-11)
-        #f = File("data/m_%d.pvd" % i)
-        #f << m
+        m_x = assemble(m[0] / volume * dx)
+        print "Mx: %f" % m_x
+
 
       f = File(filename)
       f << m
@@ -54,16 +41,16 @@ class LlgTest(unittest.TestCase):
       return m
 
   def test_sp4(self):
-    mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=3) #, scale=1e-9)
-    VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
+    #mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=2)
+    #VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
 
     m = self.prepare_s_state()
 
-    llg = LLG2(mesh, Material.py(), scale=1e-9)
+    llg = LLG2(mesh, Material.py(), scale=1e-9, demag_order=3)
     field = Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))
 
     scalar_file = open("data/sp4.dat","w",0)
-    dt = 5e-13
+    dt = 1e-13
     T  = 1e-9
 
     t  = 0.0
