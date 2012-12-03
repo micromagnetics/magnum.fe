@@ -1,3 +1,23 @@
+// Copyright (C) 2011-2012 Claas Abert
+//
+// This file is part of magnum.fe.
+//
+// magnum.fe is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// magnum.fe is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
+//
+// First added:  2012-11-30
+// Last changed: 2012-11-30
+
 #include <string>
 #include "DofForm.h"
 
@@ -5,19 +25,6 @@ using namespace magnumfe;
 
 DofForm::DofForm(uint rank, uint num_coefficients)
   : _function_spaces(rank + num_coefficients), _coefficients(num_coefficients), _rank(rank)
-{
-  // Do nothing
-}
-
-DofForm::DofForm(std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > function_spaces,
-                 std::vector<boost::shared_ptr<const dolfin::GenericFunction> > coefficients)
-  : _function_spaces(function_spaces), _coefficients(coefficients),
-    _rank(function_spaces.size())
-{
-  // Do nothing
-}
-//-----------------------------------------------------------------------------
-DofForm::~DofForm()
 {
   // Do nothing
 }

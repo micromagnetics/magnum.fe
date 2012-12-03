@@ -1,3 +1,23 @@
+// Copyright (C) 2011-2012 Claas Abert
+//
+// This file is part of magnum.fe.
+//
+// magnum.fe is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// magnum.fe is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
+//
+// First added:  2012-11-30
+// Last changed: 2012-11-30
+
 #ifndef _NORMALIZED_VECTOR_H_
 #define _NORMALIZED_VECTOR_H_
 
@@ -7,10 +27,23 @@
 #include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
+
+  /// The class defines a _DofForm_ that represents a nodewise
+  /// normalized vector field.
+
   class NormalizedVector: public CGDofForm
   {
-    public:
+  public:
 
+    /// Create a normalizing form.
+    ///
+    /// *Arguments*
+    ///     V1 (boost::shared_ptr<const dolfin::FunctionSpace>)
+    ///         The function space for which the form is defined.
+    ///     a (boost::shared_ptr<const dolfin::GenercFunction>)
+    ///         The function to be normalized.
+    ///     length (double)
+    ///         The length, the vector fuction is normalized to.
     NormalizedVector(
         boost::shared_ptr<const dolfin::FunctionSpace> V1,
         boost::shared_ptr<const dolfin::GenericFunction> a,
@@ -21,6 +54,7 @@ namespace magnumfe {
       set_coefficient(0, a);
     }
 
+    // Override functions from DofForm
     virtual uint coefficient_number(const std::string & name) const
     {
       if (name == "a") 
@@ -57,7 +91,9 @@ namespace magnumfe {
       }
     }
 
-    protected:
+  protected:
+
+    // length for normalization
     double _length;
   };
 }

@@ -1,3 +1,23 @@
+// Copyright (C) 2011-2012 Claas Abert
+//
+// This file is part of magnum.fe.
+//
+// magnum.fe is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// magnum.fe is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
+//
+// First added:  2012-11-30
+// Last changed: 2012-11-30
+
 #ifndef _SCALAR_PRODUCT_MATRIX_H_
 #define _SCALAR_PRODUCT_MATRIX_H_
 
@@ -7,10 +27,26 @@
 #include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
+
+  /// The class represents a matrix that is used to compute the
+  /// nodewise scalar product with a given vector.
+
   class ScalarProductMatrix: public CGDofForm
   {
-    public:
+  public:
 
+    /// Create a scalar product matrix.
+    ///
+    /// *Arguments*
+    ///     V1 (boost::shared_ptr<const dolfin::FunctionSpace>)
+    ///         The function space for the nodewise scalar product.
+    ///         (scalar field)
+    ///     V2 (boost::shared_ptr<const dolfin::FunctionSpace>)
+    ///         The vector function space of the functions to be
+    ///         multiplied.
+    ///     a (boost::shared_ptr<const dolfin::GenercFunction>)
+    ///         The function for which the nodewise scalarproduct is
+    ///         presented in matrix form.
     ScalarProductMatrix(
         boost::shared_ptr<const dolfin::FunctionSpace> V1,
         boost::shared_ptr<const dolfin::FunctionSpace> V2,
@@ -23,6 +59,7 @@ namespace magnumfe {
       set_coefficient(0, a);
     }
 
+    // Override functions from DofForm
     virtual uint coefficient_number(const std::string & name) const
     {
       if (name == "a") 
