@@ -80,6 +80,7 @@ void Mesher::create_cuboid_geo(const dolfin::Array<double>& size, const dolfin::
     }
     GFace *face = model->addPlanarFace(std::vector<std::vector<GEdge *> >(1, a));
     face->meshAttributes.Method = 1; // Transfinite
+    face->meshAttributes.transfiniteArrangement = -1;
     faces.push_back(face);
   }
 }
