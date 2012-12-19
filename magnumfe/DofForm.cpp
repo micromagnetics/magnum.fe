@@ -86,7 +86,7 @@ std::vector<boost::shared_ptr<const dolfin::GenericFunction> > DofForm::coeffici
   return _coefficients;
 }
 //-----------------------------------------------------------------------------
-dolfin::uint DofForm::coefficient_number(const std::string & name) const
+uint DofForm::coefficient_number(const std::string & name) const
 {
   // NOT IMPLEMENTED
   // TODO: Dissect name, assuming "wi", and return i.
