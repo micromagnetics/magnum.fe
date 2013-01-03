@@ -35,7 +35,7 @@ SubMeshInterpolator::SubMeshInterpolator(dolfin::FunctionSpace& Vsuper, dolfin::
   std::pair<size_t, size_t> local_range = Vsuper.dofmap()->ownership_range();
   for (size_t i = local_range.first; i < local_range.second; ++i) {
     const double value = i;
-    const dolfin::DolfinIndex idx = i;
+    const dolfin::la_index idx = i;
     fsuper.vector()->set(&value, 1, &idx);
   }
   fsuper.vector()->apply("insert");
@@ -44,7 +44,7 @@ SubMeshInterpolator::SubMeshInterpolator(dolfin::FunctionSpace& Vsuper, dolfin::
 
   // TODO MPIifize the following
   for (size_t i = 0; i<mapping.size(); ++i) {
-    const dolfin::DolfinIndex idx = i;
+    const dolfin::la_index idx = i;
     mapping[i] = floor((*fsub.vector())[idx] + 0.5);
   }
 }
@@ -52,7 +52,7 @@ SubMeshInterpolator::SubMeshInterpolator(dolfin::FunctionSpace& Vsuper, dolfin::
 void SubMeshInterpolator::cut(const dolfin::GenericVector& src, dolfin::GenericVector& target) {
   for (size_t i=0; i<mapping.size(); ++i) {
     const double value = src[mapping[i]];
-    const dolfin::DolfinIndex idx = i;
+    const dolfin::la_index idx = i;
     target.set(&value, 1, &idx);
   }
   target.apply("insert");
@@ -62,7 +62,7 @@ void SubMeshInterpolator::expand(const dolfin::GenericVector& src, dolfin::Gener
   target.zero();
   for (uint i=0; i<mapping.size(); ++i) {
     const double value = src[i];
-    const dolfin::DolfinIndex j = mapping[i];
+    const dolfin::la_index j = mapping[i];
     target.set(&value, 1, &j);
   }
   target.apply("insert");

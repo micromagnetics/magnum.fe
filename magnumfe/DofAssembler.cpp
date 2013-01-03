@@ -38,7 +38,7 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
   init_tensor_layout(*tensor_layout, a);
 
   // fill sparsity pattern
-  std::vector<const std::vector<dolfin::DolfinIndex>* > dofs(form_rank);
+  std::vector<const std::vector<dolfin::la_index>* > dofs(form_rank);
   boost::multi_array<uint, 2> cell_sparsity(boost::extents[1][1]);
   a.cell_sparsity(cell_sparsity);
 
@@ -48,9 +48,9 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
     dolfin::GenericSparsityPattern& pattern = *tensor_layout->sparsity_pattern();
 
     // prepare for filling sparsity pattern
-    std::vector<std::vector<dolfin::DolfinIndex> > entries(form_rank);
+    std::vector<std::vector<dolfin::la_index> > entries(form_rank);
     for (size_t i=0; i<form_rank; ++i) entries[i].resize(1);
-    std::vector<const std::vector<dolfin::DolfinIndex>* > ptr_entries(form_rank);
+    std::vector<const std::vector<dolfin::la_index>* > ptr_entries(form_rank);
 
     // iterate over cells
     for (dolfin::CellIterator cell(*a.mesh()); !cell.end(); ++cell) {
@@ -75,8 +75,8 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
   A.zero();
 
   // WRITE VALUES
-  std::vector<dolfin::DolfinIndex> num_rows(a.non_zero_entries(), 1);
-  std::vector<const dolfin::DolfinIndex*> rows(form_rank);
+  std::vector<dolfin::la_index> num_rows(a.non_zero_entries(), 1);
+  std::vector<const dolfin::la_index*> rows(form_rank);
 
   std::vector<double> values(a.non_zero_entries());
   std::vector<double *> w(num_coefficients);
@@ -101,7 +101,7 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
 
     // create w
     for (size_t i=0; i<num_coefficients; ++i) {
-      const dolfin::DolfinIndex* coeff_dofs = &(coefficients[i]->function_space()->dofmap()->cell_dofs(cell->index())[0]);
+      const dolfin::la_index* coeff_dofs = &(coefficients[i]->function_space()->dofmap()->cell_dofs(cell->index())[0]);
       coefficients[i]->vector()->get_local(&vector_w[i][0], coefficients[i]->function_space()->dofmap()->cell_dimension(cell->index()), coeff_dofs);
       w[i] = &vector_w[i][0];
     }
@@ -111,7 +111,7 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
     for (size_t i=0; i<a.non_zero_entries(); ++i) {
       const double value = values[i];
       for (size_t j=0; j<form_rank; ++j) {
-        const dolfin::DolfinIndex* row = &(*dofs[j])[cell_sparsity[i][j]];
+        const dolfin::la_index* row = &(*dofs[j])[cell_sparsity[i][j]];
         rows[j] = row;
       }
       //(const double* block, const uint* num_rows, const uint * const * rows)
