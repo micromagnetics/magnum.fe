@@ -1,0 +1,79 @@
+import unittest
+from dolfin import *
+from magnumfe import *
+import numpy
+
+#mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=2)
+mesh  = DemagField.create_mesh((50.0/2.0, 50.0/2.0, 3.0/2.0), (10, 10, 1), d=2)
+VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
+
+class LlgTest(unittest.TestCase):
+
+  def test_prepare_s_state(self):
+    filename = "data/s-state3.xml"
+    try:
+      with open(filename) as f: pass
+      # File exists, read and return
+      return Function(VV, filename)
+
+    except IOError as e:
+      material = Material.py()
+      material.alpha = 1.0
+      llg = LLG3(mesh, material, scale=1e-9, demag_order=2)
+
+      # File does not exists, calculate s-state and return
+      arg = "sqrt((3.141592*(x[0]/1e1))*(3.141592*(x[0]/1e1)))"
+      m   = llg.interpolate(Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0")))
+
+      volume = 187500
+      for i in range(400):
+        f = File("data3/m_%d.pvd" % i)
+        f << m
+        m = llg.step(m, 1e-9)
+        m_x = assemble(m[0] / volume * dx)
+        print "Mx: %f" % m_x
+
+
+      f = File(filename)
+      f << m
+
+      return m
+
+  def _test_sp4(self):
+    #mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=2)
+    #VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
+
+    m = self.prepare_s_state()
+
+    llg = LLG2(mesh, Material.py(), scale=1e-9, demag_order=3)
+    field = Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))
+
+    scalar_file = open("data/sp4.dat","w",0)
+    dt = 1e-13
+    T  = 1e-9
+
+    t  = 0.0
+    print "Total Steps: %d" % int(T / dt)
+    for i in range(int(T / dt)):
+      t = i * dt
+      
+      # write magnetization configuration (only each 20th step)
+      nth_step = 10 
+      if (i % nth_step == 0):
+        f = File("data/m_%d.pvd" % int(i/nth_step))
+        f << m
+
+      # write scalar information
+      volume = 187500
+      m_x = assemble(m[0] / volume * dx)
+      m_y = assemble(m[1] / volume * dx)
+      m_z = assemble(m[2] / volume * dx)
+      scalar_file.write("%.10f %f %f %f\n" % (t*1e9, m_x, m_y, m_z))
+
+      # calculate next step
+      m = llg.step(m, dt, h_ext = field)
+
+    scalar_file.close()
+
+if __name__ == '__main__':
+    unittest.main()
