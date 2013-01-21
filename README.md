@@ -7,7 +7,7 @@ Installation
 ### Prerequisites
 magnum.fe requires the following software/libraries to be installed:
 
-* dev-version of doflin
+* dev-version of FEniCS
 * dev-version of cbc.block
 * gmsh (headers and library)
 * cmake
@@ -15,7 +15,7 @@ magnum.fe requires the following software/libraries to be installed:
 magnum.fe is tested with dolfin build 7250, but should also work with more recent versions.
 
 #### Install dev-version of dolfin
-The dev-version of dolfin is best installed with dorsal (https://launchpad.net/dorsal).
+The dev-version of FEniCS is best installed with dorsal (https://launchpad.net/dorsal).
 
     bzr branch lp:dorsal
     cd dorsal
@@ -42,7 +42,7 @@ To build magenum.fe with cmake do
     cmake ..
     make
 
-Right now there is no install rule for make. There are however symlinks in the `site-packages/magnumfe` directory which point to the compiled swig c lp:cbc.blockude in the `build` directory. Thus you can use magnum.fe by adding the `site-packages` directory to your `PYTHONPATH`
+Right now there is no install rule for make. There are however symlinks in the `site-packages/magnumfe` directory which point to the compiled swig wrapper code in the `build` directory. Thus you can use magnum.fe by adding the `site-packages` directory to your `PYTHONPATH`
 
     export PYTHONPATH=/path/to/magnum.fe/site-packages
 
