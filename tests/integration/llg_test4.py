@@ -31,8 +31,8 @@ class LlgTest(unittest.TestCase):
     m   = llg.interpolate(m_expr)
     dm  = llg.calculate_dm(m, dt)
 
-    f  = File("data4/dm_b.pvd")
-    f << dm
+    #f  = File("data4/dm_b.pvd")
+    #f << dm
 
 if __name__ == '__main__':
     unittest.main()
