@@ -12,6 +12,9 @@ mesh = WrappedMesh.create(complete_mesh, 0)
 
 class WrappedMeshTest(unittest.TestCase):
 
+    def test_different_sizes(self):
+      assert mesh.size(0) < mesh.with_shell.size(0)
+
     def test_cut(self):
       V    = FunctionSpace(mesh.with_shell, "Lagrange", 2)
       expr = Expression("sin(x[0])")
