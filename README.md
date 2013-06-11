@@ -12,7 +12,7 @@ magnum.fe requires the following software/libraries to be installed:
 * gmsh (headers and library)
 * cmake
 
-magnum.fe is tested with dolfin build 7614, but should also work with more recent versions.
+magnum.fe is tested with dolfin dev version from 10 June 2013 (1.2.x), but should also work with more recent versions.
 
 #### Install dev-version of dolfin
 The dev-version of FEniCS is best installed with dorsal (https://launchpad.net/dorsal).
