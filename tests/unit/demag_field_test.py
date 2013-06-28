@@ -37,7 +37,7 @@ class DemagFieldTest(unittest.TestCase):
       return assemble(M)
     
     def test_energy_sphere(self):
-      mesh = DemagField.create_mesh("mesh/sphere_4.msh", d=5, n=(10,10,10), margin=0.2)
+      mesh = DemagField.create_mesh("mesh/sphere.msh", d=5, n=(10,10,10), margin=0.2)
       f = File("sphere.pvd")
       f << mesh.with_shell
 
