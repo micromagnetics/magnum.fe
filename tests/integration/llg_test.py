@@ -21,7 +21,7 @@ class LlgTest(unittest.TestCase):
     except IOError as e:
       material = Material.py()
       material.alpha = 1.0
-      llg = LLG2(mesh, material, scale=1e-9, demag_order=3)
+      llg = LLG(mesh, material, scale=1e-9, demag_order=2)
 
       # File does not exists, calculate s-state and return
       arg = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
@@ -46,7 +46,7 @@ class LlgTest(unittest.TestCase):
 
     m = self.prepare_s_state()
 
-    llg = LLG2(mesh, Material.py(), scale=1e-9, demag_order=3)
+    llg = LLG(mesh, Material.py(), scale=1e-9, demag_order=2)
     field = Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))
 
     scalar_file = open("data/sp4.dat","w",0)
