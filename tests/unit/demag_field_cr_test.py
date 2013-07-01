@@ -12,29 +12,23 @@ class DemagFieldCRTest(unittest.TestCase):
       self.assertEqual(mesh.data['sample_size'], [0.5, 0.5, 0.5])
 
     def test_energy_unit_cube(self):
-      energy = self.energy_cube()
-      self.assertTrue(abs(energy - 1.0/6.0) < 0.01)
-
-    def test_energy_scaled_big_cube(self):
-      energy = self.energy_cube(2)
-      self.assertTrue(abs(energy - 8.0/6.0) < 0.08)
-
-    def test_energy_scaled_small_cube(self):
-      energy = self.energy_cube(0.5)
-      self.assertTrue(abs(energy - 1.0/48.0) < 0.001)
-
-    def energy_cube(self, scale=1.0):
-      mesh = DemagFieldCR.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), d = 3, scale=scale)
+      mesh = DemagFieldCR.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), d = 3)
       VS = FunctionSpace(mesh, "Lagrange", 2)
       VV = VectorFunctionSpace(mesh, "Lagrange", 1)
 
       m = interpolate(Constant((0.0, 0.0, 1.0)), VV)
       demag = DemagFieldCR(mesh, order = 1)
-
       u = demag.calculate(m)
-
       M = 0.5 * inner(m, grad(u)) * dx
-      return assemble(M)
+      energy1 = assemble(M)
+
+      demag = DemagField(mesh, order = 2)
+      u = demag.calculate(m)
+      M = 0.5 * inner(m, grad(u)) * dx
+      energy2 = assemble(M)
+
+      print "CR: %f ; CG: %f" % (energy1, energy2)
+      self.assertTrue(abs(energy1 - 1.0/6.0) < 0.01)
 
 if __name__ == '__main__':
     unittest.main()
