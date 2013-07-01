@@ -136,19 +136,29 @@ void DofAssembler::init_tensor_layout(dolfin::TensorLayout& tensor_layout,
 
   std::vector<size_t> global_dimensions(rank);
   std::vector<std::pair<size_t, size_t> > local_range(rank);
+  std::vector<std::size_t> block_sizes;
   for (size_t i = 0; i < rank; i++)
   {
     dolfin_assert(dofmaps[i]);
     global_dimensions[i] = dofmaps[i]->global_dimension();
     local_range[i]       = dofmaps[i]->ownership_range();
+    block_sizes.push_back(dofmaps[i]->block_size);
   }
 
-  tensor_layout.init(global_dimensions, local_range);                                                     
+  // Set block size for sparsity graphs
+  std::size_t block_size = 1;
+  if (a.rank() == 2)
+  {
+    const std::vector<std::size_t> _bs(a.rank(), dofmaps[0]->block_size);
+    block_size = (block_sizes == _bs) ? dofmaps[0]->block_size : 1;
+  }
+
+  tensor_layout.init(global_dimensions, block_size, local_range);
   if (tensor_layout.sparsity_pattern())
   {
     dolfin::GenericSparsityPattern& pattern = *tensor_layout.sparsity_pattern();
-    const std::vector<std::pair<std::pair<size_t, size_t>, std::pair<size_t, size_t> > > periodic_master_slave_dofs;
-    dolfin::SparsityPatternBuilder::build(pattern, *(a.mesh()), dofmaps, periodic_master_slave_dofs, false, false, false, false);
+    //const std::vector<std::pair<std::pair<size_t, size_t>, std::pair<size_t, size_t> > > periodic_master_slave_dofs;
+    dolfin::SparsityPatternBuilder::build(pattern, *(a.mesh()), dofmaps, false, false, false, false);
   }
 }
 //-----------------------------------------------------------------------------

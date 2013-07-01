@@ -319,8 +319,9 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   editor.close();
 
   // physical regions
-  dolfin::MeshFunction<size_t> subdomains(mesh, 3);
-  //subdomains.init(mesh, 3); // TODO need the tetcount?
+  mesh.domains().init(3);
+  std::map<size_t, size_t> &subdomains = mesh.domains().markers(3);
+
   index = 0;
   for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
     for(unsigned int i = 0; i < (*it)->tetrahedra.size(); i++) {
@@ -329,12 +330,6 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
       ++index;
     }
   }
-
-  // https://answers.launchpad.net/dolfin/+question/174566
-
-  mesh.domains().init(3);
-  dolfin::MeshValueCollection<size_t> &domains = *mesh.domains().markers(3);
-  domains = dolfin::MeshValueCollection<size_t>(subdomains);
 }
 //-----------------------------------------------------------------------------
 const int Mesher::vertex_data[12][2] = {
