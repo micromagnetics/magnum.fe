@@ -66,7 +66,7 @@ void Mesher::create_cuboid_geo(const dolfin::Array<double>& size, const dolfin::
   for (int i=0; i<12; ++i) {
     GEdge *edge = model->addLine(vertices[vertex_data[i][0]], vertices[vertex_data[i][1]]);
     edge->resetMeshAttributes();
-    edge->meshAttributes.Method = 1; // Transfinite
+    edge->meshAttributes.method = 1; // Transfinite
     edge->meshAttributes.typeTransfinite = 1;
     edge->meshAttributes.coeffTransfinite = 1;
     edge->meshAttributes.nbPointsTransfinite = n[dir[i]];
@@ -79,7 +79,7 @@ void Mesher::create_cuboid_geo(const dolfin::Array<double>& size, const dolfin::
       a.push_back(edges[face_data[i][j]]);
     }
     GFace *face = model->addPlanarFace(std::vector<std::vector<GEdge *> >(1, a));
-    face->meshAttributes.Method = 1; // Transfinite
+    face->meshAttributes.method = 1; // Transfinite
     face->meshAttributes.transfiniteArrangement = -1; // TODO try 1 here
     faces.push_back(face);
   }
@@ -119,7 +119,7 @@ void Mesher::create_cuboid(const dolfin::Array<double>& size, const dolfin::Arra
   std::vector<std::vector<GFace *> > faces;
   faces.push_back(sample_faces);
   sample_region = model->addVolume(faces);
-  sample_region->meshAttributes.Method = 1; // Transfinite
+  sample_region->meshAttributes.method = 1; // Transfinite
   sample_region->addPhysicalEntity(0);
   for (uint i=0; i<size.size(); ++i) sample_size[i] = size[i];
 
@@ -183,7 +183,7 @@ void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, dou
   std::vector<GEdge*> connection_edges;
   for (int i=0; i<8; ++i) {
     GEdge *connection = model->addLine(inner_vertices[i], outer_vertices[i]);
-    connection->meshAttributes.Method = 1; // Transfinite
+    connection->meshAttributes.method = 1; // Transfinite
     connection->meshAttributes.typeTransfinite = 1;
     connection->meshAttributes.coeffTransfinite = shell_progression;
     connection->meshAttributes.nbPointsTransfinite = d + 1;
@@ -199,7 +199,7 @@ void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, dou
     a.push_back(connection_edges[vertex_data[i][1]]);
 
     GFace* face = model->addPlanarFace(std::vector<std::vector<GEdge *> >(1, a));
-    face->meshAttributes.Method = 1; // Transfinite
+    face->meshAttributes.method = 1; // Transfinite
     connection_faces.push_back(face);
   }
 
@@ -222,7 +222,7 @@ void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, dou
       a.push_back(connection_faces[face_data[i][j]]);
     }
     GRegion* region = model->addVolume(std::vector<std::vector<GFace *> >(1, a));
-    region->meshAttributes.Method = 1; // Transfinite
+    region->meshAttributes.method = 1; // Transfinite
     shell_regions.push_back(region);
   }
 
