@@ -9,7 +9,7 @@ magnum.fe requires the following software/libraries to be installed:
 
 * dev-version of FEniCS
 * dev-version of cbc.block
-* gmsh (headers and library)
+* gmsh >= 2.8.0 (headers and library)
 * cmake
 
 magnum.fe is tested with dolfin dev version from 10 June 2013 (1.2.x), but should also work with more recent versions.

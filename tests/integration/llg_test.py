@@ -4,14 +4,11 @@ from magnumfe import *
 import numpy
 
 mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=4)
-VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
+VV    = VectorFunctionSpace(mesh, "CG", 1, 2)
 
 class LlgTest(unittest.TestCase):
 
   def prepare_s_state(self):
-    #mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=2)
-    #VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
-
     filename = "data/s-state.xml"
     try:
       with open(filename) as f: pass
@@ -41,9 +38,6 @@ class LlgTest(unittest.TestCase):
       return m
 
   def test_sp4(self):
-    #mesh  = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=2)
-    #VV    = VectorFunctionSpace(mesh, "CG", 1, 3)
-
     m = self.prepare_s_state()
 
     llg = LLG(mesh, Material.py(), scale=1e-9, demag_order=2)
