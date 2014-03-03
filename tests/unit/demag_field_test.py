@@ -2,6 +2,7 @@ import unittest
 from dolfin import *
 from magnumfe import *
 import numpy
+import os
 
 class DemagFieldTest(unittest.TestCase):
 
@@ -37,9 +38,10 @@ class DemagFieldTest(unittest.TestCase):
       return assemble(M)
     
     def test_energy_sphere(self):
-      mesh = DemagField.create_mesh("mesh/sphere.msh", d=5, n=(10,10,10), margin=0.2)
-      f = File("sphere.pvd")
-      f << mesh.with_shell
+      sphere_mesh = os.path.dirname(os.path.realpath(__file__)) + "/mesh/sphere.msh"
+      mesh = DemagField.create_mesh(sphere_mesh, d=5, n=(10,10,10), margin=0.2)
+      #f = File("sphere.pvd")
+      #f << mesh.with_shell
 
       VV = VectorFunctionSpace(mesh, "CG", 1)
 

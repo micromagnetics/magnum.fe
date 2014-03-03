@@ -36,7 +36,7 @@ using namespace magnumfe;
 
 Mesher::Mesher():sample_size(3) {
   GmshInitialize();
-    //GmshSetOption("Mesh", "Algorithm", 5.);
+  GmshSetOption("Mesh", "Algorithm3D", 4.); // Frontal Algorithm
   model = new GModel();
   model->setFactory("Gmsh"); 
   sample_type = NONE;

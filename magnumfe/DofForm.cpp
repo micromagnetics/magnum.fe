@@ -29,6 +29,11 @@ DofForm::DofForm(uint rank, uint num_coefficients)
   // Do nothing
 }
 //-----------------------------------------------------------------------------
+DofForm::~DofForm()
+{
+  // Do nothing
+}
+//-----------------------------------------------------------------------------
 unsigned int DofForm::rank() const
 {
   return _rank;

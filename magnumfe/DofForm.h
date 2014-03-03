@@ -57,6 +57,9 @@ namespace magnumfe {
     ///         Number of coefficients of the form.
     DofForm(uint rank, uint num_coefficients);
 
+    /// Destructor
+    virtual ~DofForm();
+
     /// Return function space for given argument
     ///
     /// *Arguments*
