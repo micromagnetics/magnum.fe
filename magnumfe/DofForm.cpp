@@ -44,49 +44,49 @@ uint DofForm::num_coefficients() const
   return _coefficients.size();
 }
 //-----------------------------------------------------------------------------
-boost::shared_ptr<const dolfin::FunctionSpace> DofForm::function_space(uint i) const
+std::shared_ptr<const dolfin::FunctionSpace> DofForm::function_space(uint i) const
 {
   dolfin_assert(i < _function_spaces.size());
   return _function_spaces[i];
 }
 //-----------------------------------------------------------------------------
-std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > DofForm::function_spaces() const
+std::vector<std::shared_ptr<const dolfin::FunctionSpace> > DofForm::function_spaces() const
 {
   return _function_spaces;
 }
 //-----------------------------------------------------------------------------
 void DofForm::set_coefficient(uint i,
-                           boost::shared_ptr<const dolfin::GenericFunction> coefficient)
+                           std::shared_ptr<const dolfin::GenericFunction> coefficient)
 {
   dolfin_assert(i < _coefficients.size());
   _coefficients[i] = coefficient;
 }
 //-----------------------------------------------------------------------------
 void DofForm::set_coefficient(std::string name,
-                           boost::shared_ptr<const dolfin::GenericFunction> coefficient)
+                           std::shared_ptr<const dolfin::GenericFunction> coefficient)
 {
   set_coefficient(coefficient_number(name), coefficient);
 }
 //-----------------------------------------------------------------------------
-void DofForm::set_coefficients(std::map<std::string, boost::shared_ptr<const dolfin::GenericFunction> > coefficients)
+void DofForm::set_coefficients(std::map<std::string, std::shared_ptr<const dolfin::GenericFunction> > coefficients)
 {
-  std::map<std::string, boost::shared_ptr<const dolfin::GenericFunction> >::iterator it;
+  std::map<std::string, std::shared_ptr<const dolfin::GenericFunction> >::iterator it;
   for (it = coefficients.begin(); it != coefficients.end(); ++it)
     set_coefficient(it->first, it->second);
 }
 //-----------------------------------------------------------------------------
-boost::shared_ptr<const dolfin::GenericFunction> DofForm::coefficient(uint i) const
+std::shared_ptr<const dolfin::GenericFunction> DofForm::coefficient(uint i) const
 {
   dolfin_assert(i < _coefficients.size());
   return _coefficients[i];
 }
 //-----------------------------------------------------------------------------
-boost::shared_ptr<const dolfin::GenericFunction> DofForm::coefficient(std::string name) const
+std::shared_ptr<const dolfin::GenericFunction> DofForm::coefficient(std::string name) const
 {
   return coefficient(coefficient_number(name));
 }
 //-----------------------------------------------------------------------------
-std::vector<boost::shared_ptr<const dolfin::GenericFunction> > DofForm::coefficients() const
+std::vector<std::shared_ptr<const dolfin::GenericFunction> > DofForm::coefficients() const
 {
   return _coefficients;
 }
@@ -106,7 +106,7 @@ std::string DofForm::coefficient_name(uint i) const
   return name.str();
 }
 
-boost::shared_ptr<const dolfin::Mesh> DofForm::mesh() const
+std::shared_ptr<const dolfin::Mesh> DofForm::mesh() const
 {
   return function_space(0)->mesh();
 }

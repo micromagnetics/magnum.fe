@@ -24,7 +24,6 @@
 #include "CGDofForm.h"
 #include <dolfin.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
 
@@ -38,15 +37,15 @@ namespace magnumfe {
     /// Create a normalizing form.
     ///
     /// *Arguments*
-    ///     V1 (boost::shared_ptr<const dolfin::FunctionSpace>)
+    ///     V1 (std::shared_ptr<const dolfin::FunctionSpace>)
     ///         The function space for which the form is defined.
-    ///     a (boost::shared_ptr<const dolfin::GenercFunction>)
+    ///     a (std::shared_ptr<const dolfin::GenercFunction>)
     ///         The function to be normalized.
     ///     length (double)
     ///         The length, the vector fuction is normalized to.
     NormalizedVector(
-        boost::shared_ptr<const dolfin::FunctionSpace> V1,
-        boost::shared_ptr<const dolfin::GenericFunction> a,
+        std::shared_ptr<const dolfin::FunctionSpace> V1,
+        std::shared_ptr<const dolfin::GenericFunction> a,
         double length = 1.0) : CGDofForm(1, 1), _length(length)
     {
       _function_spaces[0] = V1;

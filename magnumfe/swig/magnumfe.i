@@ -33,7 +33,7 @@ import_array();
 %include <std_string.i>
 
 // Handle Shared Pointers
-%include <boost_shared_ptr.i>
+%include <std_shared_ptr.i>
 %shared_ptr(dolfin::FunctionSpace)
 %shared_ptr(dolfin::GenericTensor)
 %shared_ptr(dolfin::GenericVector)

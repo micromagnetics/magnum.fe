@@ -24,7 +24,6 @@
 #include "CGDofForm.h"
 #include <dolfin.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
 
@@ -38,21 +37,21 @@ namespace magnumfe {
     /// Create a transposed scalar product matrix.
     ///
     /// *Arguments*
-    ///     V1 (boost::shared_ptr<const dolfin::FunctionSpace>)
+    ///     V1 (std::shared_ptr<const dolfin::FunctionSpace>)
     ///         The function space for the nodewise scalar product.
     ///         (scalar field)
-    ///     V2 (boost::shared_ptr<const dolfin::FunctionSpace>)
+    ///     V2 (std::shared_ptr<const dolfin::FunctionSpace>)
     ///         The vector function space of the functions to be
     ///         multiplied.
-    ///     a (boost::shared_ptr<const dolfin::GenercFunction>)
+    ///     a (std::shared_ptr<const dolfin::GenercFunction>)
     ///         The function for which the nodewise scalarproduct is
     ///         presented in matrix form.
     TransScalarProductMatrix(
-        boost::shared_ptr<const dolfin::FunctionSpace> V1,
-        boost::shared_ptr<const dolfin::FunctionSpace> V2,
-        boost::shared_ptr<const dolfin::GenericFunction> a) : CGDofForm(2, 1)
+        std::shared_ptr<const dolfin::FunctionSpace> V1,
+        std::shared_ptr<const dolfin::FunctionSpace> V2,
+        std::shared_ptr<const dolfin::GenericFunction> a) : CGDofForm(2, 1)
     {
-      std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > function_spaces;
+      std::vector<std::shared_ptr<const dolfin::FunctionSpace> > function_spaces;
       _function_spaces[0] = V2;
       _function_spaces[1] = V1;
       _function_spaces[2] = V2; // first coefficient

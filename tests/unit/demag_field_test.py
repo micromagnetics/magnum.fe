@@ -34,14 +34,12 @@ class DemagFieldTest(unittest.TestCase):
 
       u = demag.calculate(m)
 
-      M = 0.5 * inner(m, grad(u)) * dx
+      M = Constant(0.5) * inner(m, grad(u)) * dx(mesh)
       return assemble(M)
     
     def test_energy_sphere(self):
       sphere_mesh = os.path.dirname(os.path.realpath(__file__)) + "/mesh/sphere.msh"
       mesh = DemagField.create_mesh(sphere_mesh, d=5, n=(10,10,10), margin=0.2)
-      #f = File("sphere.pvd")
-      #f << mesh.with_shell
 
       VV = VectorFunctionSpace(mesh, "CG", 1)
 
@@ -51,7 +49,7 @@ class DemagFieldTest(unittest.TestCase):
       u = demag.calculate(m)
 
       # calculate demag energy
-      M = 0.5 * inner(m, grad(u)) * dx
+      M = Constant(0.5) * inner(m, grad(u)) * dx(mesh)
       energy = assemble(M)
 
       self.assertTrue(abs(energy - pi/36.0) < 0.01)

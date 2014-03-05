@@ -34,7 +34,7 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
   const uint num_coefficients = a.num_coefficients();
 
   // INITIALIZE SPARSITY PATTERN
-  boost::shared_ptr<dolfin::TensorLayout> tensor_layout = A.factory().create_layout(form_rank);
+  std::shared_ptr<dolfin::TensorLayout> tensor_layout = A.factory().create_layout(form_rank);
   init_tensor_layout(*tensor_layout, a);
 
   // fill sparsity pattern
@@ -82,13 +82,13 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
   std::vector<double *> w(num_coefficients);
 
   std::vector<std::vector<double> > vector_w(num_coefficients);
-  std::vector<boost::shared_ptr<dolfin::Function> > coefficients(num_coefficients);
+  std::vector<std::shared_ptr<dolfin::Function> > coefficients(num_coefficients);
   for (size_t i=0; i<num_coefficients; ++i) {
     // init value containers
     vector_w[i].resize(a.function_space(i + form_rank)->dofmap()->max_cell_dimension());
 
     // interpolate coefficients
-    boost::shared_ptr<dolfin::Function> coeff(new dolfin::Function(a.function_space(i + form_rank)));
+    std::shared_ptr<dolfin::Function> coeff(new dolfin::Function(a.function_space(i + form_rank)));
     coeff->interpolate(*a.coefficient(i));
     coefficients[i] = coeff;
   }
@@ -153,7 +153,7 @@ void DofAssembler::init_tensor_layout(dolfin::TensorLayout& tensor_layout,
     block_size = (block_sizes == _bs) ? dofmaps[0]->block_size : 1;
   }
 
-  tensor_layout.init(global_dimensions, block_size, local_range);
+  tensor_layout.init(a.mesh()->mpi_comm(), global_dimensions, block_size, local_range);
   if (tensor_layout.sparsity_pattern())
   {
     dolfin::GenericSparsityPattern& pattern = *tensor_layout.sparsity_pattern();

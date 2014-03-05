@@ -24,7 +24,6 @@
 #include "DofForm.h"
 #include <dolfin.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
 

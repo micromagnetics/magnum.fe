@@ -25,7 +25,6 @@
 #include <map>
 #include <vector>
 #include <boost/multi_array.hpp>
-#include <boost/shared_ptr.hpp>
 
 namespace magnumfe {
 
@@ -66,43 +65,43 @@ namespace magnumfe {
     ///     i (uint)
     ///         Number of function space.
     /// *Returns*
-    ///     boost::shared_ptr<const dolfin::FunctionSpace>
+    ///     std::shared_ptr<const dolfin::FunctionSpace>
     ///         Function space.
-    boost::shared_ptr<const dolfin::FunctionSpace> function_space(uint i) const;
+    std::shared_ptr<const dolfin::FunctionSpace> function_space(uint i) const;
 
     /// Return all function spaces
     ///
     /// *Returns*
-    ///     std::vector<boost::shared_ptr<const dolfin::FunctionSpace> >
+    ///     std::vector<std::shared_ptr<const dolfin::FunctionSpace> >
     ///         Function spaces.
-    std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > function_spaces() const; 
+    std::vector<std::shared_ptr<const dolfin::FunctionSpace> > function_spaces() const; 
 
     /// Set coefficient with given number.
     ///
     /// *Arguments*
     ///     i (uint)
     ///         Number of coefficient.
-    ///     coefficient (boost::shared_ptr<const dolfin::GenericFunction> coefficient)
+    ///     coefficient (std::shared_ptr<const dolfin::GenericFunction> coefficient)
     ///         The coefficient.
     void set_coefficient(uint i,
-                         boost::shared_ptr<const dolfin::GenericFunction> coefficient);
+                         std::shared_ptr<const dolfin::GenericFunction> coefficient);
 
     /// Set coefficient with given name.
     ///
     /// *Arguments*
     ///     name (std::string)
     ///         Name of coefficient.
-    ///     coefficient (boost::shared_ptr<const dolfin::GenericFunction> coefficient)
+    ///     coefficient (std::shared_ptr<const dolfin::GenericFunction> coefficient)
     ///         The coefficient.
     void set_coefficient(std::string name,
-                         boost::shared_ptr<const dolfin::GenericFunction> coefficient);
+                         std::shared_ptr<const dolfin::GenericFunction> coefficient);
 
     /// Set all coefficients at once.
     ///
     /// *Arguments*
-    ///     coefficients (std::map<std::string, boost::shared_ptr<const dolfin::GenericFunction> >)
+    ///     coefficients (std::map<std::string, std::shared_ptr<const dolfin::GenericFunction> >)
     ///         The coefficients.
-    void set_coefficients(std::map<std::string, boost::shared_ptr<const dolfin::GenericFunction> > coefficients);
+    void set_coefficients(std::map<std::string, std::shared_ptr<const dolfin::GenericFunction> > coefficients);
 
     /// Get coefficient with given number.
     ///
@@ -110,9 +109,9 @@ namespace magnumfe {
     ///     i (uint)
     ///         Number of coefficient.
     /// *Returns*
-    ///     boost::shared_ptr<const dolfin::GenericFunction>
+    ///     std::shared_ptr<const dolfin::GenericFunction>
     ///         The coefficient.
-    boost::shared_ptr<const dolfin::GenericFunction> coefficient(uint i) const;
+    std::shared_ptr<const dolfin::GenericFunction> coefficient(uint i) const;
 
     /// Get coefficient with given name.
     ///
@@ -120,16 +119,16 @@ namespace magnumfe {
     ///     name (std::string)
     ///         Name of coefficient.
     /// *Returns*
-    ///     boost::shared_ptr<const dolfin::GenericFunction>
+    ///     std::shared_ptr<const dolfin::GenericFunction>
     ///         The coefficient.
-    boost::shared_ptr<const dolfin::GenericFunction> coefficient(std::string name) const;
+    std::shared_ptr<const dolfin::GenericFunction> coefficient(std::string name) const;
 
     /// Get all coefficients.
     ///
     /// *Returns*
-    ///     std::vector<boost::shared_ptr<const dolfin::GenericFunction> >
+    ///     std::vector<std::shared_ptr<const dolfin::GenericFunction> >
     ///         The coefficients.
-    std::vector<boost::shared_ptr<const dolfin::GenericFunction> > coefficients() const;
+    std::vector<std::shared_ptr<const dolfin::GenericFunction> > coefficients() const;
 
     /// Returns the rank of the form.
     ///
@@ -168,9 +167,9 @@ namespace magnumfe {
     /// Returns the mesh.
     ///
     /// *Returns*
-    ///     boost::shared_ptr<const dolfin::Mesh>
+    ///     std::shared_ptr<const dolfin::Mesh>
     ///         The mesh.
-    virtual boost::shared_ptr<const dolfin::Mesh> mesh() const;
+    virtual std::shared_ptr<const dolfin::Mesh> mesh() const;
 
     /// Evaluate form for a given cell.
     ///
@@ -200,10 +199,10 @@ namespace magnumfe {
 
   protected:
     // Function spaces (one for each argument)
-    std::vector<boost::shared_ptr<const dolfin::FunctionSpace> > _function_spaces;
+    std::vector<std::shared_ptr<const dolfin::FunctionSpace> > _function_spaces;
 
     // Coefficients
-    std::vector<boost::shared_ptr<const dolfin::GenericFunction> > _coefficients;
+    std::vector<std::shared_ptr<const dolfin::GenericFunction> > _coefficients;
 
     // The rank of the form
     const uint _rank;
