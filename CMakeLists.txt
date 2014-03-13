@@ -3,7 +3,7 @@
 ##############################################################
 
 # general settings
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 2.8)
 project (MagnumFE)
 
 # The version number.
@@ -12,7 +12,6 @@ set(MAGNUMFE_VERSION_MINOR 1)
 
 # Add configuration
 #configure_file(
-#  "${PROJECT_SOURCE_DIR}/magneto/config.h.in"
 #  "${PROJECT_BINARY_DIR}/config.h"
 #)
 
@@ -33,17 +32,8 @@ endmacro(append_magnumfe_src)
 ###    Libraries   TODO: check versions                    ###
 ##############################################################
 
-# PkgConfig
-include( ${CMAKE_SOURCE_DIR}/cmake/FindPkgConfig.cmake )
-if (NOT PKG_CONFIG_FOUND)
-  message (FATAL_ERROR "Cannot find PkgConfig!")
-endif()
-
-# Dolfin via PkgCOnfig
-pkg_search_module(DOLFIN REQUIRED dolfin)
-if (NOT DOLFIN_FOUND)
-  message (FATAL_ERROR "Cannot find libdolfin!")
-endif()
+# Dolfin
+find_package(DOLFIN)
 
 # GMSH
 include( ${CMAKE_SOURCE_DIR}/cmake/FindGmsh.cmake )
@@ -71,13 +61,11 @@ add_subdirectory(magnumfe/swig)
 ###    Set Compiler Flags                                  ###
 ##############################################################
 
-if(CMAKE_COMPILER_IS_GNUCXX)
-  STRING(REPLACE ";" " " DOLFIN_CXXFLAGS "${DOLFIN_CFLAGS_OTHER}")
-  SET(CMAKE_CXX_FLAGS "-O3 -Wall ${DOLFIN_CXXFLAGS}")
+# Compiler definitions
+add_definitions(${DOLFIN_CXX_DEFINITIONS})
 
-  #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -march=native -msse3 -fomit-frame-pointer -ffast-math -mfused-madd -std=gnu++0x -pthread")
-  #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -march=native -msse3 -fomit-frame-pointer -ffast-math -mfused-madd")
-endif(CMAKE_COMPILER_IS_GNUCXX)
+# Compiler flags
+set(CMAKE_CXX_FLAGS "-O3 -Wall ${DOLFIN_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 ##############################################################
 ###    Compile Library                                     ###
@@ -91,14 +79,19 @@ include_directories(
   ${DOLFIN_INCLUDE_DIRS}
   #  ${NUMPY_INCLUDE_DIRS}
 )
-
-link_directories(
-  ${DOLFIN_LIBRARY_DIRS}
+include_directories(SYSTEM
+  ${DOLFIN_3RD_PARTY_INCLUDE_DIRS}
 )
 
+link_directories(${DOLFIN_LIBRARY_DIRS})
+
 add_library(magnumfe SHARED ${MAGNUMFE_SRC})
-target_link_libraries(magnumfe ${DOLFIN_LIBRARIES})
-target_link_libraries(magnumfe ${GMSH_LIBRARY})
+
+target_link_libraries(magnumfe
+  ${DOLFIN_LIBRARIES}
+  ${DOLFIN_3RD_PARTY_LIBRARIES}
+  ${GMSH_LIBRARY}
+)
 
 ##############################################################
 ###    Swig Stuff                                          ###
@@ -111,11 +104,7 @@ set(CMAKE_SWIG_FLAGS "")
 set(INTERFACE_FILES ${PROJECT_SOURCE_DIR}/magnumfe/swig/magnumfe.i)
 
 set_source_files_properties (${INTERFACE_FILES} PROPERTIES CPLUSPLUS ON )
-set_source_files_properties (${INTERFACE_FILES} PROPERTIES SWIG_FLAGS 
-  -O
-  )
+set_source_files_properties (${INTERFACE_FILES} PROPERTIES SWIG_FLAGS -O)
 
-#swig_add_module(cpp python ${INTERFACE_FILES} ${MAGNUMFE_SRC})
-#swig_link_libraries(cpp ${DOLFIN_LIBRARIES})
 swig_add_module(cpp python ${INTERFACE_FILES})
 swig_link_libraries(cpp magnumfe)
