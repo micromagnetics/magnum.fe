@@ -40,8 +40,12 @@ import_array();
 %shared_ptr(dolfin::GenericMatrix)
 %shared_ptr(dolfin::GenericFunction)
 %shared_ptr(dolfin::Mesh)
-//%shared_ptr(dolfin::Function)
-//%shared_ptr(boost::unordered_map<uint, uint>)
+
+// don't create interface for eval methods
+%ignore magnumfe::DofForm::nodeEval;
+%ignore magnumfe::DofForm::eval;
+%ignore magnumfe::CGDofForm::nodeEval;
+%ignore magnumfe::CGDofForm::eval;
 
 // Include headers
 %include "Mesher.h"

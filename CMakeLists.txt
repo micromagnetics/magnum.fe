@@ -47,7 +47,7 @@ include(${SWIG_USE_FILE})
 find_package(PythonLibs)
 
 # Numpy
-#include( ${CMAKE_SOURCE_DIR}/cmake/FindNumPy.cmake )
+include( ${CMAKE_SOURCE_DIR}/cmake/FindNumPy.cmake )
 
 ##############################################################
 ###    Subdirectories                                      ###
@@ -77,7 +77,7 @@ include_directories(
   ${PYTHON_INCLUDE_PATH}
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${DOLFIN_INCLUDE_DIRS}
-  #  ${NUMPY_INCLUDE_DIRS}
+  ${NUMPY_INCLUDE_DIRS}
 )
 include_directories(SYSTEM
   ${DOLFIN_3RD_PARTY_INCLUDE_DIRS}
@@ -97,10 +97,20 @@ target_link_libraries(magnumfe
 ###    Swig Stuff                                          ###
 ##############################################################
 
-#string(REGEX REPLACE "-Wall" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(SWIG_MODULE_NAME cpp)
 
-set(CMAKE_SWIG_FLAGS "")
+# Disable warnings for SWIG wrapper code
+string(REGEX REPLACE "-Wall" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+# Set NumPy definitions
+set(MAGNUMFE_PYTHON_DEFINITIONS -DNUMPY_VERSION_MAJOR=${NUMPY_VERSION_MAJOR} -DNUMPY_VERSION_MINOR=${NUMPY_VERSION_MINOR} -DNUMPY_VERSION_MICRO=${NUMPY_VERSION_MICRO})
+if(NUMPY_VERSION VERSION_GREATER 1.6.2)
+  set(MAGNUMFE_PYTHON_DEFINITIONS ${MAGNUMFE_PYTHON_DEFINITIONS} -DNPY_NO_DEPRECATED_API=NPY_${NUMPY_VERSION_MAJOR}_${NUMPY_VERSION_MINOR}_API_VERSION)
+endif()
+
+add_definitions(${MAGNUMFE_PYTHON_DEFINITIONS})
+set(CMAKE_SWIG_FLAGS ${MAGNUMFE_PYTHON_DEFINITIONS})
+
 set(INTERFACE_FILES ${PROJECT_SOURCE_DIR}/magnumfe/swig/magnumfe.i)
 
 set_source_files_properties (${INTERFACE_FILES} PROPERTIES CPLUSPLUS ON )
