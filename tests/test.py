@@ -4,7 +4,8 @@ testmodules = [
     'unit.demag_field_test',
     'unit.wrapped_mesh_test',
     'unit.dof_map_test',
-    'unit.mesher_test'
+    'unit.mesher_test',
+    'unit.llg_test'
     ]
 
 suite = unittest.TestSuite()
