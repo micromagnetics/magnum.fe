@@ -37,14 +37,18 @@ class LlgTest(unittest.TestCase):
     self.assertTrue(error < 0.3)
 
   # TODO currently broken (segfault probably caused by cbc.block)
-  def ttest_llg4(self):
+  def test_llg4(self):
     llg = LLG4(mesh, material, scale=1e-9, demag_order=1)
     m   = llg.interpolate(m_expr)
     dm  = llg.calculate_dm(m, 1e-12)
 
     ref = Function(VV, ref_file)
 
-    error = assemble(inner(ref - dm, ref - dm) / inner(ref, ref) * dx) / volume
+    f = File("ref/dm.pvd")
+    f << dm
+
+    error = assemble(inner(ref - dm, ref - dm) / inner(ref, ref) * dx(mesh)) / volume
+    print error
     self.assertTrue(error < 0.3)
 
 if __name__ == '__main__':
