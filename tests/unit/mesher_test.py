@@ -11,7 +11,7 @@ class MesherTest(unittest.TestCase):
       mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
 
       # create and mesh shell
-      mesher.create_shell(1);
+      mesher.create_shell(1)
       mesh_with_shell = mesher.mesh()
       self.assertEqual(mesh_with_shell.num_cells(), 5640)
       self.assertEqual(mesh_with_shell.num_vertices(), 1188)
@@ -32,7 +32,6 @@ class MesherTest(unittest.TestCase):
       self.assertEqual(size[0], 30.0)
       self.assertEqual(size[1], 20.0)
 
-
     def test_scale(self):
       mesher = Mesher()
       mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
@@ -42,6 +41,19 @@ class MesherTest(unittest.TestCase):
 
       self.assertAlmostEqual(mesh1.hmax()*10.0, mesh2.hmax())
       self.assertAlmostEqual(mesh1.hmin()*10.0, mesh2.hmin())
+
+    def test_read_mesh_with_domains(self):
+      mesher = Mesher()
+      mesher.read_file("mesh/sphere.msh")
+
+      mesher = Mesher()
+      mesher.read_file("mesh/multidomain.msh")
+      mesher.create_shell(1, n=(10,10,10), margin=0.1)
+      mesh = mesher.mesh()
+      domains = MeshFunction("size_t", mesh, 3, mesh.domains())
+      f = File("domains.pvd")
+      f << domains
+      mesher.write_file("bla.msh")
 
 if __name__ == '__main__':
     unittest.main()

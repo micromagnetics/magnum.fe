@@ -122,21 +122,6 @@ namespace magnumfe {
     ///         The size.
     double get_sample_size(int i);
 
-    /// Returns the volume of the sample. Scling used for mesh
-    /// generation is not considered.
-    ///
-    /// *Returns*
-    ///     double
-    ///         The volume.
-    double sample_volume();
-
-    /// Returns the number vertices in the sample.
-    ///
-    /// *Returns*
-    ///     int
-    ///         The number of sample vertices.
-    int num_sample_vertices();
-
   protected:
     // Type of sample (either cuboid of read from file)
     enum SampleType {
@@ -152,7 +137,7 @@ namespace magnumfe {
 
     // GMSH geometry and mesh containers
     GModel *model;
-    GRegion *sample_region;
+    //GRegion *sample_region;
     std::vector<GFace*>   sample_faces;
     std::vector<GEdge*>   sample_edges;
     std::vector<GVertex*> sample_vertices;

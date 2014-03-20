@@ -88,16 +88,31 @@ void Mesher::create_cuboid_geo(const dolfin::Array<double>& size, const dolfin::
 void Mesher::read_file(const std::string name) {
   assert(sample_type == NONE);
   model->load(name);
-  assert(model->getNumRegions() == 1); // TODO allow multiple regions
-  model->deletePhysicalGroups();
 
-  // load entities of sample (edges, vertices, region)
-  for (GModel::eiter eit = model->firstEdge(); eit != model->lastEdge(); eit++)
-    sample_edges.push_back(*eit);
-  for (GModel::fiter fit = model->firstFace(); fit != model->lastFace(); fit++)
-    sample_faces.push_back(*fit);
-  sample_region = *(model->firstRegion());
-  sample_region->addPhysicalEntity(0);
+  // retrieve all physical groups
+  std::map<int, std::vector<GEntity*> > groups[4];
+  model->getPhysicalGroups(groups);
+
+  // handle simple mesh with just one volume and one surface
+  if (groups[2].size() == 1 and groups[3].size() == 1) {
+    //assert(model->getNumRegions() == 1); // TODO allow multiple regions
+    model->deletePhysicalGroups();
+    std::cout << "Simple Import" << std::endl;
+
+    // load entities of sample (edges, vertices, region)
+    // TODO define physical faces
+    for (GModel::fiter fit = model->firstFace(); fit != model->lastFace(); fit++)
+      sample_faces.push_back(*fit);
+
+    (*(model->firstRegion()))->addPhysicalEntity(1);
+  }
+  // handle sophisticated meshes
+  else {
+    std::cout << "Sophisticated Import" << std::endl;
+    for (std::vector<GEntity*>::iterator fit = groups[2][0].begin(); fit != groups[2][0].end(); fit++) {
+      sample_faces.push_back((GFace*) *fit);
+    }
+  }
 
   // retrieve box size
   SBoundingBox3d bounds = model->bounds();
@@ -118,9 +133,11 @@ void Mesher::create_cuboid(const dolfin::Array<double>& size, const dolfin::Arra
 
   std::vector<std::vector<GFace *> > faces;
   faces.push_back(sample_faces);
-  sample_region = model->addVolume(faces);
+
+  GRegion *sample_region = model->addVolume(faces);
   sample_region->meshAttributes.method = 1; // Transfinite
-  sample_region->addPhysicalEntity(0);
+  sample_region->addPhysicalEntity(1);
+
   for (uint i=0; i<size.size(); ++i) sample_size[i] = size[i];
 
   sample_type = CUBOID;
@@ -209,7 +226,7 @@ void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, dou
     faces.push_back(inner_faces);
     faces.push_back(sample_faces);
     GRegion* air_region = model->addVolume(faces);
-    air_region->addPhysicalEntity(1);
+    air_region->addPhysicalEntity(1000);
   }
 
   // shell
@@ -227,37 +244,9 @@ void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, dou
   }
 
   for (int i=0; i<6; ++i) {
-    // i/2+2 leads to 2, 3, 4 for x, y, z transformation area
-    shell_regions[i]->addPhysicalEntity(i/2+2);
+    // i/2+2 leads to 1001, 1002, 1003 for x, y, z transformation area
+    shell_regions[i]->addPhysicalEntity(i/2+1001);
   }
-}
-//-----------------------------------------------------------------------------
-int Mesher::num_sample_vertices() {
-  int result = sample_region->getNumMeshVertices();
-
-  std::vector<GFace*>::iterator fit;
-  for (fit = sample_faces.begin(); fit != sample_faces.end(); fit++) {
-    result += (*fit)->getNumMeshVertices();
-  }
-
-  std::vector<GEdge*>::iterator eit;
-  for (eit = sample_edges.begin(); eit != sample_edges.end(); eit++)
-    result += (*eit)->getNumMeshVertices();
-
-  std::vector<GVertex*>::iterator vit;
-  for (vit = sample_vertices.begin(); vit != sample_vertices.end(); vit++)
-    result += (*vit)->getNumMeshVertices();
-
-  return result;
-}
-//-----------------------------------------------------------------------------
-double Mesher::sample_volume() {
-  double volume = 0.0;
-  std::vector<MTetrahedron*>::iterator it;
-  for (it = sample_region->tetrahedra.begin(); it < sample_region->tetrahedra.end(); ++it)
-    volume += std::fabs((*it)->getVolume());
-
-  return volume;
 }
 //-----------------------------------------------------------------------------
 double Mesher::get_sample_size(int i) {
@@ -325,8 +314,12 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   index = 0;
   for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
     for(unsigned int i = 0; i < (*it)->tetrahedra.size(); i++) {
-      assert ((*it)->physicals.size() == 1);
-      subdomains[index] = (*it)->physicals[0];
+      //assert ((*it)->physicals.size() == 1);
+      if ((*it)->physicals.size() == 0) {
+        subdomains[index] = 0;
+      } else {
+        subdomains[index] = (*it)->physicals[0];
+      }
       ++index;
     }
   }
