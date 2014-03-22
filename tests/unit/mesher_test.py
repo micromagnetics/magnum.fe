@@ -43,17 +43,25 @@ class MesherTest(unittest.TestCase):
       self.assertAlmostEqual(mesh1.hmin()*10.0, mesh2.hmin())
 
     def test_read_mesh_with_domains(self):
-      mesher = Mesher()
-      mesher.read_file("mesh/sphere.msh")
+      # TODO test domain stuff
+      #mesher = Mesher()
+      #mesher.read_file("mesh/sphere.msh")
+      #mesher.create_cuboid((1,1,1),(1,1,1))
+      #mesher.create_shell(1, n=(1,1,1))
+      #mesh = mesher.mesh()
+      #f = File("mesh.xml")
+      #f << mesh
 
-      mesher = Mesher()
-      mesher.read_file("mesh/multidomain.msh")
-      mesher.create_shell(1, n=(10,10,10), margin=0.1)
-      mesh = mesher.mesh()
-      domains = MeshFunction("size_t", mesh, 3, mesh.domains())
-      f = File("domains.pvd")
-      f << domains
-      mesher.write_file("bla.msh")
+      #mesher = Mesher()
+      #mesher.read_file("mesh/multidomain.msh")
+      #mesher.create_shell(1, n=(10,10,10), margin=0.1)
+      #mesh = mesher.mesh()
+      #f = File("mesh2.xml")
+      #f << mesh
+      #domains = MeshFunction("size_t", mesh, 3, mesh.domains())
+      #f = File("domains.pvd")
+      #f << domains
+      #mesher.write_file("bla.msh")
 
 if __name__ == '__main__':
     unittest.main()

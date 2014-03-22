@@ -31,6 +31,7 @@
 #include <gmsh/GEntity.h>
 #include <gmsh/MVertex.h>
 #include <gmsh/MTetrahedron.h>
+#include <gmsh/MTriangle.h>
 
 using namespace magnumfe;
 
@@ -97,19 +98,21 @@ void Mesher::read_file(const std::string name) {
   if (groups[2].size() == 1 and groups[3].size() == 1) {
     //assert(model->getNumRegions() == 1); // TODO allow multiple regions
     model->deletePhysicalGroups();
-    std::cout << "Simple Import" << std::endl;
 
     // load entities of sample (edges, vertices, region)
-    // TODO define physical faces
-    for (GModel::fiter fit = model->firstFace(); fit != model->lastFace(); fit++)
+    for (GModel::fiter fit = model->firstFace(); fit != model->lastFace(); fit++) {
+      (*fit)->addPhysicalEntity(1);
       sample_faces.push_back(*fit);
+    }
 
     (*(model->firstRegion()))->addPhysicalEntity(1);
   }
   // handle sophisticated meshes
   else {
-    std::cout << "Sophisticated Import" << std::endl;
-    for (std::vector<GEntity*>::iterator fit = groups[2][0].begin(); fit != groups[2][0].end(); fit++) {
+    // require face "1" to be defined
+    assert(groups[2].find(1) != groups[2].end());
+
+    for (std::vector<GEntity*>::iterator fit = groups[2][1].begin(); fit != groups[2][1].end(); fit++) {
       sample_faces.push_back((GFace*) *fit);
     }
   }
@@ -131,6 +134,9 @@ void Mesher::create_cuboid(const dolfin::Array<double>& size, const dolfin::Arra
   assert(sample_type == NONE);
   create_cuboid_geo(size, n, sample_vertices, sample_edges, sample_faces);
 
+  for (int i=0; i < sample_faces.size(); ++i) {
+    sample_faces[i]->addPhysicalEntity(1);
+  }
   std::vector<std::vector<GFace *> > faces;
   faces.push_back(sample_faces);
 
@@ -255,13 +261,12 @@ double Mesher::get_sample_size(int i) {
 //-----------------------------------------------------------------------------
 void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   model->mesh(3);
-  if (scale != 1.0)
-    model->scaleMesh(scale);
+  if (scale != 1.0) { model->scaleMesh(scale); }
 
   dolfin::MeshEditor editor;
   editor.open(mesh, "tetrahedron", 3, 3);
 
-  // vertices
+  // add vertices to mesh
   editor.init_vertices(model->getNumMeshVertices());
   std::vector<GEntity*> entities; 
   model->getEntities(entities);       
@@ -271,11 +276,12 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   for(unsigned int i = 0; i < entities.size(); i++) {
     for(unsigned int j = 0; j < entities[i]->mesh_vertices.size(); j++) {
       MVertex *v = entities[i]->mesh_vertices[j];
-      //const unsigned int index = v->getNum() - 1;
       v->setIndex(index);
+
       p[0] = v->x();
       p[1] = v->y();
       p[2] = v->z();
+
       editor.add_vertex(index, p);
       ++index;
     }
@@ -284,16 +290,24 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   // elements
   // TODO is there a better way to get the total number of tets?
   int tetCount = 0;
-  for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
-    tetCount += (*it)->tetrahedra.size();
+  for(GModel::riter rit = model->firstRegion(); rit != model->lastRegion(); ++rit) {
+    tetCount += (*rit)->tetrahedra.size();
   }
+
   editor.init_cells(tetCount);
 
+  // initialize subdomains
+  mesh.domains().init(2);
+  mesh.domains().init(3);
+  std::map<size_t, size_t> &facetdomains = mesh.domains().markers(2);
+  std::map<size_t, size_t> &subdomains   = mesh.domains().markers(3);
+
+  // add tets to mesh and create subdomains
   std::vector<size_t> v(4);
   index = 0;
-  for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
-    for(unsigned int i = 0; i < (*it)->tetrahedra.size(); i++) {
-      MTetrahedron *tet = (*it)->tetrahedra[i];
+  for(GModel::riter rit = model->firstRegion(); rit != model->lastRegion(); ++rit) {
+    for(unsigned int i = 0; i < (*rit)->tetrahedra.size(); ++i) {
+      MTetrahedron *tet = (*rit)->tetrahedra[i];
 
       v[0] = tet->getVertex(0)->getIndex();
       v[1] = tet->getVertex(1)->getIndex();
@@ -301,26 +315,43 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
       v[3] = tet->getVertex(3)->getIndex();
 
       editor.add_cell(index, v);
+
+      // set subdomain
+      assert ((*rit)->physicals.size() == 1); // TODO move up
+      subdomains[index] = (*rit)->physicals[0];
+
       ++index;
     }
   }
-
   editor.close();
 
-  // physical regions
-  mesh.domains().init(3);
-  std::map<size_t, size_t> &subdomains = mesh.domains().markers(3);
+  // set facet subdomains
+  mesh.init(0,2);
+  for(GModel::fiter fit = model->firstFace(); fit != model->lastFace(); ++fit) {
+    if ((*fit)->getPhysicalEntities().size() == 0) continue;
+    for(unsigned int i = 0; i < (*fit)->triangles.size(); ++i) {
+      MTriangle *tri = (*fit)->triangles[i];
 
-  index = 0;
-  for(GModel::riter it = model->firstRegion(); it != model->lastRegion(); ++it) {
-    for(unsigned int i = 0; i < (*it)->tetrahedra.size(); i++) {
-      //assert ((*it)->physicals.size() == 1);
-      if ((*it)->physicals.size() == 0) {
-        subdomains[index] = 0;
-      } else {
-        subdomains[index] = (*it)->physicals[0];
+      const int v0 = tri->getVertex(0)->getIndex();
+      const int v1 = tri->getVertex(1)->getIndex();
+      const int v2 = tri->getVertex(2)->getIndex();
+
+      const size_t ft_size   = mesh.topology()(0,2).size(v0);
+      const unsigned int *ft = mesh.topology()(0,2)(v0);
+
+      for(unsigned int j = 0; j < ft_size; ++j) {
+        const unsigned int *fv = mesh.topology()(2,0)(ft[j]);
+
+        bool match = true;
+        if (std::find(fv, fv + 3, v1) == fv + 3) { match = false; }
+        if (std::find(fv, fv + 3, v2) == fv + 3) { match = false; }
+
+        if (match) {
+          assert((*fit)->physicals.size() == 1);
+          facetdomains[ft[j]] = (*fit)->physicals[0];
+          break;
+        }
       }
-      ++index;
     }
   }
 }
