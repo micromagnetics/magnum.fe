@@ -32,6 +32,7 @@
 #include <gmsh/MVertex.h>
 #include <gmsh/MTetrahedron.h>
 #include <gmsh/MTriangle.h>
+#include <gmsh/GRegionCompound.h>
 
 using namespace magnumfe;
 
@@ -109,12 +110,23 @@ void Mesher::read_file(const std::string name) {
   }
   // handle sophisticated meshes
   else {
-    // require face "1" to be defined
-    assert(groups[2].find(1) != groups[2].end());
+    // automatically retrieve outer faces of sample for meshing of shell
+    // TODO handle holes
+    model->createTopologyFromMesh();
 
-    for (std::vector<GEntity*>::iterator fit = groups[2][1].begin(); fit != groups[2][1].end(); fit++) {
-      sample_faces.push_back((GFace*) *fit);
+    std::vector<GRegion*> all_regions;
+    for (GModel::riter rit = model->firstRegion(); rit != model->lastRegion(); rit++) {
+      all_regions.push_back(*rit);
     }
+    GRegionCompound compound(model, 0, all_regions);
+
+    std::list<GFace*> faces = compound.faces();
+    for (std::list<GFace*>::iterator fit = faces.begin(); fit != faces.end(); fit++) {
+      sample_faces.push_back(*fit);
+    }
+
+    // require face "1" to be defined
+    //assert(groups[2].find(1) != groups[2].end());
   }
 
   // retrieve box size

@@ -5,7 +5,7 @@ import numpy
 
 
 class MesherTest(unittest.TestCase):
-    def ttest_create_shell(self):
+    def test_create_shell(self):
       mesher = Mesher()
       # create and mesh sample
       mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
@@ -16,7 +16,7 @@ class MesherTest(unittest.TestCase):
       self.assertEqual(mesh_with_shell.num_cells(), 5640)
       self.assertEqual(mesh_with_shell.num_vertices(), 1188)
 
-    def ttest_get_sample_size(self):
+    def test_get_sample_size(self):
       mesher = Mesher()
       mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
       size = mesher.get_sample_size()
@@ -24,7 +24,7 @@ class MesherTest(unittest.TestCase):
       self.assertEqual(size[0], 3.0)
       self.assertEqual(size[1], 2.0)
 
-    def ttest_get_scaled_sample_size(self):
+    def test_get_scaled_sample_size(self):
       mesher = Mesher()
       mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
       size = mesher.get_sample_size(scale = 10)
@@ -32,7 +32,7 @@ class MesherTest(unittest.TestCase):
       self.assertEqual(size[0], 30.0)
       self.assertEqual(size[1], 20.0)
 
-    def ttest_scale(self):
+    def test_scale(self):
       mesher = Mesher()
       mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
 
@@ -56,6 +56,7 @@ class MesherTest(unittest.TestCase):
       f = MeshFunction("size_t", mesh, 2, mesh.domains())
       dS = Measure("dS", mesh)[f]
       self.assertAlmostEqual(56.0, assemble(Constant(1.0)('+')*dS(2)))
+      self.assertAlmostEqual(201.06, assemble(Constant(1.0)('+')*(dS(3)+dS(4))), places=-1)
 
 if __name__ == '__main__':
     unittest.main()
