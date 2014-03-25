@@ -122,6 +122,15 @@ namespace magnumfe {
     ///         The size.
     double get_sample_size(int i);
 
+    /// Create cell domain with specific ID
+    ///
+    /// *Arguments*
+    ///     subdomain (std::shared_ptr<const dolfin::SubDomain>)
+    ///         The subdomain
+    ///     id (size_t)
+    ///         The ID of the subdomain
+    void create_celldomain(std::shared_ptr<const dolfin::SubDomain> subdomain, size_t id);
+
   protected:
     // Type of sample (either cuboid of read from file)
     enum SampleType {
@@ -137,12 +146,14 @@ namespace magnumfe {
 
     // GMSH geometry and mesh containers
     GModel *model;
-    //GRegion *sample_region;
     std::vector<GFace*>   sample_faces;
     std::vector<GEdge*>   sample_edges;
     std::vector<GVertex*> sample_vertices;
     dolfin::Array<double> sample_size;
     SampleType            sample_type;
+
+    // DOLFIN SubDomains (TODO Extend to FacetDomains)
+    std::vector<std::pair<std::shared_ptr<const dolfin::SubDomain>, size_t> > celldomains;
 
     // Helper method, which creates a GMSH cuboid
     void create_cuboid_geo(const dolfin::Array<double>& size,

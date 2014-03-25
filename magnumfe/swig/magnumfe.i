@@ -40,6 +40,7 @@ import_array();
 %shared_ptr(dolfin::GenericMatrix)
 %shared_ptr(dolfin::GenericFunction)
 %shared_ptr(dolfin::Mesh)
+%shared_ptr(dolfin::SubDomain)
 
 // don't create interface for eval methods
 %ignore magnumfe::DofForm::nodeEval;

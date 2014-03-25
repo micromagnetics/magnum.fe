@@ -58,5 +58,22 @@ class MesherTest(unittest.TestCase):
       self.assertAlmostEqual(56.0, assemble(Constant(1.0)('+')*dS(2)))
       self.assertAlmostEqual(201.06, assemble(Constant(1.0)('+')*(dS(3)+dS(4))), places=-1)
 
+    def test_create_subdomain(self):
+      mesher = Mesher()
+      mesher.create_cuboid((1.0, 1.0, 1.0), (5, 5, 5))
+      mesher.create_shell(1)
+
+      class TestDomain(SubDomain):
+        def inside(self, x, on_boundary):
+          return between(x[0], (-0.50, 0.50))
+
+      test_domain = TestDomain()
+
+      mesher.create_celldomain(test_domain, 3)
+      mesh = mesher.mesh()
+
+      dx = Measure("dx", mesh)[MeshFunction("size_t", mesh, 3, mesh.domains())]
+      self.assertAlmostEqual(4.0, assemble(Constant(1.0)*dx(3)))
+
 if __name__ == '__main__':
     unittest.main()

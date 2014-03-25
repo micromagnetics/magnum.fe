@@ -125,6 +125,7 @@ void Mesher::read_file(const std::string name) {
       sample_faces.push_back(*fit);
     }
 
+    // LEGACY CODE (requires outer boundary of sample to be defined as face with id "1")
     // require face "1" to be defined
     //assert(groups[2].find(1) != groups[2].end());
   }
@@ -309,10 +310,10 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   editor.init_cells(tetCount);
 
   // initialize subdomains
-  mesh.domains().init(2);
+  //mesh.domains().init(2); //TODO can this really be omitted?
   mesh.domains().init(3);
-  std::map<size_t, size_t> &facetdomains = mesh.domains().markers(2);
-  std::map<size_t, size_t> &subdomains   = mesh.domains().markers(3);
+  std::map<size_t, size_t> &facetmarkers = mesh.domains().markers(2);
+  std::map<size_t, size_t> &cellmarkers  = mesh.domains().markers(3);
 
   // add tets to mesh and create subdomains
   std::vector<size_t> v(4);
@@ -328,9 +329,27 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
 
       editor.add_cell(index, v);
 
-      // set subdomain
-      assert ((*rit)->physicals.size() == 1); // TODO move up
-      subdomains[index] = (*rit)->physicals[0];
+      // apply custom celldomains if tet does not belong to shell
+      int physical = (*rit)->physicals[0];
+      if (physical < 1000 && celldomains.size() > 0) {
+
+        // get center of current tetrahendron
+        dolfin::Array<double> tet_center(3);
+        tet_center[0] = tet->circumcenter()[0];
+        tet_center[1] = tet->circumcenter()[1];
+        tet_center[2] = tet->circumcenter()[2];
+
+        // set domain according to custom celldomains
+        for (int j=0; j < celldomains.size(); ++j) {
+          if (celldomains[j].first->inside(tet_center, false)) {
+            physical = celldomains[j].second;
+          }
+        }
+      }
+
+      // set domain marker
+      assert ((*rit)->physicals.size() == 1); // TODO move up?
+      cellmarkers[index] = physical;
 
       ++index;
     }
@@ -360,12 +379,16 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
 
         if (match) {
           assert((*fit)->physicals.size() == 1);
-          facetdomains[ft[j]] = (*fit)->physicals[0];
+          facetmarkers[ft[j]] = (*fit)->physicals[0];
           break;
         }
       }
     }
   }
+}
+//-----------------------------------------------------------------------------
+void Mesher::create_celldomain(std::shared_ptr<const dolfin::SubDomain> subdomain, size_t id) {
+  celldomains.push_back(std::pair<std::shared_ptr<const dolfin::SubDomain>, size_t>(subdomain, id));
 }
 //-----------------------------------------------------------------------------
 const int Mesher::vertex_data[12][2] = {
