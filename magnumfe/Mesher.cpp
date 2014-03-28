@@ -163,6 +163,7 @@ void Mesher::create_cuboid(const dolfin::Array<double>& size, const dolfin::Arra
 }
 //-----------------------------------------------------------------------------
 void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, double shell_progression) {
+  // TODO split up in smaller functions
   assert(sample_type != NONE);
 
   std::vector<GVertex*> inner_vertices;
@@ -312,8 +313,8 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   // initialize subdomains
   //mesh.domains().init(2); //TODO can this really be omitted?
   mesh.domains().init(3);
-  std::map<size_t, size_t> &facetmarkers = mesh.domains().markers(2);
-  std::map<size_t, size_t> &cellmarkers  = mesh.domains().markers(3);
+  std::map<size_t, size_t> &facetmarkers  = mesh.domains().markers(2);
+  std::map<size_t, size_t> &cellmarkers   = mesh.domains().markers(3);
 
   // add tets to mesh and create subdomains
   std::vector<size_t> v(4);

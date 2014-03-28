@@ -7,10 +7,9 @@ import os
 class DemagFieldTest(unittest.TestCase):
 
     def test_create_mesh(self):
-      mesh = DemagField.create_mesh((0.5, 0.5, 0.5), (11, 11, 11))
-      self.assertEqual(mesh.size(0), 1331)
-      self.assertEqual(mesh.with_shell.size(0), 1933)
-      self.assertEqual(mesh.data['sample_size'], [0.5, 0.5, 0.5])
+      mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (11, 11, 11))
+      self.assertEqual(mesh.size(0), 1933)
+      self.assertEqual(sample_size, [0.5, 0.5, 0.5])
 
     def test_energy_unit_cube(self):
       energy = self.energy_cube()
@@ -25,31 +24,24 @@ class DemagFieldTest(unittest.TestCase):
       self.assertTrue(abs(energy - 1.0/48.0) < 0.001)
 
     def energy_cube(self, scale=1.0):
-      mesh = DemagField.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), d = 3, scale=scale)
-      VS = FunctionSpace(mesh, "Lagrange", 2)
-      VV = VectorFunctionSpace(mesh, "Lagrange", 1)
+      mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), d = 3, scale=scale)
+      demag_field = DemagField(sample_size, 2)
 
-      m = interpolate(Constant((0.0, 0.0, 1.0)), VV)
-      demag = DemagField(mesh, order = 2)
+      state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
+      u = demag_field.calculate_potential(state)
 
-      u = demag.calculate(m)
-
-      M = Constant(0.5) * inner(m, grad(u)) * dx(mesh)
+      M = Constant(0.5) * inner(state.m, grad(u)) * state.dx('magnetic')
       return assemble(M)
     
     def test_energy_sphere(self):
       sphere_mesh = os.path.dirname(os.path.realpath(__file__)) + "/mesh/sphere.msh"
-      mesh = DemagField.create_mesh(sphere_mesh, d=5, n=(10,10,10), margin=0.2)
+      mesh, sample_size = DemagField.create_mesh(sphere_mesh, d=5, n=(10,10,10), margin=0.2)
+      demag_field = DemagField(sample_size, 2)
 
-      VV = VectorFunctionSpace(mesh, "CG", 1)
+      state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
+      u = demag_field.calculate_potential(state)
 
-      # calculate demag potential
-      m = interpolate(Constant((0.0, 0.0, 1.0)), VV)
-      demag = DemagField(mesh, order = 2)
-      u = demag.calculate(m)
-
-      # calculate demag energy
-      M = Constant(0.5) * inner(m, grad(u)) * dx(mesh)
+      M = Constant(0.5) * inner(state.m, grad(u)) * state.dx('magnetic')
       energy = assemble(M)
 
       self.assertTrue(abs(energy - pi/36.0) < 0.01)

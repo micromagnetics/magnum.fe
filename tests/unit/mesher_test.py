@@ -75,5 +75,11 @@ class MesherTest(unittest.TestCase):
       dx = Measure("dx", mesh)[MeshFunction("size_t", mesh, 3, mesh.domains())]
       self.assertAlmostEqual(4.0, assemble(Constant(1.0)*dx(3)))
 
+    def test_sample_size_as_mash_data(self):
+      mesher = Mesher()
+      mesher.create_cuboid((1.0, 1.0, 2.0), (1, 1, 1))
+      mesher.create_shell(1)
+      mesh = mesher.mesh()
+
 if __name__ == '__main__':
     unittest.main()
