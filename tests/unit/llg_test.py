@@ -7,22 +7,23 @@ mesh, sample_size = DemagField.create_mesh((50.0/2.0, 50.0/2.0, 3.0/2.0), (50, 5
 volume   = 50.0 * 50.0 * 3.0
 arg      = "sqrt((3.141592*(x[0]/1e1))*(3.141592*(x[0]/1e1)))"
 m_expr   = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
-ref_file = os.path.dirname(os.path.realpath(__file__)) + "/ref/llg_dm.xml"
+ref_file = os.path.dirname(os.path.realpath(__file__)) + "/ref/llg_v.xml"
 
 class LlgTest(unittest.TestCase):
 
   def test_llg(self):
-    state = State(mesh, material = Material.py(), m = m_expr)
+    VV = VectorFunctionSpace(mesh, 'CG', 1, 3)
+    state = State(mesh, material = Material.py(), m = interpolate(m_expr, VV))
 
     llg = LLG([DemagField(sample_size, 2)], scale = 1e-9)
-    v   = llg.calculate_v(state)
+    v   = llg.calculate_v(state, 1e-12)
 
     #llg = LLG(mesh, material, scale=1e-9, demag_order=2)
     #m   = llg.interpolate(m_expr)
     #dm  = llg.calculate_dm(m, 1e-12)
 
     #f = File(ref_file)
-    #f << dm
+    #f << v
 
     ref = Function(VV, ref_file)
 
