@@ -2,6 +2,8 @@ import unittest
 from dolfin import *
 from magnumfe import *
 
+set_log_active(False)
+
 class StateTest(unittest.TestCase):
     def test_named_regions(self):
       class TestDomain1(SubDomain):
@@ -34,7 +36,8 @@ class StateTest(unittest.TestCase):
       m = Constant((1.0, 0.0, 0.0))
       state = State(mesh, m = m)
 
-      self.assertEqual(m, state.m)
+      self.assertTrue(isinstance(state.m, Function))
+      self.assertAlmostEqual(1.0, assemble(inner(state.m, m)*dx(state.mesh)))
 
 if __name__ == '__main__':
     unittest.main()

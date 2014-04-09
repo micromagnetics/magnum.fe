@@ -3,6 +3,7 @@ from dolfin import *
 from magnumfe import *
 import numpy
 
+set_log_active(False)
 
 class MesherTest(unittest.TestCase):
     def test_create_shell(self):

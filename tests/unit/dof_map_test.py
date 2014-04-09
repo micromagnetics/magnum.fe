@@ -3,6 +3,8 @@ from dolfin import *
 from magnumfe import *
 import numpy
 
+set_log_active(False)
+
 mesh = UnitCubeMesh(1, 1, 1)
 VS = FunctionSpace(mesh, "CG", 1)
 VV = VectorFunctionSpace(mesh, "CG", 1)

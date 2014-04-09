@@ -3,12 +3,14 @@ from dolfin import *
 from magnumfe import *
 import numpy
 
+set_log_active(False)
+
 mesher = Mesher()
 mesher.create_cuboid((1,1,1), (7,7,7))
 mesher.create_shell(2)
 complete_mesh = mesher.mesh()
 
-mesh = WrappedMesh.create(complete_mesh, 0)
+mesh = WrappedMesh.create(complete_mesh, 1)
 
 class WrappedMeshTest(unittest.TestCase):
 
