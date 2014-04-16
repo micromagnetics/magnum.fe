@@ -30,6 +30,7 @@ class StateTest(unittest.TestCase):
       self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('air')), 1.6)
       self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('!magnetic')), 1.6)
       self.assertAlmostEqual(assemble(Constant(1.0)*state.dx(2)), 0.8)
+      self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('all')), 8.0)
 
     def test_attribute_init(self):
       mesh = UnitCubeMesh(1,1,1)

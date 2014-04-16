@@ -48,6 +48,25 @@ class WrappedMeshTest(unittest.TestCase):
       self.assertZeroAtPoint(f_expanded, (1.6, 1.6, 1.6))
       self.assertZeroAtPoint(f_expanded, (-1.6, -1.6, -1.6))
 
+    def test_multiple_subdomains(self):
+      mesher = Mesher()
+      mesher.create_cuboid((1.0, 1.0, 1.0), (5, 5, 5))
+      mesher.create_shell(1)
+
+      class TestDomain(SubDomain):
+        def inside(self, x, on_boundary):
+          return between(x[0], (-0.50, 0.50))
+
+      test_domain = TestDomain()
+
+      mesher.create_celldomain(test_domain, 3)
+
+      mesh1 = WrappedMesh.create(complete_mesh, 1)
+      mesh3 = WrappedMesh.create(complete_mesh, 3)
+      mesh13 = WrappedMesh.create(complete_mesh, (1,3))
+
+      self.assertEqual(mesh13.size(3), mesh1.size(3) + mesh3.size(3))
+
     def assertEqualAtPoint(self, f1, f2, point):
       v1 = numpy.zeros((1,), dtype="d")
       v2 = numpy.zeros((1,), dtype="d")
