@@ -60,12 +60,17 @@ class WrappedMeshTest(unittest.TestCase):
       test_domain = TestDomain()
 
       mesher.create_celldomain(test_domain, 3)
+      complete_mesh = mesher.mesh()
 
       mesh1 = WrappedMesh.create(complete_mesh, 1)
       mesh3 = WrappedMesh.create(complete_mesh, 3)
       mesh13 = WrappedMesh.create(complete_mesh, (1,3))
 
       self.assertEqual(mesh13.size(3), mesh1.size(3) + mesh3.size(3))
+
+    def test_multiple_subdomains_inverted(self):
+      mesh1 = WrappedMesh.create(mesh.with_shell, (1000,1001,1002,1003), invert=True)
+      self.assertEqual(mesh.size(3), mesh1.size(3))
 
     def assertEqualAtPoint(self, f1, f2, point):
       v1 = numpy.zeros((1,), dtype="d")
