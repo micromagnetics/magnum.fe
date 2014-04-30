@@ -1,12 +1,12 @@
 import unittest
 
 testmodules = [
-    'unit.demag_field_test',
-    'unit.wrapped_mesh_test',
-    'unit.dof_map_test',
-    'unit.mesher_test',
-    'unit.llg_test',
-    'unit.state_test'
+    'demag_field_test',
+    'wrapped_mesh_test',
+    'dof_map_test',
+    'mesher_test',
+    'llg_test',
+    'state_test'
     ]
 
 suite = unittest.TestSuite()
