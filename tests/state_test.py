@@ -38,7 +38,13 @@ class StateTest(unittest.TestCase):
       state = State(mesh, m = m)
 
       self.assertTrue(isinstance(state.m, Function))
-      self.assertAlmostEqual(1.0, assemble(inner(state.m, m)*dx(state.mesh)))
+      self.assertAlmostEqual(1.0, assemble(inner(state.m, m)*state.dx()))
+
+    def test_dx_if_no_domains_defined(self):
+      mesh = UnitCubeMesh(1,1,1)
+      state = State(mesh)
+
+      self.assertAlmostEqual(1.0, assemble(Constant(1.0) * state.dx()))
 
 if __name__ == '__main__':
     unittest.main()

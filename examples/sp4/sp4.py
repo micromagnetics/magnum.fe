@@ -39,8 +39,8 @@ t  = 0.0
 for i in range(int(T / dt)):
   t = i * dt
   
-  #if (i % nth_step == 10):
-  #  f = File("data/m_%d.pvd" % int(i/nth_step))
+  #if (i % 10 == 0):
+  #  f = File("data/m_%d.pvd" % int(i/10))
   #  f << state.m
 
   # write scalar information
@@ -48,7 +48,7 @@ for i in range(int(T / dt)):
   m_x = assemble(state.m[0] / volume * dx)
   m_y = assemble(state.m[1] / volume * dx)
   m_z = assemble(state.m[2] / volume * dx)
-  scalar_file.write("%.10f %f %f %f\n" % (t*1e9, m_x, m_y, m_z))
+  logfile.write("%.10f %f %f %f\n" % (t*1e9, m_x, m_y, m_z))
 
   # calculate next step
   llg.step(state, dt)
