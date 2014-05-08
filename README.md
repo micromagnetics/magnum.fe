@@ -50,7 +50,7 @@ Right now there is no install rule for make. There are however symlinks in the `
 You can test your installation by running the unit tests
 
     cd tests
-    python test.py
+    python run_all.py
 
 License
 -------
