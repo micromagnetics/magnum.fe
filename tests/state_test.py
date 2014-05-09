@@ -39,6 +39,12 @@ class StateTest(unittest.TestCase):
     self.assertAlmostEqual(1.6, assemble(inner(state.material.k_axis, Constant((1.0, 0.0, 0.0))) * state.dx('all')))
     self.assertAlmostEqual(6.4, assemble(inner(state.material.k_axis, Constant((0.0, 1.0, 0.0))) * state.dx('all')))
 
+  def test_set_global_material(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh)
+    state.material = Material(alpha = 1)
+    self.assertTrue(isinstance(state.material.alpha, Constant))
+
   def mesh_with_subdomains(self):
     class TestDomain1(SubDomain):
       def inside(self, x, on_boundary):
