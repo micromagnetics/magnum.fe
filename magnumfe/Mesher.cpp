@@ -71,7 +71,7 @@ void Mesher::create_cuboid_geo(const dolfin::Array<double>& size, const dolfin::
     edge->meshAttributes.method = 1; // Transfinite
     edge->meshAttributes.typeTransfinite = 1;
     edge->meshAttributes.coeffTransfinite = 1;
-    edge->meshAttributes.nbPointsTransfinite = n[dir[i]];
+    edge->meshAttributes.nbPointsTransfinite = n[dir[i]] + 1;
     edges.push_back(edge);
   }
 
@@ -180,9 +180,9 @@ void Mesher::create_shell(int d, double margin, const dolfin::Array<int>& n, dou
       inner_faces    = sample_faces;
 
       // get n values from inner cuboid
-      nn[0] = sample_edges[11]->meshAttributes.nbPointsTransfinite;
-      nn[1] = sample_edges[1]->meshAttributes.nbPointsTransfinite;
-      nn[2] = sample_edges[0]->meshAttributes.nbPointsTransfinite;
+      nn[0] = sample_edges[11]->meshAttributes.nbPointsTransfinite - 1;
+      nn[1] = sample_edges[1]->meshAttributes.nbPointsTransfinite - 1;
+      nn[2] = sample_edges[0]->meshAttributes.nbPointsTransfinite - 1;
       break;
     case MESHFILE:
       {

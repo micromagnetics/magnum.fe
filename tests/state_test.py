@@ -68,7 +68,7 @@ class StateTest(unittest.TestCase):
     test_domain2 = TestDomain2()
 
     mesher = Mesher()
-    mesher.create_cuboid((1,1,1), (11,11,11))
+    mesher.create_cuboid((1,1,1), (10,10,10))
     mesher.create_shell(1)
     mesher.create_celldomain(test_domain1, 2)
     mesher.create_celldomain(test_domain2, 3)
