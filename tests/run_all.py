@@ -2,6 +2,7 @@ import unittest
 
 testmodules = [
     'demag_field_test',
+    'demag_field_fk_test',
     'wrapped_mesh_test',
     'dof_map_test',
     'mesher_test',
