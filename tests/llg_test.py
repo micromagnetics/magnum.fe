@@ -24,16 +24,6 @@ class LlgTest(unittest.TestCase):
     error = assemble(inner(ref - v, ref - v) / inner(ref, ref) * state.dx('magnetic')) / volume
     self.assertTrue(error < 0.3)
 
-  def ttest_llg2(self):
-    llg = LLG2(mesh, material, scale=1e-9, demag_order=2)
-    m   = llg.interpolate(m_expr)
-    dm  = llg.calculate_dm(m, 1e-12)
-
-    ref = Function(VV, ref_file)
-
-    error = assemble(inner(ref - dm, ref - dm) / inner(ref, ref) * dx) / volume
-    self.assertTrue(error < 0.3)
-
   # TODO currently broken (segfault probably caused by cbc.block)
   def ttest_llg4(self):
     llg = LLG4(mesh, material, scale=1e-9, demag_order=1)
