@@ -9,7 +9,7 @@ class MesherTest(unittest.TestCase):
     def test_create_shell(self):
       mesher = Mesher()
       # create and mesh sample
-      mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
+      mesher.create_cuboid((3.0, 2.0, 1.0), (14, 9, 4))
 
       # create and mesh shell
       mesher.create_shell(1)
@@ -19,7 +19,7 @@ class MesherTest(unittest.TestCase):
 
     def test_get_sample_size(self):
       mesher = Mesher()
-      mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
+      mesher.create_cuboid((3.0, 2.0, 1.0), (14, 9, 4))
       size = mesher.get_sample_size()
 
       self.assertEqual(size[0], 3.0)
@@ -27,7 +27,7 @@ class MesherTest(unittest.TestCase):
 
     def test_get_scaled_sample_size(self):
       mesher = Mesher()
-      mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
+      mesher.create_cuboid((3.0, 2.0, 1.0), (14, 9, 4))
       size = mesher.get_sample_size(scale = 10)
 
       self.assertEqual(size[0], 30.0)
@@ -35,7 +35,7 @@ class MesherTest(unittest.TestCase):
 
     def test_scale(self):
       mesher = Mesher()
-      mesher.create_cuboid((3.0, 2.0, 1.0), (15, 10, 5))
+      mesher.create_cuboid((3.0, 2.0, 1.0), (14, 9, 4))
 
       mesh1 = mesher.mesh()
       mesh2 = mesher.mesh(10.0)
@@ -61,7 +61,7 @@ class MesherTest(unittest.TestCase):
 
     def test_create_subdomain(self):
       mesher = Mesher()
-      mesher.create_cuboid((1.0, 1.0, 1.0), (5, 5, 5))
+      mesher.create_cuboid((1.0, 1.0, 1.0), (4, 4, 4))
       mesher.create_shell(1)
 
       class TestDomain(SubDomain):

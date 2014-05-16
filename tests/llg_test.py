@@ -5,7 +5,7 @@ import os
 
 set_log_active(False)
 
-mesh, sample_size = DemagField.create_mesh((50.0/2.0, 50.0/2.0, 3.0/2.0), (50, 50, 1), d=3)
+mesh, sample_size = DemagField.create_mesh((50.0/2.0, 50.0/2.0, 3.0/2.0), (49, 49, 1), d=3)
 volume   = 50.0 * 50.0 * 3.0
 arg      = "sqrt((3.141592*(x[0]/1e1))*(3.141592*(x[0]/1e1)))"
 m_expr   = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))

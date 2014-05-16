@@ -9,9 +9,18 @@ set_log_active(False)
 class DemagFieldTest(unittest.TestCase):
 
     def test_create_mesh(self):
-      mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (11, 11, 11))
+      mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (10, 10, 10))
       self.assertEqual(mesh.with_shell.size(0), 1933)
       self.assertEqual(sample_size, [0.5, 0.5, 0.5])
+
+    def test_create_mesh_with_domains(self):
+      class TestDomain(SubDomain):
+        def inside(self, x, on_boundary):
+          return between(x[0], (0.1, 0.4))
+
+      mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), domains = {2: TestDomain()})
+      state = State(mesh, {'test': 2})
+      self.assertAlmostEqual(0.3, assemble(Constant(1.0)*state.dx('test')))
 
     def test_energy_unit_cube(self):
       energy = self.energy_cube()
