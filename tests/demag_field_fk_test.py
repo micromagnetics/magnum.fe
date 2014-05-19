@@ -12,6 +12,7 @@ class DemagFieldTestFK(unittest.TestCase):
       state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
       u = demag_field.calculate_potential(state)
       energy = assemble(Constant(0.5) * inner(state.m, grad(u)) * dx(mesh))
+      print energy
       self.assertTrue(abs(energy - 1.0/6.0) < 0.01)
 
 if __name__ == '__main__':
