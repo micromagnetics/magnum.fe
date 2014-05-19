@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>llg_terms Package &mdash; magnum.fe 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="magnum.fe 0.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">magnum.fe 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="llg-terms-package">
+<h1>llg_terms Package<a class="headerlink" href="#llg-terms-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">llg_terms</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-magnumfe.llg_terms"></span><p>This module contains all binding to c++ classes and bindings
+connected to dolfin</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.LLGTerm">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.</tt><tt class="descname">LLGTerm</tt><a class="headerlink" href="#magnumfe.llg_terms.LLGTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.LLGTerm.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.LLGTerm.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.llg_terms.DemagField">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.</tt><tt class="descname">DemagField</tt><big>(</big><em>sample_size</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class defines methods for the micromagnetic stray-field computation.
+It uses cuboid transformation techniques of arbitrary order.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagField.calculate_potential">
+<tt class="descname">calculate_potential</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagField.calculate_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the stray-field for a given simulation state</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state</dt>
+<dd>The simulation state</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.llg_terms.DemagField.create_mesh">
+<em class="property">static </em><tt class="descname">create_mesh</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagField.create_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a WrappedMesh suited for the application of the shell-
+transformation method. Either takes a filename as first argument
+to load the meshed sample or sizes and discretization of a cuboid
+sample.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div></div></blockquote>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>d</dt>
+<dd>Number of shell layers.</dd>
+<dt>scale</dt>
+<dd>Scale factor used for mesh generation.</dd>
+<dt>margin</dt>
+<dd>Margin to the sample when loading sample mesh from a file.</dd>
+<dt>n</dt>
+<dd>Discretization of inner cuboid when loading sample mesh from a file.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagField.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagField.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.llg_terms.ExternalField">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.</tt><tt class="descname">ExternalField</tt><big>(</big><em>field=Coefficient(VectorElement('Real'</em>, <em>None</em>, <em>0</em>, <em>dim=3</em>, <em>quad_scheme=None)</em>, <em>0)</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.ExternalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class represents a constant external field.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.ExternalField.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.ExternalField.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.ExternalField.set">
+<tt class="descname">set</tt><big>(</big><em>field</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.ExternalField.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.llg_terms.DemagFieldFK">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.</tt><tt class="descname">DemagFieldFK</tt><a class="headerlink" href="#magnumfe.llg_terms.DemagFieldFK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class defines methods for the micromagnetic stray-field computation.
+It uses the FEM-BEM coupling as proposed by Fredkin and Koehler.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagFieldFK.calculate_potential">
+<tt class="descname">calculate_potential</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagFieldFK.calculate_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the stray-field for a given simulation state</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state</dt>
+<dd>The simulation state</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagFieldFK.calculate_u1">
+<tt class="descname">calculate_u1</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagFieldFK.calculate_u1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagFieldFK.calculate_u2">
+<tt class="descname">calculate_u2</tt><big>(</big><em>state</em>, <em>bc</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagFieldFK.calculate_u2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagFieldFK.calculate_u2_bc">
+<tt class="descname">calculate_u2_bc</tt><big>(</big><em>state</em>, <em>u1</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagFieldFK.calculate_u2_bc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.DemagFieldFK.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.DemagFieldFK.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.llg_terms.UniaxialAnisotropyField">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.llg_terms.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class represents a constant external field.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.UniaxialAnisotropyField.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.UniaxialAnisotropyField.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.llg_terms.SpinCurrent">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.</tt><tt class="descname">SpinCurrent</tt><a class="headerlink" href="#magnumfe.llg_terms.SpinCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class represents the coupling with a spin polarized current.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.SpinCurrent.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.SpinCurrent.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.llg_terms.demag_field">
+<span id="demag-field-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">demag_field</span></tt> Module<a class="headerlink" href="#module-magnumfe.llg_terms.demag_field" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a class for the micromagnetic stray-field
+computation using transformation techniques.</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.demag_field.DemagField">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.demag_field.</tt><tt class="descname">DemagField</tt><big>(</big><em>sample_size</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field.DemagField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class defines methods for the micromagnetic stray-field computation.
+It uses cuboid transformation techniques of arbitrary order.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field.DemagField.calculate_potential">
+<tt class="descname">calculate_potential</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field.DemagField.calculate_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the stray-field for a given simulation state</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state</dt>
+<dd>The simulation state</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.llg_terms.demag_field.DemagField.create_mesh">
+<em class="property">static </em><tt class="descname">create_mesh</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field.DemagField.create_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a WrappedMesh suited for the application of the shell-
+transformation method. Either takes a filename as first argument
+to load the meshed sample or sizes and discretization of a cuboid
+sample.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div></div></blockquote>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>d</dt>
+<dd>Number of shell layers.</dd>
+<dt>scale</dt>
+<dd>Scale factor used for mesh generation.</dd>
+<dt>margin</dt>
+<dd>Margin to the sample when loading sample mesh from a file.</dd>
+<dt>n</dt>
+<dd>Discretization of inner cuboid when loading sample mesh from a file.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field.DemagField.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field.DemagField.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.llg_terms.demag_field_fk">
+<span id="demag-field-fk-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">demag_field_fk</span></tt> Module<a class="headerlink" href="#module-magnumfe.llg_terms.demag_field_fk" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a class for the micromagnetic stray-field
+computation using the FEM-BEM coupling as proposed by Fredkin and Koehler.</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.demag_field_fk.DemagFieldFK">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.demag_field_fk.</tt><tt class="descname">DemagFieldFK</tt><a class="headerlink" href="#magnumfe.llg_terms.demag_field_fk.DemagFieldFK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class defines methods for the micromagnetic stray-field computation.
+It uses the FEM-BEM coupling as proposed by Fredkin and Koehler.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_potential">
+<tt class="descname">calculate_potential</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the stray-field for a given simulation state</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state</dt>
+<dd>The simulation state</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_u1">
+<tt class="descname">calculate_u1</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_u1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_u2">
+<tt class="descname">calculate_u2</tt><big>(</big><em>state</em>, <em>bc</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_u2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_u2_bc">
+<tt class="descname">calculate_u2_bc</tt><big>(</big><em>state</em>, <em>u1</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field_fk.DemagFieldFK.calculate_u2_bc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.demag_field_fk.DemagFieldFK.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.demag_field_fk.DemagFieldFK.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.llg_terms.external_field">
+<span id="external-field-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">external_field</span></tt> Module<a class="headerlink" href="#module-magnumfe.llg_terms.external_field" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a class for the micromagnetic stray-field
+computation using transformation techniques.</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.external_field.ExternalField">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.external_field.</tt><tt class="descname">ExternalField</tt><big>(</big><em>field=Coefficient(VectorElement('Real'</em>, <em>None</em>, <em>0</em>, <em>dim=3</em>, <em>quad_scheme=None)</em>, <em>0)</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.external_field.ExternalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class represents a constant external field.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.external_field.ExternalField.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.external_field.ExternalField.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.llg_terms.external_field.ExternalField.set">
+<tt class="descname">set</tt><big>(</big><em>field</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.external_field.ExternalField.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.llg_terms.llg_term">
+<span id="llg-term-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">llg_term</span></tt> Module<a class="headerlink" href="#module-magnumfe.llg_terms.llg_term" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a class for a term added to the LLG.</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.llg_term.LLGTerm">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.llg_term.</tt><tt class="descname">LLGTerm</tt><a class="headerlink" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.llg_term.LLGTerm.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.llg_term.LLGTerm.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.llg_terms.spin_current">
+<span id="spin-current-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">spin_current</span></tt> Module<a class="headerlink" href="#module-magnumfe.llg_terms.spin_current" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a class for the coupling of a spin polarized current
+with the magnetization</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.spin_current.SpinCurrent">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.spin_current.</tt><tt class="descname">SpinCurrent</tt><a class="headerlink" href="#magnumfe.llg_terms.spin_current.SpinCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class represents the coupling with a spin polarized current.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.spin_current.SpinCurrent.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.spin_current.SpinCurrent.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.llg_terms.uniaxial_anisotropy">
+<span id="uniaxial-anisotropy-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">uniaxial_anisotropy</span></tt> Module<a class="headerlink" href="#module-magnumfe.llg_terms.uniaxial_anisotropy" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a class for a first order uniaxial anisotropy</p>
+<dl class="class">
+<dt id="magnumfe.llg_terms.uniaxial_anisotropy.UniaxialAnisotropyField">
+<em class="property">class </em><tt class="descclassname">magnumfe.llg_terms.uniaxial_anisotropy.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.llg_terms.uniaxial_anisotropy.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#magnumfe.llg_terms.llg_term.LLGTerm" title="magnumfe.llg_terms.llg_term.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.llg_terms.llg_term.LLGTerm</span></tt></a></p>
+<p>This class represents a constant external field.</p>
+<dl class="method">
+<dt id="magnumfe.llg_terms.uniaxial_anisotropy.UniaxialAnisotropyField.form_term">
+<tt class="descname">form_term</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.llg_terms.uniaxial_anisotropy.UniaxialAnisotropyField.form_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">llg_terms Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">llg_terms</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-magnumfe.llg_terms.demag_field"><tt class="docutils literal"><span class="pre">demag_field</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-magnumfe.llg_terms.demag_field_fk"><tt class="docutils literal"><span class="pre">demag_field_fk</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-magnumfe.llg_terms.external_field"><tt class="docutils literal"><span class="pre">external_field</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-magnumfe.llg_terms.llg_term"><tt class="docutils literal"><span class="pre">llg_term</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-magnumfe.llg_terms.spin_current"><tt class="docutils literal"><span class="pre">spin_current</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-magnumfe.llg_terms.uniaxial_anisotropy"><tt class="docutils literal"><span class="pre">uniaxial_anisotropy</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/magnumfe.llg_terms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">magnum.fe 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Claas Abert.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dolfin Package &mdash; magnum.fe 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="magnum.fe 0.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">magnum.fe 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dolfin-package">
+<h1>dolfin Package<a class="headerlink" href="#dolfin-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">dolfin</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-magnumfe.dolfin"></span><p>This module contains all binding to c++ classes and bindings
+connected to dolfin</p>
+<dl class="class">
+<dt id="magnumfe.dolfin.Mesher">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">Mesher</tt><a class="headerlink" href="#magnumfe.dolfin.Mesher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.Mesher" title="magnumfe.cpp.Mesher"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.Mesher</span></tt></a></p>
+<p>This class uses the GMSH library to generate dolfin meshes.
+Especially it offers methods to surround arbitrary meshes
+with a cuboid shell that is required for the demagnetization-field
+transformation method.</p>
+<p>Creating a cuboid shell assumes that the coordinate origin is
+in the center of the sample mesh (The resulting mesh will be
+symmetric around the coordinate origin).</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">mesher</span> <span class="o">=</span> <span class="n">Mesher</span><span class="p">()</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s">&quot;sample.msh&quot;</span><span class="p">)</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">create_shell</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">mesh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="method">
+<dt id="magnumfe.dolfin.Mesher.create_cuboid">
+<tt class="descname">create_cuboid</tt><big>(</big><em>size</em>, <em>n</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.Mesher.create_cuboid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cuboid of given dimension around the coordinate
+origin.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>size</dt>
+<dd>Size of the cuboid.</dd>
+<dt>n</dt>
+<dd>Number of mesh points.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.dolfin.Mesher.create_shell">
+<tt class="descname">create_shell</tt><big>(</big><em>d</em>, <em>margin=0.0</em>, <em>n=(0</em>, <em>0</em>, <em>0)</em>, <em>progression=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.Mesher.create_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cuboid shell around the current sample.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>d</dt>
+<dd>Number of layers of the shell mesh.</dd>
+<dt>margin</dt>
+<dd>Margin between sample and shell
+(useful for meshes read from file).</dd>
+<dt>n</dt>
+<dd>Number of mesh points of shell.
+(only needed if mesh was read from file)</dd>
+<dt>progression</dt>
+<dd>Defines coarsening of the shell layers.
+1.0 means no coarsening.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.dolfin.Mesher.get_sample_size">
+<tt class="descname">get_sample_size</tt><big>(</big><em>i=-1</em>, <em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.Mesher.get_sample_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sample size (inner-shell size) in a given
+dimension. Scaling used for mesh generation is not considered.
+If no direction is specified a list of sizes is returned.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>i</dt>
+<dd>The dimension (direction).</dd>
+<dt>scale</dt>
+<dd>Scaling of the mesh.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.dolfin.Mesher.mesh">
+<tt class="descname">mesh</tt><big>(</big><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.Mesher.mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mesh the geometry and return dolfin mesh.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>scale</dt>
+<dd>Scaling of the mesh. Useful for very small meshes.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.MetricMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">MetricMatrix</tt><a class="headerlink" href="#magnumfe.dolfin.MetricMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class defines a static method for the creation of expressions of
+the metric matrix used for the stray-field transformation method.</p>
+<dl class="staticmethod">
+<dt id="magnumfe.dolfin.MetricMatrix.create_for_cube">
+<em class="property">static </em><tt class="descname">create_for_cube</tt><big>(</big><em>size</em>, <em>coord</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.MetricMatrix.create_for_cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an expression for the metric matrix used for the cuboid
+transformation method for the stray-field calculation.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>size</dt>
+<dd>The size of the inner cuboid. This is used for the correct
+scaling of the tensor.</dd>
+<dt>coord</dt>
+<dd>The principal direction of transformation. For each shell
+patch this has to be chosen accordingly.</dd>
+<dt>order</dt>
+<dd>Order of transformation. Use 1 for P1 finite elements and
+2 for P&gt;1 elements.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.DofAssembler">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">DofAssembler</tt><a class="headerlink" href="#magnumfe.dolfin.DofAssembler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.DofAssembler" title="magnumfe.cpp.DofAssembler"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.DofAssembler</span></tt></a></p>
+<p>This class defines static methods for the assembly of _DofForm_ instances.</p>
+<dl class="staticmethod">
+<dt id="magnumfe.dolfin.DofAssembler.assemble">
+<em class="property">static </em><tt class="descname">assemble</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.DofAssembler.assemble" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemles a _DofForm_.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>a</dt>
+<dd>_DofForm_ to assemble.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.ScalarProductMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">ScalarProductMatrix</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.ScalarProductMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.ScalarProductMatrix" title="magnumfe.cpp.ScalarProductMatrix"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.ScalarProductMatrix</span></tt></a></p>
+<p>The class represents a matrix that is used to compute the
+nodewise scalar product with a given vector.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.ScalarProductMatrix2">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">ScalarProductMatrix2</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.ScalarProductMatrix2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.ScalarProductMatrix2" title="magnumfe.cpp.ScalarProductMatrix2"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.ScalarProductMatrix2</span></tt></a></p>
+<p>The class represents a matrix that is used to compute the
+nodewise scalar product with a given vector.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.TransScalarProductMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">TransScalarProductMatrix</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.TransScalarProductMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.TransScalarProductMatrix" title="magnumfe.cpp.TransScalarProductMatrix"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.TransScalarProductMatrix</span></tt></a></p>
+<p>The class represents a transposed matrix that is used to
+compute the nodewise scalar product with a given vector.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.NormalizedVector">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.</tt><tt class="descname">NormalizedVector</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.NormalizedVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.NormalizedVector" title="magnumfe.cpp.NormalizedVector"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.NormalizedVector</span></tt></a></p>
+<p>The class defines a _DofForm_ that represents a nodewise
+normalized vector field.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.dolfin.dofassembler">
+<span id="dofassembler-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">dofassembler</span></tt> Module<a class="headerlink" href="#module-magnumfe.dolfin.dofassembler" title="Permalink to this headline">¶</a></h2>
+<p>This module defines wrapper classes associated with the DofForm class
+and the DofAssembler.</p>
+<dl class="class">
+<dt id="magnumfe.dolfin.dofassembler.DofAssembler">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.dofassembler.</tt><tt class="descname">DofAssembler</tt><a class="headerlink" href="#magnumfe.dolfin.dofassembler.DofAssembler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.DofAssembler" title="magnumfe.cpp.DofAssembler"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.DofAssembler</span></tt></a></p>
+<p>This class defines static methods for the assembly of _DofForm_ instances.</p>
+<dl class="staticmethod">
+<dt id="magnumfe.dolfin.dofassembler.DofAssembler.assemble">
+<em class="property">static </em><tt class="descname">assemble</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.dofassembler.DofAssembler.assemble" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemles a _DofForm_.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>a</dt>
+<dd>_DofForm_ to assemble.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.dofassembler.ScalarProductMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.dofassembler.</tt><tt class="descname">ScalarProductMatrix</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.dofassembler.ScalarProductMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.ScalarProductMatrix" title="magnumfe.cpp.ScalarProductMatrix"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.ScalarProductMatrix</span></tt></a></p>
+<p>The class represents a matrix that is used to compute the
+nodewise scalar product with a given vector.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.dofassembler.ScalarProductMatrix2">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.dofassembler.</tt><tt class="descname">ScalarProductMatrix2</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.dofassembler.ScalarProductMatrix2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.ScalarProductMatrix2" title="magnumfe.cpp.ScalarProductMatrix2"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.ScalarProductMatrix2</span></tt></a></p>
+<p>The class represents a matrix that is used to compute the
+nodewise scalar product with a given vector.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.dofassembler.TransScalarProductMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.dofassembler.</tt><tt class="descname">TransScalarProductMatrix</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.dofassembler.TransScalarProductMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.TransScalarProductMatrix" title="magnumfe.cpp.TransScalarProductMatrix"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.TransScalarProductMatrix</span></tt></a></p>
+<p>The class represents a transposed matrix that is used to
+compute the nodewise scalar product with a given vector.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="magnumfe.dolfin.dofassembler.NormalizedVector">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.dofassembler.</tt><tt class="descname">NormalizedVector</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.dofassembler.NormalizedVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.NormalizedVector" title="magnumfe.cpp.NormalizedVector"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.NormalizedVector</span></tt></a></p>
+<p>The class defines a _DofForm_ that represents a nodewise
+normalized vector field.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.dolfin.mesher">
+<span id="mesher-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">mesher</span></tt> Module<a class="headerlink" href="#module-magnumfe.dolfin.mesher" title="Permalink to this headline">¶</a></h2>
+<p>This module defines a wrapper for the Mesher class</p>
+<dl class="class">
+<dt id="magnumfe.dolfin.mesher.Mesher">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.mesher.</tt><tt class="descname">Mesher</tt><a class="headerlink" href="#magnumfe.dolfin.mesher.Mesher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="magnumfe.html#magnumfe.cpp.Mesher" title="magnumfe.cpp.Mesher"><tt class="xref py py-class docutils literal"><span class="pre">magnumfe.cpp.Mesher</span></tt></a></p>
+<p>This class uses the GMSH library to generate dolfin meshes.
+Especially it offers methods to surround arbitrary meshes
+with a cuboid shell that is required for the demagnetization-field
+transformation method.</p>
+<p>Creating a cuboid shell assumes that the coordinate origin is
+in the center of the sample mesh (The resulting mesh will be
+symmetric around the coordinate origin).</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">mesher</span> <span class="o">=</span> <span class="n">Mesher</span><span class="p">()</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s">&quot;sample.msh&quot;</span><span class="p">)</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">create_shell</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">mesh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="method">
+<dt id="magnumfe.dolfin.mesher.Mesher.create_cuboid">
+<tt class="descname">create_cuboid</tt><big>(</big><em>size</em>, <em>n</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.mesher.Mesher.create_cuboid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cuboid of given dimension around the coordinate
+origin.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>size</dt>
+<dd>Size of the cuboid.</dd>
+<dt>n</dt>
+<dd>Number of mesh points.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.dolfin.mesher.Mesher.create_shell">
+<tt class="descname">create_shell</tt><big>(</big><em>d</em>, <em>margin=0.0</em>, <em>n=(0</em>, <em>0</em>, <em>0)</em>, <em>progression=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.mesher.Mesher.create_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cuboid shell around the current sample.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>d</dt>
+<dd>Number of layers of the shell mesh.</dd>
+<dt>margin</dt>
+<dd>Margin between sample and shell
+(useful for meshes read from file).</dd>
+<dt>n</dt>
+<dd>Number of mesh points of shell.
+(only needed if mesh was read from file)</dd>
+<dt>progression</dt>
+<dd>Defines coarsening of the shell layers.
+1.0 means no coarsening.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.dolfin.mesher.Mesher.get_sample_size">
+<tt class="descname">get_sample_size</tt><big>(</big><em>i=-1</em>, <em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.mesher.Mesher.get_sample_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sample size (inner-shell size) in a given
+dimension. Scaling used for mesh generation is not considered.
+If no direction is specified a list of sizes is returned.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>i</dt>
+<dd>The dimension (direction).</dd>
+<dt>scale</dt>
+<dd>Scaling of the mesh.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.dolfin.mesher.Mesher.mesh">
+<tt class="descname">mesh</tt><big>(</big><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.mesher.Mesher.mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mesh the geometry and return dolfin mesh.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>scale</dt>
+<dd>Scaling of the mesh. Useful for very small meshes.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="magnumfe.dolfin.expressions.html">expressions Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="magnumfe.dolfin.expressions.html#id1"><tt class="docutils literal"><span class="pre">expressions</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnumfe.dolfin.expressions.html#module-magnumfe.dolfin.expressions.metric_matrix"><tt class="docutils literal"><span class="pre">metric_matrix</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">dolfin Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">dolfin</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-magnumfe.dolfin.dofassembler"><tt class="docutils literal"><span class="pre">dofassembler</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-magnumfe.dolfin.mesher"><tt class="docutils literal"><span class="pre">mesher</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/magnumfe.dolfin.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">magnum.fe 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Claas Abert.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>expressions Package &mdash; magnum.fe 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="magnum.fe 0.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">magnum.fe 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="expressions-package">
+<h1>expressions Package<a class="headerlink" href="#expressions-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">expressions</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-magnumfe.dolfin.expressions"></span><p>This module contains class for the generation of metric matrix
+expressions needed for the stray-field transformation method.</p>
+<dl class="class">
+<dt id="magnumfe.dolfin.expressions.MetricMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.expressions.</tt><tt class="descname">MetricMatrix</tt><a class="headerlink" href="#magnumfe.dolfin.expressions.MetricMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class defines a static method for the creation of expressions of
+the metric matrix used for the stray-field transformation method.</p>
+<dl class="staticmethod">
+<dt id="magnumfe.dolfin.expressions.MetricMatrix.create_for_cube">
+<em class="property">static </em><tt class="descname">create_for_cube</tt><big>(</big><em>size</em>, <em>coord</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.expressions.MetricMatrix.create_for_cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an expression for the metric matrix used for the cuboid
+transformation method for the stray-field calculation.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>size</dt>
+<dd>The size of the inner cuboid. This is used for the correct
+scaling of the tensor.</dd>
+<dt>coord</dt>
+<dd>The principal direction of transformation. For each shell
+patch this has to be chosen accordingly.</dd>
+<dt>order</dt>
+<dd>Order of transformation. Use 1 for P1 finite elements and
+2 for P&gt;1 elements.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-magnumfe.dolfin.expressions.metric_matrix">
+<span id="metric-matrix-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">metric_matrix</span></tt> Module<a class="headerlink" href="#module-magnumfe.dolfin.expressions.metric_matrix" title="Permalink to this headline">¶</a></h2>
+<p>This module defines as MetricMatrix class that manly consists of a static
+method for the generation of expressions for the metric matrix used for the
+stray-field transformation method.</p>
+<dl class="class">
+<dt id="magnumfe.dolfin.expressions.metric_matrix.MetricMatrix">
+<em class="property">class </em><tt class="descclassname">magnumfe.dolfin.expressions.metric_matrix.</tt><tt class="descname">MetricMatrix</tt><a class="headerlink" href="#magnumfe.dolfin.expressions.metric_matrix.MetricMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class defines a static method for the creation of expressions of
+the metric matrix used for the stray-field transformation method.</p>
+<dl class="staticmethod">
+<dt id="magnumfe.dolfin.expressions.metric_matrix.MetricMatrix.create_for_cube">
+<em class="property">static </em><tt class="descname">create_for_cube</tt><big>(</big><em>size</em>, <em>coord</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.dolfin.expressions.metric_matrix.MetricMatrix.create_for_cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an expression for the metric matrix used for the cuboid
+transformation method for the stray-field calculation.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>size</dt>
+<dd>The size of the inner cuboid. This is used for the correct
+scaling of the tensor.</dd>
+<dt>coord</dt>
+<dd>The principal direction of transformation. For each shell
+patch this has to be chosen accordingly.</dd>
+<dt>order</dt>
+<dd>Order of transformation. Use 1 for P1 finite elements and
+2 for P&gt;1 elements.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">expressions Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">expressions</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-magnumfe.dolfin.expressions.metric_matrix"><tt class="docutils literal"><span class="pre">metric_matrix</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/magnumfe.dolfin.expressions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">magnum.fe 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Claas Abert.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
