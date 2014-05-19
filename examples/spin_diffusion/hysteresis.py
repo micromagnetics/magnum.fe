@@ -68,12 +68,12 @@ spindiff = SpinDiffusion()
 v_magnetic = Constant(assemble(Constant(1.0)*state.dx('magnetic')))
 logfile = open("hyst.dat", "w", 0)
 
-steps = 50
+steps = 100
 for i in range(steps+1):
   external_field.set((0.0, 0.0, (1.0 - 2.0*i/steps) * 60e-3/Constants.mu0))
 
   # relax
-  for j in range(100):
+  for j in range(500):
     llg.step(state, 1e-12)
     spindiff.step(state, 1e-12)
 

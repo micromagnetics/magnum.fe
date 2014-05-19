@@ -42,7 +42,7 @@ class StateTest(unittest.TestCase):
     mesh = self.mesh_with_subdomains()
     state = State(mesh, regions = {'magnetic': 1, 'air': (2, 3)})
     state.material['magnetic'] = Material(alpha = 1.0, k_axis = (0.0, 1.0, 0.0))
-    state.material['magnetic'] = Material() # TODO
+    #state.material['magnetic'] = Material() # TODO
     state.material['air'] = Material(alpha = 2.0, k_axis = (1.0, 0.0, 0.0))
 
     self.assertAlmostEqual(9.6, assemble(state.material.alpha * state.dx('all')))
