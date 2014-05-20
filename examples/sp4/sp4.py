@@ -6,6 +6,7 @@ from magnumfe import *
 #######################################
 
 mesh, sample_size = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=6)
+volume = assemble(Constant(1.0)*dx(mesh))
 
 #######################################
 #### RELAX SYSTEM TO S-STATE
@@ -16,10 +17,12 @@ arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
 m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
 
 state   = State(mesh, material = Material.py(), m = m_start)
-llg     = LLG([DemagField(sample_size, 2)], scale = 1e-9)
+llg     = LLGAlougesProject([DemagField(sample_size, 2)], scale = 1e-9)
 
 state.material.alpha = 1.0
-for i in range(200): llg.step(state, 1e-11)
+for i in range(200):
+  llg.step(state, 1e-11)
+  print "Mx: %f" % assemble(state.m[0] / volume * dx)
 
 #######################################
 #### SIMULATE SWITCHING
@@ -44,7 +47,6 @@ for i in range(int(T / dt)):
   #  f << state.m
 
   # write scalar information
-  volume = 187500
   m_x = assemble(state.m[0] / volume * dx)
   m_y = assemble(state.m[1] / volume * dx)
   m_z = assemble(state.m[2] / volume * dx)
