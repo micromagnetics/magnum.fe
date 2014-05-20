@@ -55,6 +55,15 @@ class StateTest(unittest.TestCase):
     state.material = Material(alpha = 1)
     self.assertTrue(isinstance(state.material.alpha, Constant))
 
+  def test_mesh_has_domains(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh)
+    self.assertFalse(state.mesh_has_domains())
+
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh)
+    self.assertTrue(state.mesh_has_domains())
+
   def mesh_with_subdomains(self):
     class TestDomain1(SubDomain):
       def inside(self, x, on_boundary):
