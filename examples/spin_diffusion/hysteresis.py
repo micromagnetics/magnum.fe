@@ -80,16 +80,19 @@ for i in range(steps+1):
   external_field.set((0.0, 0.0, (1.0 - 2.0*i/steps) * 60e-3/Constants.mu0))
 
   # relax
-  for j in range(1000):
+  for j in range(2000):
     llg.step(state, 1e-12)
     spindiff.step(state, 1e-12)
 
-    #if j % 10 == 0:
-    #  f = File("data/m_%d.pvd" % (j / 10))
-    #  f << state.m
+    if j % 10 == 0:
+      f = File("data/m_%d.pvd" % (j / 10))
+      f << state.m
 
-    #  f = File("data/s_%d.pvd" % (j / 10))
-    #  f << state.s
+      f = File("data/s_%d.pvd" % (j / 10))
+      f << state.s
+
+  # XXX
+  exit()
 
   m_x = assemble(state.m[0] / v_magnetic * state.dx('magnetic'))
   m_y = assemble(state.m[1] / v_magnetic * state.dx('magnetic'))

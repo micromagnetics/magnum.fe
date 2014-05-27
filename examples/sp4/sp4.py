@@ -5,7 +5,7 @@ from magnumfe import *
 #### GENERATE MESH WITH SHELL
 #######################################
 
-mesh, sample_size = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=6)
+mesh, sample_size = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=4)
 volume = assemble(Constant(1.0)*dx(mesh))
 
 #######################################
@@ -20,9 +20,7 @@ state   = State(mesh, material = Material.py(), m = m_start)
 llg     = LLGAlougesProject([DemagField(sample_size, 2)], scale = 1e-9)
 
 state.material.alpha = 1.0
-for i in range(200):
-  llg.step(state, 1e-11)
-  print "Mx: %f" % assemble(state.m[0] / volume * dx)
+for i in range(200): llg.step(state, 2e-11)
 
 #######################################
 #### SIMULATE SWITCHING
@@ -30,7 +28,7 @@ for i in range(200):
 
 state.material.alpha = 0.02
 
-llg = LLG([
+llg = LLGAlougesProject([
     ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
     DemagField(sample_size, 2)
 ], scale = 1e-9)
