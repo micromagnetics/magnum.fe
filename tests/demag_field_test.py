@@ -4,7 +4,7 @@ from magnumfe import *
 import numpy
 import os
 
-set_log_active(False)
+#set_log_active(False)
 
 class DemagFieldTest(unittest.TestCase):
 
@@ -38,9 +38,7 @@ class DemagFieldTest(unittest.TestCase):
       mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), d = 3, scale=scale)
       demag_field = DemagField(sample_size, 2)
 
-      VV = VectorFunctionSpace(mesh, 'CG', 1, 3)
-      m  = interpolate(Constant((0.0, 0.0, 1.0)), VV)
-      state = State(mesh, m = m)
+      state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
       u = demag_field.calculate_potential(state)
 
       M = Constant(0.5) * inner(state.m, grad(u)) * dx(mesh)

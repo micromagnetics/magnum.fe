@@ -131,6 +131,15 @@ namespace magnumfe {
     ///         The ID of the subdomain
     void create_celldomain(std::shared_ptr<const dolfin::SubDomain> subdomain, size_t id);
 
+    /// Create facet domain with specific ID
+    ///
+    /// *Arguments*
+    ///     subdomain (std::shared_ptr<const dolfin::SubDomain>)
+    ///         The subdomain
+    ///     id (size_t)
+    ///         The ID of the subdomain
+    void create_facetdomain(std::shared_ptr<const dolfin::SubDomain> subdomain, size_t id);
+
   protected:
     // Type of sample (either cuboid of read from file)
     enum SampleType {
@@ -152,8 +161,9 @@ namespace magnumfe {
     dolfin::Array<double> sample_size;
     SampleType            sample_type;
 
-    // DOLFIN SubDomains (TODO Extend to FacetDomains)
+    // DOLFIN SubDomains
     std::vector<std::pair<std::shared_ptr<const dolfin::SubDomain>, size_t> > celldomains;
+    std::vector<std::pair<std::shared_ptr<const dolfin::SubDomain>, size_t> > facetdomains;
 
     // Helper method, which creates a GMSH cuboid
     void create_cuboid_geo(const dolfin::Array<double>& size,

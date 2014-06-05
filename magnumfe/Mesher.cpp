@@ -331,7 +331,7 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
       editor.add_cell(index, v);
 
       // apply custom celldomains if tet does not belong to shell
-      int physical = (*rit)->physicals[0];
+      int physical = (*rit)->physicals[0]; // TODO what if no physicals are present?
       if (physical < 1000 && celldomains.size() > 0) {
 
         // get center of current tetrahendron
@@ -360,7 +360,9 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
   // set facet subdomains
   mesh.init(0,2);
   for(GModel::fiter fit = model->firstFace(); fit != model->lastFace(); ++fit) {
-    if ((*fit)->getPhysicalEntities().size() == 0) continue;
+
+    if ((*fit)->getPhysicalEntities().size() == 0 && facetdomains.size() == 0) continue;
+
     for(unsigned int i = 0; i < (*fit)->triangles.size(); ++i) {
       MTriangle *tri = (*fit)->triangles[i];
 
@@ -371,6 +373,27 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
       const size_t ft_size   = mesh.topology()(0,2).size(v0);
       const unsigned int *ft = mesh.topology()(0,2)(v0);
 
+      int physical = -1; 
+      if ((*fit)->getPhysicalEntities().size() > 0) physical = (*fit)->physicals[0];
+
+      for (int j=0; j < facetdomains.size(); ++j) {
+        bool inside = true;
+        for (int k=0; k < 3; ++k) {
+          dolfin::Array<double> point(3);
+          point[0] = tri->getVertex(k)->x();
+          point[1] = tri->getVertex(k)->y();
+          point[2] = tri->getVertex(k)->z();
+
+          if (!facetdomains[j].first->inside(point, false)) {
+            inside = false;
+            break;
+          }
+        }
+        if (inside == true) physical = facetdomains[j].second;
+      }
+
+      if (physical < 0) continue;
+
       for(unsigned int j = 0; j < ft_size; ++j) {
         const unsigned int *fv = mesh.topology()(2,0)(ft[j]);
 
@@ -379,8 +402,7 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
         if (std::find(fv, fv + 3, v2) == fv + 3) { match = false; }
 
         if (match) {
-          assert((*fit)->physicals.size() == 1);
-          facetmarkers[ft[j]] = (*fit)->physicals[0];
+          facetmarkers[ft[j]] = physical;
           break;
         }
       }
@@ -390,6 +412,10 @@ void Mesher::mesh(dolfin::Mesh &mesh, double scale) {
 //-----------------------------------------------------------------------------
 void Mesher::create_celldomain(std::shared_ptr<const dolfin::SubDomain> subdomain, size_t id) {
   celldomains.push_back(std::pair<std::shared_ptr<const dolfin::SubDomain>, size_t>(subdomain, id));
+}
+//-----------------------------------------------------------------------------
+void Mesher::create_facetdomain(std::shared_ptr<const dolfin::SubDomain> subdomain, size_t id) {
+  facetdomains.push_back(std::pair<std::shared_ptr<const dolfin::SubDomain>, size_t>(subdomain, id));
 }
 //-----------------------------------------------------------------------------
 const int Mesher::vertex_data[12][2] = {

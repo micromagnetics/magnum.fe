@@ -6,7 +6,7 @@ set_log_active(False)
 
 class StateTest(unittest.TestCase):
   def test_domains_ids(self):
-    state = State(UnitCubeMesh(1,1,1), regions = {'magnetic': 1, 'conducting': (1, 2), 'air': (3, 4)})
+    state = State(UnitCubeMesh(1,1,1), celldomains = {'magnetic': 1, 'conducting': (1, 2), 'air': (3, 4)})
 
     self.assertEqual((1,),      state.domain_ids('magnetic'))
     self.assertEqual((1,2),     state.domain_ids('conducting'))
@@ -14,15 +14,20 @@ class StateTest(unittest.TestCase):
     self.assertEqual((1,2),     state.domain_ids('!air'))
     self.assertEqual((2,3,4),   state.domain_ids('!magnetic'))
 
-  def test_named_regions(self):
+  def test_named_celldomains(self):
     mesh = self.mesh_with_subdomains()
-    state = State(mesh, regions = {'magnetic': 1, 'air': (2, 3)})
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)})
 
     self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('magnetic')), 6.4)
     self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('air')), 1.6)
     self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('!magnetic')), 1.6)
     self.assertAlmostEqual(assemble(Constant(1.0)*state.dx(2)), 0.8)
     self.assertAlmostEqual(assemble(Constant(1.0)*state.dx('all')), 8.0)
+
+  def test_named_facetdomains(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, facetdomains = {'outermagnet': 5})
+    self.assertAlmostEqual(assemble(Constant(1.0)*state.ds('outermagnet')), 16.0)
 
   def test_attribute_init(self):
     mesh = UnitCubeMesh(1,1,1)
@@ -40,7 +45,7 @@ class StateTest(unittest.TestCase):
 
   def test_material_assignment(self):
     mesh = self.mesh_with_subdomains()
-    state = State(mesh, regions = {'magnetic': 1, 'air': (2, 3)})
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)})
     state.material['magnetic'] = Material(alpha = 1.0, k_axis = (0.0, 1.0, 0.0))
     #state.material['magnetic'] = Material() # TODO
     state.material['air'] = Material(alpha = 2.0, k_axis = (1.0, 0.0, 0.0))
@@ -73,14 +78,16 @@ class StateTest(unittest.TestCase):
       def inside(self, x, on_boundary):
         return between(x[0], (-0.25, 0.0))
 
-    test_domain1 = TestDomain1()
-    test_domain2 = TestDomain2()
+    class FacetDomain(SubDomain):
+      def inside(self, x, on_boundary):
+        return near(x[0], 2.0)
 
     mesher = Mesher()
     mesher.create_cuboid((1,1,1), (10,10,10))
     mesher.create_shell(1)
-    mesher.create_celldomain(test_domain1, 2)
-    mesher.create_celldomain(test_domain2, 3)
+    mesher.create_celldomain(TestDomain1(), 2)
+    mesher.create_celldomain(TestDomain2(), 3)
+    mesher.create_facetdomain(FacetDomain(), 5)
     return mesher.mesh()
 
 if __name__ == '__main__':
