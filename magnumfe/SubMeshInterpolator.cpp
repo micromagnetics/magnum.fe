@@ -1,4 +1,4 @@
-// Copyright (C) 2011-2012 Claas Abert
+// Copyright (C) 2011-2014 Claas Abert
 //
 // This file is part of magnum.fe.
 //
