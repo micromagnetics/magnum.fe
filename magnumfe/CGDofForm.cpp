@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 //
-// First added:  2012-11-30
-// Last changed: 2012-11-30
+// Last modified by Claas Abert, 2014-06-10
 
 #include "CGDofForm.h"
 #include <vector>
