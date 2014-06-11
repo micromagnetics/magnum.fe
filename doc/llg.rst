@@ -18,7 +18,8 @@ where the effective field :math:`\boldsymbol{H}_\text{eff}` is given by the vari
 
 For a detailed discussion on the LLG see [1]. magnum.fe implements different algorithms for the integration of the LLG. Note that some algorithms depend on a specific linear backend and/or additional packages.
 
-[1] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.
+References:
+  [1] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.
 
 :class:`LLGAlougesProject`
 ++++++++++++++++++++++++++
