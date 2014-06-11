@@ -177,8 +177,13 @@ latex_elements = {
 #'pointsize': '10pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+'preamble': r"""
+ \renewcommand{\vec}[1]{\boldsymbol{#1}}
+ \newcommand{\mat}[1]{\boldsymbol{#1}}
+ \newcommand{\dx}{\;\text{d}\boldsymbol{x}}
+""",
 }
+mathjax_path = 'MathJax_local.js'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
@@ -240,3 +245,5 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+autoclass_content = "both"
