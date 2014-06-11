@@ -56,7 +56,7 @@ for j in range(200):
   spindiff.step(state, 1e-12)
 
 # apply current
-state.j = Constant((5e12, 0, 0))
+state.j = Constant((3e12, 0, 0))
 
 for j in range(1000):
   llg.step(state, 1e-12)
