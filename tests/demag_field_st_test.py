@@ -36,7 +36,7 @@ class DemagFieldTest(unittest.TestCase):
 
     def energy_cube(self, scale=1.0):
       mesh, sample_size = DemagField.create_mesh((0.5, 0.5, 0.5), (10, 10, 10), d = 3, scale=scale)
-      demag_field = DemagField(sample_size, 2)
+      demag_field = DemagField("ST", sample_size, 2)
 
       state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
       u = demag_field.calculate_potential(state)
@@ -47,7 +47,7 @@ class DemagFieldTest(unittest.TestCase):
     def ttest_energy_sphere(self):
       sphere_mesh = os.path.dirname(os.path.realpath(__file__)) + "/mesh/sphere.msh"
       mesh, sample_size = DemagField.create_mesh(sphere_mesh, d=5, n=(10,10,10), margin=0.2)
-      demag_field = DemagField(sample_size, 2)
+      demag_field = DemagField("ST", sample_size, 2)
 
       state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
       u = demag_field.calculate_potential(state)

@@ -30,8 +30,9 @@ pip-log.txt
 .mr.developer.cfg
 
 # data produced by examples
-**/data/*.vtu
-**/data/*.pvd
+examples/**/data/*.vtu
+examples/**/data/*.pvd
+examples/**/*.dat
 
 # Sphinx
 doc/_build/

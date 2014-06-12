@@ -8,7 +8,7 @@ class DemagFieldTestFK(unittest.TestCase):
 
   def test_energy_unit_cube(self):
     mesh = UnitCubeMesh(10, 10, 10)
-    demag_field = DemagFieldFK()
+    demag_field = DemagField("FK")
     state = State(mesh, m = Constant((0.0, 0.0, 1.0)))
     u = demag_field.calculate_potential(state)
     energy = assemble(Constant(0.5) * inner(state.m, grad(u)) * dx(mesh))
@@ -29,7 +29,7 @@ class DemagFieldTestFK(unittest.TestCase):
     mesh = mesher.mesh()
 
     state = State(mesh, {'magnetic': 2}, m = Constant((0.0, 0.0, 1.0)))
-    demag_field = DemagFieldFK()
+    demag_field = DemagField("FK")
     u = demag_field.calculate_potential(state)
     energy = assemble(Constant(0.5) * inner(state.m, grad(u)) * state.dx('magnetic'))
     self.assertTrue(abs(energy - 1.0/6.0) < 0.01)
