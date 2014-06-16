@@ -7,6 +7,7 @@ testmodules = [
     'llg_test',
     'material_test',
     'mesher_test',
+    'oersted_field_test',
     'state_test',
     'wrapped_mesh_test'
     ]
