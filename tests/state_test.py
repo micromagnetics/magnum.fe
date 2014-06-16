@@ -54,6 +54,29 @@ class StateTest(unittest.TestCase):
     self.assertAlmostEqual(1.6, assemble(inner(state.material.k_axis, Constant((1.0, 0.0, 0.0))) * state.dx('all')))
     self.assertAlmostEqual(6.4, assemble(inner(state.material.k_axis, Constant((0.0, 1.0, 0.0))) * state.dx('all')))
 
+  def test_volume(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)})
+    self.assertAlmostEqual(6.4, state.volume('magnetic'))
+
+  def test_average(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)}, m = Expression(("x[0]*x[0]", "0.0", "0.0")))
+
+    avg = state.m.average('magnetic')
+    self.assertAlmostEqual(0.42, avg[0])
+    self.assertAlmostEqual(0.00, avg[1])
+    self.assertAlmostEqual(0.00, avg[2])
+
+  def test_crop(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)}, m = Expression(("x[0]*x[0]", "0.0", "0.0")))
+
+    cropped = state.m.crop('magnetic')
+
+    self.assertTrue(mesh.size(3) > cropped.function_space().mesh().size(3))
+    self.assertAlmostEqual(0.42, assemble(cropped[0]*dx) / state.volume('magnetic'))
+
   def test_set_global_material(self):
     mesh = UnitCubeMesh(1,1,1)
     state = State(mesh)
