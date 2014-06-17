@@ -75,7 +75,7 @@ class StateTest(unittest.TestCase):
     cropped = state.m.crop('magnetic')
 
     self.assertTrue(mesh.size(3) > cropped.function_space().mesh().size(3))
-    self.assertAlmostEqual(0.42, assemble(cropped[0]*dx) / state.volume('magnetic'))
+    self.assertAlmostEqual(0.42, assemble(cropped[0]*dx(cropped.function_space().mesh())) / state.volume('magnetic'))
 
   def test_set_global_material(self):
     mesh = UnitCubeMesh(1,1,1)
