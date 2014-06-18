@@ -20,7 +20,7 @@ the demagnetization-field computation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-06-10
+# Last modified by Claas Abert, 2014-06-18
 
 from dolfin import *
 from magnumfe import *
@@ -69,10 +69,7 @@ for i in range(int(T / dt)):
   #  f << state.m
 
   # write scalar information
-  m_x = assemble(state.m[0] / volume * dx)
-  m_y = assemble(state.m[1] / volume * dx)
-  m_z = assemble(state.m[2] / volume * dx)
-  logfile.write("%.10f %f %f %f\n" % (t*1e9, m_x, m_y, m_z))
+  logfile.write("%.10f %f %f %f\n" % ((t*1e9,) + state.m.average()))
 
   # calculate next step
   llg.step(state, dt)

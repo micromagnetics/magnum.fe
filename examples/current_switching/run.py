@@ -19,7 +19,7 @@ Current induced switching of a soft magnetic layer in a multilayer structure.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-06-12
+# Last modified by Claas Abert, 2014-06-18
 
 from dolfin import *
 from magnumfe import *
@@ -104,7 +104,7 @@ state.material['!magnetic']  = Material(
 )
 
 llg = LLGAlougesProject([
-  DemagFieldFK(),
+  DemagField("FK"),
   UniaxialAnisotropyField(),
   SpinCurrent()
 ], scale = 1e-9)
@@ -120,7 +120,7 @@ for j in range(5000):
 
   if j % 10 == 0:
     f = File("data/m_%d.pvd" % (j / 10))
-    f << state.m
+    f << state.m.crop('magnetic')
 
     f = File("data/s_%d.pvd" % (j / 10))
     f << state.s
