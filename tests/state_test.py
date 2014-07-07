@@ -92,6 +92,16 @@ class StateTest(unittest.TestCase):
     state = State(mesh)
     self.assertTrue(state.mesh_has_domains())
 
+  def test_interpolate(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh)
+    f = state.interpolate({
+      2: Constant(1.0),
+      3: Constant(2.0)
+    })
+    self.assertAlmostEqual(assemble(f*state.dx(2)), 1.6)
+    self.assertAlmostEqual(assemble(f*state.dx(3)), 2.0)
+
   def mesh_with_subdomains(self):
     class TestDomain1(SubDomain):
       def inside(self, x, on_boundary):
