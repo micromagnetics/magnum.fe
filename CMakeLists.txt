@@ -10,6 +10,9 @@ project (MagnumFE)
 set(MAGNUMFE_VERSION_MAJOR 0)
 set(MAGNUMFE_VERSION_MINOR 1)
 
+# set cmake module path
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
 # Add configuration
 #configure_file(
 #  "${PROJECT_BINARY_DIR}/config.h"
@@ -36,7 +39,7 @@ endmacro(append_magnumfe_src)
 find_package(DOLFIN)
 
 # GMSH
-include( ${CMAKE_SOURCE_DIR}/cmake/FindGmsh.cmake )
+find_package(Gmsh)
 if (NOT GMSH_FOUND)
   message (FATAL_ERROR "Cannot find libgmsh!")
 endif()
@@ -45,9 +48,10 @@ endif()
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 find_package(PythonLibs)
+find_package(Python 2 REQUIRED)
 
 # Numpy
-include( ${CMAKE_SOURCE_DIR}/cmake/FindNumPy.cmake )
+find_package(NumPy)
 
 ##############################################################
 ###    Subdirectories                                      ###
@@ -118,3 +122,14 @@ set_source_files_properties (${INTERFACE_FILES} PROPERTIES SWIG_FLAGS -O)
 
 swig_add_module(cpp python ${INTERFACE_FILES})
 swig_link_libraries(cpp magnumfe)
+
+
+##############################################################
+###    Install Rule                                        ###
+##############################################################
+
+message ("-- Found Python ${PYTHON_VERSION}, will install at ${PYTHON_SITE_MODULES}")
+
+# install directory magnum, exclude the symlinks
+install(DIRECTORY site-packages/magnumfe DESTINATION "${PYTHON_SITE_MODULES}" PATTERN "site-packages/magnumfe/cpp.py site-packages/magnumfe/_cpp.so" EXCLUDE)
+install(FILES ${CMAKE_BINARY_DIR}/cpp.py ${CMAKE_BINARY_DIR}/_cpp.so DESTINATION "${PYTHON_SITE_MODULES}/site-packages/magnumfe")
