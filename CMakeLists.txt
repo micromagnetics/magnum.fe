@@ -130,6 +130,6 @@ swig_link_libraries(cpp magnumfe)
 
 message ("-- Found Python ${PYTHON_VERSION}, will install at ${PYTHON_SITE_MODULES}")
 
-# install directory magnum, exclude the symlinks
+install(TARGETS magnumfe DESTINATION lib)
 install(DIRECTORY site-packages/magnumfe DESTINATION "${PYTHON_SITE_MODULES}" PATTERN "site-packages/magnumfe/cpp.py site-packages/magnumfe/_cpp.so" EXCLUDE)
 install(FILES ${CMAKE_BINARY_DIR}/cpp.py ${CMAKE_BINARY_DIR}/_cpp.so DESTINATION "${PYTHON_SITE_MODULES}/magnumfe")

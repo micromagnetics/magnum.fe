@@ -18,7 +18,8 @@ RUN add-apt-repository -y ppa:fenics-packages/fenics && \
     apt-get -qqy install xauth fenics ipython
 
 # Install Compiler and magnum.fe dependencies 
-RUN apt-get install -yy \
+RUN apt-get update && \
+    apt-get install -yy \
     cmake \
     swig \
     g++ \
