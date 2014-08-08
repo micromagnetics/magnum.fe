@@ -24,8 +24,32 @@ RUN apt-get update && \
     swig \
     g++ \
     libgmsh-dev \
-    git
+    git \
+    gfortran
+    
+# Install CBC.Block
+#RUN apt-get update && \
+#    apt-get install -yy bzr
+#RUN cd /tmp && \
+#    bzr branch lp:cbc.block && \
+#    cd cbc.block && \
+#    python setup.py install
 
+# Install Bempp
+RUN cd /tmp && \
+    git clone -b release_2.0 https://github.com/bempp/bempp.git
+
+COPY bempp_setup.cfg /tmp/bempp/bempp_setup.cfg
+COPY AHMED-1.0.tar.gz /tmp/AHMED-1.0.tar.gz
+
+RUN cd /tmp/bempp && \
+    python bempp_setup.py -b bempp_setup.cfg && \
+    python bempp_setup.py -c bempp_setup.cfg && \
+    python bempp_setup.py -i all bempp_setup.cfg 
+
+ENV PYTHONPATH $HOME/bempp/python:$PYTHON_PATH
+
+# Compile and install magnumfe
 RUN cd /tmp && \
     git clone -b dev https://github.com/c-abird/magnum.fe.git && \
     cd magnum.fe && \
@@ -33,7 +57,8 @@ RUN cd /tmp && \
     cd build && \
     cmake .. && \
     make && \
-    make install
+    make install && \
+    ldconfig
 
 # Cleanup to save space
 RUN apt-get clean && \ 
