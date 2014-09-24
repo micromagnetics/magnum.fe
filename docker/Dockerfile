@@ -28,12 +28,10 @@ RUN apt-get update && \
     gfortran
     
 # Install CBC.Block
-#RUN apt-get update && \
-#    apt-get install -yy bzr
-#RUN cd /tmp && \
-#    bzr branch lp:cbc.block && \
-#    cd cbc.block && \
-#    python setup.py install
+RUN cd /tmp && \
+    git clone https://bitbucket.org/fenics-apps/cbc.block.git && \
+    cd cbc.block & \\
+    python setup.py install
 
 # Install Bempp
 RUN cd /tmp && \

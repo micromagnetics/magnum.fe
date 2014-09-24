@@ -26,7 +26,7 @@ Install Gmsh with headers
 
 Install CBC.Block
 
-    $ bzr branch lp:cbc.block
+    $ git clone https://bitbucket.org/fenics-apps/cbc.block.git
     $ cd cbc.block
     $ sudo python setup.py install
 
@@ -35,11 +35,11 @@ For installation of BEM++, see http://www.bempp.org/. magnum.fe requires the H-m
 ### Build and install
 To build magenum.fe with cmake do
 
-    cd /path/to/magnum.fe
-    mkdir build
-    cd build
-    cmake ..
-    sudo make install
+    $ cd /path/to/magnum.fe
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ sudo make install
 
 ### Create docker container
 magnum.fe can be virtualized with docker (http://www.docker.com) for easy deployment to other machines.
@@ -49,13 +49,30 @@ In order to create a docker container run
     $ cp /path/to/AHMED-1.0.tar.gz .
     $ sudo docker build .
 
-Note that you have to place the AHMED 1.0 tarball in the `docker` directory for a successfull build.
+You need Docker >= 1.0 to build the container. Note that you have to place the AHMED 1.0 tarball in the `docker` directory for a successfull build.
 
 ### Test
 You can test your installation by running the unit tests
 
-    cd tests
-    python run_all.py
+    $ cd tests
+    $ python run_all.py
+
+### Build documentation
+The following applies to Ubuntu.
+
+Install sphinx
+
+    $ sudo apt-get install python-sphinx
+
+Install RTD theme
+
+    $ sudo apt-get install python-pip
+    $ sudo pip install sphinx_rtd_theme
+
+Generate documentation (HTML)
+
+    $ cd /path/to/magnum.fe/doc
+    $ make html
 
 License
 -------
