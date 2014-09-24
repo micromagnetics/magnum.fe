@@ -17,6 +17,7 @@ Contents:
    mesher
    llg
    spin_diffusion
+   open_boundary
    field_terms
 
 
