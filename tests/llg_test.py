@@ -15,8 +15,8 @@ demag    = DemagField("ST", sample_size, 1)
 
 class LlgTest(unittest.TestCase):
 
+  # TODO test different backends explicitly
   def test_llg_alouges_lagrange(self):
-    parameters["linear_algebra_backend"] = "Epetra"
     state = State(mesh, material = Material.py(), m = m_expr)
 
     llg = LLGAlougesLagrange([demag], scale = 1e-9)
@@ -26,7 +26,6 @@ class LlgTest(unittest.TestCase):
     self.assertTrue(error < 1e-13)
 
   def test_llg_alouges_project(self):
-    parameters["linear_algebra_backend"] = "PETSc"
     state = State(mesh, material = Material.py(), m = m_expr)
 
     llg = LLGAlougesProject([demag], scale = 1e-9)
@@ -36,7 +35,6 @@ class LlgTest(unittest.TestCase):
     self.assertTrue(error < 1e-13)
 
   def test_llg_alouges_full_implicit(self):
-    parameters["linear_algebra_backend"] = "Epetra"
     state = State(mesh.with_shell, material = Material.py(), m = m_expr)
 
     llg = LLGAlougesFullImplicit([], sample_size, scale = 1e-9, demag_order = 1)
