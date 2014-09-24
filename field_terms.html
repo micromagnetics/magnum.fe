@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Field Terms &mdash; magnum.fe 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
+        <link rel="prev" title="Open Boundary Problems" href="open_boundary.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> magnum.fe</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#id1"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mesher.html">Mesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation">Shell Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">magnum.fe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Field Terms</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/field_terms.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-magnumfe"></span><div class="section" id="field-terms">
+<h1>Field Terms<a class="headerlink" href="#field-terms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="demagfield">
+<h2><a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a><a class="headerlink" href="#demagfield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.DemagField">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">DemagField</tt><big>(</big><em>method='transform'</em>, <em>sample_size=None</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves for the magnetic demagnetization field.</p>
+<p><em>Arguments</em>
+method</p>
+<blockquote>
+<div>Method for the solution of the open-boundary problem.
+Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</div></blockquote>
+<dl class="docutils">
+<dt>sample_size</dt>
+<dd>Tuple described the size of the sample. Usually this is taken from create_mesh.</dd>
+<dt>order</dt>
+<dd>The order of CG function used for the potential calculation.</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.DemagField.calculate_potential">
+<tt class="descname">calculate_potential</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.calculate_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the stray-field for a given simulation state</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state</dt>
+<dd>The simulation state</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.DemagField.create_mesh">
+<em class="property">static </em><tt class="descname">create_mesh</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.create_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a WrappedMesh suited for the application of the shell-
+transformation method. Either takes a filename as first argument
+to load the meshed sample or sizes and discretization of a cuboid
+sample.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div></div></blockquote>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>d</dt>
+<dd>Number of shell layers.</dd>
+<dt>scale</dt>
+<dd>Scale factor used for mesh generation.</dd>
+<dt>margin</dt>
+<dd>Margin to the sample when loading sample mesh from a file.</dd>
+<dt>n</dt>
+<dd>Discretization of inner cuboid when loading sample mesh from a file.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="externalfield">
+<h2><a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a><a class="headerlink" href="#externalfield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.ExternalField">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExternalField</tt><big>(</big><em>field=Coefficient(VectorElement('Real'</em>, <em>None</em>, <em>0</em>, <em>dim=3</em>, <em>quad_scheme=None)</em>, <em>0)</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a constant external field.</p>
+<p>Create a _ExternalField_ object.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>field</dt>
+<dd>The external field (Constant, Function or Expression)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="oerstedfield">
+<h2><a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a><a class="headerlink" href="#oerstedfield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.OerstedField">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">OerstedField</tt><big>(</big><em>method='transform'</em>, <em>sample_size=None</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves for the current induced Oersted field.</p>
+<p><em>Arguments</em>
+method</p>
+<blockquote>
+<div>Method for the solution of the open-boundary problem.
+Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</div></blockquote>
+<dl class="docutils">
+<dt>sample_size</dt>
+<dd>Tuple described the size of the sample. Usually this is taken from create_mesh.</dd>
+<dt>order</dt>
+<dd>The order of CG function used for the potential calculation.</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.OerstedField.calculate_field">
+<tt class="descname">calculate_field</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField.calculate_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Oersted-field for a given simulation state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state</dt>
+<dd>The simulation state</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="uniaxialanisotropyfield">
+<h2><a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><tt class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a><a class="headerlink" href="#uniaxialanisotropyfield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.UniaxialAnisotropyField">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a constant external field.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="open_boundary.html" class="btn btn-neutral" title="Open Boundary Problems"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Claas Abert.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/MathJax_local.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
