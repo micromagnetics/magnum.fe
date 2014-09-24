@@ -15,14 +15,17 @@ magnum.fe requires the following software/libraries to be installed:
 
 #### Install dependencies in Ubuntu 14.04
 Install FEniCS
+
     $ sudo add-apt-repository ppa:fenics-packages/fenics
     $ sudo apt-get update
     $ sudo apt-get install fenics
 
 Install Gmsh with headers
+
     $ sudo apt-get install libgmsh-dev
 
 Install CBC.Block
+
     $ bzr branch lp:cbc.block
     $ cd cbc.block
     $ sudo python setup.py install
