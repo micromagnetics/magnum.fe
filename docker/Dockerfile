@@ -30,7 +30,7 @@ RUN apt-get update && \
 # Install CBC.Block
 RUN cd /tmp && \
     git clone https://bitbucket.org/fenics-apps/cbc.block.git && \
-    cd cbc.block & \\
+    cd cbc.block && \
     python setup.py install
 
 # Install Bempp
@@ -49,7 +49,7 @@ ENV PYTHONPATH $HOME/bempp/python:$PYTHON_PATH
 
 # Compile and install magnumfe
 RUN cd /tmp && \
-    git clone -b dev https://github.com/c-abird/magnum.fe.git && \
+    git clone -b dev https://github.com/micromagnetics/magnum.fe.git && \
     cd magnum.fe && \
     mkdir build && \
     cd build && \
