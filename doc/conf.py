@@ -187,6 +187,7 @@ latex_elements = {
  \renewcommand{\vec}[1]{\boldsymbol{#1}}
  \newcommand{\mat}[1]{\boldsymbol{#1}}
  \newcommand{\dx}{\;\text{d}\boldsymbol{x}}
+ \usepackage{amsmath, amssymb, amsthm}
 """,
 }
 mathjax_path = 'MathJax_local.js'

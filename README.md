@@ -8,10 +8,12 @@ Installation
 magnum.fe requires the following software/libraries to be installed:
 
 * FEniCS >= 1.4
-* gmsh >= 2.8.0 (headers and library)
-* dev-version of cbc.block (optional)
+* Gmsh >= 2.8.0 (headers and library)
+* CMake >= 2.8
+* SWIG >= 2.0
+* G++ >= 4.0
+* dev-version of CBC.Block (optional)
 * BEM++ 2.0.1 (optional)
-* cmake >= 2.8
 
 #### Install dependencies in Ubuntu 14.04
 Install FEniCS
@@ -20,9 +22,9 @@ Install FEniCS
     $ sudo apt-get update
     $ sudo apt-get install fenics
 
-Install Gmsh with headers
+Install Gmsh with headers and build dependencies
 
-    $ sudo apt-get install libgmsh-dev
+    $ sudo apt-get install libgmsh-dev g++ swig cmake
 
 Install CBC.Block
 
@@ -39,6 +41,7 @@ To build magenum.fe with cmake do
     $ mkdir build
     $ cd build
     $ cmake ..
+    $ make
     $ sudo make install
 
 ### Create docker container
@@ -49,7 +52,7 @@ In order to create a docker container run
     $ cp /path/to/AHMED-1.0.tar.gz .
     $ sudo docker build .
 
-You need Docker >= 1.0 to build the container. Note that you have to place the AHMED 1.0 tarball in the `docker` directory for a successfull build.
+You need Docker >= 1.0 to build the container. Note that you have to place the AHMED 1.0 tarball in the `docker` directory for a successfull build (http://bebendorf.ins.uni-bonn.de/AHMED.html).
 
 ### Test
 You can test your installation by running the unit tests
