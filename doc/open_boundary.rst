@@ -1,4 +1,5 @@
 .. module:: magnumfe
+.. _open-boundary:
 
 Open Boundary Problems
 ======================
@@ -6,18 +7,18 @@ Open Boundary Problems
 Multiple effective-field terms, namely the demagnetization field (:class:`DemagField`) and the Oersted field (:class:`OerstedField`) involve the solution of so called open-boundary problems of the form
 
 .. math::
-  \begin{align}
-    \Delta u                                         &= \nabla \cdot \vec{f}     &&\text{in}&& \omega \\
-    \Delta u                                         &= 0                        &&\text{in}&& \mathbb{R}^3 \setminus \omega \\
-    [u]                                              &= 0                        &&\text{on}&& \partial\omega \\
-    \left[\frac{\partial u}{\partial \vec{n}}\right] &= - \vec{f} \cdot \vec{n}  &&\text{on}&& \partial\omega \\
-    u(\vec{x})                                       &= \mathcal{O}(1/|\vec{x}|) &&\text{if}&& |\vec{x}| \rightarrow \infty
-  \end{align}
+  \Delta u                                         &= \nabla \cdot \vec{f}     \quad \text{in} \quad \omega \\
+  \Delta u                                         &= 0                        \quad \text{in} \quad \mathbb{R}^3 \setminus \omega \\
+  [u]                                              &= 0                        \quad \text{on} \quad \partial\omega \\
+  \left[\frac{\partial u}{\partial \vec{n}}\right] &= - \vec{f} \cdot \vec{n}  \quad \text{on} \quad \partial\omega \\
+  u(\vec{x})                                       &= \mathcal{O}(1/|\vec{x}|) \quad \text{if} \quad |\vec{x}| \rightarrow \infty
 
 different algorithms are available for the solution of these problems.
 
-Shell Transformation
-++++++++++++++++++++
+.. _shell-transformation:
+
+Shell-Transformation Method
++++++++++++++++++++++++++++
   
 The shell-transformation method for the solution of open-boundary problems with the finite-element method was introduced in [1].
 The region of interest :math:`\omega{notrans}` is surrounded by a finite shell :math:`\omega{trans}`.
@@ -37,6 +38,8 @@ The untransformed region :math:`\omega_\text{notrans}` does not have to coincide
 
 magnum.fe uses cuboid shells, i.e. `\omega_\text{notrans}` has to be of cuboidal shape. The applied method is described in detail in [2].
 
+.. _fem-bem:
+
 Hybrid FEM-BEM Method (Fredkin and Koehler)
 +++++++++++++++++++++++++++++++++++++++++++
 
@@ -48,23 +51,19 @@ A hybrid FEM-BEM approach for the solution of open-boundary problems was propsed
 :math:`u_1` is defined by
 
 .. math::
-  \begin{align}
-    \Delta u_1                            &= \nabla \cdot \vec{f}    &&\text{in}&& \omega \\
-    \frac{\partial u_1}{\partial \vec{n}} &= - \vec{f} \cdot \vec{n} &&\text{on}&& \partial\omega \\
-    u_1                                   &= 0                       &&\text{in}&& \mathbb{R}^3 \setminus \omega.
-  \end{align}
+  \Delta u_1                            &= \nabla \cdot \vec{f}    \quad \text{in} \quad \omega \\
+  \frac{\partial u_1}{\partial \vec{n}} &= - \vec{f} \cdot \vec{n} \quad \text{on} \quad \partial\omega \\
+  u_1                                   &= 0                       \quad \text{in} \quad \mathbb{R}^3 \setminus \omega.
 
 This Neuman problem within :math:`\omega` is solved with the finite-element method.
 While :math:`u_1` solves for the right-hand side :math:`\nabla \cdot \vec{f}` and fullfills the jump condition of the normal derivative :math:`- \vec{f} \cdot \vec{n}` it is not continuous across :math:`\partial \omega`.
 This jump is compensated by :math:`u_2` which is defined as
 
 .. math::
-  \begin{align}
-    \Delta u_2                                         &= 0        &&\text{in}&& \omega \\
-    [u_2]                                              &= - [u_1]  &&\text{on}&& \partial \omega \\
-    \left[\frac{\partial u_2}{\partial \vec{n}}\right] &= 0        &&\text{on}&& \partial\omega \\
-    u_2(\vec{x})                                       &= \mathcal{O}(1/|\vec{x}|) &&\text{if}&& |\vec{x}| \rightarrow \infty
-  \end{align}
+  \Delta u_2                                         &= 0                        \quad \text{in} \quad \omega \\
+  [u_2]                                              &= - [u_1]                  \quad \text{on} \quad \partial \omega \\
+  \left[\frac{\partial u_2}{\partial \vec{n}}\right] &= 0                        \quad \text{on} \quad \partial\omega \\
+  u_2(\vec{x})                                       &= \mathcal{O}(1/|\vec{x}|) \quad \text{if} \quad |\vec{x}| \rightarrow \infty
 
 This system is solved by the double-layer potential
 
