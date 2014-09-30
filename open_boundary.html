@@ -58,13 +58,24 @@
         
         
             <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#id1"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mesher.html">Mesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
@@ -72,7 +83,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#shell-transformation">Shell Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
 </ul>
 </li>
@@ -118,38 +129,62 @@
           <div role="main">
             
   <span class="target" id="module-magnumfe"></span><div class="section" id="open-boundary-problems">
-<h1>Open Boundary Problems<a class="headerlink" href="#open-boundary-problems" title="Permalink to this headline">¶</a></h1>
+<span id="open-boundary"></span><h1>Open Boundary Problems<a class="headerlink" href="#open-boundary-problems" title="Permalink to this headline">¶</a></h1>
 <p>Multiple effective-field terms, namely the demagnetization field (<a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a>) and the Oersted field (<a class="reference internal" href="field_terms.html#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a>) involve the solution of so called open-boundary problems of the form</p>
 <div class="math">
-\[\begin{split}\begin{align}
-  \Delta u     &amp;= f(\vec{x})             &amp;\text{in}&amp;\quad \omega \\
-  \Delta u     &amp;= 0                      &amp;\text{in}&amp;\quad \mathbb{R}^3 \setminus \omega \\
-  \partial_n u &amp;= g(\vec{x})             &amp;\forall  &amp;\quad \vec{x} \in \partial \omega \\
-  u(\vec{x}) &amp;= \mathcal{O}(1/|\vec{x}|) &amp;\text{if}&amp;\quad |\vec{x}| \rightarrow \infty
-\end{align}\end{split}\]</div>
+\[\begin{split}\Delta u                                         &amp;= \nabla \cdot \vec{f}     \quad \text{in} \quad \omega \\
+\Delta u                                         &amp;= 0                        \quad \text{in} \quad \mathbb{R}^3 \setminus \omega \\
+[u]                                              &amp;= 0                        \quad \text{on} \quad \partial\omega \\
+\left[\frac{\partial u}{\partial \vec{n}}\right] &amp;= - \vec{f} \cdot \vec{n}  \quad \text{on} \quad \partial\omega \\
+u(\vec{x})                                       &amp;= \mathcal{O}(1/|\vec{x}|) \quad \text{if} \quad |\vec{x}| \rightarrow \infty\end{split}\]</div>
 <p>different algorithms are available for the solution of these problems.</p>
-<div class="section" id="shell-transformation">
-<h2>Shell Transformation<a class="headerlink" href="#shell-transformation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shell-transformation-method">
+<span id="shell-transformation"></span><h2>Shell-Transformation Method<a class="headerlink" href="#shell-transformation-method" title="Permalink to this headline">¶</a></h2>
+<p>The shell-transformation method for the solution of open-boundary problems with the finite-element method was introduced in [1].
+The region of interest <span class="math">\(\omega{notrans}\)</span> is surrounded by a finite shell <span class="math">\(\omega{trans}\)</span>.
+A bijective transformation is constructed that maps the shell region <span class="math">\(\omega{trans}\)</span> onto the complete exterior region <span class="math">\(\mathbb{R}^3 \setminus \omega_\text{notrans}\)</span>.
+The open-boundary conditions can thus be implemented by requiring homogeneous Dirichlet boundary condition of the outer boundary of the shell <span class="math">\(\omega{trans}\)</span>, resulting in the following weak formulation</p>
+<div class="math">
+\[\int_{\omega_\text{notrans}} \nabla u \cdot \nabla v \dx + \int_{\omega_\text{trans}} (\nabla u)^T \mat{g} \nabla v \dx = \int_{\omega} \vec{f} \cdot \nabla v \dx\]</div>
+<p>with the metric tensor <span class="math">\(\mat{g}\)</span> defined as</p>
+<div class="math">
+\[\mat{g} = (\mat{J}^{-1})^T | \det \mat{J} | \mat{J}^{-1}\]</div>
+<p>where <span class="math">\(\mat{J}\)</span> denotes the Jacobian of the transformation.
+The untransformed region <span class="math">\(\omega_\text{notrans}\)</span> does not have to coincide with the sample region <span class="math">\(\omega\)</span> of the original problem, but it holds <span class="math">\(\omega \subseteq \omega_\text{notrans}\)</span>.</p>
+<p>magnum.fe uses cuboid shells, i.e. <cite>omega_text{notrans}</cite> has to be of cuboidal shape. The applied method is described in detail in [2].</p>
 </div>
 <div class="section" id="hybrid-fem-bem-method-fredkin-and-koehler">
-<h2>Hybrid FEM-BEM Method (Fredkin and Koehler)<a class="headerlink" href="#hybrid-fem-bem-method-fredkin-and-koehler" title="Permalink to this headline">¶</a></h2>
-<p>A hybrid FEM-BEM approach for the solution of open-boundary problems was propsed by Fredkin and Koehler [1]. Consider the following splitting of the solution <span class="math">\(u\)</span>:</p>
+<span id="fem-bem"></span><h2>Hybrid FEM-BEM Method (Fredkin and Koehler)<a class="headerlink" href="#hybrid-fem-bem-method-fredkin-and-koehler" title="Permalink to this headline">¶</a></h2>
+<p>A hybrid FEM-BEM approach for the solution of open-boundary problems was propsed by Fredkin and Koehler [3]. Consider the following splitting of the solution <span class="math">\(u\)</span>:</p>
 <div class="math">
 \[u = u_1 + u_2\]</div>
-<p><span class="math">\(u_1\)</span> is zero within <span class="math">\(\omega\)</span> and solves the Neumann problem</p>
+<p><span class="math">\(u_1\)</span> is defined by</p>
 <div class="math">
-\[\begin{split}\begin{align}
-  \Delta u_1 &amp;= f(\vec{x}) \\
-  \frac{\partial u_1}{\partial \vec{n}} &amp;= g(\vec{x}) \text{ on } \partial \omega
-\end{align}\end{split}\]</div>
-<p>within <span class="math">\(\omega\)</span>. <span class="math">\(u_2\)</span> is required to solve the Laplace equation while fixing the continuity condition on <span class="math">\(u\)</span>. This condition is met by a double-layer potential</p>
+\[\begin{split}\Delta u_1                            &amp;= \nabla \cdot \vec{f}    \quad \text{in} \quad \omega \\
+\frac{\partial u_1}{\partial \vec{n}} &amp;= - \vec{f} \cdot \vec{n} \quad \text{on} \quad \partial\omega \\
+u_1                                   &amp;= 0                       \quad \text{in} \quad \mathbb{R}^3 \setminus \omega.\end{split}\]</div>
+<p>This Neuman problem within <span class="math">\(\omega\)</span> is solved with the finite-element method.
+While <span class="math">\(u_1\)</span> solves for the right-hand side <span class="math">\(\nabla \cdot \vec{f}\)</span> and fullfills the jump condition of the normal derivative <span class="math">\(- \vec{f} \cdot \vec{n}\)</span> it is not continuous across <span class="math">\(\partial \omega\)</span>.
+This jump is compensated by <span class="math">\(u_2\)</span> which is defined as</p>
+<div class="math">
+\[\begin{split}\Delta u_2                                         &amp;= 0                        \quad \text{in} \quad \omega \\
+[u_2]                                              &amp;= - [u_1]                  \quad \text{on} \quad \partial \omega \\
+\left[\frac{\partial u_2}{\partial \vec{n}}\right] &amp;= 0                        \quad \text{on} \quad \partial\omega \\
+u_2(\vec{x})                                       &amp;= \mathcal{O}(1/|\vec{x}|) \quad \text{if} \quad |\vec{x}| \rightarrow \infty\end{split}\]</div>
+<p>This system is solved by the double-layer potential</p>
 <div class="math">
 \[\begin{align}
   u_2 = \int_{\partial \omega} u_1 \frac{\partial}{\partial \vec{n}} \frac{1}{|\vec{x} - \vec{x}'|} \dx
 \end{align}\]</div>
+<p>The double-layer potential is computed on the boundary <span class="math">\(\partial \omega\)</span> with the boundary-element method.
+These values are used as Dirichlet boundary conditions to solve <span class="math">\(u_2\)</span> within <span class="math">\(\omega\)</span> with the finite-element method.
+For a detailed description of the method, see [3].</p>
 <dl class="docutils">
 <dt>References:</dt>
-<dd>[1] fredkin</dd>
+<dd><p class="first">[1] Brunotte, X., Meunier, G., &amp; Imhoff, J. F. (1992). Finite element modeling of unbounded problems using transformations: a rigorous, powerful and easy solution. IEEE Transactions on Magnetics, 28(2), 1663-1666.</p>
+<p>[2] Abert, C., Exl, L., Selke, G., Drews, A., &amp; Schrefl, T. (2013). Numerical methods for the stray-field calculation: A comparison of recently developed algorithms. Journal of Magnetism and Magnetic Materials, 326, 176-185.</p>
+<p class="last">[3] Fredkin, D. R., &amp; Koehler, T. R. (1990). Hybrid method for computing demagnetizing fields. Magnetics, IEEE Transactions on, 26(2), 415-417.</p>
+</dd>
 </dl>
 </div>
 </div>

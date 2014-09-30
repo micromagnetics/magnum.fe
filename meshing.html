@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Meshing &mdash; magnum.fe 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
+        <link rel="next" title="Landau-Lifshitz-Gilbert Equation" href="llg.html"/>
+        <link rel="prev" title="State and Materials" href="state.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> magnum.fe</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Meshing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">magnum.fe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Meshing</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/meshing.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-magnumfe"></span><div class="section" id="meshing">
+<h1>Meshing<a class="headerlink" href="#meshing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mesher">
+<h2><a class="reference internal" href="#magnumfe.Mesher" title="magnumfe.Mesher"><tt class="xref py py-class docutils literal"><span class="pre">Mesher</span></tt></a><a class="headerlink" href="#mesher" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/mesh.png"><img alt="_images/mesh.png" src="_images/mesh.png" style="width: 100%;" /></a>
+<p class="caption">Mesh of a sphere including cuboid shell for the solution of open-boundary problems.
+(a) Explosion view
+(b) Cross section</p>
+</div>
+<dl class="class">
+<dt id="magnumfe.Mesher">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">Mesher</tt><a class="headerlink" href="#magnumfe.Mesher" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class uses the Gmsh library to generate dolfin meshes.
+It provides methods to surround arbitrary meshes with a cuboid shell
+as required by the shell-transformation method, see
+<a class="reference internal" href="open_boundary.html#shell-transformation"><em>Shell-Transformation Method</em></a>. Moreover regular cuboid meshes can
+be created and domain information can be attached to the resulting
+dolfin mesh.</p>
+<p>The shell is always created symmetrically around the coordinate
+origin. Hence mesh files read by this class should also be constructed
+symmetrically around the origin.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="c"># Read sample.msh and create shell</span>
+<span class="n">mesher</span> <span class="o">=</span> <span class="n">Mesher</span><span class="p">()</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s">&quot;sample.msh&quot;</span><span class="p">)</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">create_shell</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">mesh</span><span class="p">()</span>
+
+<span class="c"># Create cuboid mesh and surround with shell</span>
+<span class="n">mesher</span> <span class="o">=</span> <span class="n">Mesher</span><span class="p">()</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">create_cuboid</span><span class="p">((</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">create_shell</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">mesh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="method">
+<dt id="magnumfe.Mesher.create_celldomain">
+<tt class="descname">create_celldomain</tt><big>(</big><em>domain</em>, <em>domain_id</em><big>)</big><a class="headerlink" href="#magnumfe.Mesher.create_celldomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a cell domain and attach it as <tt class="xref py py-class docutils literal"><span class="pre">dolfin.MeshDomains</span></tt> object to the mesh.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.SubDomain</span></tt>)</dt>
+<dd>The subdomain to be marked</dd>
+<dt>domain_id (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dd>The id of the subdomain</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Mesher.create_cuboid">
+<tt class="descname">create_cuboid</tt><big>(</big><em>size</em>, <em>n</em><big>)</big><a class="headerlink" href="#magnumfe.Mesher.create_cuboid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cuboid of given dimension and discretization around the coordinate
+origin.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>size (<tt class="xref py py-class docutils literal"><span class="pre">[float]</span></tt>)</dt>
+<dd>Size of the cuboid.</dd>
+<dt>n (<tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt>)</dt>
+<dd>Number of mesh mesh intervals.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Mesher.create_facetdomain">
+<tt class="descname">create_facetdomain</tt><big>(</big><em>domain</em>, <em>domain_id</em><big>)</big><a class="headerlink" href="#magnumfe.Mesher.create_facetdomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a facet domain and attach it as <tt class="xref py py-class docutils literal"><span class="pre">dolfin.MeshDomains</span></tt> object to the mesh.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.SubDomain</span></tt>)</dt>
+<dd>The subdomain to be marked</dd>
+<dt>domain_id (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dd>The id of the subdomain</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Mesher.create_shell">
+<tt class="descname">create_shell</tt><big>(</big><em>d</em>, <em>margin=0.0</em>, <em>n=(0</em>, <em>0</em>, <em>0)</em>, <em>progression=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.Mesher.create_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cuboid shell around the current sample.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>d (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dd>Number of layers of the shell mesh.</dd>
+<dt>margin (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>Margin between sample and shell
+(useful for meshes read from file).</dd>
+<dt>n (<tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt>)</dt>
+<dd>Number of mesh points of shell.
+(only required if mesh was read from file)</dd>
+<dt>progression (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>Defines coarsening of the shell layers.
+1.0 means no coarsening.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Mesher.get_sample_size">
+<tt class="descname">get_sample_size</tt><big>(</big><em>i=None</em>, <em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.Mesher.get_sample_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sample size (inner-shell size) in a given
+dimension. Scaling used for mesh generation is not considered.
+If no direction is specified a list of sizes is returned.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>i (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dd>The dimension (direction).</dd>
+<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>Scaling of the mesh.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">int</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt></dt>
+<dd>The sample size (Either a single value or a tuple)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Mesher.mesh">
+<tt class="descname">mesh</tt><big>(</big><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.Mesher.mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mesh the geometry and return as <tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt> object with domains
+attached as <tt class="xref py py-class docutils literal"><span class="pre">dolfin.MeshDomains</span></tt>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>Scaling of the mesh.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt></dt>
+<dd>The dolfin mesh.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="wrappedmesh">
+<h2><a class="reference internal" href="#magnumfe.WrappedMesh" title="magnumfe.WrappedMesh"><tt class="xref py py-class docutils literal"><span class="pre">WrappedMesh</span></tt></a><a class="headerlink" href="#wrappedmesh" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.WrappedMesh">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">WrappedMesh</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a mesh with a certain submesh and defines
+methods for the fast interpolation between the two meshes.</p>
+<dl class="staticmethod">
+<dt id="magnumfe.WrappedMesh.create">
+<em class="property">static </em><tt class="descname">create</tt><big>(</big><em>mesh</em>, <em>domain_ids</em>, <em>invert=False</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a wrapped mesh from a super mesh for a given collection
+of domain IDs.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt>)</dt>
+<dd>The mesh.</dd>
+<dt>domain_ids (<tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt>)</dt>
+<dd>List of domain IDs</dd>
+<dt>invert (<tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt>)</dt>
+<dd>Invert list of domain IDs</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><a class="reference internal" href="#magnumfe.WrappedMesh" title="magnumfe.WrappedMesh"><tt class="xref py py-class docutils literal"><span class="pre">WrappedMesh</span></tt></a></dt>
+<dd>The wrapped mesh</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.WrappedMesh.cut">
+<tt class="descname">cut</tt><big>(</big><em>f</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh.cut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a function defined on the super mesh and returns a truncated
+function defined on the sub mesh.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>f (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt>)</dt>
+<dd>The function on the super mesh.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt></dt>
+<dd>The function on the sub mesh.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.WrappedMesh.expand">
+<tt class="descname">expand</tt><big>(</big><em>f</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh.expand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a function defined on the sub mesh and returns a function
+defined on the super mesh with unknown values set to zero.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>f (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt>)</dt>
+<dd>The function on the sub mesh.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd>The function on the super mesh.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="llg.html" class="btn btn-neutral float-right" title="Landau-Lifshitz-Gilbert Equation"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="state.html" class="btn btn-neutral" title="State and Materials"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Claas Abert.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/MathJax_local.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

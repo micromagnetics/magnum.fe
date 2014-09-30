@@ -57,13 +57,28 @@
         
         
             <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#id1"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mesher.html">Mesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
@@ -71,7 +86,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation">Shell Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
 </ul>
 </li>
@@ -121,11 +136,17 @@
  <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="C">C</h2>
@@ -139,8 +160,6 @@
   <dt><a href="field_terms.html#magnumfe.DemagField.calculate_potential">calculate_potential() (magnumfe.DemagField method)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="llg.html#magnumfe.LLGAlougesLagrange.calculate_v">calculate_v() (magnumfe.LLGAlougesLagrange method)</a>
   </dt>
@@ -152,7 +171,33 @@
 
       </dl></dd>
       
+  <dt><a href="meshing.html#magnumfe.WrappedMesh.create">create() (magnumfe.WrappedMesh static method)</a>
+  </dt>
+
+      
+  <dt><a href="meshing.html#magnumfe.Mesher.create_celldomain">create_celldomain() (magnumfe.Mesher method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="meshing.html#magnumfe.Mesher.create_cuboid">create_cuboid() (magnumfe.Mesher method)</a>
+  </dt>
+
+      
+  <dt><a href="meshing.html#magnumfe.Mesher.create_facetdomain">create_facetdomain() (magnumfe.Mesher method)</a>
+  </dt>
+
+      
   <dt><a href="field_terms.html#magnumfe.DemagField.create_mesh">create_mesh() (magnumfe.DemagField static method)</a>
+  </dt>
+
+      
+  <dt><a href="meshing.html#magnumfe.Mesher.create_shell">create_shell() (magnumfe.Mesher method)</a>
+  </dt>
+
+      
+  <dt><a href="meshing.html#magnumfe.WrappedMesh.cut">cut() (magnumfe.WrappedMesh method)</a>
   </dt>
 
   </dl></td>
@@ -165,6 +210,24 @@
   <dt><a href="field_terms.html#magnumfe.DemagField">DemagField (class in magnumfe)</a>
   </dt>
 
+      
+  <dt><a href="state.html#magnumfe.State.domain_ids">domain_ids() (magnumfe.State method)</a>
+  </dt>
+
+      
+  <dt><a href="state.html#magnumfe.State.dS">dS() (magnumfe.State method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.ds">ds() (magnumfe.State method)</a>
+  </dt>
+
+      
+  <dt><a href="state.html#magnumfe.State.dx">dx() (magnumfe.State method)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -172,7 +235,43 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="meshing.html#magnumfe.WrappedMesh.expand">expand() (magnumfe.WrappedMesh method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
   <dt><a href="field_terms.html#magnumfe.ExternalField">ExternalField (class in magnumfe)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.FunctionSpace">FunctionSpace() (magnumfe.State method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="meshing.html#magnumfe.Mesher.get_sample_size">get_sample_size() (magnumfe.Mesher method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.interpolate">interpolate() (magnumfe.State method)</a>
   </dt>
 
   </dl></td>
@@ -198,7 +297,25 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="state.html#module-magnumfe">magnumfe (module)</a>, <a href="open_boundary.html#module-magnumfe">[1]</a>, <a href="field_terms.html#module-magnumfe">[2]</a>, <a href="llg.html#module-magnumfe">[3]</a>
+  <dt><a href="open_boundary.html#module-magnumfe">magnumfe (module)</a>, <a href="state.html#module-magnumfe">[1]</a>, <a href="field_terms.html#module-magnumfe">[2]</a>, <a href="llg.html#module-magnumfe">[3]</a>, <a href="meshing.html#module-magnumfe">[4]</a>
+  </dt>
+
+      
+  <dt><a href="state.html#magnumfe.Material">Material (class in magnumfe)</a>
+  </dt>
+
+      
+  <dt><a href="meshing.html#magnumfe.Mesher.mesh">mesh() (magnumfe.Mesher method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.mesh_has_domains">mesh_has_domains() (magnumfe.State method)</a>
+  </dt>
+
+      
+  <dt><a href="meshing.html#magnumfe.Mesher">Mesher (class in magnumfe)</a>
   </dt>
 
   </dl></td>
@@ -214,9 +331,23 @@
   </dl></td>
 </tr></table>
 
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.Material.py">py() (magnumfe.Material static method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="field_terms.html#magnumfe.ExternalField.set">set() (magnumfe.ExternalField method)</a>
+  </dt>
+
       
   <dt><a href="state.html#magnumfe.State">State (class in magnumfe)</a>
   </dt>
@@ -241,6 +372,38 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="field_terms.html#magnumfe.UniaxialAnisotropyField">UniaxialAnisotropyField (class in magnumfe)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.VectorFunctionSpace">VectorFunctionSpace() (magnumfe.State method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.volume">volume() (magnumfe.State method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.wrapped_mesh_for">wrapped_mesh_for() (magnumfe.State method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="meshing.html#magnumfe.WrappedMesh">WrappedMesh (class in magnumfe)</a>
   </dt>
 
   </dl></td>

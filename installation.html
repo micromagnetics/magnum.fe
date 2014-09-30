@@ -58,13 +58,24 @@
         
         
             <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#id1"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-docker-container">Create docker container</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mesher.html">Mesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
@@ -72,7 +83,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation">Shell Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
 </ul>
 </li>
@@ -119,6 +130,66 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>magnum.fe requires the following software/libraries to be installed:</p>
+<ul class="simple">
+<li>FEniCS &gt;= 1.4</li>
+<li>Gmsh &gt;= 2.8.0 (headers and library)</li>
+<li>CMake &gt;= 2.8</li>
+<li>SWIG &gt;= 2.0</li>
+<li>G++ &gt;= 4.0</li>
+<li>dev-version of CBC.Block (optional)</li>
+<li>BEM++ 2.0.1 (optional)</li>
+</ul>
+</div>
+<div class="section" id="install-from-source">
+<h2>Install from source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h2>
+<p>The current version of magnum.fe can be downloaded from GitHub via</p>
+<div class="code highlight-python"><div class="highlight"><pre>$ git clone https://github.com/micromagnetics/magnum.fe.git
+</pre></div>
+</div>
+<p>To build und install magenum.fe with CMake do</p>
+<div class="code highlight-python"><div class="highlight"><pre>$ cd /path/to/magnum.fe
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ sudo make install
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-dependencies-in-ubuntu-14-04">
+<h2>Install dependencies in Ubuntu 14.04<a class="headerlink" href="#install-dependencies-in-ubuntu-14-04" title="Permalink to this headline">¶</a></h2>
+<p>Install FEniCS</p>
+<div class="code highlight-python"><div class="highlight"><pre>$ sudo add-apt-repository ppa:fenics-packages/fenics
+$ sudo apt-get update
+$ sudo apt-get install fenics
+</pre></div>
+</div>
+<p>Install Gmsh with headers and build dependencies</p>
+<div class="code highlight-python"><div class="highlight"><pre>$ sudo apt-get install libgmsh-dev g++ swig cmake
+</pre></div>
+</div>
+<p>Install CBC.Block</p>
+<div class="code highlight-python"><div class="highlight"><pre>$ git clone https://bitbucket.org/fenics-apps/cbc.block.git
+$ cd cbc.block
+$ sudo python setup.py install
+</pre></div>
+</div>
+<p>For installation of BEM++, see <a class="reference external" href="http://www.bempp.org/">http://www.bempp.org/</a>. magnum.fe requires the H-matrix library AHMED 1.0 that is optional for BEM++, see <a class="reference external" href="http://bebendorf.ins.uni-bonn.de/AHMED.html">http://bebendorf.ins.uni-bonn.de/AHMED.html</a>.</p>
+</div>
+<div class="section" id="create-docker-container">
+<h2>Create docker container<a class="headerlink" href="#create-docker-container" title="Permalink to this headline">¶</a></h2>
+<p>magnum.fe can be virtualized with docker (<a class="reference external" href="http://www.docker.com">http://www.docker.com</a>) for easy deployment to other machines.
+In order to create a docker container run</p>
+<div class="code highlight-python"><div class="highlight"><pre>$ cd /path/to/magnum.fe/docker
+$ cp /path/to/AHMED-1.0.tar.gz .
+$ sudo docker build .
+</pre></div>
+</div>
+<p>You need Docker &gt;= 1.0 to build the container. Note that you have to place the AHMED 1.0 tarball in the <cite>docker</cite> directory for a successfull build (<a class="reference external" href="http://bebendorf.ins.uni-bonn.de/AHMED.html">http://bebendorf.ins.uni-bonn.de/AHMED.html</a>).</p>
+</div>
 </div>
 
 

@@ -16,10 +16,7 @@ where the effective field :math:`\vec{H}_\text{eff}` is given by the variational
   \vec{H}_\text{eff} =
   - \frac{1}{\mu_0 M_\text{s}} \frac{\delta U(\vec{m})}{\delta \vec{m}}.
 
-For a detailed discussion on the LLG see [1]. magnum.fe implements different algorithms for the integration of the LLG. Note that some algorithms depend on a specific linear backend and/or additional packages.
-
-References:
-  [1] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.
+For a detailed discussion on the LLG see [Brown1963]_. magnum.fe implements different algorithms for the integration of the LLG. Note that some algorithms depend on a specific linear backend and/or additional packages.
 
 :class:`LLGAlougesProject`
 ++++++++++++++++++++++++++
@@ -32,3 +29,9 @@ References:
 
 .. autoclass:: LLGAlougesLagrange
    :members:
+
+
+.. [Brown1963] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.
+.. [Alouges2008] Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.
+.. [Abert2013] Abert, C., Exl, L., Bruckner, F., Drews, A., & Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.
+.. [Goldenits2012] Goldenits, P., Hrkac, G., Praetorius, D., & Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.

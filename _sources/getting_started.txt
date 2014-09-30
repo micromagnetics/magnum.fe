@@ -1,2 +1,143 @@
 Getting Started
 ===============
+
+As a first example the standard problem #4 [MuMag4]_, proposed by the MuMag group is computed with magnum.fe. Since magnum.fe is a Python library, a simulation script is a Python script that imports magnum.fe. Furthermore the dolfin library of FEniCS has to be imported. Thus, every magnum.fe simulation script starts with
+
+.. code:: python
+
+  from dolfin import *
+  from magnumfe import *
+
+In the next step a mesh for the simulation is created. For simple geometries, the builtin meshing tools of dolfin and magnum.fe are a good choice. More complicated geometries can be meshed with external tools. magnum.fe supports a variaty of mesh file formats through the Gmsh library. Depending on the method for the solution of the open-boundary demagnetization field problem the mesh is also required to include a cuboid shell, see :ref:`open-boundary`.
+
+Here we use the hybrid FEM-BEM method, see :ref:`fem-bem`, for the computation of the demagnetization field. Hence a simple cuboid mesh as provided by the dolfin meshing tools is sufficient for the solution of the standard problem #4, that requires a cuboid of size :math:`500 \times 125 \times 3` nm. The mesh is constructed symmetrically around the coordinate origin and scaled by :math:`10^9`.
+
+.. code:: python
+
+  mesh = BoxMesh(-500.0/2, -125.0/2, -3.0/2, 500.0/2, 125.0/2, 3.0/2, 100, 25, 1)
+
+A magnetization configuration that is known to relax quickly in a magnetic s-state is defined by an analytical expression.
+
+.. code:: python
+
+  arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
+  m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
+
+A simulation state is created and initialized with material paramters and the start magnetization m_start
+
+.. code:: python
+
+  state = State(mesh, material = Material.py(), m = m_start)
+
+For the relaxation of the system, an LLG-solver object is created that includes the exchange field and demagnetization field as only effective field contributions.
+
+.. code:: python
+
+  llg = LLGAlougesProject([DemagField("FK")], scale = 1e-9)
+
+Note that the exchange field is always included in Alouges-type solvers. This is likely to change in the future. The scale arguments corresponds to the spatial scaling of the mesh.
+The system is relaxed by setting the damping of the material to :math:`\alpha = 1` and performing a number of integration steps.
+
+.. code:: python
+
+  state.material.alpha = 1.0
+  for i in range(200): llg.step(state, 2e-11)
+
+In order to switch the magnetization as required by the standard problem #4, the dampin is reduced to :math:`\alpha = 0.02`. A new solver object is created that includes an external-field.
+
+.. code:: python
+
+  state.material.alpha = 0.02
+
+  llg = LLGAlougesProject([
+      ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+      DemagField("FK")
+  ], scale = 1e-9)
+
+The time loop for the solution of the LLG has to programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python.
+
+.. code:: python
+
+  # open logfile
+  logfile = open("sp4_fk.dat", "w", 0)
+
+  # initialize time variables
+  t, dt, T = 0.0, 2e-13, 1e-9
+
+  # loop, loop, loop
+  for i in range(int(T / dt)):
+    t = i * dt
+    
+    # write scalar information
+    logfile.write("%f %f %f %f\n" % ((t*1e9,) + state.m.average()))
+
+    # calculate next step
+    llg.step(state, dt)
+
+  logfile.close()
+
+Complete code
++++++++++++++
+
+.. code:: python
+
+  from dolfin import *
+  from magnumfe import *
+
+  #######################################
+  #### GENERATE MESH WITH SHELL
+  #######################################
+
+  mesh = BoxMesh(-500.0/2, -125.0/2, -3.0/2, 500.0/2, 125.0/2, 3.0/2, 100, 25, 1)
+
+  #######################################
+  #### RELAX SYSTEM TO S-STATE
+  #######################################
+
+  # define start magnetization
+  arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
+  m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
+
+  state   = State(mesh, material = Material.py(), m = m_start)
+  llg     = LLGAlougesProject([DemagField("FK")], scale = 1e-9)
+
+  state.material.alpha = 1.0
+  for i in range(200): llg.step(state, 2e-11)
+
+  #######################################
+  #### SIMULATE SWITCHING
+  #######################################
+
+  state.material.alpha = 0.02
+
+  llg = LLGAlougesProject([
+      ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+      DemagField("FK")
+  ], scale = 1e-9)
+
+  logfile = open("sp4_fk.dat", "w", 0)
+  t, dt, T = 0.0, 2e-13, 1e-9
+
+  for i in range(int(T / dt)):
+    t = i * dt
+    
+    # write scalar information
+    logfile.write("%.10f %f %f %f\n" % ((t*1e9,) + state.m.average()))
+
+    # calculate next step
+    llg.step(state, dt)
+
+  logfile.close()
+ 
+Run the Simulation
+++++++++++++++++++
+
+Since the simulation file is a simple Python script it is run with the Python intepreter. Save the above program to a file called `sp4.py` and run
+
+.. code::
+
+  $ python sp4.py
+
+on the command line.
+
+.. [MuMag4] µMAG Standard Problem #4, http://www.ctcms.nist.gov/~rdm/std4/spec4.html

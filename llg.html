@@ -30,7 +30,7 @@
   
     <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
         <link rel="next" title="Spin Diffusion" href="spin_diffusion.html"/>
-        <link rel="prev" title="Mesher" href="mesher.html"/> 
+        <link rel="prev" title="Meshing" href="meshing.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -58,13 +58,24 @@
         
         
             <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#id1"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mesher.html">Mesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Landau-Lifshitz-Gilbert Equation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
@@ -72,7 +83,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation">Shell Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
 </ul>
 </li>
@@ -128,28 +139,24 @@
 <div class="math">
 \[\vec{H}_\text{eff} =
 - \frac{1}{\mu_0 M_\text{s}} \frac{\delta U(\vec{m})}{\delta \vec{m}}.\]</div>
-<p>For a detailed discussion on the LLG see [1]. magnum.fe implements different algorithms for the integration of the LLG. Note that some algorithms depend on a specific linear backend and/or additional packages.</p>
-<dl class="docutils">
-<dt>References:</dt>
-<dd>[1] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.</dd>
-</dl>
+<p>For a detailed discussion on the LLG see <a class="reference internal" href="#brown1963" id="id1">[Brown1963]</a>. magnum.fe implements different algorithms for the integration of the LLG. Note that some algorithms depend on a specific linear backend and/or additional packages.</p>
 <div class="section" id="llgalougesproject">
 <h2><a class="reference internal" href="#magnumfe.LLGAlougesProject" title="magnumfe.LLGAlougesProject"><tt class="xref py py-class docutils literal"><span class="pre">LLGAlougesProject</span></tt></a><a class="headerlink" href="#llgalougesproject" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.LLGAlougesProject">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesProject</tt><big>(</big><em>terms=</em>, <span class="optional">[</span><span class="optional">]</span><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesProject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges [1]. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
+<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id2">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
 <div class="math">
 \[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
 + \frac{2 A_\text{ex} \gamma}{\mu_0 M_\text{s}} \int_\Omega \nabla (\vec{m} + \frac{1}{2} k \vec{v}) \cdot \nabla \vec{w} \dx
 + \gamma \int_\Omega \vec{H}_\text{eff} \cdot \vec{w} \dx
 = 0 \quad \forall \quad \vec{w} \in T_{\vec{m}}\]</div>
-<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> [2]. As suggested in [3] the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a projection method</p>
+<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> <a class="reference internal" href="#abert2013" id="id3">[Abert2013]</a>. As suggested in <a class="reference internal" href="#goldenits2012" id="id4">[Goldenits2012]</a> the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a projection method</p>
 <div class="math">
 \[(\mat{I} - \mat{B}^T \mat{B}) \mat{A} \vec{v} = 
 (\mat{I} - \mat{B}^T \mat{B}) \vec{b}\]</div>
 <p>where <span class="math">\(\mat{A}\)</span> and <span class="math">\(\vec{b}\)</span> are the discretized bilinear and linear part of the weak formulation above and <span class="math">\(\mat{B}\)</span> is a matrix that delivers the node-wise scalar product with <span class="math">\(\vec{m}\)</span> if applied to a vector field (e.g. <span class="math">\(\vec{v}\)</span>).</p>
-<p>The integration step itself is performed by application of a node-wise renormalization as proposed by Alouges in [1]:</p>
+<p>The integration step itself is performed by application of a node-wise renormalization as proposed by Alouges in <a class="reference internal" href="#alouges2008" id="id5">[Alouges2008]</a>:</p>
 <div class="math">
 \[\vec{m}_i(t+k) = \frac{\vec{m}_i(t) + k \vec{v}_i}{|\vec{m}_i(t) + k \vec{v}_i|}\]</div>
 <div class="admonition note">
@@ -157,19 +164,14 @@
 <p class="last">This class requires the Petsc Backend to be enabled.</p>
 </div>
 <dl class="docutils">
-<dt>References:</dt>
-<dd><p class="first">[1] Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.</p>
-<p>[2] Abert, C., Exl, L., Bruckner, F., Drews, A., &amp; Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.</p>
-<p class="last">[3] Goldenits, P., Hrkac, G., Praetorius, D., &amp; Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.</p>
-</dd>
-</dl>
-<p><em>Arguments</em>
-terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</p>
-<blockquote>
-<div>Effective Field terms to be considered.</div></blockquote>
-<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</dt>
+<dd>Effective Field terms to be considered.</dd>
 <dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
 <dd>The scaling of the model. Use 1e-9 if you use nanometers as length measure.</dd>
+</dl>
+</dd>
 </dl>
 <dl class="method">
 <dt id="magnumfe.LLGAlougesProject.calculate_v">
@@ -211,13 +213,13 @@ terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</
 <dl class="class">
 <dt id="magnumfe.LLGAlougesLagrange">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesLagrange</tt><big>(</big><em>terms=</em>, <span class="optional">[</span><span class="optional">]</span><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesLagrange" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges [1]. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
+<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id6">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
 <div class="math">
 \[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
 + \frac{2 A_\text{ex} \gamma}{\mu_0 M_\text{s}} \int_\Omega \nabla (\vec{m} + \frac{1}{2} k \vec{v}) \cdot \nabla \vec{w} \dx
 + \gamma \int_\Omega \vec{H}_\text{eff} \cdot \vec{w} \dx
 = 0 \quad \forall \quad \vec{w} \in T_{\vec{m}}\]</div>
-<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> [2]. As suggested in [3] the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a Lagrange multiplier ansatz as proposed in [3]</p>
+<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> <a class="reference internal" href="#abert2013" id="id7">[Abert2013]</a>. As suggested in <a class="reference internal" href="#goldenits2012" id="id8">[Goldenits2012]</a> the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a Lagrange multiplier ansatz as proposed in <a class="reference internal" href="#goldenits2012" id="id9">[Goldenits2012]</a>.</p>
 <div class="math">
 \[\begin{split}\begin{pmatrix}
     \mat{A} &amp; \mat{B} \\ \mat{B}^T &amp; 0
@@ -238,19 +240,14 @@ terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</
 <p class="last">This class requires CBC.Block.</p>
 </div>
 <dl class="docutils">
-<dt>References:</dt>
-<dd><p class="first">[1] Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.</p>
-<p>[2] Abert, C., Exl, L., Bruckner, F., Drews, A., &amp; Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.</p>
-<p class="last">[3] Goldenits, P., Hrkac, G., Praetorius, D., &amp; Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.</p>
-</dd>
-</dl>
-<p><em>Arguments</em>
-terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</p>
-<blockquote>
-<div>Effective Field terms to be considered.</div></blockquote>
-<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</dt>
+<dd>Effective Field terms to be considered.</dd>
 <dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
 <dd>The scaling of the model. Use 1e-9 if you use nanometers as length measure.</dd>
+</dl>
+</dd>
 </dl>
 <dl class="method">
 <dt id="magnumfe.LLGAlougesLagrange.calculate_v">
@@ -286,6 +283,30 @@ terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</
 
 </dd></dl>
 
+<table class="docutils citation" frame="void" id="brown1963" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Brown1963]</a></td><td>Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="alouges2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Alouges2008]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id6">3</a>)</em> Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abert2013" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Abert2013]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> Abert, C., Exl, L., Bruckner, F., Drews, A., &amp; Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="goldenits2012" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Goldenits2012]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>)</em> Goldenits, P., Hrkac, G., Praetorius, D., &amp; Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -298,7 +319,7 @@ terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</
         <a href="spin_diffusion.html" class="btn btn-neutral float-right" title="Spin Diffusion"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mesher.html" class="btn btn-neutral" title="Mesher"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="meshing.html" class="btn btn-neutral" title="Meshing"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

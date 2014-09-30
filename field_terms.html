@@ -57,13 +57,24 @@
         
         
             <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#id1"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mesher.html">Mesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
@@ -71,7 +82,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation">Shell Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
 </ul>
 </li>
@@ -124,16 +135,18 @@
 <dt id="magnumfe.DemagField">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">DemagField</tt><big>(</big><em>method='transform'</em>, <em>sample_size=None</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves for the magnetic demagnetization field.</p>
-<p><em>Arguments</em>
-method</p>
-<blockquote>
-<div>Method for the solution of the open-boundary problem.
-Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</div></blockquote>
 <dl class="docutils">
-<dt>sample_size</dt>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>method (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>)</dt>
+<dd>Method for the solution of the open-boundary problem.
+Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
+<dt>sample_size (<tt class="xref py py-class docutils literal"><span class="pre">[float]</span></tt>)</dt>
 <dd>Tuple described the size of the sample. Usually this is taken from create_mesh.</dd>
-<dt>order</dt>
+<dt>order (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
 <dd>The order of CG function used for the potential calculation.</dd>
+</dl>
+</dd>
 </dl>
 <dl class="method">
 <dt id="magnumfe.DemagField.calculate_potential">
@@ -142,7 +155,7 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
 <dd>The simulation state</dd>
 </dl>
 </dd>
@@ -156,19 +169,25 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 transformation method. Either takes a filename as first argument
 to load the meshed sample or sizes and discretization of a cuboid
 sample.</p>
-<p><em>Example</em></p>
-<blockquote>
-<div></div></blockquote>
 <dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="c"># load from file</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">DemagField</span><span class="o">.</span><span class="n">create_mesh</span><span class="p">(</span><span class="s">&quot;sphere.msh&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c"># create cuboid mesh of size 1.0 x 1.0 x 1.0</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">DemagField</span><span class="o">.</span><span class="n">create_mesh</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>d</dt>
+<dt>d (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
 <dd>Number of shell layers.</dd>
-<dt>scale</dt>
+<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
 <dd>Scale factor used for mesh generation.</dd>
-<dt>margin</dt>
+<dt>margin (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
 <dd>Margin to the sample when loading sample mesh from a file.</dd>
-<dt>n</dt>
+<dt>n (<tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt>)</dt>
 <dd>Discretization of inner cuboid when loading sample mesh from a file.</dd>
 </dl>
 </dd>
@@ -184,15 +203,28 @@ sample.</p>
 <dt id="magnumfe.ExternalField">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExternalField</tt><big>(</big><em>field=Coefficient(VectorElement('Real'</em>, <em>None</em>, <em>0</em>, <em>dim=3</em>, <em>quad_scheme=None)</em>, <em>0)</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents a constant external field.</p>
-<p>Create a _ExternalField_ object.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>field</dt>
+<dt>field (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></tt>)</dt>
 <dd>The external field (Constant, Function or Expression)</dd>
 </dl>
 </dd>
 </dl>
+<dl class="method">
+<dt id="magnumfe.ExternalField.set">
+<tt class="descname">set</tt><big>(</big><em>field</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the external field.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>field (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></tt>)</dt>
+<dd>The external field (Constant, Function or Expression)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -202,16 +234,18 @@ sample.</p>
 <dt id="magnumfe.OerstedField">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">OerstedField</tt><big>(</big><em>method='transform'</em>, <em>sample_size=None</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves for the current induced Oersted field.</p>
-<p><em>Arguments</em>
-method</p>
-<blockquote>
-<div>Method for the solution of the open-boundary problem.
-Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</div></blockquote>
 <dl class="docutils">
-<dt>sample_size</dt>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>method (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>)</dt>
+<dd>Method for the solution of the open-boundary problem.
+Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
+<dt>sample_size (<tt class="xref py py-class docutils literal"><span class="pre">[float]</span></tt>)</dt>
 <dd>Tuple described the size of the sample. Usually this is taken from create_mesh.</dd>
-<dt>order</dt>
+<dt>order (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
 <dd>The order of CG function used for the potential calculation.</dd>
+</dl>
+</dd>
 </dl>
 <dl class="method">
 <dt id="magnumfe.OerstedField.calculate_field">
@@ -220,7 +254,7 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
 <dd>The simulation state</dd>
 </dl>
 </dd>
@@ -235,7 +269,8 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 <dl class="class">
 <dt id="magnumfe.UniaxialAnisotropyField">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents a constant external field.</p>
+<dd><p>This class represents an uniaxial anisotropy field. The Anisotropy constant
+K_uni and the axis K_uni_axis are required as material parameters.</p>
 </dd></dl>
 
 </div>
