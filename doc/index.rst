@@ -20,7 +20,6 @@ Contents:
    open_boundary
    field_terms
 
-
 Indices and tables
 ==================
 

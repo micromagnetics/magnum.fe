@@ -20,7 +20,7 @@ the demagnetization-field computation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-06-18
+# Last modified by Claas Abert, 2014-09-30
 
 from dolfin import *
 from magnumfe import *
@@ -30,7 +30,6 @@ from magnumfe import *
 #######################################
 
 mesh, sample_size = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100, 25, 1), d=4)
-volume = assemble(Constant(1.0)*dx(mesh))
 
 #######################################
 #### RELAX SYSTEM TO S-STATE
@@ -58,9 +57,8 @@ llg = LLGAlougesProject([
 ], scale = 1e-9)
 
 logfile = open("sp4_st.dat", "w", 0)
-dt, T = 2e-13, 1e-9
+t, dt, T = 0.0, 2e-13, 1e-9
 
-t  = 0.0
 for i in range(int(T / dt)):
   t = i * dt
   
