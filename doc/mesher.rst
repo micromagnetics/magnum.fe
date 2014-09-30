@@ -11,7 +11,7 @@ Mesher
    (b) Cross section
 
 :class:`Mesher`
-===============
++++++++++++++++
 .. autoclass:: Mesher
    :members:
 
