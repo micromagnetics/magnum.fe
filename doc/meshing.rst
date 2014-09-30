@@ -1,7 +1,10 @@
 .. module:: magnumfe
 
-Mesher
-======
+Meshing
+=======
+
+:class:`Mesher`
++++++++++++++++
 .. figure:: /images/mesh.png
    :width: 100%
    :align: center
@@ -10,8 +13,11 @@ Mesher
    (a) Explosion view
    (b) Cross section
 
-:class:`Mesher`
-+++++++++++++++
 .. autoclass:: Mesher
    :members:
 
+:class:`WrappedMesh`
+++++++++++++++++++++
+
+.. autoclass:: WrappedMesh
+   :members:

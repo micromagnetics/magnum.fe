@@ -14,7 +14,7 @@ Contents:
    installation
    getting_started
    state
-   mesher
+   meshing
    llg
    spin_diffusion
    open_boundary
