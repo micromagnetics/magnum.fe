@@ -10,4 +10,4 @@ document.write('\
               }\
             }\
           });\
-        </script>')
+        </script>');
