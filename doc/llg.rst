@@ -33,5 +33,5 @@ For a detailed discussion on the LLG see [Brown1963]_. magnum.fe implements diff
 
 .. [Brown1963] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.
 .. [Alouges2008] Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.
-.. [Abert2013] Abert, C., Exl, L., Bruckner, F., Drews, A., & Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.
+.. [Abert2013b] Abert, C., Exl, L., Bruckner, F., Drews, A., & Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.
 .. [Goldenits2012] Goldenits, P., Hrkac, G., Praetorius, D., & Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.
