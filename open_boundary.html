@@ -144,7 +144,7 @@ u(\vec{x})                                       &amp;= \mathcal{O}(1/|\vec{x}|)
 <p>different algorithms are available for the solution of these problems.</p>
 <div class="section" id="shell-transformation-method">
 <span id="shell-transformation"></span><h2>Shell-Transformation Method<a class="headerlink" href="#shell-transformation-method" title="Permalink to this headline">¶</a></h2>
-<p>The shell-transformation method for the solution of open-boundary problems with the finite-element method was introduced in [1].
+<p>The shell-transformation method for the solution of open-boundary problems with the finite-element method was introduced in <a class="reference internal" href="#brunotte1992" id="id1">[Brunotte1992]</a>.
 The region of interest <span class="math">\(\omega{notrans}\)</span> is surrounded by a finite shell <span class="math">\(\omega{trans}\)</span>.
 A bijective transformation is constructed that maps the shell region <span class="math">\(\omega{trans}\)</span> onto the complete exterior region <span class="math">\(\mathbb{R}^3 \setminus \omega_\text{notrans}\)</span>.
 The open-boundary conditions can thus be implemented by requiring homogeneous Dirichlet boundary condition of the outer boundary of the shell <span class="math">\(\omega{trans}\)</span>, resulting in the following weak formulation</p>
@@ -155,11 +155,11 @@ The open-boundary conditions can thus be implemented by requiring homogeneous Di
 \[\mat{g} = (\mat{J}^{-1})^T | \det \mat{J} | \mat{J}^{-1}\]</div>
 <p>where <span class="math">\(\mat{J}\)</span> denotes the Jacobian of the transformation.
 The untransformed region <span class="math">\(\omega_\text{notrans}\)</span> does not have to coincide with the sample region <span class="math">\(\omega\)</span> of the original problem, but it holds <span class="math">\(\omega \subseteq \omega_\text{notrans}\)</span>.</p>
-<p>magnum.fe uses cuboid shells, i.e. <cite>omega_text{notrans}</cite> has to be of cuboidal shape. The applied method is described in detail in [2].</p>
+<p>magnum.fe uses cuboid shells, i.e. <cite>omega_text{notrans}</cite> has to be of cuboidal shape. The applied method is described in detail in <a class="reference internal" href="#abert2013a" id="id2">[Abert2013a]</a>.</p>
 </div>
 <div class="section" id="hybrid-fem-bem-method-fredkin-and-koehler">
 <span id="fem-bem"></span><h2>Hybrid FEM-BEM Method (Fredkin and Koehler)<a class="headerlink" href="#hybrid-fem-bem-method-fredkin-and-koehler" title="Permalink to this headline">¶</a></h2>
-<p>A hybrid FEM-BEM approach for the solution of open-boundary problems was propsed by Fredkin and Koehler [3]. Consider the following splitting of the solution <span class="math">\(u\)</span>:</p>
+<p>A hybrid FEM-BEM approach for the solution of open-boundary problems was propsed by Fredkin and Koehler <a class="reference internal" href="#fredkin1990" id="id3">[Fredkin1990]</a>. Consider the following splitting of the solution <span class="math">\(u\)</span>:</p>
 <div class="math">
 \[u = u_1 + u_2\]</div>
 <p><span class="math">\(u_1\)</span> is defined by</p>
@@ -182,14 +182,26 @@ u_2(\vec{x})                                       &amp;= \mathcal{O}(1/|\vec{x}
 \end{align}\]</div>
 <p>The double-layer potential is computed on the boundary <span class="math">\(\partial \omega\)</span> with the boundary-element method.
 These values are used as Dirichlet boundary conditions to solve <span class="math">\(u_2\)</span> within <span class="math">\(\omega\)</span> with the finite-element method.
-For a detailed description of the method, see [3].</p>
-<dl class="docutils">
-<dt>References:</dt>
-<dd><p class="first">[1] Brunotte, X., Meunier, G., &amp; Imhoff, J. F. (1992). Finite element modeling of unbounded problems using transformations: a rigorous, powerful and easy solution. IEEE Transactions on Magnetics, 28(2), 1663-1666.</p>
-<p>[2] Abert, C., Exl, L., Selke, G., Drews, A., &amp; Schrefl, T. (2013). Numerical methods for the stray-field calculation: A comparison of recently developed algorithms. Journal of Magnetism and Magnetic Materials, 326, 176-185.</p>
-<p class="last">[3] Fredkin, D. R., &amp; Koehler, T. R. (1990). Hybrid method for computing demagnetizing fields. Magnetics, IEEE Transactions on, 26(2), 415-417.</p>
-</dd>
-</dl>
+For a detailed description of the method, see <a class="reference internal" href="#fredkin1990" id="id4">[Fredkin1990]</a>.</p>
+<p>References:</p>
+<table class="docutils citation" frame="void" id="brunotte1992" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Brunotte1992]</a></td><td>Brunotte, X., Meunier, G., &amp; Imhoff, J. F. (1992). Finite element modeling of unbounded problems using transformations: a rigorous, powerful and easy solution. IEEE Transactions on Magnetics, 28(2), 1663-1666.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abert2013a" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Abert2013a]</a></td><td>Abert, C., Exl, L., Selke, G., Drews, A., &amp; Schrefl, T. (2013). Numerical methods for the stray-field calculation: A comparison of recently developed algorithms. Journal of Magnetism and Magnetic Materials, 326, 176-185.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="fredkin1990" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Fredkin1990]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> Fredkin, D. R., &amp; Koehler, T. R. (1990). Hybrid method for computing demagnetizing fields. Magnetics, IEEE Transactions on, 26(2), 415-417.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
