@@ -2,7 +2,7 @@ Installation
 ============
 
 Prerequisites
--------------
++++++++++++++
 magnum.fe requires the following software/libraries to be installed:
 
 * FEniCS >= 1.4
@@ -14,7 +14,7 @@ magnum.fe requires the following software/libraries to be installed:
 * BEM++ 2.0.1 (optional)
 
 Install from source
--------------------
++++++++++++++++++++
 
 The current version of magnum.fe can be downloaded from GitHub via
 
@@ -34,7 +34,7 @@ To build und install magenum.fe with CMake do
   $ sudo make install
 
 Install dependencies in Ubuntu 14.04
-------------------------------------
+++++++++++++++++++++++++++++++++++++
 Install FEniCS
 
 .. code::
@@ -60,7 +60,7 @@ Install CBC.Block
 For installation of BEM++, see http://www.bempp.org/. magnum.fe requires the H-matrix library AHMED 1.0 that is optional for BEM++, see http://bebendorf.ins.uni-bonn.de/AHMED.html.
 
 Create docker container
------------------------
++++++++++++++++++++++++
 magnum.fe can be virtualized with docker (http://www.docker.com) for easy deployment to other machines.
 In order to create a docker container run
 
