@@ -20,13 +20,13 @@ Fredkin and Koehler for the demagnetization-field computation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-09-30
+# Last modified by Claas Abert, 2014-10-02
 
 from dolfin import *
 from magnumfe import *
 
 #######################################
-#### GENERATE MESH WITH SHELL
+#### GENERATE MESH
 #######################################
 
 mesh = BoxMesh(-500.0/2, -125.0/2, -3.0/2, 500.0/2, 125.0/2, 3.0/2, 100, 25, 1)

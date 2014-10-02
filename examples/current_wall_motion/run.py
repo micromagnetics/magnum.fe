@@ -19,7 +19,7 @@ Current driven domain-wall motion with constant current and spin accumulation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-06-18
+# Last modified by Claas Abert, 2014-10-02
 
 from dolfin import *
 from magnumfe import *
@@ -70,8 +70,6 @@ llg = LLGAlougesProject([
 ], scale = 1e-9)
 
 spindiff = SpinDiffusion(scale = 1e-9)
-
-v_py = Constant(assemble(Constant(1.0)*state.dx('all')))
 
 # relax
 for j in range(200):
