@@ -5,7 +5,7 @@
 
 .. only:: html
 
-  .. image:: /images/logo.png
+  .. image:: /images/logo.svg
 
 Welcome to magnum.fe's documentation!
 =====================================
