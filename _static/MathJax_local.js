@@ -8,6 +8,9 @@ document.write('\
                 mat: ["{\\\\boldsymbol #1}", 1],\
                 dx:  "{\\\\;\\\\text{d}\\\\vec{x}}"\
               }\
+            },\
+            "HTML-CSS": {\
+              linebreaks: {automatic: true, width: "container"}\
             }\
           });\
         </script>');
