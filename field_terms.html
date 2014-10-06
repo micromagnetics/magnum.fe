@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
@@ -84,7 +85,10 @@
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
@@ -265,6 +270,16 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="spincurrent">
+<h2><a class="reference internal" href="#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a><a class="headerlink" href="#spincurrent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinCurrent">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinCurrent</tt><a class="headerlink" href="#magnumfe.SpinCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents the coupling of the magnetization with a spin polarized current.
+It should be used in combination with the <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a> class.</p>
 </dd></dl>
 
 </div>

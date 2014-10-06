@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
@@ -85,7 +86,10 @@
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Spin Diffusion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Spin Diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
@@ -95,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
@@ -132,8 +137,120 @@
 </div>
           <div role="main">
             
-  <div class="section" id="spin-diffusion">
-<h1>Spin Diffusion<a class="headerlink" href="#spin-diffusion" title="Permalink to this headline">¶</a></h1>
+  <span class="target" id="module-magnumfe"></span><div class="section" id="spin-diffusion">
+<span id="id1"></span><h1>Spin Diffusion<a class="headerlink" href="#spin-diffusion" title="Permalink to this headline">¶</a></h1>
+<p>The interaction of spin polarized currents with the magnetization can be described by a spin-accumulation model described in <a class="reference internal" href="#zhang2002" id="id2">[Zhang2002]</a> and <a class="reference internal" href="#garcia2007" id="id3">[Garcia2007]</a>.
+In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</span> exerts a torque on the magnetization by an additional term to the LLG</p>
+<div class="math">
+\[\frac{\partial \vec{m}}{\partial t} =
+- \gamma \vec{m} \times (\vec{h}_\text{eff} + \frac{c}{\mu_0} \vec{s})
++ \alpha \vec{m} \times \frac{\partial \vec{m}}{\partial t}\]</div>
+<p>where <span class="math">\(c\)</span> is a coupling constant. The spin accumulation itself depends on the magnetization by the diffusion equation</p>
+<div class="math">
+\[\frac{\partial \vec{s}}{\partial t} =
+- \vec{\nabla} \cdot \mat{J}_\text{s}
+- 2 D_0 \left[
+  \frac{\vec{s}}{\lambda_\text{sf}^2}
+  + \frac{\vec{s} \times \vec{m}}{\lambda_\text{J}^2}
+\right]\]</div>
+<p>where <span class="math">\(D_0\)</span> is the diffusion constant, <span class="math">\(\lambda_\text{sf}\)</span> is the characteristic length for spin-flip relaxation, <span class="math">\(\lambda_\text{J}\)</span> depends on the electron&#8217;s mean free path and <span class="math">\(\mat{J}_\text{s}\)</span> is the matrix valued spin current given by</p>
+<div class="math">
+\[\mat{J}_\text{s} =
+\frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{J}_\text{e}
+- 2 D_0 \left[
+  \vec{\nabla} \vec{s}
+  - \beta \beta' \vec{m} \otimes \left( (\vec{\nabla}\vec{s})^T \vec{m} \right)
+\right].\]</div>
+<p>Here <span class="math">\(\beta\)</span> and <span class="math">\(beta'\)</span> are dimensionless polarization parameters and <span class="math">\(\mat{J}_\text{e}\)</span> is the electrical current density. As shown in <a class="reference internal" href="#abert2014b" id="id4">[Abert2014b]</a> this method is able to reproduce the results of both the spin torque model by Slonczewski, see <a class="reference internal" href="#slonczewski1996" id="id5">[Slonczewski1996]</a>, and the model by Zhang and Li, see <a class="reference internal" href="#zhang2004" id="id6">[Zhang2004]</a>.</p>
+<div class="section" id="spindiffusion">
+<h2><a class="reference internal" href="#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a><a class="headerlink" href="#spindiffusion" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinDiffusion">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinDiffusion</tt><big>(</big><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.SpinDiffusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver for the spin-diffusion equation according to <a class="reference internal" href="#abert2014a" id="id7">[Abert2014a]</a>. The spin diffusion <span class="math">\(\vec{s}\)</span> is computed from the current magnetization <span class="math">\(\vec{m}\)</span> by</p>
+<div class="math">
+\[\begin{split}\int_{\Omega} \;\text{d}_{t} \boldsymbol{s}^{k+1} \cdot \boldsymbol{\zeta} \;\text{d}\boldsymbol{x}
+\;+\; 2 D_0 \, a(\boldsymbol{s}^{k+1}, \boldsymbol{\zeta})
+=\\
+\frac{\beta \mu_\text{B}}{e} \int_{\omega} \left[ \boldsymbol{m}^{k+1} \otimes \boldsymbol{j}^{k+1} \right] : \boldsymbol{\nabla} \boldsymbol{\zeta} \;\text{d}\boldsymbol{x}
+- \frac{\beta \mu_\text{B}}{e} \int_{\partial \Omega \cap \partial \omega} (\boldsymbol{j}^{k+1} \cdot \boldsymbol{n}) (\boldsymbol{m}^{k+1} \cdot \boldsymbol{\zeta}) \;\text{d}\boldsymbol{x}\end{split}\]</div>
+<p>where <span class="math">\(\text{d}_t \vec{s}^{k+1} = (\vec{s}^{k+1} - \vec{s}^k)\)</span> and the bilinear form <span class="math">\(a(\zeta_1, \zeta_2)\)</span> is defined as</p>
+<div class="math">
+\[\begin{split}a(\boldsymbol{\zeta_1}, \boldsymbol{\zeta_2}) =
+\frac{1}{\lambda_\text{sf}^2} \int_{\Omega} \boldsymbol{\zeta}_1 \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
++ \int_{\Omega} \boldsymbol{\nabla} \boldsymbol{\zeta}_1 : \boldsymbol{\nabla} \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
+\\
+- \beta \beta' \int_{\omega} \left[ \boldsymbol{m}^{k+1} \otimes \left((\boldsymbol{\nabla} \boldsymbol{\zeta}_1)^T \boldsymbol{m}^{k+1} \right) \right] : \boldsymbol{\nabla} \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
++ \frac{1}{\lambda_\text{J}^2} \int_{\omega} \left( \boldsymbol{\zeta}_1 \times \boldsymbol{m}^{k+1} \right) \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}.\end{split}\]</div>
+<p>The region <span class="math">\(\Omega\)</span> corresponds to the &#8220;conducting&#8221; cell domain and the region <span class="math">\(\omega\)</span> corresponds to the &#8220;magnetic&#8221; cell domain. The boundary <span class="math">\(\partial \Omega \cap \partial \omega\)</span> has to be defined explicitly as facet domain named &#8220;outermagnet&#8221;.</p>
+<p>The characteric time scale of the spin-diffusion dynamics is orders of magnitude smaller than that of the magnetization dynamics. However, the integration scheme is able to handle very large time steps. Hence the time step can be taken from the integration of the LLG if only the magnetization dynamics are of interest, see <a class="reference internal" href="#abert2014b" id="id8">[Abert2014b]</a>.</p>
+<p>Add the <a class="reference internal" href="field_terms.html#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a> to the LLG terms in order to get a bidirectional coupling of spin diffusion and magnetization.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>The scaling of the model. Use 1e-9 if you use nanometers as length measure.</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.SpinDiffusion.step">
+<tt class="descname">step</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.SpinDiffusion.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate <span class="math">\(\vec{s}(t+\Delta t)\)</span> for a given timestep.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dd>The simulation state.</dd>
+<dt>dt (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>The time-step size.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<table class="docutils citation" frame="void" id="zhang2002" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Zhang2002]</a></td><td>Zhang, S., Levy, P. M., &amp; Fert, A. (2002). Mechanisms of spin-polarized current-driven magnetization switching. Physical review letters, 88(23), 236601.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="garcia2007" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[Garcia2007]</a></td><td>García-Cervera, C. J., &amp; Wang, X. P. (2007). Spin-polarized currents in ferromagnetic multilayers. Journal of Computational Physics, 224(2), 699-711.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abert2014b" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Abert2014b]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Abert, C., Ruggeri M., Bruckner F., Vogler C., Hrkac G., Praetorius D., &amp; Suess D. (2014). Self-consistent micromagnetic simulations including spin diffusion effects. In preparation</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="slonczewski1996" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[Slonczewski1996]</a></td><td>Slonczewski, J. C. (1996). Current-driven excitation of magnetic multilayers. Journal of Magnetism and Magnetic Materials, 159(1), L1-L7.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="zhang2004" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[Zhang2004]</a></td><td>Zhang, S., &amp; Li, Z. (2004). Roles of nonequilibrium conduction electrons on the magnetization dynamics of ferromagnets. Physical Review Letters, 93(12), 127204.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abert2014a" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[Abert2014a]</a></td><td><ol class="first last upperalpha simple" start="3">
+<li>Abert, G. Hrkac, M. Page, D. Praetorius, M. Ruggeri, &amp; D. Suess.  Spin-polarized transport in ferromagnetic multilayers: An unconditionally convergent FEM integrator.  Comput. Math. Appl., 68, 6, 639-654, 2014.</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

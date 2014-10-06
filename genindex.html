@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
@@ -84,7 +85,10 @@
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
@@ -297,7 +302,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="open_boundary.html#module-magnumfe">magnumfe (module)</a>, <a href="state.html#module-magnumfe">[1]</a>, <a href="field_terms.html#module-magnumfe">[2]</a>, <a href="llg.html#module-magnumfe">[3]</a>, <a href="meshing.html#module-magnumfe">[4]</a>
+  <dt><a href="spin_diffusion.html#module-magnumfe">magnumfe (module)</a>, <a href="open_boundary.html#module-magnumfe">[1]</a>, <a href="state.html#module-magnumfe">[2]</a>, <a href="field_terms.html#module-magnumfe">[3]</a>, <a href="llg.html#module-magnumfe">[4]</a>, <a href="meshing.html#module-magnumfe">[5]</a>
   </dt>
 
       
@@ -349,11 +354,19 @@
   </dt>
 
       
-  <dt><a href="state.html#magnumfe.State">State (class in magnumfe)</a>
+  <dt><a href="field_terms.html#magnumfe.SpinCurrent">SpinCurrent (class in magnumfe)</a>
+  </dt>
+
+      
+  <dt><a href="spin_diffusion.html#magnumfe.SpinDiffusion">SpinDiffusion (class in magnumfe)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State">State (class in magnumfe)</a>
+  </dt>
+
       
   <dt><a href="llg.html#magnumfe.LLGAlougesLagrange.step">step() (magnumfe.LLGAlougesLagrange method)</a>
   </dt>
@@ -361,6 +374,10 @@
       <dd><dl>
         
   <dt><a href="llg.html#magnumfe.LLGAlougesProject.step">(magnumfe.LLGAlougesProject method)</a>
+  </dt>
+
+        
+  <dt><a href="spin_diffusion.html#magnumfe.SpinDiffusion.step">(magnumfe.SpinDiffusion method)</a>
   </dt>
 
       </dl></dd>

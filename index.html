@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
@@ -84,7 +85,10 @@
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
@@ -94,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
@@ -133,6 +138,33 @@
             
   <img src="_images/logo.svg" /><div class="section" id="welcome-to-magnum-fe-s-documentation">
 <h1>Welcome to magnum.fe&#8217;s documentation!<a class="headerlink" href="#welcome-to-magnum-fe-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>magnum.fe is a finite-element package for the solution of dynamical micromagnetic problems. It is written in Python and C++ and largely relies on the multi purpose finite-element library <a class="reference external" href="http://fenicsproject.org/">FEniCS</a>. For the solution of open-boundary problems a hybrid FEM/BEM method is implemented that uses the <a class="reference external" href="http://www.bempp.org/">BEM++</a> library. magnum.fe is free software and can be extended to your needs.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Integration of the Landau-Lifshitz-Gilbert Equation</li>
+<li>Demagnetization-field computation via shell transformation or hybrid FEM/BEM method</li>
+<li>Oersted-field computation via shell transformation or hybrid FEM/BEM method</li>
+<li>Solution of the spin-diffusion model</li>
+</ul>
+</div>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>Visit our <a class="reference external" href="https://github.com/micromagnetics/magnum.fe">GitHub page</a> to download magnum.fe.</p>
+</div>
+<div class="section" id="license-and-disclaimer">
+<h2>License and Disclaimer<a class="headerlink" href="#license-and-disclaimer" title="Permalink to this headline">¶</a></h2>
+<p>magnum.fe is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>magnum.fe is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details.</p>
+</div>
+<div class="section" id="alternatives">
+<h2>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></h2>
+<p>You might also want to have a look at these open-source finite-element micromagnetic codes:</p>
+<ul class="simple">
+<li>Nmag (<a class="reference external" href="http://nmag.soton.ac.uk/nmag/">http://nmag.soton.ac.uk/nmag/</a>)</li>
+<li>magpar (<a class="reference external" href="http://www.magpar.net/">http://www.magpar.net/</a>)</li>
+</ul>
+<p>You code is not listed here, but should be? Drop us a line (<a class="reference external" href="mailto:claas&#46;abert&#37;&#52;&#48;tuwien&#46;ac&#46;at">claas<span>&#46;</span>abert<span>&#64;</span>tuwien<span>&#46;</span>ac<span>&#46;</span>at</a>).</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
@@ -145,6 +177,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
@@ -162,7 +195,10 @@
 <li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
@@ -172,10 +208,12 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
