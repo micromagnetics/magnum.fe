@@ -22,6 +22,12 @@ Field Terms
 .. autoclass:: OerstedField
    :members:
 
+:class:`SpinCurrent`
++++++++++++++++++++++
+
+.. autoclass:: SpinCurrent
+   :members:
+
 :class:`UniaxialAnisotropyField`
 ++++++++++++++++++++++++++++++++
 

@@ -140,4 +140,11 @@ Since the simulation file is a simple Python script it is run with the Python in
 
 on the command line.
 
+More Examples
++++++++++++++
+
+More examples can be found in the :code:`examples` directory of the magnum.fe source tree.
+
+
 .. [MuMag4] µMAG Standard Problem #4, http://www.ctcms.nist.gov/~rdm/std4/spec4.html
+

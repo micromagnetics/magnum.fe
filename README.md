@@ -1,9 +1,19 @@
 magnum.fe
 =========
 
+magnum.fe is a finite-element package for the solution of dynamical micromagnetic problems. It is written in Python and C++ and largely relies on the multi purpose finite-element library [FEniCS](http://fenicsproject.org/). For the solution of open-boundary problems a hybrid FEM/BEM method is implemented that uses the [BEM++](http://www.bempp.org/) library. magnum.fe is free software and can be extended to your needs.
+
+To get started, visit http://micromagnetics.org/magnum.fe .
+
+Features
+--------
+* Integration of the Landau-Lifshitz-Gilbert Equation
+* Demagnetization-field computation via shell transformation or hybrid FEM/BEM method
+* Oersted-field computation via shell transformation or hybrid FEM/BEM method
+* Solution of the spin-diffusion model
+
 Installation
 ------------
-
 ### Prerequisites
 magnum.fe requires the following software/libraries to be installed:
 
@@ -77,6 +87,8 @@ Generate documentation (HTML)
     $ cd /path/to/magnum.fe/doc
     $ make html
 
-License
--------
-Released under the GNU General Public License 3 (included).
+License and Disclaimer
+----------------------
+magnum.fe is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+magnum.fe is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details.
