@@ -150,9 +150,9 @@ u(\vec{x})                                       &amp;= \mathcal{O}(1/|\vec{x}|)
 <div class="section" id="shell-transformation-method">
 <span id="shell-transformation"></span><h2>Shell-Transformation Method<a class="headerlink" href="#shell-transformation-method" title="Permalink to this headline">¶</a></h2>
 <p>The shell-transformation method for the solution of open-boundary problems with the finite-element method was introduced in <a class="reference internal" href="#brunotte1992" id="id1">[Brunotte1992]</a>.
-The region of interest <span class="math">\(\omega{notrans}\)</span> is surrounded by a finite shell <span class="math">\(\omega{trans}\)</span>.
-A bijective transformation is constructed that maps the shell region <span class="math">\(\omega{trans}\)</span> onto the complete exterior region <span class="math">\(\mathbb{R}^3 \setminus \omega_\text{notrans}\)</span>.
-The open-boundary conditions can thus be implemented by requiring homogeneous Dirichlet boundary condition of the outer boundary of the shell <span class="math">\(\omega{trans}\)</span>, resulting in the following weak formulation</p>
+The region of interest <span class="math">\(\omega_\text{notrans}\)</span> is surrounded by a finite shell <span class="math">\(\omega_\text{trans}\)</span>.
+A bijective transformation is constructed that maps the shell region <span class="math">\(\omega_\text{trans}\)</span> onto the complete exterior region <span class="math">\(\mathbb{R}^3 \setminus \omega_\text{notrans}\)</span>.
+The open-boundary conditions can thus be implemented by requiring homogeneous Dirichlet boundary condition of the outer boundary of the shell <span class="math">\(\omega_\text{trans}\)</span>, resulting in the following weak formulation</p>
 <div class="math">
 \[\int_{\omega_\text{notrans}} \nabla u \cdot \nabla v \dx + \int_{\omega_\text{trans}} (\nabla u)^T \mat{g} \nabla v \dx = \int_{\omega} \vec{f} \cdot \nabla v \dx\]</div>
 <p>with the metric tensor <span class="math">\(\mat{g}\)</span> defined as</p>
@@ -160,7 +160,7 @@ The open-boundary conditions can thus be implemented by requiring homogeneous Di
 \[\mat{g} = (\mat{J}^{-1})^T | \det \mat{J} | \mat{J}^{-1}\]</div>
 <p>where <span class="math">\(\mat{J}\)</span> denotes the Jacobian of the transformation.
 The untransformed region <span class="math">\(\omega_\text{notrans}\)</span> does not have to coincide with the sample region <span class="math">\(\omega\)</span> of the original problem, but it holds <span class="math">\(\omega \subseteq \omega_\text{notrans}\)</span>.</p>
-<p>magnum.fe uses cuboid shells, i.e. <cite>omega_text{notrans}</cite> has to be of cuboidal shape. The applied method is described in detail in <a class="reference internal" href="#abert2013a" id="id2">[Abert2013a]</a>.</p>
+<p>magnum.fe uses cuboid shells, i.e. <span class="math">\(\omega_\text{notrans}\)</span> has to be of cuboidal shape. The applied method is described in detail in <a class="reference internal" href="#abert2013a" id="id2">[Abert2013a]</a>.</p>
 </div>
 <div class="section" id="hybrid-fem-bem-method-fredkin-and-koehler">
 <span id="fem-bem"></span><h2>Hybrid FEM-BEM Method (Fredkin and Koehler)<a class="headerlink" href="#hybrid-fem-bem-method-fredkin-and-koehler" title="Permalink to this headline">¶</a></h2>
