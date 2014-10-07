@@ -144,7 +144,7 @@
 <span class="kn">from</span> <span class="nn">magnumfe</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<p>In the next step a mesh for the simulation is created. For simple geometries, the builtin meshing tools of dolfin and magnum.fe are a good choice. More complicated geometries can be meshed with external tools. magnum.fe supports a variaty of mesh file formats through the Gmsh library. Depending on the method for the solution of the open-boundary demagnetization field problem the mesh is also required to include a cuboid shell, see <a class="reference internal" href="open_boundary.html#open-boundary"><em>Open Boundary Problems</em></a>.</p>
+<p>In the next step a mesh for the simulation is created. For simple geometries, the builtin meshing tools of dolfin and magnum.fe are a good choice. More complicated geometries can be meshed with external tools. magnum.fe supports a variety of mesh file formats through the Gmsh library. Depending on the method for the solution of the open-boundary demagnetization field problem the mesh is also required to include a cuboid shell, see <a class="reference internal" href="open_boundary.html#open-boundary"><em>Open Boundary Problems</em></a>.</p>
 <p>Here we use the hybrid FEM-BEM method, see <a class="reference internal" href="open_boundary.html#fem-bem"><em>Hybrid FEM-BEM Method (Fredkin and Koehler)</em></a>, for the computation of the demagnetization field. Hence a simple cuboid mesh as provided by the dolfin meshing tools is sufficient for the solution of the standard problem #4, that requires a cuboid of size <span class="math">\(500 \times 125 \times 3\)</span> nm. The mesh is constructed symmetrically around the coordinate origin and scaled by <span class="math">\(10^9\)</span>.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="o">-</span><span class="mf">500.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">125.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">500.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">125.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -154,7 +154,7 @@
 <span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">,</span> <span class="s">&quot;sin(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>A simulation state is created and initialized with material paramters and the start magnetization m_start</p>
+<p>A simulation state is created and initialized with material paramters and the start magnetization m_start.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="o">.</span><span class="n">py</span><span class="p">(),</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m_start</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -162,13 +162,13 @@
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">llg</span> <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span><span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)],</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Note that the exchange field is always included in Alouges-type solvers. This is likely to change in the future. The scale arguments corresponds to the spatial scaling of the mesh.
+<p>Note that the exchange field is always included in Alouges-type solvers. This is likely to change in the future. The scale argument corresponds to the spatial scaling of the mesh.
 The system is relaxed by setting the damping of the material to <span class="math">\(\alpha = 1\)</span> and performing a number of integration steps.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span> <span class="n">llg</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mf">2e-11</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In order to switch the magnetization as required by the standard problem #4, the dampin is reduced to <span class="math">\(\alpha = 0.02\)</span>. A new solver object is created that includes an external-field.</p>
+<p>In order to switch the magnetization as required by the standard problem #4, the damping is reduced to <span class="math">\(\alpha = 0.02\)</span>. A new solver object is created that includes an external-field.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span>
 
 <span class="n">llg</span> <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span>
@@ -177,7 +177,7 @@ The system is relaxed by setting the damping of the material to <span class="mat
 <span class="p">],</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The time loop for the solution of the LLG has to programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python.</p>
+<p>The time loop for the solution of the LLG has to be programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># open logfile</span>
 <span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4_fk.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -251,7 +251,7 @@ The system is relaxed by setting the damping of the material to <span class="mat
 </div>
 <div class="section" id="run-the-simulation">
 <h2>Run the Simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this headline">¶</a></h2>
-<p>Since the simulation file is a simple Python script it is run with the Python intepreter. Save the above program to a file called <cite>sp4.py</cite> and run</p>
+<p>Since the simulation file is a simple Python script it is run with the Python interpreter. Save the above program to a file called <cite>sp4.py</cite> and run</p>
 <div class="code highlight-python"><div class="highlight"><pre>$ python sp4.py
 </pre></div>
 </div>
