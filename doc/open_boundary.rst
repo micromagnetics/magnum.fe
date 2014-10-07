@@ -21,9 +21,9 @@ Shell-Transformation Method
 +++++++++++++++++++++++++++
   
 The shell-transformation method for the solution of open-boundary problems with the finite-element method was introduced in [Brunotte1992]_.
-The region of interest :math:`\omega{notrans}` is surrounded by a finite shell :math:`\omega{trans}`.
-A bijective transformation is constructed that maps the shell region :math:`\omega{trans}` onto the complete exterior region :math:`\mathbb{R}^3 \setminus \omega_\text{notrans}`.
-The open-boundary conditions can thus be implemented by requiring homogeneous Dirichlet boundary condition of the outer boundary of the shell :math:`\omega{trans}`, resulting in the following weak formulation
+The region of interest :math:`\omega_\text{notrans}` is surrounded by a finite shell :math:`\omega_\text{trans}`.
+A bijective transformation is constructed that maps the shell region :math:`\omega_\text{trans}` onto the complete exterior region :math:`\mathbb{R}^3 \setminus \omega_\text{notrans}`.
+The open-boundary conditions can thus be implemented by requiring homogeneous Dirichlet boundary condition of the outer boundary of the shell :math:`\omega_\text{trans}`, resulting in the following weak formulation
 
 .. math::
   \int_{\omega_\text{notrans}} \nabla u \cdot \nabla v \dx + \int_{\omega_\text{trans}} (\nabla u)^T \mat{g} \nabla v \dx = \int_{\omega} \vec{f} \cdot \nabla v \dx
@@ -36,7 +36,7 @@ with the metric tensor :math:`\mat{g}` defined as
 where :math:`\mat{J}` denotes the Jacobian of the transformation.
 The untransformed region :math:`\omega_\text{notrans}` does not have to coincide with the sample region :math:`\omega` of the original problem, but it holds :math:`\omega \subseteq \omega_\text{notrans}`.
 
-magnum.fe uses cuboid shells, i.e. `\omega_\text{notrans}` has to be of cuboidal shape. The applied method is described in detail in [Abert2013a]_.
+magnum.fe uses cuboid shells, i.e. :math:`\omega_\text{notrans}` has to be of cuboidal shape. The applied method is described in detail in [Abert2013a]_.
 
 .. _fem-bem:
 
