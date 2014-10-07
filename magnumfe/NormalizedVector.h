@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 //
-// Last modified by Claas Abert, 2014-06-10
+// Last modified by Claas Abert, 2014-10-07
 
 #ifndef _NORMALIZED_VECTOR_H_
 #define _NORMALIZED_VECTOR_H_
@@ -84,8 +84,15 @@ namespace magnumfe {
       }
       norm = sqrt(norm);
 
-      for (size_t i=0; i<dim; ++i) {
-        A[i] = w[0][i] / norm * _length;
+      if (norm == 0.0) {
+        A[0] = _length;
+        for (size_t i=1; i<dim; ++i) {
+          A[i] = 0.0;
+        }
+      } else {
+        for (size_t i=0; i<dim; ++i) {
+          A[i] = w[0][i] / norm * _length;
+        }
       }
     }
 

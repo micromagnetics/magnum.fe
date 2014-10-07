@@ -77,6 +77,22 @@ class StateTest(unittest.TestCase):
     self.assertTrue(mesh.size(3) > cropped.function_space().mesh().size(3))
     self.assertAlmostEqual(0.42, assemble(cropped[0]*dx(cropped.function_space().mesh())) / state.volume('magnetic'))
 
+  def test_normalize(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, {'everything': (1,2,3)})
+    state.f = state.interpolate({
+      1: Constant((0.0, 2.0, 0.0))
+    })
+
+    self.assertAlmostEqual(0.0, assemble(inner(Constant((1.0, 0.0, 0.0)), state.f) * state.dx()))
+    self.assertAlmostEqual(14.4, assemble(inner(Constant((0.0, 1.0, 0.0)), state.f) * state.dx()))
+
+    state.f.normalize()
+
+    self.assertAlmostEqual(0.8, assemble(inner(Constant((1.0, 0.0, 0.0)), state.f) * state.dx()))
+    self.assertAlmostEqual(7.2, assemble(inner(Constant((0.0, 1.0, 0.0)), state.f) * state.dx()))
+
+
   def test_set_global_material(self):
     mesh = UnitCubeMesh(1,1,1)
     state = State(mesh)
