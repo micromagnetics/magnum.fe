@@ -1,5 +1,5 @@
 """
-Current induced switching of a soft magnetic layer in a multilayer structure.
+Switching of a permalloy multilayer structure with an electric current.
 """
 
 # Copyright (C) 2011-2014 Claas Abert
@@ -19,38 +19,13 @@ Current induced switching of a soft magnetic layer in a multilayer structure.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-06-18
+# Last modified by Claas Abert, 2014-10-08
 
 from dolfin import *
 from magnumfe import *
-from math import sqrt
-
-#######################################
-#### GENERATE MESH WITH SUBDOMAINS
-#######################################
-
-class FM1(SubDomain):
-  def inside(self, x, on_boundary):
-    return between(x[2], (-12.5, -2.5))
-
-class NM(SubDomain):
-  def inside(self, x, on_boundary):
-    return between(x[2], (-2.5, 2.5))
-
-class FM2(SubDomain):
-  def inside(self, x, on_boundary):
-    return between(x[2], (2.5, 12.5))
-
-class FMB(SubDomain):
-  def inside(self, x, on_boundary):
-    return near(x[2], 12.5) or near(x[2], -12.5)
 
 mesher = Mesher()
-mesher.create_cuboid((100.0/2.0, 100.0/2.0, 25.0/2.0), (25, 25, 10))
-mesher.create_celldomain(FM1(), 1)
-mesher.create_celldomain(NM(),  2)
-mesher.create_celldomain(FM2(), 3)
-mesher.create_facetdomain(FMB(), 2)
+mesher.read_file("multilayer.msh")
 mesh = mesher.mesh()
 
 #######################################
@@ -58,40 +33,23 @@ mesh = mesher.mesh()
 #######################################
 
 state = State(mesh,
-    celldomains  = {'pinned': 1, 'py': 3, 'magnetic': (1, 3), 'conducting': (1, 2, 3)},
-    facetdomains = {'outermagnet': 2},
-    m = Expression(('1.0 - 2*(x[2] < 0.0)', '0.0', '0.0')),
+    celldomains  = {'magnetic': (1, 3), 'conducting': (1, 2, 3)},
+    facetdomains = {'outermagnet': 1, 'interface': 2},
+    m = Constant((1, 0, 0)),
     s = Constant((0, 0, 0)),
-    j = Constant((0, 0, -5e12))
+    j = Constant((0, 0, -1e12))
   )
 
-state.material['pinned'] = Material(
-  alpha      = 1.0,
-  ms         = 1.43/Constants.mu0,
-  Aex        = 2.158e-11,
-  #K_uni      = 6.6e6,     # gyro freq: 3.25*10^11
-  K_uni      = 5e5,
-  K_uni_axis = (1, 0, 0),
-  D0         = 1e-3,
-  beta       = 0.9,
-  beta_prime = 0.8,
-  lambda_sf  = 10e-9,
-  lambda_j   = 4e-9,
-  c          = 3.125e-3
-)
-
-state.material['py'] = Material(
+state.material['magnetic'] = Material(
   alpha      = 1.0,
   ms         = 8e5,
   Aex        = 1.3e-11,
-  K_uni      = 0.0,
-  K_uni_axis = (1, 0, 0),
   D0         = 1e-3,
   beta       = 0.9,
   beta_prime = 0.8,
   lambda_sf  = 10e-9,
-  lambda_j   = 4e-9,
-  c          = 3.125e-3
+  lambda_j   = 2.236e-09,
+  c          = 3.155e-3
 )
 
 state.material['!magnetic']  = Material(
@@ -99,28 +57,19 @@ state.material['!magnetic']  = Material(
   beta       = 0.9,
   beta_prime = 0.8,
   lambda_sf  = 10e-9,
-  lambda_j   = 4e-9,
-  c          = 3.125e-3
+  lambda_j   = 2.236e-09,
+  c          = 3.155e-3
 )
 
-llg = LLGAlougesProject([
-  DemagField("FK"),
-  UniaxialAnisotropyField(),
-  SpinCurrent()
-], scale = 1e-9)
+state.m.assign(state.interpolate({1: Constant((1.0, 0.0, 0.0)), 3: Constant((-1.0, 0.0, 0.0))}))
+state.m.normalize()
 
+llg      = LLGAlougesProject([DemagField("FK"), SpinCurrent()], scale = 1e-9)
 spindiff = SpinDiffusion(scale = 1e-9)
 
-v_py = Constant(assemble(Constant(1.0)*state.dx('py')))
+for i in range(300):
+  f = File("data/m_%d.pvd" % i)
+  f << state.m.crop('magnetic')
 
-# relax
-for j in range(5000):
-  llg.step(state, 1e-12)
-  spindiff.step(state, 1e-12)
-
-  if j % 10 == 0:
-    f = File("data/m_%d.pvd" % (j / 10))
-    f << state.m.crop('magnetic')
-
-    f = File("data/s_%d.pvd" % (j / 10))
-    f << state.s
+  llg.step(state, 1e-11)
+  spindiff.step(state, 1e-11)
