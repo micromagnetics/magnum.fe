@@ -3,6 +3,11 @@
 #
 # Authors: 
 # Claas Abert <claas.abert@tuwien.ac.at>
+#
+# Based on the work of
+# Lizao Li <lixx1445@umn.edu>
+# Jack S. Hale <jack.hale@uni.lu>
+# (https://bitbucket.org/garth-wells/fenics-virtual/src/4efc1c04b8c83b50497d2c1e7d239019bd429569/docker/stable-ppa/Dockerfile)
 FROM phusion/baseimage:0.9.12
 MAINTAINER Claas Abert <claas.abert@tuwien.ac.at>
 
@@ -49,7 +54,7 @@ ENV PYTHONPATH $HOME/bempp/python:$PYTHON_PATH
 
 # Compile and install magnumfe
 RUN cd /tmp && \
-    git clone -b dev https://github.com/micromagnetics/magnum.fe.git && \
+    git clone https://github.com/micromagnetics/magnum.fe.git && \
     cd magnum.fe && \
     mkdir build && \
     cd build && \
