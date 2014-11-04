@@ -156,10 +156,10 @@ convenience wrappers for the handling of multiple domains.</p>
 <span class="c"># Set materials for different regions</span>
 <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s">&#39;iron&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s">&#39;cobalt&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">state</span><span class="o">.</span><span class="n">mateiral</span><span class="p">[</span><span class="s">&#39;conducting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s">&#39;conducting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 
 <span class="c"># Use integration measures with named domains</span>
-<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">))</span>       <span class="c"># Everywhere</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">))</span>       <span class="c"># All named domains</span>
 <span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;magnetic&#39;</span><span class="p">))</span>  <span class="c"># Magnetic region</span>
 <span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;!magnetic&#39;</span><span class="p">))</span> <span class="c"># Nonmagnetic region</span>
 <span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>           <span class="c"># Region by ID</span>
@@ -171,6 +171,9 @@ convenience wrappers for the handling of multiple domains.</p>
 <span class="c"># Crop magnetization to subdomain and save as PVD</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;m_iron.pvd&quot;</span><span class="p">)</span>
 <span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="s">&#39;iron&#39;</span><span class="p">)</span>
+
+<span class="c"># Normalize the magnetization</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd>
