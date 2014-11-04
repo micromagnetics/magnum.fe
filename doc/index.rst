@@ -18,6 +18,12 @@ Download
 ++++++++
 Visit our `GitHub page <https://github.com/micromagnetics/magnum.fe>`_ to download magnum.fe.
 
+Citing
+++++++
+If you use results from magnum.fe for scientific publications, we would be very grateful if you would cite the following paper:
+
+  Abert, C., Exl, L., Bruckner, F., Drews, A., & Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.
+
 License and Disclaimer
 ++++++++++++++++++++++
 magnum.fe is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
