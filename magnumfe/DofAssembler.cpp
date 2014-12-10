@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 //
-// Last modified by Claas Abert, 2015-01-05
+// Last modified by Claas Abert, 2015-01-16
 
 #include "DofAssembler.h"
 #include "DofForm.h"
@@ -64,7 +64,8 @@ void DofAssembler::assemble(dolfin::GenericTensor& A,
           entries[j][0]  = value;
           ptr_entries[j] = &entries[j];
         }
-        pattern.insert(ptr_entries);
+        // XXX use insert_local instead?
+        pattern.insert_global(ptr_entries);
       }
     }
     pattern.apply();
@@ -125,22 +126,21 @@ void DofAssembler::init_tensor_layout(dolfin::TensorLayout& tensor_layout,
     const DofForm& a)
 {
   dolfin_assert(tensor_layout);
-  const uint rank = a.rank();
 
-  // create list of dofmaps
+  // Get dof maps
   std::vector<const dolfin::GenericDofMap*> dofmaps;
-  for (size_t i=0; i<rank; ++i) {
+  for (std::size_t i = 0; i < a.rank(); ++i)
     dofmaps.push_back(a.function_space(i)->dofmap().get());
-  }
 
-  std::vector<size_t> global_dimensions(rank);
-  std::vector<std::pair<size_t, size_t> > local_range(rank);
+  // Get dimensions
+  std::vector<std::size_t> global_dimensions;
+  std::vector<std::pair<std::size_t, std::size_t>> local_range;
   std::vector<std::size_t> block_sizes;
-  for (size_t i = 0; i < rank; i++)
+  for (std::size_t i = 0; i < a.rank(); i++)
   {
     dolfin_assert(dofmaps[i]);
-    global_dimensions[i] = dofmaps[i]->global_dimension();
-    local_range[i]       = dofmaps[i]->ownership_range();
+    global_dimensions.push_back(dofmaps[i]->global_dimension());
+    local_range.push_back(dofmaps[i]->ownership_range());
     block_sizes.push_back(dofmaps[i]->block_size);
   }
 
@@ -152,12 +152,36 @@ void DofAssembler::init_tensor_layout(dolfin::TensorLayout& tensor_layout,
     block_size = (block_sizes == _bs) ? dofmaps[0]->block_size : 1;
   }
 
-  tensor_layout.init(a.mesh()->mpi_comm(), global_dimensions, block_size, local_range);
+  // Initialise tensor layout
+  tensor_layout.init(a.mesh()->mpi_comm(), global_dimensions, block_size,
+                      local_range);
+
+  if (a.rank() > 0)
+  {
+    tensor_layout.local_to_global_map.resize(a.rank());
+    for (std::size_t i = 0; i < a.rank(); ++i)
+    {
+      const std::size_t bs = dofmaps[i]->block_size;
+      const std::size_t local_size
+        = local_range[i].second - local_range[i].first;
+      const std::vector<std::size_t>& local_to_global_unowned
+        = dofmaps[i]->local_to_global_unowned();
+      tensor_layout.local_to_global_map[i].resize(local_size
+                                                + bs*local_to_global_unowned.size());
+      for (std::size_t j = 0;
+           j < tensor_layout.local_to_global_map[i].size(); ++j)
+      {
+        tensor_layout.local_to_global_map[i][j]
+          = dofmaps[i]->local_to_global_index(j);
+      }
+    }
+  }
+
+  // Build sparsity pattern
   if (tensor_layout.sparsity_pattern())
   {
     dolfin::GenericSparsityPattern& pattern = *tensor_layout.sparsity_pattern();
-    //const std::vector<std::pair<std::pair<size_t, size_t>, std::pair<size_t, size_t> > > periodic_master_slave_dofs;
-    dolfin::SparsityPatternBuilder::build(pattern, *(a.mesh()), dofmaps, false, false, false, false);
+    dolfin::SparsityPatternBuilder::build(pattern, *(a.mesh()), dofmaps, false, false, false, false, false);
   }
 }
 //-----------------------------------------------------------------------------

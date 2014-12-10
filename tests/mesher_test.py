@@ -6,6 +6,7 @@ import numpy
 set_log_active(False)
 
 class MesherTest(unittest.TestCase):
+
   def test_create_shell(self):
     mesher = Mesher()
     # create and mesh sample

@@ -1,10 +1,12 @@
 import unittest
+from magnumfe import Timer
 
 testmodules = [
     'demag_field_fk_test',
     'demag_field_st_test',
     'dof_map_test',
     'llg_test',
+    'llg_term_test',
     'material_test',
     'mesher_test',
     'oersted_field_test',
@@ -26,4 +28,6 @@ for t in testmodules:
     subsuite.addTest(unittest.defaultTestLoader.loadTestsFromName(t))
     suite.addTest(subsuite)
 
+#Timer.enable()
 unittest.TextTestRunner().run(suite)
+#Timer.print_report()

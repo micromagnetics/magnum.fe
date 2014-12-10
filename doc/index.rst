@@ -50,6 +50,7 @@ You code is not listed here, but should be? Drop us a line (claas.abert@tuwien.a
    spin_diffusion
    open_boundary
    field_terms
+   misc
 
 Indices and tables
 ==================

@@ -5,6 +5,7 @@ from magnumfe import *
 set_log_active(False)
 
 class StateTest(unittest.TestCase):
+
   def test_domains_ids(self):
     state = State(UnitCubeMesh(1,1,1), celldomains = {'magnetic': 1, 'conducting': (1, 2), 'air': (3, 4)})
 
@@ -143,6 +144,22 @@ class StateTest(unittest.TestCase):
     state.step(integrator, 1e-9)
     self.assertTrue(integrator.called)
     self.assertAlmostEqual(1e-9, state.t)
+
+  def test_M_inv_diag(self):
+    mesh = UnitCubeMesh(2,2,2)
+    state = State(mesh)
+    v = TestFunction(state.VectorFunctionSpace())
+    r = assemble(inner(Constant((1.0, 0.0, 0.0)), v) * state.dx())
+    result = state.M_inv_diag() * r
+    self.assertAlmostEqual(27.0, result.array().sum())
+
+  def test_M_inv_diag_on_subdomain(self):
+    mesh = UnitCubeMesh(2,2,2)
+    state = State(mesh)
+    v = TestFunction(state.VectorFunctionSpace())
+    r = assemble(inner(Constant((1.0, 0.0, 0.0)), v) * state.dx())
+    result = state.M_inv_diag() * r
+    self.assertAlmostEqual(27.0, result.array().sum())
 
   def mesh_with_subdomains(self):
     class TestDomain1(SubDomain):

@@ -15,7 +15,10 @@ demag    = DemagField("ST", sample_size, 1)
 
 class LlgTest(unittest.TestCase):
 
+<<<<<<< HEAD
   # TODO test different backends explicitly
+=======
+>>>>>>> d9a478c... remove Epetra code from LLG integrators
   def test_llg_alouges_lagrange(self):
     state = State(mesh, material = Material.py(), scale = 1e-9, m = m_expr)
 

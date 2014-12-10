@@ -34,5 +34,29 @@ class DemagFieldTestFK(unittest.TestCase):
     energy = assemble(Constant(0.5) * inner(state.m, grad(u)) * state.dx('magnetic'))
     self.assertTrue(abs(energy - 1.0/6.0) < 0.01)
 
+  def test_field_with_lumping(self):
+    class UnitCubeDomain(SubDomain):
+      def inside(self, x, on_boundary):
+        return between(x[0], (-0.50, 0.50)) and \
+               between(x[1], (-0.50, 0.50)) and \
+               between(x[2], (-0.50, 0.50))
+
+    cube_domain = UnitCubeDomain()
+
+    mesher = Mesher()
+    mesher.create_cuboid((1.0, 1.0, 1.0), (20, 20, 20))
+    mesher.create_celldomain(cube_domain, 2)
+    mesh = mesher.mesh()
+
+    state = State(mesh, {'magnetic': 2},
+              m = Constant((0.0, 0.0, 1.0)),
+              material = Material(ms = 1.0)
+            )
+    demag_field = DemagField("FK")
+
+    h = demag_field.field(state, lump = True)
+    energy = assemble(Constant(0.5) * inner(state.m, - h) * state.dx('magnetic'))
+    self.assertTrue(abs(energy - 1.0/6.0) < 0.01)
+
 if __name__ == '__main__':
     unittest.main()
