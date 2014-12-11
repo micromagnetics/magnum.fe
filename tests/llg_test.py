@@ -19,7 +19,7 @@ class LlgTest(unittest.TestCase):
   def test_llg_alouges_lagrange(self):
     state = State(mesh, material = Material.py(), scale = 1e-9, m = m_expr)
 
-    llg = LLGAlougesLagrange([demag])
+    llg = LLGAlougesLagrange([demag, ExchangeField()])
     v   = llg.calculate_v(state, 1e-12)
 
     error = assemble(inner(ref - v, ref - v) / inner(ref, ref) * state.dx('magnetic')) / volume * 1e-12
@@ -28,7 +28,7 @@ class LlgTest(unittest.TestCase):
   def test_llg_alouges_project(self):
     state = State(mesh, material = Material.py(), scale = 1e-9, m = m_expr)
 
-    llg = LLGAlougesProject([demag])
+    llg = LLGAlougesProject([demag, ExchangeField()])
     v   = llg.calculate_v(state, 1e-12)
 
     error = assemble(inner(ref - v, ref - v) / inner(ref, ref) * state.dx('magnetic')) / volume * 1e-12
