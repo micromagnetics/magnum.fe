@@ -116,7 +116,7 @@ Complete code
   ])
 
   logfile = open("sp4_fk.dat", "w", 0)
-  t, dt, T = 0.0, 2e-13, 1e-9
+  dt, T = 2e-13, 1e-9
 
   for i in range(int(T / dt)):
     
