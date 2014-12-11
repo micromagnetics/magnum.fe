@@ -10,6 +10,12 @@ Field Terms
 .. autoclass:: DemagField
    :members:
 
+:class:`ExchangeField`
+++++++++++++++++++++++
+
+.. autoclass:: ExchangeField
+   :members:
+
 :class:`ExternalField`
 ++++++++++++++++++++++
 

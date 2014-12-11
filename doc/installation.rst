@@ -5,7 +5,7 @@ Prerequisites
 +++++++++++++
 magnum.fe requires the following software/libraries to be installed:
 
-* FEniCS >= 1.4
+* FEniCS = 1.4
 * Gmsh >= 2.8.0 (headers and library)
 * CMake >= 2.8
 * SWIG >= 2.0

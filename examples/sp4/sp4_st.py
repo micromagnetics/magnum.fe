@@ -20,7 +20,7 @@ the demagnetization-field computation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-09-30
+# Last modified by Claas Abert, 2014-12-11
 
 from dolfin import *
 from magnumfe import *
@@ -39,8 +39,8 @@ mesh, sample_size = DemagField.create_mesh((500.0/2.0, 125.0/2.0, 3.0/2.0), (100
 arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
 m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
 
-state   = State(mesh, material = Material.py(), m = m_start)
-llg     = LLGAlougesProject([DemagField("ST", sample_size, 2)], scale = 1e-9)
+state   = State(mesh, material = Material.py(), scale = 1e-9, m = m_start)
+llg     = LLGAlougesProject([ExchangeField(), DemagField("ST", sample_size, 2)])
 
 state.material.alpha = 1.0
 for i in range(200): llg.step(state, 2e-11)
@@ -53,23 +53,22 @@ state.material.alpha = 0.02
 
 llg = LLGAlougesProject([
     ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+    ExchangeField(),
     DemagField("ST", sample_size, 2)
-], scale = 1e-9)
+])
 
 logfile = open("sp4_st.dat", "w", 0)
-t, dt, T = 0.0, 2e-13, 1e-9
+dt, T = 2e-13, 1e-9
 
 for i in range(int(T / dt)):
-  t = i * dt
-  
   #if (i % 10 == 0):
   #  f = File("data/m_%d.pvd" % int(i/10))
   #  f << state.m
 
   # write scalar information
-  logfile.write("%.10f %f %f %f\n" % ((t*1e9,) + state.m.average()))
+  logfile.write("%.10f %f %f %f\n" % ((state.t*1e9,) + state.m.average()))
 
   # calculate next step
-  llg.step(state, dt)
+  state.step(llg, dt)
 
 logfile.close()

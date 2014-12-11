@@ -19,7 +19,7 @@ Switching of a permalloy multilayer structure with an electric current.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-10-08
+# Last modified by Claas Abert, 2014-12-11
 
 from dolfin import *
 from magnumfe import *
@@ -35,6 +35,7 @@ mesh = mesher.mesh()
 state = State(mesh,
     celldomains  = {'magnetic': (1, 3), 'conducting': (1, 2, 3)},
     facetdomains = {'outermagnet': 1, 'interface': 2},
+    scale = 1e-9,
     m = Constant((1, 0, 0)),
     s = Constant((0, 0, 0)),
     j = Constant((0, 0, -1e12))
@@ -64,12 +65,13 @@ state.material['!magnetic']  = Material(
 state.m.assign(state.interpolate({1: Constant((1.0, 0.0, 0.0)), 3: Constant((-1.0, 0.0, 0.0))}))
 state.m.normalize()
 
-llg      = LLGAlougesProject([DemagField("FK"), SpinCurrent()], scale = 1e-9)
-spindiff = SpinDiffusion(scale = 1e-9)
+llg      = LLGAlougesProject([ExchangeField(), DemagField("FK"), SpinCurrent()])
+spindiff = SpinDiffusion()
 
 for i in range(300):
+
+  # save magnetization
   f = File("data/m_%d.pvd" % i)
   f << state.m.crop('magnetic')
 
-  llg.step(state, 1e-11)
-  spindiff.step(state, 1e-11)
+  state.step([llg, spindiff], 1e-11)

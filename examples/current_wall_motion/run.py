@@ -19,73 +19,60 @@ Current driven domain-wall motion with constant current and spin accumulation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-10-02
+# Last modified by Claas Abert, 2014-12-11
 
 from dolfin import *
 from magnumfe import *
-from math import sqrt
 
 #######################################
-#### GENERATE MESH WITH SUBDOMAINS
+#### DEFINE MESH, STATE AND MATERIAL
 #######################################
+mesh = BoxMesh(-600.0/2, -100.0/2, -10.0/2, 600.0/2, 100.0/2, 10.0/2, 120, 20, 1)
 
-class FMB(SubDomain):
-  def inside(self, x, on_boundary):
-    return near(x[0], 200.0) or near(x[0], 200.0)
-
-mesher = Mesher()
-mesher.create_cuboid((600.0/2.0, 100.0/2.0, 10.0/2.0), (100, 25, 1))
-#mesher.create_celldomain(FM1(), 1)
-mesher.create_facetdomain(FMB(), 2)
-mesh = mesher.mesh()
-
-#######################################
-#### DEFINE STATE AND MATERIAL
-#######################################
-
-state = State(mesh,
-    celldomains  = {'magnetic': 1, 'conducting': 1},
-    facetdomains = {'outermagnet': 2},
-    m = Expression(('1.0 - 2*(x[0] < 0.0)', '0.0', '0.0')),
-    s = Constant((0, 0, 0)),
-    j = Constant((0, 0, 0))
-    #j = Constant((1e11, 0, 0))
-  )
-
-state.material['all'] = Material(
-  alpha      = 1.0,
-  ms         = 8e5,
-  Aex        = 1.3e-11,
-  D0         = 1e-3,
-  beta       = 0.9,
-  beta_prime = 0.8,
-  lambda_sf  = 10e-9,
-  lambda_j   = 4e-9,
-  c          = 3.125e-3
+state = State(mesh, scale = 1e-9,
+    material = Material(
+      alpha      = 0.1,
+      ms         = 8e5,
+      Aex        = 1.3e-11,
+      D0         = 1e-3,
+      beta       = 0.9,
+      beta_prime = 0.8,
+      lambda_sf  = 10e-9,
+      lambda_j   = 4e-9,
+      c          = 3.125e-3
+    ),
+    m = Expression(('1.0 - 2*(x[0] < 0.0)', 'x[0] > -10.0 && x[0] < 10.0', '0.0')),
+    s = Constant((0.0, 0.0, 0.0)),
+    j = Constant((0.0, 0.0, 0.0))
 )
 
+# normalize since initial configuration is not normalized
+state.m.normalize()
+
+# setup integrators
 llg = LLGAlougesProject([
+  ExchangeField(),
   DemagField("FK"),
   SpinCurrent()
-], scale = 1e-9)
+])
 
-spindiff = SpinDiffusion(scale = 1e-9)
+spindiff = SpinDiffusion()
 
 # relax
-for j in range(200):
-  llg.step(state, 1e-12)
-  spindiff.step(state, 1e-12)
+for j in range(200): state.step(llg, 1e-12)
 
-# apply current
+# apply constant current
 state.j = Constant((3e12, 0, 0))
 
 for j in range(1000):
-  llg.step(state, 1e-12)
-  spindiff.step(state, 1e-12)
 
+  # save fields every 10th step
   if j % 10 == 0:
     f = File("data/m_%d.pvd" % (j / 10))
     f << state.m
 
     f = File("data/s_%d.pvd" % (j / 10))
     f << state.s
+
+  # calculate next step
+  state.step([llg, spindiff], 1e-12)

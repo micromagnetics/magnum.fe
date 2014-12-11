@@ -118,6 +118,32 @@ class StateTest(unittest.TestCase):
     self.assertAlmostEqual(assemble(f*state.dx(2)), 1.6)
     self.assertAlmostEqual(assemble(f*state.dx(3)), 2.0)
 
+  def test_scale_parameter(self):
+    mesh = UnitCubeMesh(1,1,1)
+
+    state = State(mesh)
+    self.assertAlmostEqual(state.scale, 1.0)
+
+    state = State(mesh, scale=1e-9)
+    self.assertAlmostEqual(state.scale, 1e-9)
+
+  def test_step(self):
+    class Integrator(object):
+      def __init__(self):
+        self.called = False
+      def step(self, state, dt):
+        self.called = True
+    integrator = Integrator()
+
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh)
+
+    self.assertAlmostEqual(0.0, state.t)
+    self.assertFalse(integrator.called)
+    state.step(integrator, 1e-9)
+    self.assertTrue(integrator.called)
+    self.assertAlmostEqual(1e-9, state.t)
+
   def mesh_with_subdomains(self):
     class TestDomain1(SubDomain):
       def inside(self, x, on_boundary):
