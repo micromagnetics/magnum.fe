@@ -97,6 +97,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
@@ -166,7 +167,7 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 <h2><a class="reference internal" href="#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a><a class="headerlink" href="#spindiffusion" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.SpinDiffusion">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinDiffusion</tt><big>(</big><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.SpinDiffusion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinDiffusion</tt><a class="headerlink" href="#magnumfe.SpinDiffusion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solver for the spin-diffusion equation according to <a class="reference internal" href="#abert2014a" id="id7">[Abert2014a]</a>. The spin diffusion <span class="math">\(\vec{s}\)</span> is computed from the current magnetization <span class="math">\(\vec{m}\)</span> by</p>
 <div class="math">
 \[\begin{split}\int_{\Omega} \;\text{d}_{t} \boldsymbol{s}^{k+1} \cdot \boldsymbol{\zeta} \;\text{d}\boldsymbol{x}
@@ -185,14 +186,6 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 <p>The region <span class="math">\(\Omega\)</span> corresponds to the &#8220;conducting&#8221; cell domain and the region <span class="math">\(\omega\)</span> corresponds to the &#8220;magnetic&#8221; cell domain. The boundary <span class="math">\(\partial \Omega \cap \partial \omega\)</span> has to be defined explicitly as facet domain named &#8220;outermagnet&#8221;.</p>
 <p>The characteric time scale of the spin-diffusion dynamics is orders of magnitude smaller than that of the magnetization dynamics. However, the integration scheme is able to handle very large time steps. Hence the time step can be taken from the integration of the LLG if only the magnetization dynamics are of interest, see <a class="reference internal" href="#abert2014b" id="id8">[Abert2014b]</a>.</p>
 <p>Add the <a class="reference internal" href="field_terms.html#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a> to the LLG terms in order to get a bidirectional coupling of spin diffusion and magnetization.</p>
-<dl class="docutils">
-<dt><em>Arguments</em></dt>
-<dd><dl class="first last docutils">
-<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
-<dd>The scaling of the model. Use 1e-9 if you use nanometers as length measure.</dd>
-</dl>
-</dd>
-</dl>
 <dl class="method">
 <dt id="magnumfe.SpinDiffusion.step">
 <tt class="descname">step</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.SpinDiffusion.step" title="Permalink to this definition">¶</a></dt>

@@ -97,6 +97,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
@@ -153,7 +154,7 @@
 <h2><a class="reference internal" href="#magnumfe.LLGAlougesProject" title="magnumfe.LLGAlougesProject"><tt class="xref py py-class docutils literal"><span class="pre">LLGAlougesProject</span></tt></a><a class="headerlink" href="#llgalougesproject" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.LLGAlougesProject">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesProject</tt><big>(</big><em>terms=</em>, <span class="optional">[</span><span class="optional">]</span><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesProject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesProject</tt><big>(</big><em>terms=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesProject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id2">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
 <div class="math">
 \[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
@@ -177,8 +178,6 @@
 <dd><dl class="first last docutils">
 <dt>terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</dt>
 <dd>Effective Field terms to be considered.</dd>
-<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
-<dd>The scaling of the model. Use 1e-9 if you use nanometers as length measure.</dd>
 </dl>
 </dd>
 </dl>
@@ -221,7 +220,7 @@
 <h2><a class="reference internal" href="#magnumfe.LLGAlougesLagrange" title="magnumfe.LLGAlougesLagrange"><tt class="xref py py-class docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a><a class="headerlink" href="#llgalougeslagrange" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.LLGAlougesLagrange">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesLagrange</tt><big>(</big><em>terms=</em>, <span class="optional">[</span><span class="optional">]</span><em>scale=1.0</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesLagrange" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesLagrange</tt><big>(</big><em>terms=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesLagrange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id6">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
 <div class="math">
 \[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
@@ -253,8 +252,6 @@
 <dd><dl class="first last docutils">
 <dt>terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</dt>
 <dd>Effective Field terms to be considered.</dd>
-<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
-<dd>The scaling of the model. Use 1e-9 if you use nanometers as length measure.</dd>
 </dl>
 </dd>
 </dl>

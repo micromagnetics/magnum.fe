@@ -23,19 +23,18 @@ A magnetization configuration that is known to relax quickly in a magnetic s-sta
   arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
   m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
 
-A simulation state is created and initialized with material paramters and the start magnetization m_start.
+A simulation state is created and initialized with material paramters and the start magnetization m_start. Note the the :code:`scale` parameter is set to :math:`10^{-9}` since the problem size is given in nanometers. This scaling is advised to avoid numerical artifacts.
 
 .. code:: python
 
-  state = State(mesh, material = Material.py(), m = m_start)
+  state = State(mesh, material = Material.py(), scale = 1e-9, m = m_start)
 
 For the relaxation of the system, an LLG-solver object is created that includes the exchange field and demagnetization field as only effective field contributions.
 
 .. code:: python
 
-  llg = LLGAlougesProject([DemagField("FK")], scale = 1e-9)
+  llg = LLGAlougesProject([ExchangeField(), DemagField("FK")])
 
-Note that the exchange field is always included in Alouges-type solvers. This is likely to change in the future. The scale argument corresponds to the spatial scaling of the mesh.
 The system is relaxed by setting the damping of the material to :math:`\alpha = 1` and performing a number of integration steps.
 
 .. code:: python
@@ -51,10 +50,11 @@ In order to switch the magnetization as required by the standard problem #4, the
 
   llg = LLGAlougesProject([
       ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+      ExchangeField(),
       DemagField("FK")
-  ], scale = 1e-9)
+  ])
 
-The time loop for the solution of the LLG has to be programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python.
+The time loop for the solution of the LLG has to be programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python. Note that an LLG step can either be performed by calling :code:`step` on the :class:`llg` object as is done for the relaxation process, or by calling :code:`step` on the :class:`state` object. In contrast to the first method, the latter method increases the time variable :class:`t` of the state.
 
 .. code:: python
 
@@ -62,17 +62,16 @@ The time loop for the solution of the LLG has to be programmed explicitly by now
   logfile = open("sp4_fk.dat", "w", 0)
 
   # initialize time variables
-  t, dt, T = 0.0, 2e-13, 1e-9
+  dt, T = 2e-13, 1e-9
 
   # loop, loop, loop
   for i in range(int(T / dt)):
-    t = i * dt
     
     # write scalar information
-    logfile.write("%f %f %f %f\n" % ((t*1e9,) + state.m.average()))
+    logfile.write("%f %f %f %f\n" % ((state.t*1e9,) + state.m.average()))
 
     # calculate next step
-    llg.step(state, dt)
+    state.step(llg, dt)
 
   logfile.close()
 
@@ -98,8 +97,8 @@ Complete code
   arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
   m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
 
-  state   = State(mesh, material = Material.py(), m = m_start)
-  llg     = LLGAlougesProject([DemagField("FK")], scale = 1e-9)
+  state   = State(mesh, material = Material.py(), scale = 1e-9, m = m_start)
+  llg     = LLGAlougesProject([ExchangeField(), DemagField("FK")])
 
   state.material.alpha = 1.0
   for i in range(200): llg.step(state, 2e-11)
@@ -112,20 +111,20 @@ Complete code
 
   llg = LLGAlougesProject([
       ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+      ExchangeField(),
       DemagField("FK")
-  ], scale = 1e-9)
+  ])
 
   logfile = open("sp4_fk.dat", "w", 0)
   t, dt, T = 0.0, 2e-13, 1e-9
 
   for i in range(int(T / dt)):
-    t = i * dt
     
     # write scalar information
-    logfile.write("%.10f %f %f %f\n" % ((t*1e9,) + state.m.average()))
+    logfile.write("%.10f %f %f %f\n" % ((state.t*1e9,) + state.m.average()))
 
     # calculate next step
-    llg.step(state, dt)
+    state.step(llg, dt)
 
   logfile.close()
  

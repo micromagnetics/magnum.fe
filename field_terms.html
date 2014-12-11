@@ -96,6 +96,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Field Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
@@ -206,6 +207,23 @@ sample.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="exchangefield">
+<h2><a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><tt class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></tt></a><a class="headerlink" href="#exchangefield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.ExchangeField">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExchangeField</tt><a class="headerlink" href="#magnumfe.ExchangeField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents the micromagnetic exchange field.</p>
+<dl class="docutils">
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>Aex</dt>
+<dd>Exchange constant</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="externalfield">
 <h2><a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a><a class="headerlink" href="#externalfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -280,6 +298,14 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinCurrent</tt><a class="headerlink" href="#magnumfe.SpinCurrent" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents the coupling of the magnetization with a spin polarized current.
 It should be used in combination with the <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a> class.</p>
+<dl class="docutils">
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>c</dt>
+<dd>Spin diffusion coupling constant</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -288,8 +314,17 @@ It should be used in combination with the <a class="reference internal" href="sp
 <dl class="class">
 <dt id="magnumfe.UniaxialAnisotropyField">
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents an uniaxial anisotropy field. The Anisotropy constant
-K_uni and the axis K_uni_axis are required as material parameters.</p>
+<dd><p>This class represents an uniaxial anisotropy field.</p>
+<dl class="docutils">
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>K_uni</dt>
+<dd>Anisotropy constant</dd>
+<dt>K_uni_axis</dt>
+<dd>Anisotropy axis, e.g. (1.0, 0.0, 0.0)</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

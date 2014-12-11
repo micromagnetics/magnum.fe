@@ -97,6 +97,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
@@ -143,7 +144,7 @@
 <h2><a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a><a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.State">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">State</tt><big>(</big><em>mesh</em>, <em>celldomains={'magnetic': 1</em>, <em>'conducting': 1}</em>, <em>facetdomains={}</em>, <em>material=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.State" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">State</tt><big>(</big><em>mesh</em>, <em>celldomains={'magnetic': 1</em>, <em>'conducting': 1}</em>, <em>facetdomains={}</em>, <em>material=None</em>, <em>scale=1.0</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.State" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class holds the complete state of the simulation and provides some
 convenience wrappers for the handling of multiple domains.</p>
 <dl class="docutils">
@@ -187,6 +188,8 @@ convenience wrappers for the handling of multiple domains.</p>
 <dd>naming of the facet subdomains</dd>
 <dt>material (<a class="reference internal" href="#magnumfe.Material" title="magnumfe.Material"><tt class="xref py py-class docutils literal"><span class="pre">Material</span></tt></a>)</dt>
 <dd>the material of the sample. If material differs from subdomain to subdomain, use material setters instead.</dd>
+<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>the spatial scaling of the mesh. Use 1e-9 if you use nanometers as length measure.</dd>
 <dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs (<tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt>)</dt>
 <dd>add any state variables like magnetization (m) or spin diffusion (s).
 Expressions are automatically interpolated on the corresponding discrete spaces.</dd>
@@ -373,6 +376,21 @@ on a suitable function space.</p>
 <dd><dl class="first last docutils">
 <dt><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></dt>
 <dd>True if mesh contains cell-domain data</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.State.step">
+<tt class="descname">step</tt><big>(</big><em>integrators</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.State.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the step method on every integrator and increases <tt class="code docutils literal"><span class="pre">t</span></tt>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>integrators (<tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">Integrator</span></tt>)</dt>
+<dd>Integrator on which the step method is called.
+Can be either a list of integrators or a single integrator.</dd>
 </dl>
 </dd>
 </dl>
