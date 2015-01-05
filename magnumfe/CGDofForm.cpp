@@ -1,4 +1,4 @@
-// Copyright (C) 2011-2014 Claas Abert
+// Copyright (C) 2011-2015 Claas Abert
 //
 // This file is part of magnum.fe.
 //
@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 //
-// Last modified by Claas Abert, 2014-06-10
+// Last modified by Claas Abert, 2015-01-05
 
 #include "CGDofForm.h"
 #include <vector>

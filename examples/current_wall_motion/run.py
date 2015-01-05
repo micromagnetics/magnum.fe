@@ -2,7 +2,7 @@
 Current driven domain-wall motion with constant current and spin accumulation.
 """
 
-# Copyright (C) 2011-2014 Claas Abert
+# Copyright (C) 2011-2015 Claas Abert
 #
 # This file is part of magnum.fe. 
 #
@@ -19,7 +19,7 @@ Current driven domain-wall motion with constant current and spin accumulation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2014-12-11
+# Last modified by Claas Abert, 2015-01-05
 
 from dolfin import *
 from magnumfe import *
