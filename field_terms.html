@@ -29,6 +29,7 @@
 
   
     <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
+        <link rel="next" title="Miscellaneous" href="misc.html"/>
         <link rel="prev" title="Open Boundary Problems" href="open_boundary.html"/> 
 
   
@@ -95,12 +96,17 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -139,6 +145,90 @@
             
   <span class="target" id="module-magnumfe"></span><div class="section" id="field-terms">
 <h1>Field Terms<a class="headerlink" href="#field-terms" title="Permalink to this headline">¶</a></h1>
+<p>Each contribution to the effective field is represented by a subclass of <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>.
+A subclass has at least to implement the <tt class="code docutils literal"><span class="pre">form_term_rhs</span></tt> method.</p>
+<p>Available field classes are <a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><tt class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a>, <a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a>, <a class="reference internal" href="#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a>, <a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><tt class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a>.</p>
+<div class="section" id="llgterm">
+<h2><a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a><a class="headerlink" href="#llgterm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.LLGTerm">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGTerm</tt><a class="headerlink" href="#magnumfe.LLGTerm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="magnumfe.LLGTerm.field">
+<tt class="descname">field</tt><big>(</big><em>state</em>, <em>x=None</em>, <em>lump=False</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the effective-field contribution for a given state.</p>
+<p>This method uses a projection method to retrieve the field from the
+RHS-form given by the <tt class="code docutils literal"><span class="pre">form_term_rhs</span></tt> method. It should be overriden
+for better performance.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dd>the simulation state</dd>
+<dt>x (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Vector</span></tt>)</dt>
+<dd>the vector to store the result or <tt class="code docutils literal"><span class="pre">None</span></tt></dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt></dt>
+<dd>the effective-field contribution</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.LLGTerm.form_term_lhs">
+<tt class="descname">form_term_lhs</tt><big>(</big><em>state</em>, <em>w</em>, <em>dt_v</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_term_lhs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the left-hand-side contribution of the effective field
+for Alouges-type integration schemes.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dd>The simulation state.</dd>
+<dt>w (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.TestFunction</span></tt>)</dt>
+<dd>The test function used in the Alouges integrator.</dd>
+<dt>dt_v (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.TrialFunction</span></tt>)</dt>
+<dd>The trial function multiplied with the timestep and theta.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Form</span></tt></dt>
+<dd>the form contribution for the LHS</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.LLGTerm.form_term_rhs">
+<tt class="descname">form_term_rhs</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_term_rhs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the right-hand-side contribution of the effective field
+for Alouges-type integration schemes.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dd>The simulation state.</dd>
+<dt>w (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.TestFunction</span></tt>)</dt>
+<dd>The test function used in the Alouges integrator.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Form</span></tt></dt>
+<dd>the form contribution for the RHS</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="demagfield">
 <h2><a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a><a class="headerlink" href="#demagfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -335,6 +425,8 @@ It should be used in combination with the <a class="reference internal" href="sp
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="misc.html" class="btn btn-neutral float-right" title="Miscellaneous"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="open_boundary.html" class="btn btn-neutral" title="Open Boundary Problems"><span class="fa fa-arrow-circle-left"></span> Previous</a>

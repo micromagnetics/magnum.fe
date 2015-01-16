@@ -96,12 +96,17 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -171,12 +176,12 @@
 \[\vec{m}_i(t+k) = \frac{\vec{m}_i(t) + k \vec{v}_i}{|\vec{m}_i(t) + k \vec{v}_i|}\]</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This class requires the Petsc Backend to be enabled.</p>
+<p class="last">This class requires the PETSc Backend to be enabled.</p>
 </div>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</dt>
+<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>)</dt>
 <dd>Effective Field terms to be considered.</dd>
 </dl>
 </dd>
@@ -245,12 +250,12 @@
 \[\vec{m}_i(t+k) = \frac{\vec{m}_i(t) + k \vec{v}_i}{|\vec{m}_i(t) + k \vec{v}_i|}\]</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This class requires CBC.Block.</p>
+<p class="last">This class requires CBC.Block and the PETSc linear-algebra backend.</p>
 </div>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>terms (<tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt>)</dt>
+<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>)</dt>
 <dd>Effective Field terms to be considered.</dd>
 </dl>
 </dd>

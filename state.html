@@ -96,12 +96,17 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -213,6 +218,25 @@ Expressions are automatically interpolated on the corresponding discrete spaces.
 <dd><dl class="first last docutils">
 <dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.FunctionSpace</span></tt></dt>
 <dd>the function space</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.State.M_inv_diag">
+<tt class="descname">M_inv_diag</tt><big>(</big><em>domain='all'</em><big>)</big><a class="headerlink" href="#magnumfe.State.M_inv_diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the inverse lumped mass matrix for the vector function space.
+The result ist cached.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method requires the PETSc Backend to be enabled.</p>
+</div>
+<dl class="docutils">
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Matrix</span></tt></dt>
+<dd>the matrix</dd>
 </dl>
 </dd>
 </dl>

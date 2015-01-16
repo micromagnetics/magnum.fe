@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Miscellaneous &mdash; magnum.fe 0.0.1 documentation</title>
   
 
   
@@ -28,7 +28,8 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/> 
+    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
+        <link rel="prev" title="Field Terms" href="field_terms.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -44,7 +45,7 @@
       <div class="wy-side-nav-search">
         <a href="index.html" class="fa fa-home"> magnum.fe</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -55,7 +56,7 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
         
-            <ul>
+            <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
@@ -103,8 +104,8 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Miscellaneous</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -130,8 +131,10 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li></li>
+    <li>Miscellaneous</li>
       <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/misc.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -139,22 +142,99 @@
 </div>
           <div role="main">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <span class="target" id="module-magnumfe"></span><div class="section" id="miscellaneous">
+<h1>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="timer">
+<h2><a class="reference internal" href="#magnumfe.Timer" title="magnumfe.Timer"><tt class="xref py py-class docutils literal"><span class="pre">Timer</span></tt></a><a class="headerlink" href="#timer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.Timer">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">Timer</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#magnumfe.Timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility class that supports basic timing/profiling features. Each timer is
+initialized with a unique name. Each call to the body is timed and counted.
+Results can be printed with by calling <tt class="code docutils literal"><span class="pre">print_report()</span></tt>.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="first highlight-python"><div class="highlight"><pre><span class="n">Timer</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-  
-  <div id="search-results">
-  
-  </div>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="k">with</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;Outer Function&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+      <span class="k">with</span> <span class="n">Timer</span><span class="p">(</span><span class="s">&quot;Inner Function&quot;</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="mf">1.0</span>
+
+<span class="n">Timer</span><span class="o">.</span><span class="n">print_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>results in:</p>
+<div class="last highlight-none"><div class="highlight"><pre>================================================
+TIMER REPORT
+================================================
+Operation           No of calls    Avg time [ms]
+----------------  -------------  ---------------
+Outer Function               10       0.022912
+  Inner Function            100       0.00054121
+================================================
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="magnumfe.Timer.configure">
+<em class="property">static </em><tt class="descname">configure</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.Timer.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the timer.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>active <tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></dt>
+<dd>Flag the activates/deactived all timers.</dd>
+<dt>skip <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt></dt>
+<dd>Skip the timing of the first x calls to every timer. The calls are
+still counted, but not considered in the average execution time.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.Timer.disable">
+<em class="property">static </em><tt class="descname">disable</tt><big>(</big><big>)</big><a class="headerlink" href="#magnumfe.Timer.disable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable all timers.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.Timer.enable">
+<em class="property">static </em><tt class="descname">enable</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.Timer.enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable all timers. Takes all options that are accepted by <tt class="code docutils literal"><span class="pre">configure</span></tt>.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.Timer.print_report">
+<em class="property">static </em><tt class="descname">print_report</tt><big>(</big><big>)</big><a class="headerlink" href="#magnumfe.Timer.print_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the timing report.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="magnumfe.Timer.reset">
+<em class="property">static </em><tt class="descname">reset</tt><big>(</big><big>)</big><a class="headerlink" href="#magnumfe.Timer.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all timers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
 
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="field_terms.html" class="btn btn-neutral" title="Field Terms"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -191,7 +271,6 @@
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="_static/MathJax_local.js"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -207,14 +286,7 @@
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>
