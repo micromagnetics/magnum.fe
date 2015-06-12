@@ -77,7 +77,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
 </ul>
 </li>
@@ -101,12 +101,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -147,7 +148,7 @@
 <h1>Field Terms<a class="headerlink" href="#field-terms" title="Permalink to this headline">¶</a></h1>
 <p>Each contribution to the effective field is represented by a subclass of <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>.
 A subclass has at least to implement the <tt class="code docutils literal"><span class="pre">form_term_rhs</span></tt> method.</p>
-<p>Available field classes are <a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><tt class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a>, <a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a>, <a class="reference internal" href="#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a>, <a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><tt class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a>.</p>
+<p>Available field classes are <a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><tt class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a>, <a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a>, <tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt>, <a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><tt class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a>.</p>
 <div class="section" id="llgterm">
 <h2><a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a><a class="headerlink" href="#llgterm" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -155,10 +156,10 @@ A subclass has at least to implement the <tt class="code docutils literal"><span
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGTerm</tt><a class="headerlink" href="#magnumfe.LLGTerm" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="magnumfe.LLGTerm.field">
-<tt class="descname">field</tt><big>(</big><em>state</em>, <em>x=None</em>, <em>lump=False</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.field" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">field</tt><big>(</big><em>state</em>, <em>x=None</em>, <em>lump=True</em>, <em>rhs_func=None</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the effective-field contribution for a given state.</p>
 <p>This method uses a projection method to retrieve the field from the
-RHS-form given by the <tt class="code docutils literal"><span class="pre">form_term_rhs</span></tt> method. It should be overriden
+RHS-form given by the <tt class="code docutils literal"><span class="pre">form_rhs</span></tt> method. It should be overriden
 for better performance.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
@@ -179,8 +180,8 @@ for better performance.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="magnumfe.LLGTerm.form_term_lhs">
-<tt class="descname">form_term_lhs</tt><big>(</big><em>state</em>, <em>w</em>, <em>dt_v</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_term_lhs" title="Permalink to this definition">¶</a></dt>
+<dt id="magnumfe.LLGTerm.form_lhs">
+<tt class="descname">form_lhs</tt><big>(</big><em>state</em>, <em>w</em>, <em>dt_v</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_lhs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the left-hand-side contribution of the effective field
 for Alouges-type integration schemes.</p>
 <dl class="docutils">
@@ -204,8 +205,8 @@ for Alouges-type integration schemes.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="magnumfe.LLGTerm.form_term_rhs">
-<tt class="descname">form_term_rhs</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_term_rhs" title="Permalink to this definition">¶</a></dt>
+<dt id="magnumfe.LLGTerm.form_rhs">
+<tt class="descname">form_rhs</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_rhs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the right-hand-side contribution of the effective field
 for Alouges-type integration schemes.</p>
 <dl class="docutils">
@@ -226,6 +227,20 @@ for Alouges-type integration schemes.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="magnumfe.LLGTerm.prec_field">
+<tt class="descname">prec_field</tt><big>(</big><em>state</em>, <em>x=None</em>, <em>lump=False</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.prec_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the constant contribution to the preconditioner. Defaults to
+:code`field`.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.LLGTerm.prec_form">
+<tt class="descname">prec_form</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.prec_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the m-dependent contribution to the preconditioner. Defaults to
+:code`form_rhs`.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -233,25 +248,39 @@ for Alouges-type integration schemes.</p>
 <h2><a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a><a class="headerlink" href="#demagfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.DemagField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">DemagField</tt><big>(</big><em>method='transform'</em>, <em>sample_size=None</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">DemagField</tt><big>(</big><em>method='Shell Transform'</em>, <em>order=1</em>, <em>solver='LU'</em>, <em>region='magnetic'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves for the magnetic demagnetization field.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>method (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>)</dt>
+<dt>method (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
 <dd>Method for the solution of the open-boundary problem.
 Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
-<dt>sample_size (<tt class="xref py py-class docutils literal"><span class="pre">[float]</span></tt>)</dt>
-<dd>Tuple described the size of the sample. Usually this is taken from create_mesh.</dd>
 <dt>order (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
-<dd>The order of CG function used for the potential calculation.</dd>
+<dd>The order of CG function used for the potential calculation.
+Currently only affects ST method.</dd>
+<dt>solver (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
+<dd>Solver type for FEM systems (either &#8220;LU&#8221; or &#8220;CG&#8221;).
+Currently only affects FK method.</dd>
+<dt>region (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
+<dd>Name of the region considered for field computation</dd>
+<dt>aca_eps (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>Accuracy of ACA algorithm. FK method only.</dd>
+<dt>loglevel (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
+<dd>Loglevel of Bem++ (low, default, high). FK method only.</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
 </dl>
 </dd>
 </dl>
 <dl class="method">
-<dt id="magnumfe.DemagField.calculate_potential">
-<tt class="descname">calculate_potential</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.calculate_potential" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the stray-field for a given simulation state</p>
+<dt id="magnumfe.DemagField.u">
+<tt class="descname">u</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the demagnetization-field potential u for a given simulation state</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
@@ -263,32 +292,15 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="magnumfe.DemagField.create_mesh">
-<em class="property">static </em><tt class="descname">create_mesh</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.create_mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a WrappedMesh suited for the application of the shell-
-transformation method. Either takes a filename as first argument
-to load the meshed sample or sizes and discretization of a cuboid
-sample.</p>
+<dt id="magnumfe.DemagField.wrap_mesh">
+<em class="property">static </em><tt class="descname">wrap_mesh</tt><big>(</big><em>mesh</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.wrap_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a WrappedMesh object from a mesh with cuboid shell as created by
+the magnum-msh script.</p>
 <dl class="docutils">
-<dt><em>Example</em></dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="c"># load from file</span>
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">DemagField</span><span class="o">.</span><span class="n">create_mesh</span><span class="p">(</span><span class="s">&quot;sphere.msh&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-
-<span class="c"># create cuboid mesh of size 1.0 x 1.0 x 1.0</span>
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">DemagField</span><span class="o">.</span><span class="n">create_mesh</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>d (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
-<dd>Number of shell layers.</dd>
-<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
-<dd>Scale factor used for mesh generation.</dd>
-<dt>margin (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
-<dd>Margin to the sample when loading sample mesh from a file.</dd>
-<dt>n (<tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt>)</dt>
-<dd>Discretization of inner cuboid when loading sample mesh from a file.</dd>
+<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>))</dt>
+<dd>The mesh including the cuboid shell (either mesh object or path to mesh file)</dd>
 </dl>
 </dd>
 </dl>
@@ -304,6 +316,12 @@ sample.</p>
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExchangeField</tt><a class="headerlink" href="#magnumfe.ExchangeField" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents the micromagnetic exchange field.</p>
 <dl class="docutils">
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+</dl>
+</dd>
 <dt><em>Required material parameters</em></dt>
 <dd><dl class="first last docutils">
 <dt>Aex</dt>
@@ -318,30 +336,18 @@ sample.</p>
 <h2><a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a><a class="headerlink" href="#externalfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.ExternalField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExternalField</tt><big>(</big><em>field=Coefficient(VectorElement('Real'</em>, <em>None</em>, <em>0</em>, <em>dim=3</em>, <em>quad_scheme=None)</em>, <em>0)</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents a constant external field.</p>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExternalField</tt><big>(</big><em>h_ext=None</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents an external field. The field value is either
+taken from state class or provided directly as argument. In the latter
+case the attribute state.h_ext is set accordingly.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>field (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></tt>)</dt>
-<dd>The external field (Constant, Function or Expression)</dd>
+<dt>h_ext (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></tt>)</dt>
+<dd>The external field (GenericFunction or lambda)</dd>
 </dl>
 </dd>
 </dl>
-<dl class="method">
-<dt id="magnumfe.ExternalField.set">
-<tt class="descname">set</tt><big>(</big><em>field</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField.set" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reset the external field.</p>
-<dl class="docutils">
-<dt><em>Arguments</em></dt>
-<dd><dl class="first last docutils">
-<dt>field (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></tt>)</dt>
-<dd>The external field (Constant, Function or Expression)</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -349,7 +355,7 @@ sample.</p>
 <h2><a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a><a class="headerlink" href="#oerstedfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.OerstedField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">OerstedField</tt><big>(</big><em>method='transform'</em>, <em>sample_size=None</em>, <em>order=1</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">OerstedField</tt><big>(</big><em>method='transform'</em>, <em>order=1</em>, <em>solver='LU'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves for the current induced Oersted field.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
@@ -357,10 +363,21 @@ sample.</p>
 <dt>method (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>)</dt>
 <dd>Method for the solution of the open-boundary problem.
 Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
-<dt>sample_size (<tt class="xref py py-class docutils literal"><span class="pre">[float]</span></tt>)</dt>
-<dd>Tuple described the size of the sample. Usually this is taken from create_mesh.</dd>
 <dt>order (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
 <dd>The order of CG function used for the potential calculation.</dd>
+<dt>solver (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
+<dd>Solver type for FEM systems (either &#8220;LU&#8221; or &#8220;CG&#8221;).
+Currently only affects FK method.</dd>
+<dt>aca_eps (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dd>Accuracy of ACA algorithm. FK method only.</dd>
+<dt>loglevel (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
+<dd>Loglevel of Bem++ (low, default, high). FK method only.</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>j</dt>
+<dd>Electric Current</dd>
 </dl>
 </dd>
 </dl>
@@ -381,14 +398,24 @@ Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Sh
 </dd></dl>
 
 </div>
-<div class="section" id="spincurrent">
-<h2><a class="reference internal" href="#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a><a class="headerlink" href="#spincurrent" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spintorque">
+<h2><a class="reference internal" href="#magnumfe.SpinTorque" title="magnumfe.SpinTorque"><tt class="xref py py-class docutils literal"><span class="pre">SpinTorque</span></tt></a><a class="headerlink" href="#spintorque" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="magnumfe.SpinCurrent">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinCurrent</tt><a class="headerlink" href="#magnumfe.SpinCurrent" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents the coupling of the magnetization with a spin polarized current.
-It should be used in combination with the <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a> class.</p>
+<dt id="magnumfe.SpinTorque">
+<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinTorque</tt><a class="headerlink" href="#magnumfe.SpinTorque" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents the coupling of the magnetization with a spin
+polarized current. It requires the spin accumulation s to be set in the
+state. The spin accumulation s has to be prescribed in the state, either
+by direct integration with <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a> or by equilibrium
+treatment with <tt class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></tt> or
+<tt class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></tt>.</p>
 <dl class="docutils">
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>s</dt>
+<dd>Spin accumulation</dd>
+</dl>
+</dd>
 <dt><em>Required material parameters</em></dt>
 <dd><dl class="first last docutils">
 <dt>c</dt>
@@ -406,6 +433,12 @@ It should be used in combination with the <a class="reference internal" href="sp
 <em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents an uniaxial anisotropy field.</p>
 <dl class="docutils">
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+</dl>
+</dd>
 <dt><em>Required material parameters</em></dt>
 <dd><dl class="first last docutils">
 <dt>K_uni</dt>

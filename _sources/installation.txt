@@ -12,6 +12,7 @@ magnum.fe requires the following software/libraries to be installed:
 * G++ >= 4.0
 * dev-version of CBC.Block (optional)
 * BEM++ 2.0.1 (optional)
+* scikits.odes from https://github.com/c-abird/odes (optional)
 
 Install from source
 +++++++++++++++++++

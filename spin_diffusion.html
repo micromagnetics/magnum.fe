@@ -77,7 +77,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
 </ul>
 </li>
@@ -101,12 +101,13 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -190,7 +191,7 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 + \frac{1}{\lambda_\text{J}^2} \int_{\omega} \left( \boldsymbol{\zeta}_1 \times \boldsymbol{m}^{k+1} \right) \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}.\end{split}\]</div>
 <p>The region <span class="math">\(\Omega\)</span> corresponds to the &#8220;conducting&#8221; cell domain and the region <span class="math">\(\omega\)</span> corresponds to the &#8220;magnetic&#8221; cell domain. The boundary <span class="math">\(\partial \Omega \cap \partial \omega\)</span> has to be defined explicitly as facet domain named &#8220;outermagnet&#8221;.</p>
 <p>The characteric time scale of the spin-diffusion dynamics is orders of magnitude smaller than that of the magnetization dynamics. However, the integration scheme is able to handle very large time steps. Hence the time step can be taken from the integration of the LLG if only the magnetization dynamics are of interest, see <a class="reference internal" href="#abert2014b" id="id8">[Abert2014b]</a>.</p>
-<p>Add the <a class="reference internal" href="field_terms.html#magnumfe.SpinCurrent" title="magnumfe.SpinCurrent"><tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt></a> to the LLG terms in order to get a bidirectional coupling of spin diffusion and magnetization.</p>
+<p>Add the <tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt> to the LLG terms in order to get a bidirectional coupling of spin diffusion and magnetization.</p>
 <dl class="method">
 <dt id="magnumfe.SpinDiffusion.step">
 <tt class="descname">step</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.SpinDiffusion.step" title="Permalink to this definition">¶</a></dt>

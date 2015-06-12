@@ -38,10 +38,10 @@ Available field classes are :class:`DemagField`, :class:`ExchangeField`, :class:
 .. autoclass:: OerstedField
    :members:
 
-:class:`SpinCurrent`
-+++++++++++++++++++++
+:class:`SpinTorque`
++++++++++++++++++++++++++++++++++++
 
-.. autoclass:: SpinCurrent
+.. autoclass:: SpinTorque
    :members:
 
 :class:`UniaxialAnisotropyField`

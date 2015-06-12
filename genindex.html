@@ -76,7 +76,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#mesher"><tt class="docutils literal"><span class="pre">Mesher</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
 </ul>
 </li>
@@ -100,12 +100,13 @@
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spincurrent"><tt class="docutils literal"><span class="pre">SpinCurrent</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
 </ul>
 </li>
 </ul>
@@ -148,7 +149,6 @@
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
- | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
@@ -166,11 +166,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="field_terms.html#magnumfe.OerstedField.calculate_field">calculate_field() (magnumfe.OerstedField method)</a>
+  <dt><a href="misc.html#magnumfe.Cache">Cache (class in magnumfe)</a>
   </dt>
 
       
-  <dt><a href="field_terms.html#magnumfe.DemagField.calculate_potential">calculate_potential() (magnumfe.DemagField method)</a>
+  <dt><a href="field_terms.html#magnumfe.OerstedField.calculate_field">calculate_field() (magnumfe.OerstedField method)</a>
   </dt>
 
       
@@ -183,34 +183,14 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="misc.html#magnumfe.Timer.configure">configure() (magnumfe.Timer static method)</a>
   </dt>
 
       
   <dt><a href="meshing.html#magnumfe.WrappedMesh.create">create() (magnumfe.WrappedMesh static method)</a>
-  </dt>
-
-      
-  <dt><a href="meshing.html#magnumfe.Mesher.create_celldomain">create_celldomain() (magnumfe.Mesher method)</a>
-  </dt>
-
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="meshing.html#magnumfe.Mesher.create_cuboid">create_cuboid() (magnumfe.Mesher method)</a>
-  </dt>
-
-      
-  <dt><a href="meshing.html#magnumfe.Mesher.create_facetdomain">create_facetdomain() (magnumfe.Mesher method)</a>
-  </dt>
-
-      
-  <dt><a href="field_terms.html#magnumfe.DemagField.create_mesh">create_mesh() (magnumfe.DemagField static method)</a>
-  </dt>
-
-      
-  <dt><a href="meshing.html#magnumfe.Mesher.create_shell">create_shell() (magnumfe.Mesher method)</a>
   </dt>
 
       
@@ -233,6 +213,10 @@
 
       
   <dt><a href="state.html#magnumfe.State.domain_ids">domain_ids() (magnumfe.State method)</a>
+  </dt>
+
+      
+  <dt><a href="state.html#magnumfe.State.dP">dP() (magnumfe.State method)</a>
   </dt>
 
   </dl></td>
@@ -284,27 +268,17 @@
   </dt>
 
       
-  <dt><a href="field_terms.html#magnumfe.LLGTerm.form_term_lhs">form_term_lhs() (magnumfe.LLGTerm method)</a>
+  <dt><a href="field_terms.html#magnumfe.LLGTerm.form_lhs">form_lhs() (magnumfe.LLGTerm method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="field_terms.html#magnumfe.LLGTerm.form_term_rhs">form_term_rhs() (magnumfe.LLGTerm method)</a>
+  <dt><a href="field_terms.html#magnumfe.LLGTerm.form_rhs">form_rhs() (magnumfe.LLGTerm method)</a>
   </dt>
 
       
   <dt><a href="state.html#magnumfe.State.FunctionSpace">FunctionSpace() (magnumfe.State method)</a>
-  </dt>
-
-  </dl></td>
-</tr></table>
-
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="meshing.html#magnumfe.Mesher.get_sample_size">get_sample_size() (magnumfe.Mesher method)</a>
   </dt>
 
   </dl></td>
@@ -351,22 +325,14 @@
   <dt><a href="misc.html#module-magnumfe">magnumfe (module)</a>, <a href="state.html#module-magnumfe">[1]</a>, <a href="open_boundary.html#module-magnumfe">[2]</a>, <a href="spin_diffusion.html#module-magnumfe">[3]</a>, <a href="field_terms.html#module-magnumfe">[4]</a>, <a href="llg.html#module-magnumfe">[5]</a>, <a href="meshing.html#module-magnumfe">[6]</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="state.html#magnumfe.Material">Material (class in magnumfe)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="meshing.html#magnumfe.Mesher.mesh">mesh() (magnumfe.Mesher method)</a>
-  </dt>
-
       
   <dt><a href="state.html#magnumfe.State.mesh_has_domains">mesh_has_domains() (magnumfe.State method)</a>
-  </dt>
-
-      
-  <dt><a href="meshing.html#magnumfe.Mesher">Mesher (class in magnumfe)</a>
   </dt>
 
   </dl></td>
@@ -386,11 +352,19 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="misc.html#magnumfe.Timer.print_report">print_report() (magnumfe.Timer static method)</a>
+  <dt><a href="field_terms.html#magnumfe.LLGTerm.prec_field">prec_field() (magnumfe.LLGTerm method)</a>
+  </dt>
+
+      
+  <dt><a href="field_terms.html#magnumfe.LLGTerm.prec_form">prec_form() (magnumfe.LLGTerm method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="misc.html#magnumfe.Timer.print_report">print_report() (magnumfe.Timer static method)</a>
+  </dt>
+
       
   <dt><a href="state.html#magnumfe.Material.py">py() (magnumfe.Material static method)</a>
   </dt>
@@ -400,6 +374,12 @@
 
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="misc.html#magnumfe.Cache.requires_update">requires_update() (magnumfe.Cache method)</a>
+  </dt>
+
+  </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="misc.html#magnumfe.Timer.reset">reset() (magnumfe.Timer static method)</a>
@@ -412,15 +392,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="field_terms.html#magnumfe.ExternalField.set">set() (magnumfe.ExternalField method)</a>
-  </dt>
-
-      
-  <dt><a href="field_terms.html#magnumfe.SpinCurrent">SpinCurrent (class in magnumfe)</a>
-  </dt>
-
-      
   <dt><a href="spin_diffusion.html#magnumfe.SpinDiffusion">SpinDiffusion (class in magnumfe)</a>
+  </dt>
+
+      
+  <dt><a href="field_terms.html#magnumfe.SpinTorque">SpinTorque (class in magnumfe)</a>
   </dt>
 
   </dl></td>
@@ -464,7 +440,17 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="field_terms.html#magnumfe.DemagField.u">u() (magnumfe.DemagField method)</a>
+  </dt>
+
+      
   <dt><a href="field_terms.html#magnumfe.UniaxialAnisotropyField">UniaxialAnisotropyField (class in magnumfe)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.uuid">uuid() (magnumfe.State method)</a>
   </dt>
 
   </dl></td>
@@ -490,11 +476,19 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="state.html#magnumfe.State.wrapped_mesh_for">wrapped_mesh_for() (magnumfe.State method)</a>
+  <dt><a href="misc.html#magnumfe.Cache.wrap_func">wrap_func() (magnumfe.Cache method)</a>
+  </dt>
+
+      
+  <dt><a href="field_terms.html#magnumfe.DemagField.wrap_mesh">wrap_mesh() (magnumfe.DemagField static method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="state.html#magnumfe.State.wrapped_mesh_for">wrapped_mesh_for() (magnumfe.State method)</a>
+  </dt>
+
       
   <dt><a href="meshing.html#magnumfe.WrappedMesh">WrappedMesh (class in magnumfe)</a>
   </dt>
