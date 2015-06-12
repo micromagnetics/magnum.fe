@@ -38,12 +38,6 @@ endmacro(append_magnumfe_src)
 # Dolfin
 find_package(DOLFIN)
 
-# GMSH
-find_package(Gmsh)
-if (NOT GMSH_FOUND)
-  message (FATAL_ERROR "Cannot find libgmsh!")
-endif()
-
 # SWIG + Python
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
@@ -94,7 +88,6 @@ add_library(magnumfe SHARED ${MAGNUMFE_SRC})
 target_link_libraries(magnumfe
   ${DOLFIN_LIBRARIES}
   ${DOLFIN_3RD_PARTY_LIBRARIES}
-  ${GMSH_LIBRARY}
 )
 
 ##############################################################
@@ -128,8 +121,9 @@ swig_link_libraries(cpp magnumfe)
 ###    Install Rule                                        ###
 ##############################################################
 
-message ("-- Found Python ${PYTHON_VERSION}, will install at ${PYTHON_SITE_MODULES}")
+message (STATUS "Found Python ${PYTHON_VERSION}, will install at ${CMAKE_INSTALL_PREFIX}/${PYTHON_SITE_MODULES}")
 
 install(TARGETS magnumfe DESTINATION lib)
 install(DIRECTORY site-packages/magnumfe DESTINATION "${PYTHON_SITE_MODULES}" PATTERN "site-packages/magnumfe/cpp.py site-packages/magnumfe/_cpp.so" EXCLUDE)
 install(FILES ${CMAKE_BINARY_DIR}/cpp.py ${CMAKE_BINARY_DIR}/_cpp.so DESTINATION "${PYTHON_SITE_MODULES}/magnumfe")
+install(CODE "execute_process(COMMAND python -m compileall ${CMAKE_INSTALL_PREFIX}/${PYTHON_SITE_MODULES}/magnumfe)")

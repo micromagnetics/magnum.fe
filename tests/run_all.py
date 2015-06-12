@@ -8,9 +8,10 @@ testmodules = [
     'llg_test',
     'llg_term_test',
     'material_test',
-    'mesher_test',
     'oersted_field_test',
+    'spin_torque_test',
     'state_test',
+    'masked_state_test',
     'wrapped_mesh_test'
     ]
 

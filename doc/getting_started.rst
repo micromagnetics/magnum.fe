@@ -1,11 +1,10 @@
 Getting Started
 ===============
 
-As a first example the standard problem #4 [MuMag4]_, proposed by the MuMag group is computed with magnum.fe. Since magnum.fe is a Python library, a simulation script is a Python script that imports magnum.fe. Furthermore the dolfin library of FEniCS has to be imported. Thus, every magnum.fe simulation script starts with
+As a first example the standard problem #4 [MuMag4]_, proposed by the MuMag group is computed with magnum.fe. Since magnum.fe is a Python library, a simulation script is a Python script that imports magnum.fe. Thus, every magnum.fe simulation script starts with
 
 .. code:: python
 
-  from dolfin import *
   from magnumfe import *
 
 In the next step a mesh for the simulation is created. For simple geometries, the builtin meshing tools of dolfin and magnum.fe are a good choice. More complicated geometries can be meshed with external tools. magnum.fe supports a variety of mesh file formats through the Gmsh library. Depending on the method for the solution of the open-boundary demagnetization field problem the mesh is also required to include a cuboid shell, see :ref:`open-boundary`.
@@ -80,7 +79,6 @@ Complete code
 
 .. code:: python
 
-  from dolfin import *
   from magnumfe import *
 
   #######################################

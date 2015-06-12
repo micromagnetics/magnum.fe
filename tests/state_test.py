@@ -1,5 +1,4 @@
 import unittest
-from dolfin import *
 from magnumfe import *
 
 set_log_active(False)
@@ -30,13 +29,142 @@ class StateTest(unittest.TestCase):
     state = State(mesh, facetdomains = {'outermagnet': 5})
     self.assertAlmostEqual(assemble(Constant(1.0)*state.ds('outermagnet')), 16.0)
 
+  def test_ds_intersection(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, facetdomains = {'A': 5, 'B': 6, 'AB': (5,6)})
+    ab           = assemble(Constant(1.0)*state.ds('AB'))
+    a_intersect  = assemble(Constant(1.0)*state.ds('AB', intersect='A'))
+    a            = assemble(Constant(1.0)*state.ds('A'))
+    zero         = assemble(Constant(1.0)*state.ds('A', intersect='B'))
+
+    self.assertAlmostEqual(2*a, ab)
+    self.assertAlmostEqual(a, a_intersect)
+    self.assertAlmostEqual(0.0, zero)
+
   def test_attribute_init(self):
     mesh = UnitCubeMesh(1,1,1)
     m = Constant((1.0, 0.0, 0.0))
     state = State(mesh, m = m)
 
-    self.assertTrue(isinstance(state.m, Function))
     self.assertAlmostEqual(1.0, assemble(inner(state.m, m)*state.dx()))
+
+  def test_attribute_setter_should_reuse_function(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, m = Constant((1.0, 0.0, 0.0)))
+    self.assertAlmostEqual(1.0, state.m.average()[0])
+    m = state.m
+    state.m = Constant((2.0, 0.0, 0.0))
+    self.assertEqual(m, state.m)
+    self.assertAlmostEqual(2.0, state.m.average()[0])
+
+  def test_attribute_uuid(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, m = Constant((1.0, 0.0, 0.0)))
+    uuid = state.m.uuid
+    self.assertEqual(uuid, state.m.uuid)
+    state.m = Constant((2.0, 0.0, 0.0))
+    self.assertNotEqual(uuid, state.m.uuid)
+
+  def test_multi_uuid(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, a1 = 1.0, a2 = 2.0)
+    self.assertEqual([1.0, 2.0], state.uuid("a1", "a2"))
+    state.a2 = 3.0
+    self.assertEqual([1.0, 3.0], state.uuid("a1", "a2"))
+
+  def test_lambda_attribute_cycle(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh,
+        a = lambda state: (state.b, "b"),
+        b = lambda state: (state.a, "a")
+    )
+    self.assertRaises(AttributeCycleDependency, lambda:state.a)
+
+  def test_lambda_attribute(self):
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, t2 = lambda state: 2.0 * state.t)
+    state.t = 1.0
+    self.assertAlmostEqual(2.0, state.t2)
+    state.t = 2.0
+    self.assertAlmostEqual(4.0, state.t2)
+
+  def test_lambda_attribute_decoration(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh,
+        celldomains = {'a': 2, 'b': 3},
+        f           = lambda state: Expression("x[0]")
+    )
+    f = state.f.crop('a')
+    f_int = assemble(f*dx(f.function_space().mesh()))
+    self.assertAlmostEqual(0.1, f_int/state.volume('a'))
+    self.assertAlmostEqual(0.1, state.f.average('a'))
+
+  def test_lambda_attribute_reset(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh)
+    state.a = lambda state: state.interpolate(Constant(state.t))
+    self.assertTrue(isinstance(state.a, Function))
+    state.t = 1.0
+    self.assertTrue(isinstance(state.a, Function))
+
+  def test_lambda_attribute_caching(self):
+    global count
+    count = 0
+    def lamb(state):
+      global count
+      count += 1
+      return (2.0 * state.t, "t", "m")
+
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, lamb = lamb, m = Constant((1.0, 0.0, 0.0)))
+    state.lamb
+    state.lamb
+    self.assertEqual(1, count)
+    state.t = 1.0
+    state.lamb
+    state.lamb
+    self.assertEqual(2, count)
+    state.m = Constant((0.0, 1.0, 0.0))
+    state.lamb
+    state.lamb
+    self.assertEqual(3, count)
+
+  def test_lambda_scalar_attribute_caching(self):
+    global count
+    count = 0
+    def l1(state):
+      global count
+      count += 1
+      return (2.0 * state.t, "l2")
+
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, l1=l1, l2=lambda state: int(state.t))
+
+    state.t = 1.0
+    state.l1
+    self.assertAlmostEqual(2.0, state.l1)
+    self.assertEqual(1, count)
+    state.t = 1.5
+    self.assertAlmostEqual(2.0, state.l1)
+    self.assertEqual(1, count)
+    state.t = 2.5
+    self.assertAlmostEqual(5.0, state.l1)
+    self.assertEqual(2, count)
+
+  def test_lambda_attribute_uuid(self):
+    global count
+    count = 0
+    def lamb(state):
+      global count
+      count += 1
+      return (Constant(2.0 * state.t), "t", "m")
+
+    mesh = UnitCubeMesh(1,1,1)
+    state = State(mesh, lamb = lamb, m = Constant((1.0, 0.0, 0.0)))
+    uuid = state.uuid('lamb')
+    self.assertEqual(uuid, state.uuid('lamb'))
+    state.m = Constant((0.0, 1.0, 0.0))
+    self.assertNotEqual(uuid, state.uuid('lamb'))
 
   def test_dx_if_no_domains_defined(self):
     mesh = UnitCubeMesh(1,1,1)
@@ -54,6 +182,37 @@ class StateTest(unittest.TestCase):
     self.assertAlmostEqual(9.6, assemble(state.material.alpha * state.dx('all')))
     self.assertAlmostEqual(1.6, assemble(inner(state.material.k_axis, Constant((1.0, 0.0, 0.0))) * state.dx('all')))
     self.assertAlmostEqual(6.4, assemble(inner(state.material.k_axis, Constant((0.0, 1.0, 0.0))) * state.dx('all')))
+
+  def test_cascaded_material_assignment(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': (1, 2, 3), 'm1': 2})
+    state.material['magnetic'] = Material(ms=8e5,alpha=1.0)
+    state.material['m1'] = Material(ms=4e5)
+
+    self.assertAlmostEqual(state.volume(), assemble(state.material.alpha*state.dx()))
+
+  def test_dP_functional(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)}, a = Constant(1.0))
+
+    self.assertAlmostEqual(state.a.crop('magnetic').function_space().mesh().size(0), assemble(state.a*state.dP('magnetic')))
+    self.assertAlmostEqual(state.a.crop('air').function_space().mesh().size(0), assemble(state.a*state.dP('air')))
+
+  def test_dP_vector(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)}, a = Constant((1.0, 2.0, 3.0)))
+
+    v = TestFunction(state.VectorFunctionSpace())
+    result = assemble(inner(v, state.a)*state.dP('magnetic')).array()
+
+    self.assertAlmostEqual(state.a.crop('magnetic').function_space().mesh().size(0)*6, result.sum())
+
+  def test_material_assignment_with_base(self):
+    mesh = self.mesh_with_subdomains()
+    state = State(mesh, celldomains = {'magnetic': 1, 'air': (2, 3)}, material = Material(alpha = 0.1))
+    state.material['magnetic'] = Material(alpha = 1.0)
+
+    self.assertAlmostEqual(6.56, assemble(state.material.alpha*state.dx()))
 
   def test_volume(self):
     mesh = self.mesh_with_subdomains()
@@ -93,12 +252,14 @@ class StateTest(unittest.TestCase):
     self.assertAlmostEqual(0.8, assemble(inner(Constant((1.0, 0.0, 0.0)), state.f) * state.dx()))
     self.assertAlmostEqual(7.2, assemble(inner(Constant((0.0, 1.0, 0.0)), state.f) * state.dx()))
 
-
   def test_set_global_material(self):
     mesh = UnitCubeMesh(1,1,1)
     state = State(mesh)
-    state.material = Material(alpha = 1)
+    state.material = Material(alpha = 0.1)
     self.assertTrue(isinstance(state.material.alpha, Constant))
+    self.assertAlmostEqual(0.1, assemble(state.material.alpha*state.dx()))
+    state.material.alpha = 0.2
+    self.assertAlmostEqual(0.2, assemble(state.material.alpha*state.dx()))
 
   def test_mesh_has_domains(self):
     mesh = UnitCubeMesh(1,1,1)
@@ -162,25 +323,7 @@ class StateTest(unittest.TestCase):
     self.assertAlmostEqual(27.0, result.array().sum())
 
   def mesh_with_subdomains(self):
-    class TestDomain1(SubDomain):
-      def inside(self, x, on_boundary):
-        return between(x[0], (0.0, 0.25))
-
-    class TestDomain2(SubDomain):
-      def inside(self, x, on_boundary):
-        return between(x[0], (-0.25, 0.0))
-
-    class FacetDomain(SubDomain):
-      def inside(self, x, on_boundary):
-        return near(x[0], 2.0)
-
-    mesher = Mesher()
-    mesher.create_cuboid((1,1,1), (10,10,10))
-    mesher.create_shell(1)
-    mesher.create_celldomain(TestDomain1(), 2)
-    mesher.create_celldomain(TestDomain2(), 3)
-    mesher.create_facetdomain(FacetDomain(), 5)
-    return mesher.mesh()
+    return Mesh("mesh/state.xml.gz")
 
 if __name__ == '__main__':
     unittest.main()

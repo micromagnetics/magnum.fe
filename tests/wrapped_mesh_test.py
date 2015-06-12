@@ -1,15 +1,10 @@
 import unittest
-from dolfin import *
 from magnumfe import *
 import numpy
 
 set_log_active(False)
 
-mesher = Mesher()
-mesher.create_cuboid((1,1,1), (7,7,7))
-mesher.create_shell(2)
-complete_mesh = mesher.mesh()
-
+complete_mesh = Mesh("mesh/wrapped_1.xml.gz")
 mesh = WrappedMesh.create(complete_mesh, 1)
 
 class WrappedMeshTest(unittest.TestCase):
@@ -48,19 +43,24 @@ class WrappedMeshTest(unittest.TestCase):
     self.assertZeroAtPoint(f_expanded, (1.6, 1.6, 1.6))
     self.assertZeroAtPoint(f_expanded, (-1.6, -1.6, -1.6))
 
+  def test_expand_dont_overwrite(self):
+    V    = FunctionSpace(mesh, "Lagrange", 2)
+    expr = Expression("sin(x[0])")
+    f    = interpolate(expr, V)
+
+    V_complete = FunctionSpace(complete_mesh, "Lagrange", 2)
+    f_complete = interpolate(Constant(2.0), V_complete)
+
+    f_expanded = mesh.expand(f, f_complete)
+    self.assertEqualAtPoint(f, f_expanded, (0.1, 0.2, 0.3))
+    self.assertEqualAtPoint(f, f_expanded, (0.3, 0.5, 0.8))
+    self.assertEqualAtPoint(f, f_expanded, (-0.1, -0.2, 0.3))
+    self.assertValueAtPoint(f_expanded, (1.6, 1.6, 1.6), 2.0)
+    self.assertValueAtPoint(f_expanded, (-1.6, -1.6, -1.6), 2.0)
+
+
   def test_multiple_subdomains(self):
-    mesher = Mesher()
-    mesher.create_cuboid((1.0, 1.0, 1.0), (5, 5, 5))
-    mesher.create_shell(1)
-
-    class TestDomain(SubDomain):
-      def inside(self, x, on_boundary):
-        return between(x[0], (-0.50, 0.50))
-
-    test_domain = TestDomain()
-
-    mesher.create_celldomain(test_domain, 3)
-    complete_mesh = mesher.mesh()
+    complete_mesh = Mesh("mesh/wrapped_2.xml.gz")
 
     mesh1 = WrappedMesh.create(complete_mesh, 1)
     mesh3 = WrappedMesh.create(complete_mesh, 3)
@@ -79,10 +79,13 @@ class WrappedMeshTest(unittest.TestCase):
     f2.eval(v2, numpy.array(point))
     self.assertAlmostEqual(v1[0], v2[0])
 
-  def assertZeroAtPoint(self, f, point):
+  def assertValueAtPoint(self, f, point, value = 0.0):
     v = numpy.zeros((1,), dtype="d")
     f.eval(v, numpy.array(point))
-    self.assertEqual(0, v[0])
+    self.assertAlmostEqual(value, v[0])
+
+  def assertZeroAtPoint(self, f, point):
+    self.assertValueAtPoint(f, point, 0.0)
 
   def assertOnSuperMesh(self, f):
     self.assertEqual(mesh.with_shell.size(0), f.function_space().mesh().size(0))

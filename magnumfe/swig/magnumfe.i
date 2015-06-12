@@ -1,7 +1,6 @@
 %module(package="magnumfe") cpp
 
 %{
-#include "Mesher.h"
 #include "SubMeshInterpolator.h"
 #include "DofForm.h"
 #include "CGDofForm.h"
@@ -49,7 +48,6 @@ import_array();
 %ignore magnumfe::CGDofForm::eval;
 
 // Include headers
-%include "Mesher.h"
 %include "SubMeshInterpolator.h"
 %include "DofForm.h"
 %include "CGDofForm.h"

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 //
-// Last modified by Claas Abert, 2015-01-05
+// Last modified by Claas Abert, 2015-02-24
 
 #include "SubMeshInterpolator.h"
 #include <iostream>
@@ -58,7 +58,6 @@ void SubMeshInterpolator::cut(const dolfin::GenericVector& src, dolfin::GenericV
 }
 //-----------------------------------------------------------------------------
 void SubMeshInterpolator::expand(const dolfin::GenericVector& src, dolfin::GenericVector& target) {
-  target.zero();
   for (uint i=0; i<mapping.size(); ++i) {
     const double value = src[i];
     const dolfin::la_index j = mapping[i];

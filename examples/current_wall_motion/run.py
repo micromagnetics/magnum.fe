@@ -19,9 +19,8 @@ Current driven domain-wall motion with constant current and spin accumulation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2015-01-05
+# Last modified by Claas Abert, 2015-02-16
 
-from dolfin import *
 from magnumfe import *
 
 #######################################
@@ -53,7 +52,7 @@ state.m.normalize()
 llg = LLGAlougesProject([
   ExchangeField(),
   DemagField("FK"),
-  SpinCurrent()
+  SpinTorque()
 ])
 
 spindiff = SpinDiffusion()
@@ -63,16 +62,18 @@ for j in range(200): state.step(llg, 1e-12)
 
 # apply constant current
 state.j = Constant((3e12, 0, 0))
+state.t = 0.0
+
+# prepare log files
+mfile = File("data/m.pvd")
+sfile = File("data/s.pvd")
 
 for j in range(1000):
 
   # save fields every 10th step
   if j % 10 == 0:
-    f = File("data/m_%d.pvd" % (j / 10))
-    f << state.m
-
-    f = File("data/s_%d.pvd" % (j / 10))
-    f << state.s
+    mfile << (state.m, state.t)
+    sfile << (state.s, state.t)
 
   # calculate next step
   state.step([llg, spindiff], 1e-12)

@@ -1,5 +1,4 @@
 set(SRC
-  Mesher.cpp
   SubMeshInterpolator.cpp
   DofForm.cpp
   DofAssembler.cpp

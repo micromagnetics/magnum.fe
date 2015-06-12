@@ -20,9 +20,8 @@ Fredkin and Koehler for the demagnetization-field computation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2015-01-05
+# Last modified by Claas Abert, 2015-03-12
 
-from dolfin import *
 from magnumfe import *
 
 #######################################
@@ -44,8 +43,10 @@ permalloy = Material(
 )
 
 # define start magnetization
-norm    = "sqrt(x[0]*x[0] + x[1]*x[1] + 10*10)"
-m_start = Expression(("-x[1]/%s" % norm, "x[0]/%s" % norm, "10/%s" % norm))
+#norm    = "sqrt(x[0]*x[0] + x[1]*x[1] + 10*10)"
+#m_start = Expression(("-x[1]/%s" % norm, "x[0]/%s" % norm, "10/%s" % norm))
+m_start = Expression(("-x[1]/r", "x[0]/r", "10/r"), r = Expression("sqrt(x[0]*x[0] + x[1]*x[1] + 100)"))
+
 state   = State(mesh, material = permalloy, scale = 1e-9,
     m = m_start,
     j = Constant((1e12, 0.0, 0.0)),
@@ -68,18 +69,19 @@ for i in range(400): llg.step(state, 2e-11)
 
 state.material.alpha = 0.1
 
-llg      = LLGAlougesProject([ExchangeField(), DemagField("FK"), SpinCurrent()])
+llg      = LLGAlougesProject([ExchangeField(), DemagField("FK"), SpinTorque()])
 spindiff = SpinDiffusion()
 
-logfile = open("sp5.dat", "w", 0)
 dt, T = 1e-13, 14e-9
+
+# prepare log files
+logfile = open("sp5.dat", "w", 0)
+mfile = File("data/m.pvd")
 
 for i in range(int(T / dt)):
 
   # write field every 100th step
-  if (i % 100 == 0):
-    f = File("data/m_%d.pvd" % int(i/100))
-    f << state.m
+  if (i % 100 == 0): mfile << (state.m, state.t)
 
   # write scalar information every 10th step
   if (i % 10 == 0):

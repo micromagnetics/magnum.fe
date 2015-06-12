@@ -1,5 +1,4 @@
 import unittest
-from dolfin import *
 from magnumfe import *
 import numpy
 

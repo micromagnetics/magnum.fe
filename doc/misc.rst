@@ -8,3 +8,9 @@ Miscellaneous
 
 .. autoclass:: Timer
    :members:
+
+:class:`Cache`
+++++++++++++++++++++++++++
+
+.. autoclass:: Cache
+   :members:
