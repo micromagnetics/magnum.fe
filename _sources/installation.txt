@@ -6,13 +6,11 @@ Prerequisites
 magnum.fe requires the following software/libraries to be installed:
 
 * FEniCS >= 1.5
-* Gmsh >= 2.8.0 (headers and library)
 * CMake >= 2.8
 * SWIG >= 2.0
 * G++ >= 4.0
 * dev-version of CBC.Block (optional)
-* BEM++ 2.0.1 (optional)
-* scikits.odes from https://github.com/c-abird/odes (optional)
+* BEM++ 2.0.3 python-pseudoinverse branch (optional)
 
 Install from source
 +++++++++++++++++++
@@ -23,7 +21,7 @@ The current version of magnum.fe can be downloaded from GitHub via
 
   $ git clone https://github.com/micromagnetics/magnum.fe.git
 
-To build und install magenum.fe with CMake do
+To build und install magnum.fe with CMake do
 
 .. code::
 
@@ -44,12 +42,6 @@ Install FEniCS
   $ sudo apt-get update
   $ sudo apt-get install fenics
 
-Install Gmsh with headers and build dependencies
-
-.. code::
-
-  $ sudo apt-get install libgmsh-dev g++ swig cmake
-
 Install CBC.Block
 
 .. code::
@@ -58,7 +50,7 @@ Install CBC.Block
   $ cd cbc.block
   $ sudo python setup.py install
 
-For installation of BEM++, see http://www.bempp.org/. magnum.fe requires the H-matrix library AHMED 1.0 that is optional for BEM++, see http://bebendorf.ins.uni-bonn.de/AHMED.html.
+For installation of BEM++, see http://www.bempp.org/.
 
 Create docker container
 +++++++++++++++++++++++
@@ -67,8 +59,8 @@ In order to create a docker container run
 
 .. code::
 
-  $ cd /path/to/magnum.fe/docker
-  $ cp /path/to/AHMED-1.0.tar.gz .
+  $ cd /path/to/magnum.fe
   $ sudo docker build .
 
-You need Docker >= 1.0 to build the container. Note that you have to place the AHMED 1.0 tarball in the `docker` directory for a successfull build (http://bebendorf.ins.uni-bonn.de/AHMED.html).
+This procedure should download all necessary software and install magnum.fe into the container.
+You need Docker >= 1.0 to build the container.
