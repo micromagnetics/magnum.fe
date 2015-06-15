@@ -55,6 +55,17 @@ ENV PYTHONPATH $HOME/bempp/python:$PYTHON_PATH
 RUN apt-get -qq update && \
     apt-get -qqy install libgmsh-dev
 
+# Install magnum.msh
+RUN cd /tmp && \
+    git clone https://github.com/micromagnetics/magnum.msh.git magnum.msh && \
+    cd /tmp/magnum.msh && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    make install && \
+    ldconfig
+
 # Install magnum.fe
 COPY . /tmp/magnum.fe
 

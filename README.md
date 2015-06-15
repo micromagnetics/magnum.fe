@@ -22,7 +22,7 @@ magnum.fe requires the following software/libraries to be installed:
 * SWIG >= 2.0
 * G++ >= 4.0
 * dev-version of CBC.Block (optional)
-* BEM++ 2.0.3 (optional)
+* BEM++ 2.0.3 python-pseudoinverse branch (optional)
 
 #### Install dependencies in Ubuntu 14.04
 Install FEniCS
@@ -90,4 +90,4 @@ License and Disclaimer
 ----------------------
 magnum.fe is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-magnum.fe is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details.
+magnum.fe is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU Lesser General Public License for more details.
