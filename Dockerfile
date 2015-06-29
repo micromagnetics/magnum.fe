@@ -40,14 +40,14 @@ RUN apt-get -qq update && \
 RUN cd /tmp && \
     git clone -b features/python-pseudoinverse https://github.com/micromagnetics/bempp.git
 
-COPY docker/bempp_setup.cfg /tmp/bempp/
+COPY virtual/files/bempp_setup.cfg /tmp/bempp/
 
 RUN cd /tmp/bempp && \
     python bempp_setup.py -b bempp_setup.cfg && \
     python bempp_setup.py -c bempp_setup.cfg && \
     python bempp_setup.py -i all bempp_setup.cfg 
 
-ENV PYTHONPATH $HOME/bempp/python:$PYTHON_PATH
+ENV PYTHONPATH /usr/local/bempp/python:$PYTHON_PATH
 
 
 

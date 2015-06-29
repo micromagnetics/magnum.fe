@@ -29,10 +29,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-# data produced by examples
-examples/**/data/*.vtu
-examples/**/data/*.pvd
-examples/**/*.dat
-
 # Sphinx
 doc/_build/
