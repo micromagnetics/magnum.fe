@@ -39,7 +39,7 @@ Available field classes are :class:`DemagField`, :class:`ExchangeField`, :class:
    :members:
 
 :class:`SpinTorque`
-+++++++++++++++++++++++++++++++++++
++++++++++++++++++++
 
 .. autoclass:: SpinTorque
    :members:
