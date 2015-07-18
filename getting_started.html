@@ -156,8 +156,7 @@
 </pre></div>
 </div>
 <p>A magnetization configuration that is known to relax quickly in a magnetic s-state is defined by an analytical expression.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">arg</span>     <span class="o">=</span> <span class="s">&quot;sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))&quot;</span>
-<span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">,</span> <span class="s">&quot;sin(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">))</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;sin(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="n">Expression</span><span class="p">(</span><span class="s">&quot;fabs(pi*x[0]/1e3)&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>A simulation state is created and initialized with material paramters and the start magnetization m_start. Note the the <tt class="code docutils literal"><span class="pre">scale</span></tt> parameter is set to <span class="math">\(10^{-9}\)</span> since the problem size is given in nanometers. This scaling is advised to avoid numerical artifacts.</p>
@@ -185,7 +184,7 @@
 </div>
 <p>The time loop for the solution of the LLG has to be programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python. Note that an LLG step can either be performed by calling <tt class="code docutils literal"><span class="pre">step</span></tt> on the <tt class="xref py py-class docutils literal"><span class="pre">llg</span></tt> object as is done for the relaxation process, or by calling <tt class="code docutils literal"><span class="pre">step</span></tt> on the <tt class="xref py py-class docutils literal"><span class="pre">state</span></tt> object. In contrast to the first method, the latter method increases the time variable <tt class="xref py py-class docutils literal"><span class="pre">t</span></tt> of the state.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># open logfile</span>
-<span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4_fk.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="c"># initialize time variables</span>
 <span class="n">dt</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mf">2e-13</span><span class="p">,</span> <span class="mf">1e-9</span>
@@ -217,8 +216,7 @@
 <span class="c">#######################################</span>
 
 <span class="c"># define start magnetization</span>
-<span class="n">arg</span>     <span class="o">=</span> <span class="s">&quot;sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))&quot;</span>
-<span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">,</span> <span class="s">&quot;sin(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">))</span>
+<span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;sin(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="n">Expression</span><span class="p">(</span><span class="s">&quot;fabs(pi*x[0]/1e3)&quot;</span><span class="p">))</span>
 
 <span class="n">state</span>   <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="o">.</span><span class="n">py</span><span class="p">(),</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m_start</span><span class="p">)</span>
 <span class="n">llg</span>     <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">(),</span> <span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)])</span>
@@ -233,12 +231,12 @@
 <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span>
 
 <span class="n">llg</span> <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span>
-    <span class="n">ExternalField</span><span class="p">((</span><span class="o">-</span><span class="mf">24.6e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.3e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+    <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mf">24.6e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.3e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))),</span>
     <span class="n">ExchangeField</span><span class="p">(),</span>
     <span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)</span>
 <span class="p">])</span>
 
-<span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4_fk.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">dt</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mf">2e-13</span><span class="p">,</span> <span class="mf">1e-9</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)):</span>
