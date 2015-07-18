@@ -20,7 +20,7 @@ Fredkin and Koehler for the demagnetization-field computation.
 # You should have received a copy of the GNU Lesser General Public License
 # along with magnum.fe. If not, see <http://www.gnu.org/licenses/>.
 # 
-# Last modified by Claas Abert, 2015-06-08
+# Last modified by Claas Abert, 2015-07-18
 
 from magnumfe import *
 
@@ -51,7 +51,7 @@ for i in range(200): llg.step(state, 2e-11)
 state.material.alpha = 0.02
 
 llg = LLGAlougesProject([
-    ExternalField(Constant(-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+    ExternalField(Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))),
     ExchangeField(),
     DemagField("FK")
 ])

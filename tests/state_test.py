@@ -277,8 +277,8 @@ class StateTest(unittest.TestCase):
       2: Constant(1.0),
       3: Constant(2.0)
     })
-    self.assertAlmostEqual(assemble(f*state.dx(2)), 1.6)
-    self.assertAlmostEqual(assemble(f*state.dx(3)), 2.0)
+    self.assertAlmostEqual(assemble(f*state.dx(2)), 1.2)
+    self.assertAlmostEqual(assemble(f*state.dx(3)), 1.6)
 
   def test_scale_parameter(self):
     mesh = UnitCubeMesh(1,1,1)

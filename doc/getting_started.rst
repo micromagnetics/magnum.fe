@@ -48,7 +48,7 @@ In order to switch the magnetization as required by the standard problem #4, the
   state.material.alpha = 0.02
 
   llg = LLGAlougesProject([
-      ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+      ExternalField(Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))),
       ExchangeField(),
       DemagField("FK")
   ])
