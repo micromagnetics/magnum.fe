@@ -19,8 +19,7 @@ A magnetization configuration that is known to relax quickly in a magnetic s-sta
 
 .. code:: python
 
-  arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
-  m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
+  m_start = Expression(("cos(alpha)", "sin(alpha)", "0.0"), alpha=Expression("fabs(pi*x[0]/1e3)"))
 
 A simulation state is created and initialized with material paramters and the start magnetization m_start. Note the the :code:`scale` parameter is set to :math:`10^{-9}` since the problem size is given in nanometers. This scaling is advised to avoid numerical artifacts.
 
@@ -58,7 +57,7 @@ The time loop for the solution of the LLG has to be programmed explicitly by now
 .. code:: python
 
   # open logfile
-  logfile = open("sp4_fk.dat", "w", 0)
+  logfile = open("sp4.dat", "w", 0)
 
   # initialize time variables
   dt, T = 2e-13, 1e-9
@@ -92,8 +91,7 @@ Complete code
   #######################################
 
   # define start magnetization
-  arg     = "sqrt((3.141592*(x[0]/1e3))*(3.141592*(x[0]/1e3)))"
-  m_start = Expression(("cos(%s)" % arg, "sin(%s)" % arg, "0.0"))
+  m_start = Expression(("cos(alpha)", "sin(alpha)", "0.0"), alpha=Expression("fabs(pi*x[0]/1e3)"))
 
   state   = State(mesh, material = Material.py(), scale = 1e-9, m = m_start)
   llg     = LLGAlougesProject([ExchangeField(), DemagField("FK")])
@@ -108,12 +106,12 @@ Complete code
   state.material.alpha = 0.02
 
   llg = LLGAlougesProject([
-      ExternalField((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0)),
+      ExternalField(Constant((-24.6e-3/Constants.mu0, +4.3e-3/Constants.mu0, 0.0))),
       ExchangeField(),
       DemagField("FK")
   ])
 
-  logfile = open("sp4_fk.dat", "w", 0)
+  logfile = open("sp4.dat", "w", 0)
   dt, T = 2e-13, 1e-9
 
   for i in range(int(T / dt)):
