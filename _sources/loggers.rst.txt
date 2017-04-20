@@ -1,0 +1,24 @@
+.. module:: magnumfe
+
+Logging
+=======
+
+magnum.fe provides classes for the convenient logging of the simulation state. Usually when performing dynamic simulations the logging of a number of scalar values like the time and the averaged magnetization is of interest. This task is performed by the :class:`ScalarLogger` class. The values are written to simple tab separated file that can be read by a number of post processing and plotting tools like e.g. `Gnuplot <http://www.gnuplot.info/>`_. Additionally one might be interested in the exact magnetization configuration at every time in order to get deeper insight into the dynamic process. The :class:`FieldLogger` provides loggin features for arbitrary scalar and vector fields and writes the field data along with the current simulation time to a :code:`PVD` file that can be read by programs using the VTK library, e.g. `Paraview <http://www.paraview.org/>`_. The class :class:`Logger` employs both :class:`ScalarLogger` and :class:`FieldLogger` to log scalar and field data and offers a convenient resume functionality to continue a simulation from intermediate logging results.
+
+:class:`Logger`
++++++++++++++++
+
+.. autoclass:: Logger
+   :members:
+
+:class:`ScalarLogger`
++++++++++++++++++++++
+
+.. autoclass:: ScalarLogger
+   :members:
+
+:class:`FieldLogger`
+++++++++++++++++++++
+
+.. autoclass:: FieldLogger
+   :members:

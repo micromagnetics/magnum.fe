@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A Simple Spin-Torque Oscillator &mdash; magnum.fe 2.2.2 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="State and Materials" href="state.html"/>
+        <link rel="prev" title="Meshes and domains" href="meshing.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A Simple Spin-Torque Oscillator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#load-mesh-and-name-regions">Load Mesh and Name Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-material-constants">Define Material Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialize-and-relax-magnetization">Initialize and Relax Magnetization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#couple-spin-diffusion-model-to-llg">Couple Spin-Diffusion Model to LLG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">magnum.fe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>A Simple Spin-Torque Oscillator</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/oscillator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-simple-spin-torque-oscillator">
+<span id="oscillator"></span><h1>A Simple Spin-Torque Oscillator<a class="headerlink" href="#a-simple-spin-torque-oscillator" title="Permalink to this headline">¶</a></h1>
+<p>In this section the simulation of a simple spin torque oscillator is shown in order to demonstrate the handling of multiple domains in magnum.fe.</p>
+<div class="section" id="load-mesh-and-name-regions">
+<h2>Load Mesh and Name Regions<a class="headerlink" href="#load-mesh-and-name-regions" title="Permalink to this headline">¶</a></h2>
+<p>We use the mesh, that we created in <a class="reference internal" href="meshing.html#meshes-gmsh"><span class="std std-ref">Creating a multilayer structure with Gmsh</span></a>. Like in any magnum.fe simulation script we have to include the magnum.fe library. In the next line the mesh is loaded from the file <code class="code docutils literal"><span class="pre">stack.xml</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;stack.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The mesh file contains domain information through numbered IDs as pointed out in the preceding section. For convenience, magnum.fe offers the possibility to assign names to these regions. Some region names are important for the default behaviour of magnum.fe. For instance, the LLG is by default always solved in the region named &#8216;magnetic&#8217;, the spin accumulation is by default solved on the &#8216;conducting&#8217; region. Moreover, arbitrary names might by assigned to regions in order to simplify material assignment or postprocessing operations such as computing averages. The name assignment is done on the creation of the state object. Cell domains and facet domains are treated individually.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;electrode_bottom&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;fixed_layer&#39;</span><span class="p">:</span>      <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;spacer&#39;</span><span class="p">:</span>           <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;free_layer&#39;</span><span class="p">:</span>       <span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;electrode_top&#39;</span><span class="p">:</span>    <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span>         <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;conducting&#39;</span><span class="p">:</span>       <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;contact_bottom&#39;</span><span class="p">:</span>   <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;contact_top&#39;</span><span class="p">:</span>      <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>A single domain ID may be assigned to multiple named domains. In the next step material constants for the different regions (cell domains) are defined.</p>
+</div>
+<div class="section" id="define-material-constants">
+<h2>Define Material Constants<a class="headerlink" href="#define-material-constants" title="Permalink to this headline">¶</a></h2>
+<p>Depending on the models and field contributions to be solved, the definition of different constants is required. Material constants can either be scalar, such as the saturation magnetization ms, or vector valued, such as the easy axis of the uniaxial anisotropy field. Material constants are discretized by piecewise constant functions. That means, that material parameters are constant within each simulation cell.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Define material constants in magnetic region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">alpha</span>      <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+  <span class="n">Aex</span>        <span class="o">=</span> <span class="mf">2.8e-11</span><span class="p">,</span>
+  <span class="n">D0</span>         <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">C0</span>         <span class="o">=</span> <span class="mf">1.2e6</span><span class="p">,</span>
+  <span class="n">beta</span>       <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
+  <span class="n">beta_prime</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+  <span class="n">tau_sf</span>     <span class="o">=</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
+  <span class="n">J</span>          <span class="o">=</span> <span class="mf">4.0e-20</span>
+<span class="p">)</span>
+
+<span class="c1"># Define specific constants for free layer</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;free_layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">ms</span>         <span class="o">=</span> <span class="mf">1.00</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span>
+  <span class="n">K_uni</span>      <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+  <span class="n">K_uni_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Define specific constants for fixed layer</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;fixed_layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">ms</span>         <span class="o">=</span> <span class="mf">1.24</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span>
+  <span class="n">K_uni</span>      <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span><span class="p">,</span>
+  <span class="n">K_uni_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Define material constants for nonmagnetic region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;!magnetic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">D0</span>         <span class="o">=</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">C0</span>         <span class="o">=</span> <span class="mi">6</span><span class="n">e6</span><span class="p">,</span>
+  <span class="n">tau_sf</span>     <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the material parameters are applied in the order of appearance. Parameters, set in certain regions can be overridden by subsequent calls of the material setter. The nonmagnetic region in this example is referred to by application of the inversion operator &#8216;!&#8217;, e.g. &#8216;!magnetic`. Important parameter constants for the magnetic region are the damping <code class="code docutils literal"><span class="pre">alpha</span></code>, the exchange constant <code class="code docutils literal"><span class="pre">Aex</span></code>, the saturation magnetization <code class="code docutils literal"><span class="pre">ms</span></code> and the anisotropy constant <code class="code docutils literal"><span class="pre">K_uni</span></code> and axis <code class="code docutils literal"><span class="pre">K_uni_axis</span></code>. All constants are given in SI units (e.g. saturation magnetization in A/m, Aex in J/m).</p>
+</div>
+<div class="section" id="initialize-and-relax-magnetization">
+<h2>Initialize and Relax Magnetization<a class="headerlink" href="#initialize-and-relax-magnetization" title="Permalink to this headline">¶</a></h2>
+<p>Next the initial magnetization configuration is defined. Again, domain names can be used to conveniently set the magnetization in the individual regions.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span>
+            <span class="s1">&#39;free_layer&#39;</span><span class="p">:</span>  <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+            <span class="s1">&#39;fixed_layer&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+          <span class="p">})</span>
+</pre></div>
+</div>
+<p>Instead of <code class="code docutils literal"><span class="pre">Constant</span></code> objects we could also have used spatially varying <code class="code docutils literal"><span class="pre">Expression</span></code> objects as in the standard problem #4 example. Now that we have defined an initial magnetization configuration, the magnetization should be relaxed into an energetic minimum. We start by defining effective-field contributios that should be considered for energy minimization.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">exchange_field</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">()</span>
+<span class="n">demag_field</span>    <span class="o">=</span> <span class="n">DemagField</span><span class="p">()</span>
+<span class="n">aniso_field</span>    <span class="o">=</span> <span class="n">UniaxialAnisotropyField</span><span class="p">()</span>
+<span class="n">external_field</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Next, an LLG integrator is initialized with the defined fields, the damping of the system is set to <span class="math">\(\alpha = 1\)</span> for a fast relaxation, and the LLG is integrated a couple of steps.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">aniso_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">])</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Due to the high damping, the system is considered to be in equilibrium after 1ns.</p>
+</div>
+<div class="section" id="couple-spin-diffusion-model-to-llg">
+<h2>Couple Spin-Diffusion Model to LLG<a class="headerlink" href="#couple-spin-diffusion-model-to-llg" title="Permalink to this headline">¶</a></h2>
+<p>Now, we want to add a DC current to the system to obtain an oscillation in the free layer. The most advanced model in magnum.fe for description of the interaction of electric current and magnetization is the self-consistent spin accumulation model supplied by the class <code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code>. It provides solvers for the spin accumulation that takes boundary conditions like current inflow or electric potential as an input and computes not only the spin accumulation, but also the electric potential and current. In order to make the spin accumulation available to the <code class="code docutils literal"><span class="pre">SpinTorque</span></code> LLG term it is registered in the state object as a virtual attribute.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">spin_acc</span> <span class="o">=</span> <span class="n">SpinAccumulationForPotential</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">s</span>  <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">s</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span>  <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">j</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">u</span>  <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">u</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Moreover, the suppliers for the electric current <code class="code docutils literal"><span class="pre">j</span></code> and the potential <code class="code docutils literal"><span class="pre">u</span></code> are registered. As mentioned above, the <code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code> class requires boundary conditions for the computation of the different fields. These boundary conditions are also registered in the state as virtual attributes.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">j_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact_top&#39;</span><span class="p">:</span>    <span class="n">Constant</span><span class="p">(</span><span class="mi">4</span><span class="n">e11</span><span class="p">)}</span>
+<span class="n">state</span><span class="o">.</span><span class="n">u_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact_bottom&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>At the top contact, a constant current outflow of <span class="math">\(4 \cdot 10^{11}\)</span> A/m is defined. The bottom contact is assigned zero electric potential. Note that due to the DC current these virtual attributes are simply constants. Virtual attributes in general may depend on the simulation state in an arbitrary fashion. An AC current outflow could be easily implemented by <code class="code docutils literal"><span class="pre">state.j_boundary</span> <span class="pre">=</span> <span class="pre">lambda</span> <span class="pre">state:</span> <span class="pre">Constant(A*sin(2*pi*freq*state.t))</span></code> with <code class="code docutils literal"><span class="pre">A</span></code> being the amplitude and <code class="code docutils literal"><span class="pre">freq</span></code> being the frequency.</p>
+<p>Now everything is set up to compute the spin accumulation, but there is still a lack of an LLG contribution that couples the spin accumulation to the magnetization dynamics. This job is done by the the <code class="code docutils literal"><span class="pre">SpinTorque</span></code> class that implements a torque term that expects the spin accumulation to be supplied by <code class="code docutils literal"><span class="pre">state.s</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">spin_torque</span>    <span class="o">=</span> <span class="n">SpinTorque</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Adding this term to an LLG integrator enables the solution of the coupled LLG and spin diffusion equation. In order to simulate the oscillation, the damping is set back to <span class="math">\(\alpha = 0.1\)</span> and the time of the state is reset to 0.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">aniso_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">,</span> <span class="n">spin_torque</span><span class="p">])</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p>Now log files for the scalar data and the fields magnetization <span class="math">\(\vec{m}\)</span>, spin accumulation <span class="math">\(\vec{s}\)</span>, and current <span class="math">\(\vec{j}\)</span> are created.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># prepare log files</span>
+<span class="n">logger</span>  <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s2">&quot;log.dat&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m[free_layer]&#39;</span><span class="p">,</span> <span class="s1">&#39;u[facet:contact_top]&#39;</span><span class="p">))</span>
+<span class="n">mlogger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s2">&quot;data/m.pvd&quot;</span><span class="p">,</span> <span class="s1">&#39;m[magnetic]&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">slogger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s2">&quot;data/s.pvd&quot;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">jlogger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s2">&quot;data/j.pvd&quot;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Beside the fields and the averaged magnetization, we are interested in the conductivity of the stack depending on the magnetization configuration. Since the self-consistent model solves for the potential in the whole sample, the conductivity can be easily obtained by computing the potential difference of the top contact to the bottom contact. The potential at the bottom contact is set to 0 in the simulation script. The potential at the top contact can be easily logged by adding a column <code class="code docutils literal"><span class="pre">u[facet:contact_top]</span></code> to the logger. The complete integration code including logging then reads</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span>
+  <span class="n">logger</span>  <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">mlogger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">slogger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">jlogger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+
+  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>The applied current is expected to move the magnetization in the free layer out of its equilibrium configuration which leads to oscillation. The system will then reach a dynamic equilibrium where the energy dissipation is exactly compensated by the constant current, see Figure. The potential difference <span class="math">\(u\)</span> is expected to be relatively small in the beginning of the simulation, where the magnetization in the free layer is almost parallel to the fixed layer and then increases and saturates when reaching the stable oscillation mode, see <a class="reference internal" href="#oscillator-results"><span class="std std-numref">Fig. 14</span></a>.</p>
+<div class="figure" id="oscillator-results">
+<a class="reference internal image-reference" href="_images/oscillator.png"><img alt="_images/oscillator.png" src="_images/oscillator.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Results for the spin torque oscillator. (a) Time development of the average magnetization and potential difference of top to bottom contact. (b) snapshot of the magnetization during oscillation.</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="state.html" class="btn btn-neutral float-right" title="State and Materials" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="meshing.html" class="btn btn-neutral" title="Meshes and domains" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, SuessCo.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.2.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/MathJax_local.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

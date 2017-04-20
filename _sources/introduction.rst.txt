@@ -1,0 +1,22 @@
+Introduction
+============
+
+magnum.fe is a Python library for the solution of micromagnetic problems with the finite-element method. It implements state of the art algorithms and tightly integrates with the powerful finite-element library `FEniCS <http://fenicsproject.org/>`_. Simulation scripts are written in Python which leads to very readable yet flexible code. Due to FEniCS integration extensive postprocessing can be done directly in the simulations scripts. Alternatively results can be written to PVD files and postprocessed with `Paraview <http://www.paraview.org/>`_. This manual is meant to give you both a quick start and a reference to magnum.fe.
+
+Features
+++++++++
+* Preconditioned implicit time-integration of the Landau-Lifshitz-Gilbert Equation
+* Demagnetization-field computation via shell transformation or hybrid FEM/BEM method
+* Oersted-field computation via shell transformation or hybrid FEM/BEM method
+* Arbitrary field terms varying in space and time
+* Spin-torque model by Zhang and Li
+* Spin-torque model by Slonczewski
+* Solution of the 3D spin-diffusion model including spin Hall and inverse spin Hall effect
+* Antiferromagnetic coupling layers (RKKY)
+* Dzyaloshinskii-Moriya interaction
+* Direct energy minimization
+* Stochastic integrator for finite temperature simulations
+* String method for energy barrier computations
+* Solver for electric potential according the Ohm's law
+* Maxwell solver for linear material laws
+* Sophisticated domain handling, e.g. for spatially varying material parameters

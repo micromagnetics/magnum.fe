@@ -1,0 +1,89 @@
+.. module:: magnumfe
+
+Miscellaneous
+=============
+
+Units
++++++
+
+The following table contains a list of quantities used in magnum.fe and their units. Note that all quantities are given in SI units.
+
+This convention also applies to the mesh dimension which in general is expected to be given in meters. However, for numerical reasons it is preferable to create a mesh with lateral dimensions with the order of magnitude 1 and add a proper :code:`scale` parameter in the :class:`State` class. Usually nanometers are a good choice which corresponds to :code:`state.scale = 1e-9`.
+
+======================================  ===================================================  =============================
+**Quantity**                            **Description**                                      **Unit**
+======================================  ===================================================  =============================
+:code:`A` (:class:`SAFLayer`)           coupling constant                                    :math:`\text{J/m}^2`
+:code:`A` (:class:`AFCoupling`)         coupling constant                                    :math:`\text{J/m}^2`
+:code:`Aex` (:class:`Material`)         exchange constant                                    :math:`\text{J/m}`
+:code:`alpha` (:class:`Material`)       damping constant                                     :math:`1`
+:code:`b` (:class:`Material`)           coupling constant (Zhang and Li model)               :math:`\text{m}^3/\text{As}`
+:code:`beta` (:class:`Material`)        polarization parameter                               :math:`1`
+:code:`beta_prime` (:class:`Material`)  polarization parameter                               :math:`1`
+:code:`c` (:class:`Material`)           spin diffusion coupling constant (deprecated)        :math:`\text{N/A}^2`
+:code:`C0` (:class:`Material`)          connected to conductivity by :math:`C_0=\sigma/2`    :math:`\text{A/Vm}`
+:code:`D0` (:class:`Material`)          diffusion constant                                   :math:`\text{m}^2\text{/s}`
+:code:`D_inter` (:class:`Material`)     interface DMI coupling constant                      :math:`\text{J/m}^2`
+:code:`E()` (:class:`LLGTerm`)          energy                                               :math:`\text{J}`
+:code:`h()` (:class:`LLGTerm`)          field                                                :math:`\text{A/m}`
+:code:`j` (:class:`State`)              electric current                                     :math:`\text{A/m}^2`
+:code:`J` (:class:`Material`)           coupling strength                                    :math:`\text{J}`
+:code:`K_uni` (:class:`Material`)       anisotropy constant                                  :math:`\text{J/m}^3`
+:code:`lambda_sf` (:class:`Material`)   diffusion length (deprecated)                        :math:`\text{m}`
+:code:`lambda_j` (:class:`Material`)    diffusion length (deprecated)                        :math:`\text{m}`
+:code:`m` (:class:`State`)              magnetization                                        :math:`1`
+:code:`ms` (:class:`Material`)          saturation magnetization                             :math:`\text{A/m}`
+:code:`s` (:class:`State`)              spin accumulation                                    :math:`\text{A/m}`
+:code:`sigma` (:class:`Material`)       electric conductivity                                :math:`\text{A/Vm}`
+:code:`t` (:class:`State`)              time                                                 :math:`\text{s}`
+:code:`T` (:class:`State`)              temperature                                          :math:`\text{K}`
+:code:`theta` (:class:`Material`)       spin Hall angle                                      :math:`1`
+:code:`tau_sf` (:class:`Material`)      spin-flip relaxation time                            :math:`\text{s}`
+:code:`xi` (:class:`Material`)          degree of nonadiabacity (Zhang and Li model)         :math:`1`
+======================================  ===================================================  =============================
+
+:class:`Constants`
+++++++++++++++++++
+
+magnum.fe defines some important constants in the :class:`Constants` class. They can be used to conveniently convert units. For instance the field strength of 2 Tesla can be converted to A/m by using :code:`2.0 / Constants.mu0` in the simulation script.
+
+.. autoclass:: Constants
+   :members:
+
+:func:`read_vtk`
+++++++++++++++++
+
+.. autofunction:: read_vtk
+
+:class:`TimeInterpolator`
++++++++++++++++++++++++++
+
+.. autoclass:: TimeInterpolator
+   :members:
+
+:class:`Timer`
+++++++++++++++
+
+.. autoclass:: Timer
+   :members:
+
+:class:`Cache`
+++++++++++++++
+
+.. autoclass:: Cache
+   :members:
+
+Screen logging
+++++++++++++++
+
+magnum.fe uses the Python :code:`logging` interface to print status information to the screen. The verbosity of the screen logging can be configured for magnum.fe and third party libraries individualy. Availabe log levels are
+
+.. code:: python
+
+  CRITICAL  = 50 # errors that may lead to data corruption and suchlike
+  ERROR     = 40 # things that go boom
+  WARNING   = 30 # things that may go boom later
+  INFO      = 20 # information of general interest
+
+.. autofunction:: set_log_level
+.. autofunction:: set_fenics_log_level

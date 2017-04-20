@@ -1,0 +1,32 @@
+.. only:: html
+
+  .. image:: /images/logo.svg
+
+
+Welcome to magnum.fe's documentation!
+=====================================
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction
+   installation
+   getting_started
+   meshing
+   oscillator
+   state
+   llg
+   loggers
+   field_terms
+   spin_diffusion
+   solvers
+   open_boundary
+   misc
+   examples
+
+.. only:: html
+
+  Indices and tables
+  ==================
+
+  * :ref:`genindex`

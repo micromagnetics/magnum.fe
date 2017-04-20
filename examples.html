@@ -1,0 +1,957 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Examples &mdash; magnum.fe 2.2.2 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="prev" title="Miscellaneous" href="misc.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mesh-generation-and-domain-management">Mesh generation and domain management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-attributes-and-field-terms">Virtual attributes and field terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spin-torque-oscillator-with-restricted-integration-domain">Spin-torque oscillator with restricted integration domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spin-torque-oscillator-with-slonczewski-spin-torque">Spin-torque oscillator with Slonczewski spin torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#energy-barrier-computation-of-magnetic-multilayer-with-the-string-method">Energy barrier computation of magnetic multilayer with the string method</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">magnum.fe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Examples</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/examples.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-magnumfe"></span><div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mesh-generation-and-domain-management">
+<span id="domain-management"></span><h2>Mesh generation and domain management<a class="headerlink" href="#mesh-generation-and-domain-management" title="Permalink to this headline">¶</a></h2>
+<p>This example showcases some basic and advanced techniques to create meshes within magnum.fe and set material parameters and attributes making use of the domain handling features of magnum.fe.
+As always, we start the script by importing the <code class="code docutils literal"><span class="pre">magnumfe</span></code> library.
+Furthermore we import NumPy which we will use later on.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p>For complicated geometries it is usually reasonable to use external meshing tools such as Gmsh or Salome to create the mesh and then covert it with <code class="code docutils literal"><span class="pre">magnum.msh</span></code>.
+However, FEniCS and thus also magnum.fe comes with some basic meshing features that are sufficient for simple problem types.
+A simple regular box shaped box can be created with the <code class="xref py py-class docutils literal"><span class="pre">BoxMesh</span></code> class of FEniCS.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create simple, regular box mesh of dimensions 20x20x5,</span>
+<span class="c1"># discretized by 20x20x5 cells</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a plain mesh without any domain information.
+In order to create cell domains within the mesh we can use the <code class="xref py py-class docutils literal"><span class="pre">AutoSubDomain</span></code> class of FEniCS that defines a region in terms of a function that indicated whether a point <code class="code docutils literal"><span class="pre">x</span></code> it belongs to the domain or not.
+The <code class="xref py py-class docutils literal"><span class="pre">AutoSubDomain</span></code> object can then be used set the cell-domain markers in the mesh object.
+Here we create three layers with heights 2nm, 1nm, 2nm and give them IDs 1, 2, 3.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create layer regions in z-direction with thicknesses 2,1,2</span>
+<span class="n">cell_domain_1</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">2.001</span><span class="p">)</span>
+<span class="n">cell_domain_2</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.999</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">3.001</span><span class="p">)</span>
+<span class="n">cell_domain_3</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">2.999</span><span class="p">)</span>
+<span class="n">cell_domain_1</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cell_domain_2</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cell_domain_3</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, that we use slightly shifted tresholds for the domain check (e.g. 2.001 instead of 2) in order to make sure that each cell in the respective subdomain passes the check for each of its vertices.
+Depending on the mesh resolution it is wise to use smaller shifts, e.g. machine eps.
+The <code class="code docutils literal"><span class="pre">mark</span></code> method of the <code class="xref py py-class docutils literal"><span class="pre">AutoSubDomain</span></code> class takes a mesh, the dimension of the domain (cell = 3), and the ID of the domain as arguments.
+The only difference when creating facet domains instead of cell domains is setting the domain dimension to 2.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create facet regions on top/bottom and between the layers</span>
+<span class="n">facet_domain_1</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">facet_domain_2</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">2.0</span><span class="p">))</span>
+<span class="n">facet_domain_3</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">))</span>
+<span class="n">facet_domain_4</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">5.0</span><span class="p">))</span>
+<span class="n">facet_domain_1</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">facet_domain_2</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">facet_domain_3</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">facet_domain_4</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>From this simple multilayer mesh we can create a <a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> object with named domains</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create state and name domains</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;spacer&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;bottom_and_top&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">},</span> <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;spacer1&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;spacer2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="p">})</span>
+</pre></div>
+</div>
+<p>After initializing the <a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> object with the mesh, both the cell domains and facet domains can be accessed as FEniCS <code class="xref py py-class docutils literal"><span class="pre">MeshFunction</span></code> objects via <code class="code docutils literal"><span class="pre">state.cell_domains</span></code> and <code class="code docutils literal"><span class="pre">state.facet_domains</span></code> respectively.
+By writing the domain information into PVD files we can easily check our domain assignment with Paraview.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># save domain IDs into files</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;cell_domains.pvd&quot;</span><span class="p">)</span>  <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">cell_domains</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;facet_domains.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">facet_domains</span>
+</pre></div>
+</div>
+<p>The resulting visualization by Paraview is shown in <a class="reference internal" href="#domains"><span class="std std-numref">Fig. 20</span></a>.</p>
+<div class="figure align-center" id="domains">
+<a class="reference internal image-reference" href="_images/domains.png"><img alt="_images/domains.png" src="_images/domains.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Domain IDs as displayed by Paraview (a) cell domains (b) facet domains (with threshold filter in order to clip undefined triangles that are displayed as maximum integer value).</span></p>
+</div>
+<p>Next, we want to assign material parameters to the different domains.
+Material parameter assignment in magnum.fe is done by accessing <code class="code docutils literal"><span class="pre">state.material</span></code>.
+Parameters can be set one by one by calling <code class="code docutils literal"><span class="pre">state.material.parameter1</span> <span class="pre">=</span> <span class="pre">xxx</span></code>, <code class="code docutils literal"><span class="pre">state.material.parameter2</span> <span class="pre">=</span> <span class="pre">yyy</span></code> etc. or in bunches by calling <code class="code docutils literal"><span class="pre">state.material</span> <span class="pre">=</span> <span class="pre">Material(parameter1</span> <span class="pre">=</span> <span class="pre">xxx,</span> <span class="pre">parameter2</span> <span class="pre">=</span> <span class="pre">yyy)</span></code>.
+Assigning a value to <code class="code docutils literal"><span class="pre">state.material.parameter</span></code> will set this value for the complete mesh.
+However, more often than not, we want to set different material parameters in different domains.
+This can be easily achieved masking (restricting) the material to a certain domain.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># set material parameters in different regions</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">K_uni</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">(</span><span class="s2">&quot;x[0]*0.5e5&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we set two material parameters, namely <code class="code docutils literal"><span class="pre">alpha</span></code> and <code class="code docutils literal"><span class="pre">K_uni</span></code>.
+While <code class="code docutils literal"><span class="pre">alpha</span></code> is simply set to the constant value 1 in the &#8216;top&#8217; region, the material parameter <code class="code docutils literal"><span class="pre">K_uni</span></code> is given as an spatially varying FEniCS <code class="xref py py-class docutils literal"><span class="pre">Expression</span></code>.
+Please refer to the <a class="reference external" href="http://fenicsproject.org/documentation">FEniCS documentation</a> for details on the use of expressions.
+As mentioned easlier, material parameters can also be assigned one by one</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">K_uni</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span>
+</pre></div>
+</div>
+<p>Note, that we do not assign any value for <code class="code docutils literal"><span class="pre">alpha</span></code> in the &#8216;top&#8217; region, which leads to a value of 0 in this region.
+In order to check the correct parameter assignment we can write the material parameters to PVD files.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># save material paramters to files</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;alpha.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;K_uni.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">K_uni</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#material-parameters"><span class="std std-numref">Fig. 21</span></a> shows the resulting material parameters in the complete mesh.</p>
+<div class="figure align-center" id="material-parameters">
+<a class="reference internal image-reference" href="_images/material_parameters.png"><img alt="_images/material_parameters.png" src="_images/material_parameters.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Material parameters as displayed by Paraview (a) alpha (b) K_uni.</span></p>
+</div>
+<p>By accessing each domain individually and by the use of <code class="xref py py-class docutils literal"><span class="pre">Expression</span></code> objects we already have a very fine grained control over the material parameter assignment.
+However, sometimes we might want to go even one step further and directly operate on the mesh level of the material parameters.
+Material parameters are discretized with piecewise constant functions which means that there is one material parameter value per mesh cell.
+In the following we develop a code that generates a spatially varying anisotropy axis with a uniformly distributed direction.
+The code uses the NumPy interface of FEniCS to populate the underlying vectors of the material functions.
+An additional challenge is the vector nature of the axis material parameters that requires us to use the <code class="code docutils literal"><span class="pre">split</span></code> and <code class="code docutils literal"><span class="pre">assign</span></code> methods to operate on each component individually.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># 1) Initially empty constant</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">K_uni_axis</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># 2) get material function in top domain and split into components</span>
+<span class="n">axis_top</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">K_uni_axis</span>
+<span class="n">axis_top_x</span><span class="p">,</span> <span class="n">axis_top_y</span><span class="p">,</span> <span class="n">axis_top_z</span> <span class="o">=</span> <span class="n">axis_top</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 3) get number of cells in domain and generate uniformly distributed directions</span>
+<span class="n">n_cells</span> <span class="o">=</span> <span class="n">axis_top_x</span><span class="o">.</span><span class="n">vector</span><span class="p">()</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_cells</span><span class="p">))</span>
+<span class="n">phi</span>   <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_cells</span><span class="p">)</span>
+
+<span class="c1"># 4) set vectors of components individually</span>
+<span class="n">axis_top_x</span><span class="o">.</span><span class="n">vector</span><span class="p">()[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">axis_top_y</span><span class="o">.</span><span class="n">vector</span><span class="p">()[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">axis_top_z</span><span class="o">.</span><span class="n">vector</span><span class="p">()[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="c1"># 5) assign components to vector function and set material</span>
+<span class="n">assign</span><span class="p">(</span><span class="n">axis_top</span><span class="p">,</span> <span class="p">[</span><span class="n">axis_top_x</span><span class="p">,</span> <span class="n">axis_top_y</span><span class="p">,</span> <span class="n">axis_top_z</span><span class="p">])</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">K_uni_axis</span> <span class="o">=</span> <span class="n">axis_top</span>
+
+<span class="c1"># 6) save result to PVD file</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;K_uni_axis.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">K_uni_axis</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#k-uni-axis"><span class="std std-numref">Fig. 22</span></a> shows the results for the random distributed anisotropy axes.</p>
+<div class="figure align-center" id="k-uni-axis">
+<a class="reference internal image-reference" href="_images/K_uni_axis.png"><img alt="_images/K_uni_axis.png" src="_images/K_uni_axis.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Random K_uni_axis as displayed by Paraview.</span></p>
+</div>
+<p>The domain management feature of magnum.fe do not only apply to material parameters but also to state attributes such as the magnetization <code class="code docutils literal"><span class="pre">state.m</span></code>, the electric current <code class="code docutils literal"><span class="pre">state.j</span></code> etc.
+For example, the <a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> class has a method <code class="code docutils literal"><span class="pre">interpolate</span></code> that allows to define expresions for the interpolation domain wise.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># set magnetization in different regions</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span>
+  <span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+  <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="n">Expression</span><span class="p">((</span><span class="s2">&quot;cos(x[0])&quot;</span><span class="p">,</span> <span class="s2">&quot;sin(x[0])&quot;</span><span class="p">,</span> <span class="s2">&quot;0.0&quot;</span><span class="p">))</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>Here, we choose a constant inplane magnetization in the &#8216;bottom&#8217; layer and a varying magnetization given by an <code class="xref py py-class docutils literal"><span class="pre">Expression</span></code> in the &#8216;top&#8217; layer.
+As for the material parameters, the resulting magnetization can be easily written to a PVD file.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># save magnetization</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;m_complete.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;m_bottom_and_top.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;bottom_and_top&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>While the first command saves the magnetization on the complete mesh into a PVD file, the second command only saves the parts defined by the &#8216;bottom_and_top&#8217; domain.
+When dealing with magnetic multilayers that consist of magnetic and nonmagnetic regions this feature can be used to save the magnetization only in physically meaningful (magntic) parts of the structure.
+The result are depicted in <a class="reference internal" href="#m"><span class="std std-numref">Fig. 23</span></a>.</p>
+<div class="figure align-center" id="m">
+<a class="reference internal image-reference" href="_images/m.png"><img alt="_images/m.png" src="_images/m.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Magnetization configuration (a) in the complete mesh (b) cropped to a certain region.</span></p>
+</div>
+<p>As a last example of magnum.fe&#8217;s domain management we look at the computation of average values.
+Both scalar and vector field can be easily averaged over the complete mesh or over certain regions.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># output average magnetization</span>
+<span class="nb">print</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="nb">print</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This lead to the following output</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">0.520395923452039</span><span class="p">,</span> <span class="mf">0.014304519185336612</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">0.9999999999999999</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="virtual-attributes-and-field-terms">
+<h2>Virtual attributes and field terms<a class="headerlink" href="#virtual-attributes-and-field-terms" title="Permalink to this headline">¶</a></h2>
+<p>This example shows some useful examples for the handling of <a class="reference internal" href="state.html#virtual-attributes"><span class="std std-ref">Virtual Attributes</span></a> and <a class="reference internal" href="field_terms.html#field-terms"><span class="std std-ref">Field Terms</span></a>.
+We use the same mesh as for the <a class="reference internal" href="#domain-management"><span class="std std-ref">Mesh generation and domain management</span></a> example.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># create simple, regular box mesh of dimensions 20x20x5</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># create layer regions in z-direction with thicknesses 2,1,2</span>
+<span class="n">cell_domain_1</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">2.001</span><span class="p">)</span>
+<span class="n">cell_domain_2</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.999</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">3.001</span><span class="p">)</span>
+<span class="n">cell_domain_3</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">2.999</span><span class="p">)</span>
+<span class="n">cell_domain_1</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cell_domain_2</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cell_domain_3</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># create facet regions on top/bottom and between the layers</span>
+<span class="n">facet_domain_1</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">facet_domain_2</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">2.0</span><span class="p">))</span>
+<span class="n">facet_domain_3</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">))</span>
+<span class="n">facet_domain_4</span> <span class="o">=</span> <span class="n">AutoSubDomain</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">near</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">5.0</span><span class="p">))</span>
+<span class="n">facet_domain_1</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">facet_domain_2</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">facet_domain_3</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">facet_domain_4</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># create state and name domains</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;spacer&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">},</span> <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;spacer1&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;spacer2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="p">})</span>
+</pre></div>
+</div>
+<p>Note, that we define a region named &#8220;magnetic&#8221;, which is the default region name for the magnetic region expected from all field terms and intergrators.
+While attributes (and virtual attributes) appear as FEniCS <code class="xref py py-class docutils literal"><span class="pre">Function</span></code> object, they are enriched by some convenient methods.
+E.g. vector valued attributes, such as the magnetization can be easily normalized with the <code class="code docutils literal"><span class="pre">normalize</span></code> method.
+Averages can be computed with the <code class="code docutils literal"><span class="pre">average</span></code> method.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># set magnetization and use normalize method to renormalize</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;m&gt; = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>prints</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">m</span><span class="o">&gt;</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">0.7071067811865179</span><span class="p">,</span> <span class="mf">0.7071067811865179</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The magnetization in this case is a regular attribute.
+It is a constant vector field that is set by an attribute setter <code class="code docutils literal"><span class="pre">state.m</span> <span class="pre">=</span> <span class="pre">xxx</span></code> and can be read afterwards via the attribute getter <code class="code docutils literal"><span class="pre">state.m</span></code>.
+Note, that each <code class="xref py py-class docutils literal"><span class="pre">Constant</span></code>, <code class="xref py py-class docutils literal"><span class="pre">Expression</span></code> or <code class="xref py py-class docutils literal"><span class="pre">Function</span></code> object is interpolated onto a first order discrete Lagrange space (<span class="math">\(\mathcal{P}^1\)</span>) and enriched with methods such as <code class="code docutils literal"><span class="pre">average</span></code>.</p>
+<p>Attributes are used by solvers and field terms to solve the micromagnetic equations.
+E.g. the Oersted field term obtains the current for its computations from <code class="code docutils literal"><span class="pre">state.j</span></code>.
+We want to simulate the Oersted field for a current that varies in time.
+This is, where virtual attributes come into play.
+Virtual attributes can depend on every attribute of the state, including the time, the magnetization or any other normal or virtual attribute.
+In the following we define a current that rises from <span class="math">\((0,0,0) \text{A}/\text{m}^2\)</span> at <span class="math">\(t=0\)</span> to <span class="math">\((0,0,10^{12}) \text{A}/\text{m}^2\)</span> at <span class="math">\(t = 1 \text{ns}\)</span>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># define virtual attribute for linearly rising current j</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">/</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span> <span class="o">*</span> <span class="mi">1</span><span class="n">e12</span><span class="p">))</span>
+<span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;j&gt;(0) = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">j</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.5e-9</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;j&gt;(0.5e-9) = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">j</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>prints</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.5e-9</span><span class="p">)</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">499999999999.99347</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>magnum.fe provides a number of predefined routines to set up virtual attributes.
+E.g., the method <code class="code docutils literal"><span class="pre">h()</span></code> of every field term can be used to directly compute the corresponding field by passing a state object.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># setup simple external field and write to file</span>
+<span class="n">external_field</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Expression</span><span class="p">((</span><span class="s2">&quot;x[2]/5./mu0&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">),</span> <span class="n">mu0</span> <span class="o">=</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">))</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;h.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">external_field</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, it can also be used a virtual attribute when the state argument is omitted.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># register external field as virtual attribute</span>
+<span class="n">state</span><span class="o">.</span><span class="n">h_ext</span> <span class="o">=</span> <span class="n">external_field</span><span class="o">.</span><span class="n">h</span><span class="p">()</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;h.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">h_ext</span>
+</pre></div>
+</div>
+<p>One advantage of registering the field method as a virtual attribute, is that virtual attribute, like regular attributes, are enriched with methods such as <code class="code docutils literal"><span class="pre">average</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;&lt;h_ext&gt; = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">h_ext</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;h_ext&gt;_top = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">h_ext</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;h_ext&gt;_top_surface = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">h_ext</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;facet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h_ext</span><span class="o">&gt;</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">397887.35774102324</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">h_ext</span><span class="o">&gt;</span><span class="n">_top</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">636619.7723858159</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">h_ext</span><span class="o">&gt;</span><span class="n">_top_surface</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">795774.7154822319</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Not only the field method <code class="code docutils literal"><span class="pre">h()</span></code>, but also the energy method <code class="code docutils literal"><span class="pre">E()</span></code> of any field term can both be used directly or a virtual attribute.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># compute energy directly and through virtual attribute</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ms</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="nb">print</span> <span class="s2">&quot;E_ext = &quot;</span><span class="p">,</span> <span class="n">external_field</span><span class="o">.</span><span class="n">E</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E_ext</span> <span class="o">=</span> <span class="n">external_field</span><span class="o">.</span><span class="n">E</span><span class="p">()</span>
+<span class="nb">print</span> <span class="s2">&quot;E_ext = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">E_ext</span>
+</pre></div>
+</div>
+<p>prints</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">E_ext</span> <span class="o">=</span>  <span class="o">-</span><span class="mf">565.685424949</span>
+<span class="n">E_ext</span> <span class="o">=</span>  <span class="o">-</span><span class="mf">565.685424949</span>
+</pre></div>
+</div>
+<p>Note, that the material parameter <code class="code docutils literal"><span class="pre">ms</span></code> has to be set in order to compute the energy.
+As another example we register the demagnetization field and check whether the virtual attribute is updated properly on magnetization change.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create demag field object</span>
+<span class="n">demag_field</span> <span class="o">=</span> <span class="n">DemagField</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">h_demag</span> <span class="o">=</span> <span class="n">demag_field</span><span class="o">.</span><span class="n">h</span><span class="p">()</span>
+
+<span class="c1"># check if virtual field attribute is updated on magnetization change</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;h_demag(1,0,0)&gt;_top = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">h_demag</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">&quot;&lt;h_demag(-1,0,0)&gt;_top = &quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">h_demag</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h_demag</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="n">_top</span> <span class="o">=</span>  <span class="p">(</span><span class="o">-</span><span class="mf">0.13839708423953592</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.3894124376866775e-05</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.996042348220122e-05</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">h_demag</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="n">_top</span> <span class="o">=</span>  <span class="p">(</span><span class="mf">0.13839708423953592</span><span class="p">,</span> <span class="mf">3.3894124376866775e-05</span><span class="p">,</span> <span class="mf">3.996042348220122e-05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another reason to register a field or energy as virtual attribute is its possible use in logger classes.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># use virtual attributes in logger object</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s2">&quot;log.dat&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;h_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;E_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;h_demag[top]&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spin-torque-oscillator-with-restricted-integration-domain">
+<h2>Spin-torque oscillator with restricted integration domain<a class="headerlink" href="#spin-torque-oscillator-with-restricted-integration-domain" title="Permalink to this headline">¶</a></h2>
+<p>This example is a variation of the spin-torque oscillator that was introduced in <a class="reference internal" href="oscillator.html#oscillator"><span class="std std-ref">A Simple Spin-Torque Oscillator</span></a> and requires the same mesh.
+In contrast to the original version, we want to reduce the computation time by neglecting the dynamics of the fixed layer while still keeping the effects of both the stray field and the spin accumulation onto the free layer.
+Therefore, we reuse the first part of the original simulation script including the relaxation of the full system.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># read mesh</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;mesh/stack.xml&quot;</span><span class="p">)</span>
+
+<span class="c1"># initialized state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;electrode_bottom&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;fixed_layer&#39;</span><span class="p">:</span>      <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;spacer&#39;</span><span class="p">:</span>           <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;free_layer&#39;</span><span class="p">:</span>       <span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;electrode_top&#39;</span><span class="p">:</span>    <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span>         <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;conducting&#39;</span><span class="p">:</span>       <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;contact_bottom&#39;</span><span class="p">:</span>   <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;contact_top&#39;</span><span class="p">:</span>      <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span>
+<span class="p">)</span>
+
+<span class="c1"># define material constants in magnetic region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">alpha</span>      <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+  <span class="n">Aex</span>        <span class="o">=</span> <span class="mf">2.8e-11</span><span class="p">,</span>
+  <span class="n">D0</span>         <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">C0</span>         <span class="o">=</span> <span class="mf">1.2e6</span><span class="p">,</span>
+  <span class="n">beta</span>       <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
+  <span class="n">beta_prime</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+  <span class="n">tau_sf</span>     <span class="o">=</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
+  <span class="n">J</span>          <span class="o">=</span> <span class="mf">4.0e-20</span>
+<span class="p">)</span>
+
+<span class="c1"># define specific constants for free layer</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;free_layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">ms</span>         <span class="o">=</span> <span class="mf">1.00</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span>
+  <span class="n">K_uni</span>      <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+  <span class="n">K_uni_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># define specific constants for fixed layer</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;fixed_layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">ms</span>         <span class="o">=</span> <span class="mf">1.24</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span>
+  <span class="n">K_uni</span>      <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span><span class="p">,</span>
+  <span class="n">K_uni_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># define material constants for nonmagnetic region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;!magnetic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">D0</span>         <span class="o">=</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">C0</span>         <span class="o">=</span> <span class="mi">6</span><span class="n">e6</span><span class="p">,</span>
+  <span class="n">tau_sf</span>     <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># define start magnetization</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span>
+            <span class="s1">&#39;free_layer&#39;</span><span class="p">:</span>  <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+            <span class="s1">&#39;fixed_layer&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+          <span class="p">})</span>
+
+<span class="c1"># initialize field terms</span>
+<span class="n">exchange_field</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">()</span>
+<span class="n">demag_field</span>    <span class="o">=</span> <span class="n">DemagField</span><span class="p">(</span><span class="n">compute_region</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">aniso_field</span>    <span class="o">=</span> <span class="n">UniaxialAnisotropyField</span><span class="p">()</span>
+<span class="n">external_field</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">)))</span>
+
+<span class="c1"># relax the system</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">aniso_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">])</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, that <code class="code docutils literal"><span class="pre">DemagField(compute_region</span> <span class="pre">=</span> <span class="pre">'all')</span></code> is used here instead of <code class="code docutils literal"><span class="pre">DemagField()</span></code> in the original version.
+This means that the complete mesh, including the nonmagnetic domains, is treated with FEM when computing the demagnetization field.
+More importantly, the BEM matrix, required for the demagnetization-field computation, is constructed from the outer boundary of the complete mesh, which, in the case of multilayer structures, consists of less nodes than the boundary of the magnetic region.</p>
+<p>Since the fixed layer is considered to be static for the rest of the simulation, we can compute its demagnetization field once and reuse this field for the complete simulation.
+This can be achieved by creating a <a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a> instance with properly set source and target regions and use the computed field in an <a class="reference internal" href="field_terms.html#magnumfe.ExternalField" title="magnumfe.ExternalField"><code class="xref py py-class docutils literal"><span class="pre">ExternalField</span></code></a> object:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># compute demag_field generated by fixed layer in free layer</span>
+<span class="c1"># use compute_region = &#39;all&#39; to avoid BEM matrix reassembly</span>
+<span class="n">demag_field_fixed</span> <span class="o">=</span> <span class="n">DemagField</span><span class="p">(</span><span class="n">compute_region</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
+                               <span class="n">source_region</span> <span class="o">=</span> <span class="s1">&#39;fixed_layer&#39;</span><span class="p">,</span>
+                               <span class="n">target_region</span> <span class="o">=</span> <span class="s1">&#39;free_layer&#39;</span><span class="p">)</span>
+
+<span class="c1"># create a static field from the fixed-layer demag field</span>
+<span class="n">demag_field_fixed_static</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">demag_field_fixed</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Since we use <code class="code docutils literal"><span class="pre">compute_region</span> <span class="pre">=</span> <span class="pre">'all'</span></code> again, the BEM matrix does not have to be reassembled but is taken from cache which speeds up the setup and descreases memory requirements.
+In a next step we setup a <a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a> instance that only solves on the free layer:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create free-layer only demag field object to save computation time</span>
+<span class="n">demag_field_free</span> <span class="o">=</span> <span class="n">DemagField</span><span class="p">(</span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;free_layer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we setup the spin accumlation solver and hook it into the state as virtual attribute.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># define spin accumulation coupling</span>
+<span class="n">spin_acc</span> <span class="o">=</span> <span class="n">SpinAccumulationForCurrent</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">s</span>  <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">s</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note, that we use the <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a> class instead of <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a> as in the original script.
+Since we do not care about resistance change and the influence of the magnetization configuration onto the electric current is considered to be neglectable, this choice will lead to another performance increase.
+The <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a> class expects the current to be provided by <code class="code docutils literal"><span class="pre">state.j</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="n">e11</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>and as for the original script we need to create a <a class="reference internal" href="field_terms.html#magnumfe.SpinTorque" title="magnumfe.SpinTorque"><code class="xref py py-class docutils literal"><span class="pre">SpinTorque</span></code></a> object in order to couple spin accumulation with the magnetization</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">spin_torque</span> <span class="o">=</span> <span class="n">SpinTorque</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The integrator for the LLG is setup with both the static fixed-layer demagnetization field and the dynamic free-layer field.
+Furthermore its integration region, which defaults to &#8216;magnetic&#8217; is set to &#8216;free_layer` in order to reduce the dimension of the problem.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create LLG integrator that operates on free layer only</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field_fixed_static</span><span class="p">,</span> <span class="n">demag_field_free</span><span class="p">,</span> \
+                <span class="n">aniso_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">,</span> <span class="n">spin_torque</span><span class="p">],</span> <span class="n">region</span> <span class="o">=</span> <span class="s2">&quot;free_layer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The rest of the simulation script is very similar to the original script.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># prepare log files</span>
+<span class="n">logger</span>  <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s2">&quot;log.dat&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m[free_layer]&#39;</span><span class="p">))</span>
+
+<span class="k">while</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span>
+  <span class="n">logger</span>  <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, that the electric potential is not logged since it is not computed by the <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a> class.
+<a class="reference internal" href="#oscillator-restricted-domain-plot"><span class="std std-numref">Fig. 24</span></a> shows the simulation results compared to the full simulation from the <a class="reference internal" href="oscillator.html#oscillator"><span class="std std-ref">A Simple Spin-Torque Oscillator</span></a> section.
+The results are slightly different, but important features such as the frequency of the oscillator are very similar to the full fledged simulation.</p>
+<div class="figure align-center" id="oscillator-restricted-domain-plot">
+<a class="reference internal image-reference" href="_images/plot.png"><img alt="_images/plot.png" src="_images/plot.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Oscillator results compared to the full fledged oscillator example.</span></p>
+</div>
+</div>
+<div class="section" id="spin-torque-oscillator-with-slonczewski-spin-torque">
+<h2>Spin-torque oscillator with Slonczewski spin torque<a class="headerlink" href="#spin-torque-oscillator-with-slonczewski-spin-torque" title="Permalink to this headline">¶</a></h2>
+<p>This example is a variation of the spin-torque oscillator that was introduced in <a class="reference internal" href="oscillator.html#oscillator"><span class="std std-ref">A Simple Spin-Torque Oscillator</span></a>.
+In contrast to the original version, the spin-transfer torque in this example is computed using the model of Slonczewski.
+The Slonczewski model describes the spin torque in terms of a surface interaction between the neighboring interfaces of the free and fixed layer.
+In order to set up the solver for the Slonczewski model, the mesh of the original oscillator example has to be modified.
+The Slonczewski model does not require any leads, however, the neighboring interfaces of the magnetic layers have to be marked with IDs.
+An appropriate GEO file for Gmsh reads:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">cl</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">;</span>
+
+<span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">30</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">};</span>
+
+<span class="n">Line</span> <span class="n">Loop</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+<span class="n">Plane</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+
+<span class="n">s0</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>     <span class="n">Layers</span><span class="p">{</span><span class="mi">4</span><span class="p">};};</span>
+<span class="n">s1</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">1.5</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">1</span><span class="p">};};</span>
+<span class="n">s2</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">3.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">2</span><span class="p">};};</span>
+
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s2</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+
+<span class="n">Physical</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#oscillator-slonzcewski-domains"><span class="std std-numref">Fig. 25</span></a> shows the resulting domains in the mesh.</p>
+<div class="figure align-center" id="oscillator-slonzcewski-domains">
+<a class="reference internal image-reference" href="_images/domains1.png"><img alt="_images/domains1.png" src="_images/domains1.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Domain definitions as required by the Slonczewski model (a) Cell domains (b) Facet domains.</span></p>
+</div>
+<p>The first part of the simulation script is very similar to the original script.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># read mesh</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;mesh/stack.xml.gz&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># initialized state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;fixed_layer&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;spacer&#39;</span><span class="p">:</span>      <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;free_layer&#39;</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+  <span class="p">},</span>
+  <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;interface1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;interface2&#39;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span>
+<span class="p">)</span>
+
+
+<span class="c1"># define material constants in magnetic region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">alpha</span>      <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+  <span class="n">Aex</span>        <span class="o">=</span> <span class="mf">2.8e-11</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># define specific constants for free layer</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;free_layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">ms</span>         <span class="o">=</span> <span class="mf">1.00</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># define specific constants for fixed layer</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;fixed_layer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">ms</span>         <span class="o">=</span> <span class="mf">1.24</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span>
+  <span class="n">K_uni</span>      <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span><span class="p">,</span>
+  <span class="n">K_uni_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># define start magnetization</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span>
+            <span class="s1">&#39;free_layer&#39;</span><span class="p">:</span>  <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+            <span class="s1">&#39;fixed_layer&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+          <span class="p">})</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="n">e11</span><span class="p">))</span>
+
+<span class="c1"># initialize field terms</span>
+<span class="n">exchange_field</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">()</span>
+<span class="n">demag_field</span>    <span class="o">=</span> <span class="n">DemagField</span><span class="p">(</span><span class="n">compute_region</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">aniso_field</span>    <span class="o">=</span> <span class="n">UniaxialAnisotropyField</span><span class="p">()</span>
+<span class="n">external_field</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">)))</span>
+
+<span class="c1"># relax the system</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">aniso_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">])</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, that since we want to use the model of Slonczewski for the spin torque, we don&#8217;t require any material parameters connected to the spin-diffusion model (<code class="code docutils literal"><span class="pre">D0</span></code>, <code class="code docutils literal"><span class="pre">C0</span></code>, <code class="code docutils literal"><span class="pre">beta</span></code>, <code class="code docutils literal"><span class="pre">beta_prime</span></code>, <code class="code docutils literal"><span class="pre">tau_sf</span></code>, <code class="code docutils literal"><span class="pre">J</span></code>).
+Also the named domains have changed due to the different mesh and a constant current is set in <code class="code docutils literal"><span class="pre">state.j</span></code>.
+Instead of setting up a solver for the spin accumulation, the Slonczewski model is directly implemented as an effective-field term, see <a class="reference internal" href="field_terms.html#magnumfe.SpinTorqueSlonczewski" title="magnumfe.SpinTorqueSlonczewski"><code class="xref py py-class docutils literal"><span class="pre">SpinTorqueSlonczewski</span></code></a>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># define spin accumulation coupling</span>
+<span class="n">spin_torque</span> <span class="o">=</span> <span class="n">SpinTorqueSlonczewski</span><span class="p">(</span><span class="n">layer_region</span> <span class="o">=</span> <span class="s1">&#39;spacer&#39;</span><span class="p">,</span>
+                                    <span class="n">interface1</span> <span class="o">=</span> <span class="s1">&#39;interface1&#39;</span><span class="p">,</span>
+                                    <span class="n">interface2</span> <span class="o">=</span> <span class="s1">&#39;interface2&#39;</span><span class="p">,</span>
+                                    <span class="n">P</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">Gamma</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We use the default bidirectional coupling which requires only the definition of the coupled interfaces and the cell regaion that connects them (<code class="code docutils literal"><span class="pre">spacer</span></code>).
+Furthermore we have to define the constants <span class="math">\(P\)</span> and <span class="math">\(\Gamma\)</span>.
+The rest of the script is again very similar to the original script.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># solve coupled system</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">aniso_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">,</span> <span class="n">spin_torque</span><span class="p">])</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># prepare log files</span>
+<span class="n">logger</span>  <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s2">&quot;log.dat&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m[free_layer]&#39;</span><span class="p">))</span>
+<span class="n">mlogger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s2">&quot;data/m.pvd&quot;</span><span class="p">,</span> <span class="s1">&#39;m[magnetic]&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span>
+  <span class="n">logger</span>  <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">mlogger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#oscillator-slonzcewski-plot"><span class="std std-numref">Fig. 26</span></a> shows the simulation results as computed by magnum.fe.</p>
+<div class="figure align-center" id="oscillator-slonzcewski-plot">
+<a class="reference internal image-reference" href="_images/plot1.png"><img alt="_images/plot1.png" src="_images/plot1.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">Oscillator results obtained with the Slonczewski model.</span></p>
+</div>
+</div>
+<div class="section" id="energy-barrier-computation-of-magnetic-multilayer-with-the-string-method">
+<h2>Energy barrier computation of magnetic multilayer with the string method<a class="headerlink" href="#energy-barrier-computation-of-magnetic-multilayer-with-the-string-method" title="Permalink to this headline">¶</a></h2>
+<p>In this example the energy barrier between the parallel and antiparallel state of an elliptical multilayer structure is computed.
+First we use Gmsh to create an appropriate mesh.
+The geo file <code class="code docutils literal"><span class="pre">stack.geo</span></code> for a trilayer with thicknesses 10nm, 1.5nm, 3nm and radii 40nm and 15nm respectively reads:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">cl</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">;</span>
+
+<span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">40</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">};</span>
+
+<span class="n">Line</span> <span class="n">Loop</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+<span class="n">Plane</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+
+<span class="n">s0</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>     <span class="p">};</span>
+<span class="n">s1</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">1.5</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="p">};</span>
+<span class="n">s2</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">3.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="p">};</span>
+
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s2</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+</pre></div>
+</div>
+<p>A magnum.fe compatible mesh file is generated by calling Gmsh and converting the resulting mesh:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">gmsh</span> <span class="o">-</span><span class="mi">3</span> <span class="n">stack</span><span class="o">.</span><span class="n">geo</span>
+<span class="n">magnum</span><span class="o">.</span><span class="n">msh</span> <span class="n">stack</span><span class="o">.</span><span class="n">msh</span> <span class="n">stack</span><span class="o">.</span><span class="n">xml</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>Note that we use the file extension <code class="code docutils literal"><span class="pre">xml.gz</span></code> here leads to compressed output.
+The simulation script for the energy-barrier computation starts as any magnum.fe simulation script by importing the <code class="code docutils literal"><span class="pre">magnumfe</span></code> library:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Next we import the mesh and create a <a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> object with named domains:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create mesh and state</span>
+<span class="n">mesh</span>  <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;stack.xml.gz&quot;</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="s1">&#39;fixed&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;free&#39;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">},</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Only the upper and lower layers are defined as magnetic.
+The middle layer is not named since it is not required for the energy computation.
+The material parameters <span class="math">\(M_\text{s}\)</span> and <span class="math">\(A\)</span> are assigned to the magnetic regions in order to compute the energy due to the demagnetization and exchange field.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+    <span class="n">ms</span>  <span class="o">=</span> <span class="mi">8</span><span class="n">e5</span><span class="p">,</span>
+    <span class="n">Aex</span> <span class="o">=</span> <span class="mf">1.3e-11</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, that it is not required to assign <span class="math">\(\alpha\)</span> since we are not interested in the dynamics of the system but only in the energy barrier.
+Now, we initialize the <a class="reference internal" href="solvers.html#magnumfe.StringSolver" title="magnumfe.StringSolver"><code class="xref py py-class docutils literal"><span class="pre">StringSolver</span></code></a> object, by defining the desired energy contributions and the state for the computations.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="n">StringSolver</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">[</span>
+    <span class="n">ExchangeField</span><span class="p">(),</span>
+    <span class="n">DemagField</span><span class="p">()</span>
+  <span class="p">])</span>
+</pre></div>
+</div>
+<p>The string solver iteratively relaxes a magnetization trajectory between two minima in order to find the minimum energy barrier.
+This trajectory is discretized by a number of magnetization images.
+This number can be configured when initialized the <a class="reference internal" href="solvers.html#magnumfe.StringSolver" title="magnumfe.StringSolver"><code class="xref py py-class docutils literal"><span class="pre">StringSolver</span></code></a> object and defaults to 20.
+In order to create a start trajectory with <span class="math">\(N\)</span> (in this case 20) images you can call the <code class="code docutils literal"><span class="pre">level</span></code> method on an arbitrarily sized list of magnetization images.
+We want to start from an out-of-plane rotation from parallel to antiparallel which can be easily parametrized by three images (1: parallel, 2: out-of-plane, 3: antiparallel)</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">images</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">level</span><span class="p">([</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span><span class="s1">&#39;fixed&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="s1">&#39;free&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))}),</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span><span class="s1">&#39;fixed&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="s1">&#39;free&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))}),</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span><span class="s1">&#39;fixed&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="s1">&#39;free&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))})</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<p>This initial trajectory leads to a very high energy barrier since the out-of-plane configuration is highliy unfavorable due to the shape anisotropy.
+The string method is expected to optimize this trajectory to an in-plane rotation with possibly non-homogeneous magnetization configurations.
+The <a class="reference internal" href="solvers.html#magnumfe.StringSolver" title="magnumfe.StringSolver"><code class="xref py py-class docutils literal"><span class="pre">StringSolver</span></code></a> object operates on the <code class="code docutils literal"><span class="pre">images</span></code> object and changes it iteratively.
+In order to log the optimization process we generate two log files <code class="code docutils literal"><span class="pre">barrier.dat</span></code> and <code class="code docutils literal"><span class="pre">energies.dat</span></code>.
+In <code class="code docutils literal"><span class="pre">barrier.dat</span></code> we save the energy barrier measured from both energy minima (parallel and antiparallel state).
+In <code class="code docutils literal"><span class="pre">energies.dat</span></code> we save the energies of the complete trajectory for every string-method iteration.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bfile</span> <span class="o">=</span>  <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;barrier.dat&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">efile</span> <span class="o">=</span>  <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;energies.dat&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Furthermore, we create some variables/constants to monitor the minimization process</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># step counter</span>
+<span class="n">etol</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">23</span>    <span class="c1"># stop criterion (energy barrier change in Joule)</span>
+<span class="n">delta_e</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e99</span>  <span class="c1"># start value for energy barrier</span>
+</pre></div>
+</div>
+<p>Now we enter the optimization loop.
+Within the loop, the <code class="code docutils literal"><span class="pre">step</span></code> method is called on the <a class="reference internal" href="solvers.html#magnumfe.StringSolver" title="magnumfe.StringSolver"><code class="xref py py-class docutils literal"><span class="pre">StringSolver</span></code></a> object, performing one optimization iteration on the <code class="code docutils literal"><span class="pre">images</span></code> object.
+After each simulation step the results, including all magnetization iamges, are written in different log files.
+Furthermore the energy barrier is computed and compared to the last iteration.
+If the change in the energy barrier is less than <code class="code docutils literal"><span class="pre">etol</span></code>, the optimization is considered to be converged.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># loop until convergence</span>
+<span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="n">delta_e</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">etol</span><span class="p">:</span>
+
+  <span class="c1"># update value of energy barrier for stopping criterion</span>
+  <span class="n">delta_e</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>
+
+  <span class="c1"># perform string method step (relax every image for 2e-11 s)</span>
+  <span class="n">string</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="mi">2</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
+
+  <span class="c1"># write all magnetization images</span>
+  <span class="n">mfile</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="s2">&quot;step_</span><span class="si">%d</span><span class="s2">/m.pvd&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span> <span class="n">mfile</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span>
+
+  <span class="c1"># write all energies (step no, image no, energy)</span>
+  <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">):</span> <span class="n">efile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%g</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+  <span class="n">efile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+  <span class="c1"># write energy barriers (step no, first image to max, last image to max)</span>
+  <span class="n">bfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%g</span><span class="s2"> </span><span class="si">%g</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+  <span class="c1"># increase step counter</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Finally, we close the log files by calling</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">efile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The results logged in <code class="code docutils literal"><span class="pre">energies.dat</span></code> and <code class="code docutils literal"><span class="pre">barrier.dat</span></code> are shown in <a class="reference internal" href="#energies-dat"><span class="std std-numref">Fig. 27</span></a> and <a class="reference internal" href="#barrier-dat"><span class="std std-numref">Fig. 28</span></a> respectively.</p>
+<div class="figure align-center" id="energies-dat">
+<a class="reference internal image-reference" href="_images/energies.png"><img alt="_images/energies.png" src="_images/energies.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Transition-path energies for different string-method iterations.</span></p>
+</div>
+<div class="figure align-center" id="barrier-dat">
+<a class="reference internal image-reference" href="_images/barrier.png"><img alt="_images/barrier.png" src="_images/barrier.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Energy barrier evolution during string-method iteration.</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="misc.html" class="btn btn-neutral" title="Miscellaneous" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, SuessCo.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.2.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/MathJax_local.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

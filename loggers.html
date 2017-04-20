@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Logging &mdash; magnum.fe 2.2.2 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Field Terms" href="field_terms.html"/>
+        <link rel="prev" title="Integrators for the Landau-Lifshitz-Gilbert Equation" href="llg.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logger"><code class="docutils literal"><span class="pre">Logger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scalarlogger"><code class="docutils literal"><span class="pre">ScalarLogger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fieldlogger"><code class="docutils literal"><span class="pre">FieldLogger</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">magnum.fe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Logging</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/loggers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-magnumfe"></span><div class="section" id="logging">
+<h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p>magnum.fe provides classes for the convenient logging of the simulation state. Usually when performing dynamic simulations the logging of a number of scalar values like the time and the averaged magnetization is of interest. This task is performed by the <a class="reference internal" href="#magnumfe.ScalarLogger" title="magnumfe.ScalarLogger"><code class="xref py py-class docutils literal"><span class="pre">ScalarLogger</span></code></a> class. The values are written to simple tab separated file that can be read by a number of post processing and plotting tools like e.g. <a class="reference external" href="http://www.gnuplot.info/">Gnuplot</a>. Additionally one might be interested in the exact magnetization configuration at every time in order to get deeper insight into the dynamic process. The <a class="reference internal" href="#magnumfe.FieldLogger" title="magnumfe.FieldLogger"><code class="xref py py-class docutils literal"><span class="pre">FieldLogger</span></code></a> provides loggin features for arbitrary scalar and vector fields and writes the field data along with the current simulation time to a <code class="code docutils literal"><span class="pre">PVD</span></code> file that can be read by programs using the VTK library, e.g. <a class="reference external" href="http://www.paraview.org/">Paraview</a>. The class <a class="reference internal" href="#magnumfe.Logger" title="magnumfe.Logger"><code class="xref py py-class docutils literal"><span class="pre">Logger</span></code></a> employs both <a class="reference internal" href="#magnumfe.ScalarLogger" title="magnumfe.ScalarLogger"><code class="xref py py-class docutils literal"><span class="pre">ScalarLogger</span></code></a> and <a class="reference internal" href="#magnumfe.FieldLogger" title="magnumfe.FieldLogger"><code class="xref py py-class docutils literal"><span class="pre">FieldLogger</span></code></a> to log scalar and field data and offers a convenient resume functionality to continue a simulation from intermediate logging results.</p>
+<div class="section" id="logger">
+<h2><a class="reference internal" href="#magnumfe.Logger" title="magnumfe.Logger"><code class="xref py py-class docutils literal"><span class="pre">Logger</span></code></a><a class="headerlink" href="#logger" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.Logger">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">Logger</code><span class="sig-paren">(</span><em>directory</em>, <em>scalars=[]</em>, <em>fields=[]</em>, <em>scalars_every=1</em>, <em>fields_every=1</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logger class that is able to log both scalars and fields and that
+offers a simple resume mechanism to resume simulations from existing
+log files. Resume is currently only possible from time t and
+magnetization m and requires the respective field logger for the
+magnetization. Internally uses <a class="reference internal" href="#magnumfe.ScalarLogger" title="magnumfe.ScalarLogger"><code class="xref py py-class docutils literal"><span class="pre">ScalarLogger</span></code></a> and
+<a class="reference internal" href="#magnumfe.FieldLogger" title="magnumfe.FieldLogger"><code class="xref py py-class docutils literal"><span class="pre">FieldLogger</span></code></a>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>directory (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The directoy where all log files are stored</dd>
+<dt>scalars (<code class="xref py py-class docutils literal"><span class="pre">tuple`|:class:`list</span></code>)</dt>
+<dd>List of scalars to be logged, e.g. (&#8216;t&#8217;, &#8216;m&#8217;, &#8216;m[pinned]&#8217;)</dd>
+<dt>fields (<code class="xref py py-class docutils literal"><span class="pre">tuple`|:class:`list</span></code>)</dt>
+<dd>List of fields to be logged, e.g. (&#8216;m&#8217;, &#8216;h[pinned]&#8217;)</dd>
+<dt>scalars_every (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Log scalars every nth step</dd>
+<dt>fields_every (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Log fields every nth step</dd>
+</dl>
+</dd>
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Log the magnetization every 10th step</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">scalars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">],</span> <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">])</span>
+
+<span class="c1"># check if resume is possible</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">is_resumable</span><span class="p">()</span>
+
+<span class="c1"># try to resume from log files</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">resume</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># log state</span>
+<span class="n">logger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.Logger.is_resumable">
+<code class="descname">is_resumable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Logger.is_resumable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if logger can resume from log files.</p>
+<dl class="docutils">
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></dt>
+<dd>True if resumable, False otherwise</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Logger.log">
+<code class="descname">log</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Logger.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs a field from the given state to the log file. This
+method is aliased with left-shift operator, so
+<code class="code docutils literal"><span class="pre">logger.log(state)</span></code> can also be written as
+<code class="code docutils literal"><span class="pre">logger</span> <span class="pre">&lt;&lt;</span> <span class="pre">state</span></code>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state from which the logging row should be generated.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.Logger.resume">
+<code class="descname">resume</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Logger.resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to resume from existing log files. If resume is possible
+the state object is updated with latest possible values of t
+and m and the different log files are aligned and resumed.
+If resume is not possible the state is not modiefied and the
+simulations starts from the beginning.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state to be resumed from the log data</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="scalarlogger">
+<h2><a class="reference internal" href="#magnumfe.ScalarLogger" title="magnumfe.ScalarLogger"><code class="xref py py-class docutils literal"><span class="pre">ScalarLogger</span></code></a><a class="headerlink" href="#scalarlogger" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.ScalarLogger">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">ScalarLogger</code><span class="sig-paren">(</span><em>filename</em>, <em>columns</em>, <em>every=1</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ScalarLogger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple logger class to log scalar values into a tab separated file.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>filename (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The name of the log file</dd>
+<dt>columns ([<code class="xref py py-class docutils literal"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal"><span class="pre">function</span></code>])</dt>
+<dd>The columns to be written to the log file</dd>
+<dt>every (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Write row to log file every nth call</dd>
+</dl>
+</dd>
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># log time and average magnetization</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s1">&#39;log.dat&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">))</span>
+
+<span class="c1"># log time and average magnetization in the domains</span>
+<span class="c1"># &#39;free&#39; and &#39;fixed&#39; separately</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s1">&#39;log.dat&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m[free]&#39;</span><span class="p">,</span> <span class="s1">&#39;m[fixed]&#39;</span><span class="p">))</span>
+
+<span class="c1"># log time and potential u averaged on the facet domain &#39;top&#39;</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s1">&#39;log.dat&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;u[facet:top]&#39;</span><span class="p">))</span>
+
+<span class="c1"># log time in ns and averaged magnetization</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s1">&#39;log.dat&#39;</span><span class="p">,</span> <span class="p">((</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span><span class="o">*</span><span class="mf">1e9</span><span class="p">),</span> <span class="s1">&#39;m&#39;</span><span class="p">))</span>
+
+<span class="c1"># Actually log a row</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.ScalarLogger.add_column">
+<code class="descname">add_column</code><span class="sig-paren">(</span><em>column</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ScalarLogger.add_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column to the logger. The column can be given either by
+a <code class="code docutils literal"><span class="pre">str</span></code> pointing to a (virtual) attribute in the state
+object, e.g. &#8216;t&#8217; to log <code class="code docutils literal"><span class="pre">state.t</span></code> or a <code class="xref py py-class docutils literal"><span class="pre">function</span></code>
+that receives a <code class="code docutils literal"><span class="pre">state</span></code> object and returns the value to
+be logged, e.g. <code class="code docutils literal"><span class="pre">lambda</span> <span class="pre">state:</span> <span class="pre">state.t</span></code>. Lambda attributes
+can be named by providing a tuple with name and lambda, e.g.
+<code class="code docutils literal"><span class="pre">('t',</span> <span class="pre">lambda</span> <span class="pre">state:</span> <span class="pre">state.t)</span></code>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>column (<code class="xref py py-class docutils literal"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code> | <code class="xref py py-class docutils literal"><span class="pre">function</span></code>)</dt>
+<dd>the column to be logged.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.ScalarLogger.log">
+<code class="descname">log</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ScalarLogger.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs a row to the log file generated from the given state. This
+method is aliased with left-shift operator, so
+<code class="code docutils literal"><span class="pre">logger.log(state)</span></code> can also be written as
+<code class="code docutils literal"><span class="pre">logger</span> <span class="pre">&lt;&lt;</span> <span class="pre">state</span></code>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state from which the logging row should be generated.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.ScalarLogger.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ScalarLogger.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the counter that is used to log every nth row.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.ScalarLogger.resumable_step">
+<code class="descname">resumable_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ScalarLogger.resumable_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last step the logger can resume from, e.g. if the logger
+logs every 10th step and the first (i = 0) step was already logged,
+the result is 10.</p>
+<dl class="docutils">
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">int</span></code></dt>
+<dd>The step number the logger is able to resume from</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.ScalarLogger.resume">
+<code class="descname">resume</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ScalarLogger.resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to resume existing log file from log step i. The log file
+is truncated accordingly.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>i (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>The log step to resume from</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="fieldlogger">
+<h2><a class="reference internal" href="#magnumfe.FieldLogger" title="magnumfe.FieldLogger"><code class="xref py py-class docutils literal"><span class="pre">FieldLogger</span></code></a><a class="headerlink" href="#fieldlogger" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.FieldLogger">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">FieldLogger</code><span class="sig-paren">(</span><em>filename</em>, <em>field</em>, <em>every=1</em>, <em>encoding='compressed'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple logger class to log field values into <code class="code docutils literal"><span class="pre">PVD</span></code> files.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>filename (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The name of the log file</dd>
+<dt>field (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The name of the field to be logged, e.g. &#8220;m&#8221;</dd>
+<dt>every (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Write row to log file every nth call</dd>
+<dt>encoding (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>Encoding used to write VTU files (&#8220;ascii&#8221;, &#8220;compressed&#8221;)</dd>
+</dl>
+</dd>
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Log the magnetization every 10th step</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s1">&#39;m.pvd&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Log the magnetization cropped to the &#39;free&#39; domain</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s1">&#39;m.pvd&#39;</span><span class="p">,</span> <span class="s1">&#39;m[free]&#39;</span><span class="p">)</span>
+
+<span class="c1"># Actually log a field</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.FieldLogger.last_recorded_step">
+<code class="descname">last_recorded_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger.last_recorded_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of the last step logged and None if no
+step was yet logged.</p>
+<dl class="docutils">
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">int</span></code></dt>
+<dd>Number of the last step recorded</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.FieldLogger.log">
+<code class="descname">log</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs a field from the given state to the log file. This
+method is aliased with left-shift operator, so
+<code class="code docutils literal"><span class="pre">logger.log(state)</span></code> can also be written as
+<code class="code docutils literal"><span class="pre">logger</span> <span class="pre">&lt;&lt;</span> <span class="pre">state</span></code>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state from which the logging row should be generated.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.FieldLogger.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the counter that is used to log every nth row.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.FieldLogger.resumable_step">
+<code class="descname">resumable_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger.resumable_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last step the logger can resume from, e.g. if the logger
+logs every 10th step and the first (i = 0) step was already logged,
+the result is 10.</p>
+<dl class="docutils">
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">int</span></code></dt>
+<dd>The step number the logger is able to resume from</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.FieldLogger.resume">
+<code class="descname">resume</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger.resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to resume existing log file from log step i. The log file
+is truncated accordingly.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>i (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>The log step to resume from</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.FieldLogger.step_data">
+<code class="descname">step_data</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.FieldLogger.step_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns field and time to a given step number.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>i (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>The step number</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt>(<code class="xref py py-class docutils literal"><span class="pre">float</span></code>, <code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code>)</dt>
+<dd>Time and the field of step i</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="field_terms.html" class="btn btn-neutral float-right" title="Field Terms" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="llg.html" class="btn btn-neutral" title="Integrators for the Landau-Lifshitz-Gilbert Equation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, SuessCo.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.2.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/MathJax_local.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

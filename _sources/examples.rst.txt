@@ -1,0 +1,10 @@
+.. module:: magnumfe
+
+Examples
+========
+
+.. include:: ./examples/domain_management.inc
+.. include:: ./examples/virtual_attributes.inc
+.. include:: ./examples/oscillator_restricted_domain.inc
+.. include:: ./examples/oscillator_slonczewski.inc
+.. include:: ./examples/string_method_multilayer.inc

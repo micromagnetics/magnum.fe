@@ -1,0 +1,165 @@
+.. module:: magnumfe
+.. _spin-diffusion:
+
+Spin diffusion
+==============
+
+The interaction of spin polarized currents with the magnetization can be described by a spin-accumulation model described in [Zhang2002]_ and [Garcia2007]_.
+In this model the spin accumulation :math:`\vec{s}(\vec{x})` exerts a torque on the magnetization by an additional term to the LLG
+
+.. math::
+  \frac{\partial \vec{m}}{\partial t} =
+  - \gamma \vec{m} \times (\vec{h}_\text{eff} + \frac{J}{\hbar \gamma M_\text{s}} \vec{s})
+  + \alpha \vec{m} \times \frac{\partial \vec{m}}{\partial t}
+
+where :math:`J` the coupling strength between itinerant and lattice magentic moments. The spin accumulation itself depends on the magnetization by the diffusion equation
+
+.. math::
+  \frac{\partial \vec{s}}{\partial t} =
+  - \vec{\nabla} \cdot \mat{J}_\text{s}
+  - \frac{\vec{s}}{\tau_\text{sf}}
+  - J \frac{\vec{s} \times \vec{m}}{\hbar}
+
+where :math:`D_0` is the diffusion constant, :math:`\tau_\text{sf}` is the spin-flip relaxation time, and :math:`\mat{J}_\text{s}` is the matrix valued spin current given by
+
+.. math::
+  \mat{J}_\text{s} = 
+  \frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{J}_\text{e}
+  - 2 D_0 \left[
+    \vec{\nabla} \vec{s}
+    - \beta \beta' \vec{m} \otimes \left( (\vec{\nabla}\vec{s})^T \vec{m} \right)
+  \right].
+
+Here :math:`\beta` and :math:`\beta'` are dimensionless polarization parameters and :math:`\mat{J}_\text{e}` is the electrical current density. As shown in [Abert2014b]_ this method is able to reproduce the results of both the spin torque model by Slonczewski, see [Slonczewski1996]_, and the model by Zhang and Li, see [Zhang2004]_.
+
+magnum.fe provides different methods for the solution of the spin diffusion model. The :class:`SpinDiffusion` class integrates the dynamic spin diffusion equation. Combined with an Alouges type integrator it can be shown that the resulting scheme is unconditionally convergent, see [Abert2014a]_, [Abert2015]_.
+
+The typical time scale of the motion of the spin accumulation is two orders of magnitude faster than that of the magnetic motion. Hence, if one is only interested in the magnetization dynamics it is reasonable to treat the spin accumulation in equilibrium by solving for the static case. This model is provided by the :class:`SpinAccumulationForCurrent` class. It basically offers a method :code:`s()` that can be registered as virtual attribute in order to provide the equilibrium spin accumulation for a given magnetization and current distribution.
+
+Both models mentioned above require the prescription of an electric current density. However, the electric conductivity and thus also the current density is known to depend on the magnetization. A fully self-consistent model would therefore not only solve for the spin accumulation, but also for the electric current. The spin-diffusion model introduced above has its origin in a more general model, that was also introduced in [Zhang2002]_ where the electric current :math:`\vec{J}_\text{e}` and the spin current :math:`\vec{J}_\text{s}` are given by the coupled system
+
+.. math::
+  \vec{J}_\text{s} &= 2 C_0 \frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{E} - 2 D_0 \nabla \vec{s} \\
+  \vec{J}_\text{e} &= 2 C_0 \vec{E} - 2 D_0 \frac{\beta' e}{\mu_\text{B}} (\nabla \vec{s})^T \vec{m}
+  
+with :math:`\vec{E}` being the electric field and :math:`C_0` being connected to the electric conductivity :math:`\sigma` by :math:`C_0 = \sigma/2`. Furthermore it is assumed that the electric field has a scalar potential :math:`u` given by :math:`\vec{E} = - \nabla u` and that there are no sources of electric current within the considered region :math:`\nabla \cdot \vec{J}_\text{e} = 0`. Plugging into the static equation for the spin accumulation :math:`\frac{\partial \vec{s}}{\partial t} = 0` yields the system
+
+.. math::
+  - 2 C_0 \Delta u - 2 \beta' D_0 \frac{e}{\mu_\text{B}} \vec{\nabla} \cdot \left[
+    (\vec{\nabla}\vec{s})^T \vec{m}
+  \right] &= 0\\
+   \vec{\nabla} \cdot \left[
+     2 \beta C_0 \frac{\mu_\text{B}}{e} \vec{m} \otimes \vec{\nabla} u
+     + 2 D_0 \vec{\nabla}\vec{s}
+  \right]
+  - \frac{\vec{s}}{\tau_\text{sf}}
+  - J \frac{\vec{s} \times \vec{m}}{\hbar}
+  &= 0
+
+which can be simultaneously solved for the potential :math:`u` and the spin accumulation :math:`\vec{s}`. This is done by the :class:`SpinAccumulationForPotential` class that provides methods for the computation of :math:`u`, :math:`\vec{s}` and the electric current :math:`\vec{J}_\text{e}`. The details of this method are described in [Abert2016]_.
+
+The :class:`SpinAccumulationWithSpinhall` solver extends the :class:`SpinAccumulationForPotential` solver by the spin Hall and invsere spin Hall effect. The spin current and electric current without spin Hall :math:`\vec{J}_\text{s}^0` and :math:`\vec{J}_\text{e}^0` are defined along the lines of the self-consistent model
+
+.. math::
+  \vec{J}_\text{s}^0 &= 2 C_0 \frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{E} - 2 D_0 \nabla \vec{s} \\
+  \vec{J}_\text{e}^0 &= 2 C_0 \vec{E} - 2 D_0 \frac{\beta' e}{\mu_\text{B}} (\nabla \vec{s})^T \vec{m}.
+
+According to [Dyakonov2007]_ the system including spin Hall effects is then given by
+
+.. math::
+  J_{\text{s},ij} &= J_{\text{s},ij}^0 + \epsilon_{ijk} \theta \frac{\mu_\text{B}}{e} J_{\text{e},k}^0\\
+  J_{\text{e},i}  &= J_{\text{e},i}^0 - \epsilon_{ijk} \theta \frac{e}{\mu_\text{B}} J_{\text{s},jk}^0.
+
+where :math:`\theta` is the dimensionless spin Hall angle.
+
+Any of these solvers provide methods to compute the spin accumulation for a given magnetization. In order to account for the influence of the spin accumulation onto the magnetization dynamics you have to include the :class:`SpinTorque` term in the list of effective field contributions and make sure that the computed value for the spin accumulation is accessible via :code:`state.s`.
+
+An overview over the different spin diffusion classes is given in the following table:
+
+======================================  =========================================  =====================  =================================
+**Class**                               :math:`\text{d}\vec{s}/\text{d}t = 0`      **self-consistent**    **(inverse) spin Hall**
+======================================  =========================================  =====================  =================================
+:class:`SpinDiffusion`                  no                                         no                     no
+:class:`SpinAccumulationForCurrent`     yes                                        no                     no
+:class:`SpinAccumulationForPotential`   yes                                        yes                    no
+:class:`SpinAccumulationWithSpinhall`   yes                                        yes                    yes
+======================================  =========================================  =====================  =================================
+
+Legacy material parameters
+++++++++++++++++++++++++++
+
+Until version 1.1.x, magnum.fe implemented all spin diffusion models with a different set of material parameters. Namely instead of the coupling strength :math:`J` and the spin-flip relaxation time :math:`\tau_\text{sf}` the former formulation includes the coupling constant :math:`c` and the diffusion lengths :math:`\lambda_\text{sf}` and :math:`\lambda_\text{J}`. With these parameters the extended LLG reads
+
+.. math::
+  \frac{\partial \vec{m}}{\partial t} =
+  - \gamma \vec{m} \times (\vec{h}_\text{eff} + \frac{c}{\mu_0} \vec{s})
+  + \alpha \vec{m} \times \frac{\partial \vec{m}}{\partial t}
+
+and the dynamics of the spin accumulation :math:`\vec{s}` are described by
+
+.. math::
+  \frac{\partial \vec{s}}{\partial t} =
+  - \vec{\nabla} \cdot \mat{J}_\text{s}
+  - 2 D_0 \left[
+    \frac{\vec{s}}{\lambda_\text{sf}^2}
+    + \frac{\vec{s} \times \vec{m}}{\lambda_\text{J}^2}
+  \right]
+
+where :math:`\lambda_\text{sf}` is the characteristic length for spin-flip relaxation and :math:`\lambda_\text{J}` depends on the electron’s mean free path. Note, that three legacy parameters (:math:`c`, :math:`\lambda_\text{sf}`, and :math:`\lambda_\text{J}`) are substituted by two parameters (:math:`J` and :math:`\tau_\text{sf}`) which means, that the legacy set of parameters is overdefined. The old parameters are still supported, but magnum.fe will print a legacy warning and it is recommended to switch to the new set of parameters. The following relations between old and new parameters hold
+
+.. math::
+  \lambda_\text{sf} &= \sqrt{2 D_0 \tau_\text{sf}}\\
+  \lambda_\text{J}  &= \sqrt{2 D_0 \hbar / J}\\
+  c                 &= J \mu_0 / \hbar \gamma M_\text{s}
+
+Cell and facet regions
+++++++++++++++++++++++
+
+All spin diffusion related classes require the definition of certain cell and facet regions, see :numref:`spin_diffusion_regions`. As usual, regions containing magnetic material have to be included in the :code:`magnetic` region. Moreover, all conducting materials have to be included in the :code:`conducting` region. Note that conducting magnetic regions have to be included in this region, too.
+
+.. figure:: /images/spin_diffusion_regions.png
+   :name: spin_diffusion_regions
+   :width: 60%
+   :align: center
+
+   Regions required by the different spin diffusion classes. The facet regions :code:`contact1` and :code:`contact2` are only required by the :class:`SpinAccumulationForPotential` class in order to apply a potential to the stack.
+
+Besides the cell regions all spin diffusion classes require the definition of a :code:`outermagnet` facet region. This region should contain all interfaces between air and magnetic material. In the case of a magnetic multilayer that is surrounded contacted with nonmagnetic electrodes, this region includes the side facets of the magnetic layers (not the metal-magnetic interfaces).
+Note that the definition of the :code:`outermagnet` region only influences the simulation if the region is passed by an electric current. The defintion can be omitted if this is not the case.
+
+See the figure for the proper definition of both cell and facet regions for a magnetic/nonmagnetic multilayer stack.
+
+:class:`SpinDiffusion`
+++++++++++++++++++++++
+
+.. autoclass:: SpinDiffusion
+   :members:
+
+:class:`SpinAccumulationForCurrent`
++++++++++++++++++++++++++++++++++++
+
+.. autoclass:: SpinAccumulationForCurrent
+   :members:
+
+:class:`SpinAccumulationForPotential`
++++++++++++++++++++++++++++++++++++++
+
+.. autoclass:: SpinAccumulationForPotential
+   :members:
+
+:class:`SpinAccumulationWithSpinhall`
++++++++++++++++++++++++++++++++++++++
+
+.. autoclass:: SpinAccumulationWithSpinhall
+   :members:
+
+
+.. [Zhang2002] Zhang, S., Levy, P. M., & Fert, A. (2002). Mechanisms of spin-polarized current-driven magnetization switching. Physical review letters, 88(23), 236601.
+.. [Garcia2007] García-Cervera, C. J., & Wang, X. P. (2007). Spin-polarized currents in ferromagnetic multilayers. Journal of Computational Physics, 224(2), 699-711.
+.. [Abert2014b] Abert, C., Ruggeri M., Bruckner F., Vogler C., Hrkac G., Praetorius D., & Suess D. (2014). Self-consistent micromagnetic simulations including spin diffusion effects. In preparation
+.. [Slonczewski1996] Slonczewski, J. C. (1996). Current-driven excitation of magnetic multilayers. Journal of Magnetism and Magnetic Materials, 159(1), L1-L7.
+.. [Zhang2004] Zhang, S., & Li, Z. (2004). Roles of nonequilibrium conduction electrons on the magnetization dynamics of ferromagnets. Physical Review Letters, 93(12), 127204.
+.. [Abert2014a] C. Abert, G. Hrkac, M. Page, D. Praetorius, M. Ruggeri, & D. Suess.  Spin-polarized transport in ferromagnetic multilayers: An unconditionally convergent FEM integrator.  Comput. Math. Appl., 68, 6, 639-654, 2014. 
+.. [Abert2015] Abert, C., Ruggeri, M., Bruckner, F., Vogler, C., Hrkac, G., Praetorius, D., & Suess, D. (2015). A three-dimensional spin-diffusion model for micromagnetics. Scientific reports, 5.
+.. [Abert2016] Abert, C. to be published
+.. [Dyakonov2007] Dyakonov, M. I. (2007). Magnetoresistance due to edge spin accumulation. Physical review letters, 99(12), 126601.

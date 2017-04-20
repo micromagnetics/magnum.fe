@@ -1,0 +1,81 @@
+.. module:: magnumfe
+
+Integrators for the Landau-Lifshitz-Gilbert Equation
+====================================================
+
+One of the key features of magnum.fe is the time integration of the Landau-Lifshitz-Gilbert equation (LLG). The LLG describes the motion of the magnetization configuration in micromagnetics:
+
+.. math::
+  \partial_t \vec{m} =
+  - \gamma ( \vec{m} \times \vec{H}_\text{eff} )
+  + \alpha ( \vec{m} \times \partial_t \vec{m} )
+
+where the effective field :math:`\vec{H}_\text{eff}` is given by the variational derivative of the total free energy
+
+.. math::
+  \vec{H}_\text{eff} =
+  - \frac{1}{\mu_0 M_\text{s}} \frac{\delta U(\vec{m})}{\delta \vec{m}}.
+
+For a detailed discussion on the LLG, see [Brown1963]_. magnum.fe implements different algorithms for the integration of the LLG. For most situations the :class:`LLGCvode` integrator will provide by far the best performance.
+
+All LLG integrators are configured with a list of :class:`LLGTerm` objects. Each of these objects represents either an effective field contribution, e.g. the demagnetization field, or a more general contribution to the LLG, e.g. the spin-torque term.
+
+.. code:: python
+
+  # create LLG integrator that incorporates the demagnetization field
+  # and the exchange field as effective field
+  llg = LLGCvode([DemagField(), ExchangeField()])
+
+By default all integrators solve the LLG on the 'magnetic' region. This default can be changed by passing a :code:`region` parameter to the initializer.
+
+.. code:: python
+
+  # solve LLG on region named 'some_region_name'
+  llg = LLGCvode([DemagField(), ExchangeField()], region = 'some_region_name')
+
+The integration is then performed stepwise by calling the :code:`step` method on the solver object.
+
+.. code:: python
+
+  # perform timestep with dt = 1ps
+  llg.step(state, 1e-12)
+
+Alternatively you can use the :code:`step` method of the :code:`state` object. This method does not only call the :code:`step` method of the integrator, but also increases the time :code:`state.t` appropriately.
+
+.. code:: python
+
+  # perform timestep with dt = 1ps and increase state.t
+  state.step(llg, 1e-12)
+
+Depending on the type of LLG integrator, different additional options might be passed to the initializer. Please refer to the following class reference for details.
+
+:class:`LLGCvode`
+++++++++++++++++++++++++++
+
+.. autoclass:: LLGCvode
+   :members:
+
+:class:`LLGAlougesProject`
+++++++++++++++++++++++++++
+
+.. autoclass:: LLGAlougesProject
+   :members:
+
+:class:`LLGAlougesLagrange`
++++++++++++++++++++++++++++
+
+.. autoclass:: LLGAlougesLagrange
+   :members:
+
+:class:`LLGStochastic`
++++++++++++++++++++++++++++
+
+.. autoclass:: LLGStochastic
+   :members:
+
+
+.. [Brown1963] Brown Jr, W. F. Micromagnetics, 1963. Interscience, New York.
+.. [Suess2002] Suess, D., Tsiantos, V., Schrefl, T., Fidler, J., Scholz, W., Forster, H., ... & Miles, J. J. (2002). Time resolved micromagnetics using a preconditioned time integration method. Journal of Magnetism and Magnetic Materials, 248(2), 298-311.
+.. [Alouges2008] Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.
+.. [Abert2013b] Abert, C., Exl, L., Bruckner, F., Drews, A., & Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.
+.. [Goldenits2012] Goldenits, P., Hrkac, G., Praetorius, D., & Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.

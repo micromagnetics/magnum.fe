@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Solvers &mdash; magnum.fe 2.2.2 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Open Boundary Problems" href="open_boundary.html"/>
+        <link rel="prev" title="Spin diffusion" href="spin_diffusion.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solvers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#electric-potential">Electric Potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maxwell-solvers">Maxwell Solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#maxwellreduced"><code class="docutils literal"><span class="pre">MaxwellReduced</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maxwelltotal"><code class="docutils literal"><span class="pre">MaxwellTotal</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#stringsolver"><code class="docutils literal"><span class="pre">StringSolver</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#minimizer-bb"><code class="docutils literal"><span class="pre">Minimizer_BB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#minimizer-lbfgs"><code class="docutils literal"><span class="pre">Minimizer_LBFGS</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">magnum.fe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Solvers</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/solvers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-magnumfe"></span><div class="section" id="solvers">
+<h1>Solvers<a class="headerlink" href="#solvers" title="Permalink to this headline">¶</a></h1>
+<p>The following classes provide different solvers for specific tasks.</p>
+<div class="section" id="electric-potential">
+<h2>Electric Potential<a class="headerlink" href="#electric-potential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.ElectricPotential">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">ElectricPotential</code><span class="sig-paren">(</span><em>magnetic_region='magnetic'</em>, <em>conducting_region='conducting'</em>, <em>outermagnet_region='outermagnet'</em>, <em>solver='cg'</em>, <em>prec='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ElectricPotential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the electric potential and current according to Ohm&#8217;s law.
+Boundray conditions can be given either as potential (Dirichlet) or
+current outflow (Neumann).</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Initialize state with magnetization</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="c1"># set a constant current inflow on contact1 facet-region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact1&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)}</span>
+
+<span class="c1"># set a constant potential on contact2 facet-region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">u_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact2&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)}</span>
+
+<span class="c1"># Create solver and hook into state via virtual attributes</span>
+<span class="n">potential</span> <span class="o">=</span> <span class="n">ElectricPotential</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">potential</span><span class="o">.</span><span class="n">u</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">potential</span><span class="o">.</span><span class="n">j</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>conducting_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the conducting region, defaults to &#8220;conducting&#8221;</dd>
+<dt>solver  (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Solver for linear system (&#8220;cg&#8221;, &#8220;gmres&#8221;,...), defaults to &#8220;bicgstab&#8221;</dd>
+<dt>prec (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Preconditioner for linear system (&#8220;ilu&#8221;, &#8220;amg&#8221;, ...), default to &#8220;ilu&#8221;</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>u_boundary</dt>
+<dd>Potential boundary conditions</dd>
+<dt>j_boundary</dt>
+<dd>Current boundary conditions</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>sigma</dt>
+<dd>Electric conductivity</dd>
+<dt>C0</dt>
+<dd>Alternative to conductivity, see <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a>
+(<span class="math">\(C_0 = \sigma/2\)</span>)</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.ElectricPotential.j">
+<code class="descname">j</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ElectricPotential.j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the electric current for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Electric current or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="maxwell-solvers">
+<h2>Maxwell Solvers<a class="headerlink" href="#maxwell-solvers" title="Permalink to this headline">¶</a></h2>
+<p>Different methods are available for the solution of the magnetostatic Maxwell equations:</p>
+<div class="math">
+\[\begin{split}\text{rot} \vec{H} &amp;= \vec{j} \quad \text{in} \; \Omega_m \\
+\text{div} \vec{B} &amp;= 0       \quad \text{in} \; \Omega_m\end{split}\]</div>
+<p>The open-boundary problem is handled by the direct Johnson-Nedelec FEM-BEM coupling method, which avoids the discretization of the other domain. The following jump conditions need to be considered at the surface of the magnetic material:</p>
+<div class="math">
+\[\begin{split}\vec{n} \times \left[\![ \vec{H} \right]\!] &amp;= 0 \\
+\vec{n} \cdot \left[\![ \vec{B} \right]\!] &amp;= 0\end{split}\]</div>
+<p>The magnetic flux density <span class="math">\(\vec{B}\)</span> and the magnetic field <span class="math">\(\vec{H}\)</span> are connected via a (nonlinear) material law. For the numerical solutioin with a Newton-like method, the material law is linearized around the actual bias point:</p>
+<div class="math">
+\[\vec{B} = \vec{B}(\vec{H}) \approx \vec{B}_\text{r} + \chi \, \vec{H}\]</div>
+<p>At the moment only <span class="math">\(H\)</span>-based methods are implemented. The source of these methods is an external field <span class="math">\(H_\text{ext}\)</span> (sometimes called impressed current vector potential). Any FieldTerm class can be used to create the source field for a Maxwell problem. If for example a known current density should act as sources of the magnetic field the OerstedField class can be used to calculate <span class="math">\(H_\text{ext}\)</span>.</p>
+<div class="figure align-center" id="maxwell-team13">
+<a class="reference internal image-reference" href="_images/maxwell_team13.png"><img alt="_images/maxwell_team13.png" src="_images/maxwell_team13.png" style="width: 60%;" /></a>
+</div>
+<div class="section" id="maxwellreduced">
+<h3><a class="reference internal" href="#magnumfe.MaxwellReduced" title="magnumfe.MaxwellReduced"><code class="xref py py-class docutils literal"><span class="pre">MaxwellReduced</span></code></a><a class="headerlink" href="#maxwellreduced" title="Permalink to this headline">¶</a></h3>
+<p>Since the external field <span class="math">\(H_\text{ext}\)</span> contains all rotational contibutions to the total field which are created by some current distribution, the remaining induced field <span class="math">\(H_\text{d}\)</span> is irrotational and can therefor be described by a gradient field:</p>
+<div class="math">
+\[\vec{H} = \vec{H_{ext}} - \nabla u\]</div>
+<p>The reduced scalar potential <span class="math">\(u\)</span> can be defined globally and always exists. Unfortunately cancelation effects can occur if magnetic materials with high susceptibility are considered. In this case the induced field and the external field nearly cancel each other, which may lead to large numerical errors. Nevertheless the reduced scalar potential is often useful due to its simplicity.</p>
+<div class="math">
+\[\begin{split}\vec{\nabla} \cdot \left(\vec{\mu} \, \vec{\nabla} u \right) &amp;= \vec{\nabla} \cdot \left( \mu \, \vec{H_{ext}} + \vec{B}_\text{r}\right) \quad \text{in} \; \Omega \\
+\Delta u &amp;= 0 \quad \text{in} \; \mathbb{R}^3 \setminus \Omega \\
+[\![ u ]\!] &amp;= 0 \quad \text{on} \; \partial \Omega \\
+[\![\nabla u \cdot \vec{\mu} \cdot \vec{n} ]\!] &amp;= \left( \vec{H_{ext}} \cdot [\![ \mu ]\!] + \vec{B}_\text{r} \right) \cdot \vec{n} \quad \text{on} \; \partial \Omega\end{split}\]</div>
+<p>Using the direct Johnson-Nedelec FEM-BEM coupling method leads to the following discretized system of equations:</p>
+<div class="math">
+\[\begin{split}\begin{pmatrix} M^{11}_{ij} &amp; M^{12}_{in} \\ M^{21}_{mj} &amp; M^{22}_{mn} \end{pmatrix}
+\begin{pmatrix} u_j \\ \phi_n \end{pmatrix} =
+\begin{pmatrix} RHS^1_i \\ \vec{0} \end{pmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}M^{11}_{ij} &amp;= \int\limits_{\Omega} \mu^+ \, \vec{\nabla} \Lambda_i \cdot \vec{\nabla} \Lambda_j \, d\Omega \\
+M^{12}_{in} &amp;= -\int\limits_{\Gamma} \Lambda_i \, \mathbb{1}_n \, d\Gamma \\
+M^{21}_{mj} &amp;= \frac{1}{2} \Lambda_j(\vec{x}_m) - \frac{1}{4 \pi} \int\limits_{\Gamma} \Lambda_j(\vec{y}) \frac{\vec{x}_m - \vec{y}}{\vert \vec{x}_m - \vec{y}\vert^3} \, \vec{n} \, d\Gamma_y \\
+M^{22}_{mn} &amp;= \frac{1}{4 \pi} \int\limits_{\Gamma} \frac{\mathbb{1}_n(\vec{y})}{\vert \vec{x} - \vec{y}\vert} \, d\Gamma_y \\
+RHS^1_{i}   &amp;= -\int\limits_{\Gamma} \mu_0 \, \vec{H}_\text{ext} \cdot \vec{n} \, \Lambda_i \, d\Gamma + \int\limits_{\Omega} \left( \vec{H}_\text{ext} \cdot \mu + \vec{B}_\text{r} \right) \cdot \nabla \Lambda_i \, d\Omega\end{split}\]</div>
+<p>From the mathematical point of view using piecewise linear and continuous basis functions <span class="math">\(\Lambda_i\)</span> for the potential and piecewise constant basis functions <span class="math">\(\mathbb{1}_n\)</span> for the normal derivative seems to be the natural choice for a lowest order discritization. Nevertheless the Johnson-Nedelec coupling should be stable for arbitrary combinations of function spaces.</p>
+<dl class="class">
+<dt id="magnumfe.MaxwellReduced">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">MaxwellReduced</code><span class="sig-paren">(</span><em>lump=True</em>, <em>region='maxwell'</em>, <em>tol=1e-16</em>, <em>maxiter=20</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.MaxwellReduced" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class solves the magnetostatic Maxwell equations using a reduced scalar potential formulation as
+introduced in <a class="reference internal" href="#bruckner2012" id="id1">[Bruckner2012]</a>.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">UnitCubeMesh</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">maxwell_material</span> <span class="o">=</span> <span class="n">MaxwellMaterial</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">chi</span><span class="o">=</span><span class="mi">1</span><span class="n">e3</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">Hext</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)))</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="n">MaxwellReduced</span><span class="p">()</span>
+<span class="n">Hd</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Hd</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">Htot</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Htot</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">B</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The external field is assumed to be in state.Hext.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class requires the PETSc Backend to be enabled.</p>
+</div>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if set to <code class="code docutils literal"><span class="pre">True</span></code> external field terms are computed with mass lumping</dd>
+<dt>prec_solver (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>Solver for preconditioning system, either &#8216;LU&#8217; or &#8216;GMRES&#8217;, defaults to &#8216;LU&#8217;</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The region where the Maxwell equations are solved, defaults to &#8216;maxwell&#8217;</dd>
+<dt>tol (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Threshold for the tolerance within the Newton iteration</dd>
+<dt>maxiter (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Maximum number of Newton iterations</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.MaxwellReduced.u">
+<code class="descname">u</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.MaxwellReduced.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate <span class="math">\(\vec{m}(H_{ext})\)</span>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The external field configuration.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="maxwelltotal">
+<h3><a class="reference internal" href="#magnumfe.MaxwellTotal" title="magnumfe.MaxwellTotal"><code class="xref py py-class docutils literal"><span class="pre">MaxwellTotal</span></code></a><a class="headerlink" href="#maxwelltotal" title="Permalink to this headline">¶</a></h3>
+<p>An alternative scalar potential formulation, which does not suffer from numerical cancelation errors, is the total scalar potential. In contrast to the reduced scalar potential, the total scalar potential directly describes the total field:</p>
+<div class="math">
+\[\vec{H} = - \nabla u\]</div>
+<p>Since this formulation is only allowed in regions without current density, it is necessary to devide the global problem into inner and other region. While the total scalar potential can only be defined within the inner region, a reduced scalar potential is used to describe the outer region (where some currents are needed to create the source field <span class="math">\(H_\text{ext}\)</span>. Additionally the total scalar potential is only well defined if the inner region is singly-connected (artificial cuts can be used to create a singly-connected domain). Furthermore since the potential description changes from inner to outer region the formulatioin of the jump conditions at the boundary of the magnetic domain, requiers the knowledge of a potential of the external field <span class="math">\(u_\text{ext}\)</span>. Putting everything together the following equations can be derived for the total scalar potential:</p>
+<div class="math">
+\[\begin{split}\vec{\nabla} \cdot \left(\vec{\mu} \, \vec{\nabla} u \right) &amp;= \vec{\nabla} \cdot \vec{B}_\text{r} \quad \text{in} \; \Omega \\
+\Delta u &amp;= 0 \quad \text{in} \; \mathbb{R}^3 \setminus \Omega \\
+[\![ u ]\!] &amp;= u_\text{ext} \quad \text{on} \; \partial \Omega \\
+[\![\nabla u \cdot \vec{\mu} \cdot \vec{n} ]\!] &amp;= \left( -\mu_0 \, \vec{H_{ext}} + \vec{B}_\text{r} \right) \cdot \vec{n} \quad \text{on} \; \partial \Omega\end{split}\]</div>
+<p>Using the direct Johnson-Nedelec FEM-BEM coupling method leads to the following discretized system of equations:</p>
+<div class="math">
+\[\begin{split}\begin{pmatrix} M^{11}_{ij} &amp; M^{12}_{in} \\ M^{21}_{mj} &amp; M^{22}_{mn} \end{pmatrix}
+\begin{pmatrix} u_j \\ \phi_n \end{pmatrix} =
+\begin{pmatrix} RHS^1_i \\ RHS^2_m \end{pmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}M^{11}_{ij} &amp;= \int\limits_{\Omega} \mu^+ \, \vec{\nabla} \Lambda_i \cdot \vec{\nabla} \Lambda_j \, d\Omega \\
+M^{12}_{in} &amp;= -\int\limits_{\Gamma} \Lambda_i \, \mathbb{1}_n \, d\Gamma \\
+M^{21}_{mj} &amp;= \frac{1}{2} \Lambda_j(\vec{x}_m) - \frac{1}{4 \pi} \int\limits_{\Gamma} \Lambda_j(\vec{y}) \frac{\vec{x}_m - \vec{y}}{\vert \vec{x}_m - \vec{y}\vert^3} \, \vec{n} \, d\Gamma_y \\
+M^{22}_{mn} &amp;= \frac{1}{4 \pi} \int\limits_{\Gamma} \frac{\mathbb{1}_n(\vec{y})}{\vert \vec{x}_m - \vec{y}\vert} \, d\Gamma_y \\
+RHS^1_{i}   &amp;= -\int\limits_{\Gamma} \mu_0 \, \vec{H}_\text{ext} \cdot \vec{n} \, \Lambda_i \, d\Gamma + \int\limits_{\Omega} \vec{B}_\text{r} \cdot \nabla \Lambda_i \, d\Omega\\
+RHS^2_{i}   &amp;= M^{21}_{mj} \, u_j^\text{ext}\end{split}\]</div>
+<dl class="class">
+<dt id="magnumfe.MaxwellTotal">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">MaxwellTotal</code><span class="sig-paren">(</span><em>lump=True</em>, <em>region='maxwell'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.MaxwellTotal" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class solves the magnetostatic Maxwell equations using a total scalar potential formulation as
+introduced in <a class="reference internal" href="#bruckner2012" id="id2">[Bruckner2012]</a>.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">UnitCubeMesh</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">maxwell_material</span> <span class="o">=</span> <span class="n">MaxwellMaterial</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">chi</span><span class="o">=</span><span class="mi">1</span><span class="n">e3</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">Hext</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)))</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="n">MaxwellTotal</span><span class="p">()</span>
+<span class="n">Hd</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Hd</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">Htot</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Htot</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">B</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The external field is assumed to be in state.Hext.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class requires the PETSc Backend to be enabled.</p>
+</div>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if set to <code class="code docutils literal"><span class="pre">True</span></code> external field terms are computed with mass lumping</dd>
+<dt>prec_solver (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>Solver for preconditioning system, either &#8216;LU&#8217; or &#8216;GMRES&#8217;, defaults to &#8216;LU&#8217;</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The region where the Maxwell equations are solved, defaults to &#8216;maxwell&#8217;</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.MaxwellTotal.u">
+<code class="descname">u</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.MaxwellTotal.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate <span class="math">\(\vec{m}(H_{ext})\)</span>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The external field configuration.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="stringsolver">
+<h2><a class="reference internal" href="#magnumfe.StringSolver" title="magnumfe.StringSolver"><code class="xref py py-class docutils literal"><span class="pre">StringSolver</span></code></a><a class="headerlink" href="#stringsolver" title="Permalink to this headline">¶</a></h2>
+<p>magnum.fe implements the string method as introduced in <a class="reference internal" href="#e2007" id="id3">[E2007]</a> for the computation of energy barriers between two defined magnetic states that usually mark local minimia in the energy landscape. The basic working principle of the string method is illustrated in <a class="reference internal" href="#string-method"><span class="std std-numref">Fig. 19</span></a>.</p>
+<div class="figure align-center" id="string-method">
+<a class="reference internal image-reference" href="_images/string_method.png"><img alt="_images/string_method.png" src="_images/string_method.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Visualization of the string method used to find the energy barrier between two energy minima. The dashed line is the start path discretized by 10 images shown as dots. The solid line is the resulting minimum energy path as computed by the string method.</span></p>
+</div>
+<p>The starting point for the energy barrier minimization is an arbitrary path between the magnetization configurations <span class="math">\(\vec{m}_1\)</span> and <span class="math">\(\vec{m}_2\)</span> discretized by a number of transitional magnetization states referred to as images. The minimum energy barrier between <span class="math">\(\vec{m}_1\)</span> and <span class="math">\(\vec{m}_2\)</span> is then computed by iteratively relaxing the initial transition path. Each step of this procedure consists of two operations. In the first operation every image is driven towards an energy minimum by a steepest descend method. In a second operation the images on the resulting path are rearanged in an equidistant fashion by a spline interpolation as suggested in <a class="reference internal" href="#e2007" id="id4">[E2007]</a>. When converged the whole information of the minumum energy path, including both images and energies, is made available to the user.</p>
+<dl class="class">
+<dt id="magnumfe.StringSolver">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">StringSolver</code><span class="sig-paren">(</span><em>state</em>, <em>terms=[]</em>, <em>num_images=20</em>, <em>fix_start=False</em>, <em>fix_end=False</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.StringSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class implements the string method for energy barrier calculations as
+introduced in <a class="reference internal" href="#e2007" id="id5">[E2007]</a>. The images are stored in a <code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code>
+object that acts as a list of <code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> objects and
+moreover provides convenience wrappers to access the energies and averaged
+magnetization for the individual images.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="n">StringSolver</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">(),</span> <span class="n">UniaxialAnisotropyField</span><span class="p">()],</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># create initial images</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">level</span><span class="p">([</span>
+  <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+  <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+  <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="c1"># perform 10 string steps</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="n">string</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+
+<span class="c1"># print energy barrier</span>
+<span class="nb">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>
+
+<span class="c1"># print average magnetization of first image</span>
+<span class="nb">print</span> <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">m</span>
+
+<span class="c1"># save all images</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="s2">&quot;m.pvd&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+  <span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">image</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms ([<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>])</dt>
+<dd>list of LLG contributions to be considered for energy minimization</dd>
+<dt>num_images (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>number of images used for minimization</dd>
+<dt>fix_start (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>fix start image</dd>
+<dt>fix_end (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>fix end image</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>region on which the LLG is solved for minimization</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.StringSolver.level">
+<code class="descname">level</code><span class="sig-paren">(</span><em>images</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.StringSolver.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rearanges images in an equidistant manner by spline interpolation and
+returns the result as <code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code> object as required
+by the <code class="code docutils literal"><span class="pre">step</span></code> method. While the number of input images is arbitrary,
+the number of ouput images is defined by the <code class="code docutils literal"><span class="pre">num_images</span></code> attribute
+of the class.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>images (<code class="xref py py-class docutils literal"><span class="pre">list</span></code>/<code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code>)</dt>
+<dd>images to be leveled provided either as Python <code class="xref py py-class docutils literal"><span class="pre">list</span></code> or
+<code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code></dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code></dt>
+<dd>the leveled images</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.StringSolver.step">
+<code class="descname">step</code><span class="sig-paren">(</span><em>images</em>, <em>h=1e-11</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.StringSolver.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a single string method step. The images are provided as
+<code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code> object as provided by the <code class="code docutils literal"><span class="pre">level</span></code>
+method and are update inplace. The result of the step is already leveled.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>images (<code class="xref py py-class docutils literal"><span class="pre">MagnetizationCollection</span></code>)</dt>
+<dd>the magnetization images</dd>
+<dt>h (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>size of the steepest descend step used to relax the images</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="minimizer-bb">
+<h2><a class="reference internal" href="#magnumfe.Minimizer_BB" title="magnumfe.Minimizer_BB"><code class="xref py py-class docutils literal"><span class="pre">Minimizer_BB</span></code></a><a class="headerlink" href="#minimizer-bb" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.Minimizer_BB">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">Minimizer_BB</code><span class="sig-paren">(</span><em>terms=[]</em>, <em>region='magnetic'</em>, <em>tau_min=1e-10</em>, <em>tau_max=1e-05</em>, <em>dm_max=10000.0</em>, <em>samples=10</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Minimizer_BB" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class implements the direct energy minimizing algorithm introduced in <a class="reference internal" href="#exl2014" id="id6">[Exl2014]</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature is experimental.</p>
+</div>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="n">minimizer</span> <span class="o">=</span> <span class="n">Minimizer_BB</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">()])</span>
+<span class="n">minimizer</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms ([<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>])</dt>
+<dd>List of LLG contributions to be considered for energy minimization</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>region on which the energy is minimized</dd>
+<dt>tau_min (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>minimum step size</dd>
+<dt>tau_max (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>maximum step size</dd>
+<dt>dm_max (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>stop criterion given as supremum norm of dm/dt</dd>
+<dt>sample (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>number of subsequent steps the stop criterion has to be fulfilled</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="minimizer-lbfgs">
+<h2><a class="reference internal" href="#magnumfe.Minimizer_LBFGS" title="magnumfe.Minimizer_LBFGS"><code class="xref py py-class docutils literal"><span class="pre">Minimizer_LBFGS</span></code></a><a class="headerlink" href="#minimizer-lbfgs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.Minimizer_LBFGS">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">Minimizer_LBFGS</code><span class="sig-paren">(</span><em>terms=[]</em>, <em>region='magnetic'</em>, <em>**args</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Minimizer_LBFGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class implements the direct energy minimizing algorithm based on L-BFGS iteration.
+For details see [Schrefl???]_.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature is experimental.</p>
+</div>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="n">minimizer</span> <span class="o">=</span> <span class="n">Minimizer_LBFGS</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">()])</span>
+<span class="n">minimizer</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms ([<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>])</dt>
+<dd>List of LLG contributions to be considered for energy minimization</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>region on which the energy is minimized</dd>
+<dt>maxiter (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>maximum number of BFGS iterations (default = 200)</dd>
+<dt>tol (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Tolerance to be reached (default = 1e-6)</dd>
+<dt>m (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>rank of the hessian approximation (default = 5)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<table class="docutils citation" frame="void" id="bruckner2012" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Bruckner2012]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> 3D FEM–BEM-coupling method to solve magnetostatic Maxwell equations. Journal of Magnetism and Magnetic Materials, 324(10), 1862-1866</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="exl2014" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[Exl2014]</a></td><td>Exl, L., Bance, S., Reichel, F., Schrefl, T., Stimming, H. P., &amp; Mauser, N. J. (2014). LaBonte&#8217;s method revisited: An effective steepest descent method for micromagnetic energy minimization. Journal of Applied Physics, 115(17), 17D118.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="e2007" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[E2007]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id5">3</a>)</em> Weinan, E., Ren, W., &amp; Vanden-Eijnden, E. (2007). Simplified and improved string method for computing the minimum energy paths in barrier-crossing events. The Journal of Chemical Physics, 126(16), 164103.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="open_boundary.html" class="btn btn-neutral float-right" title="Open Boundary Problems" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="spin_diffusion.html" class="btn btn-neutral" title="Spin diffusion" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, SuessCo.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.2.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/MathJax_local.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

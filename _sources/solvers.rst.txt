@@ -1,0 +1,142 @@
+.. module:: magnumfe
+
+Solvers
+=======
+
+The following classes provide different solvers for specific tasks.
+
+Electric Potential
+++++++++++++++++++
+
+.. autoclass:: ElectricPotential
+   :members:
+
+Maxwell Solvers
++++++++++++++++
+
+Different methods are available for the solution of the magnetostatic Maxwell equations:
+
+.. math::
+  \text{rot} \vec{H} &= \vec{j} \quad \text{in} \; \Omega_m \\
+  \text{div} \vec{B} &= 0       \quad \text{in} \; \Omega_m
+
+The open-boundary problem is handled by the direct Johnson-Nedelec FEM-BEM coupling method, which avoids the discretization of the other domain. The following jump conditions need to be considered at the surface of the magnetic material:
+
+.. math::
+  \vec{n} \times \left[\![ \vec{H} \right]\!] &= 0 \\
+  \vec{n} \cdot \left[\![ \vec{B} \right]\!] &= 0
+
+The magnetic flux density :math:`\vec{B}` and the magnetic field :math:`\vec{H}` are connected via a (nonlinear) material law. For the numerical solutioin with a Newton-like method, the material law is linearized around the actual bias point:
+
+.. math::
+  \vec{B} = \vec{B}(\vec{H}) \approx \vec{B}_\text{r} + \chi \, \vec{H}
+
+At the moment only :math:`H`-based methods are implemented. The source of these methods is an external field :math:`H_\text{ext}` (sometimes called impressed current vector potential). Any FieldTerm class can be used to create the source field for a Maxwell problem. If for example a known current density should act as sources of the magnetic field the OerstedField class can be used to calculate :math:`H_\text{ext}`.
+
+.. figure:: /images/maxwell_team13.png
+   :name: maxwell_team13
+   :width: 60%
+   :align: center
+
+:class:`MaxwellReduced`
+^^^^^^^^^^^^^^^^^^^^^^^
+Since the external field :math:`H_\text{ext}` contains all rotational contibutions to the total field which are created by some current distribution, the remaining induced field :math:`H_\text{d}` is irrotational and can therefor be described by a gradient field:
+
+.. math::
+  \vec{H} = \vec{H_{ext}} - \nabla u
+
+The reduced scalar potential :math:`u` can be defined globally and always exists. Unfortunately cancelation effects can occur if magnetic materials with high susceptibility are considered. In this case the induced field and the external field nearly cancel each other, which may lead to large numerical errors. Nevertheless the reduced scalar potential is often useful due to its simplicity.
+
+.. math::
+  \vec{\nabla} \cdot \left(\vec{\mu} \, \vec{\nabla} u \right) &= \vec{\nabla} \cdot \left( \mu \, \vec{H_{ext}} + \vec{B}_\text{r}\right) \quad \text{in} \; \Omega \\
+  \Delta u &= 0 \quad \text{in} \; \mathbb{R}^3 \setminus \Omega \\
+  [\![ u ]\!] &= 0 \quad \text{on} \; \partial \Omega \\
+  [\![\nabla u \cdot \vec{\mu} \cdot \vec{n} ]\!] &= \left( \vec{H_{ext}} \cdot [\![ \mu ]\!] + \vec{B}_\text{r} \right) \cdot \vec{n} \quad \text{on} \; \partial \Omega
+
+Using the direct Johnson-Nedelec FEM-BEM coupling method leads to the following discretized system of equations:
+
+.. math::
+  \begin{pmatrix} M^{11}_{ij} & M^{12}_{in} \\ M^{21}_{mj} & M^{22}_{mn} \end{pmatrix}
+  \begin{pmatrix} u_j \\ \phi_n \end{pmatrix} =
+  \begin{pmatrix} RHS^1_i \\ \vec{0} \end{pmatrix}
+
+.. math::
+  M^{11}_{ij} &= \int\limits_{\Omega} \mu^+ \, \vec{\nabla} \Lambda_i \cdot \vec{\nabla} \Lambda_j \, d\Omega \\
+  M^{12}_{in} &= -\int\limits_{\Gamma} \Lambda_i \, \mathbb{1}_n \, d\Gamma \\
+  M^{21}_{mj} &= \frac{1}{2} \Lambda_j(\vec{x}_m) - \frac{1}{4 \pi} \int\limits_{\Gamma} \Lambda_j(\vec{y}) \frac{\vec{x}_m - \vec{y}}{\vert \vec{x}_m - \vec{y}\vert^3} \, \vec{n} \, d\Gamma_y \\
+  M^{22}_{mn} &= \frac{1}{4 \pi} \int\limits_{\Gamma} \frac{\mathbb{1}_n(\vec{y})}{\vert \vec{x} - \vec{y}\vert} \, d\Gamma_y \\
+  RHS^1_{i}   &= -\int\limits_{\Gamma} \mu_0 \, \vec{H}_\text{ext} \cdot \vec{n} \, \Lambda_i \, d\Gamma + \int\limits_{\Omega} \left( \vec{H}_\text{ext} \cdot \mu + \vec{B}_\text{r} \right) \cdot \nabla \Lambda_i \, d\Omega
+
+From the mathematical point of view using piecewise linear and continuous basis functions :math:`\Lambda_i` for the potential and piecewise constant basis functions :math:`\mathbb{1}_n` for the normal derivative seems to be the natural choice for a lowest order discritization. Nevertheless the Johnson-Nedelec coupling should be stable for arbitrary combinations of function spaces. 
+
+.. autoclass:: MaxwellReduced
+   :members:
+
+:class:`MaxwellTotal`
+^^^^^^^^^^^^^^^^^^^^^
+An alternative scalar potential formulation, which does not suffer from numerical cancelation errors, is the total scalar potential. In contrast to the reduced scalar potential, the total scalar potential directly describes the total field:
+
+.. math::
+  \vec{H} = - \nabla u
+
+Since this formulation is only allowed in regions without current density, it is necessary to devide the global problem into inner and other region. While the total scalar potential can only be defined within the inner region, a reduced scalar potential is used to describe the outer region (where some currents are needed to create the source field :math:`H_\text{ext}`. Additionally the total scalar potential is only well defined if the inner region is singly-connected (artificial cuts can be used to create a singly-connected domain). Furthermore since the potential description changes from inner to outer region the formulatioin of the jump conditions at the boundary of the magnetic domain, requiers the knowledge of a potential of the external field :math:`u_\text{ext}`. Putting everything together the following equations can be derived for the total scalar potential:
+
+.. math::
+  \vec{\nabla} \cdot \left(\vec{\mu} \, \vec{\nabla} u \right) &= \vec{\nabla} \cdot \vec{B}_\text{r} \quad \text{in} \; \Omega \\
+  \Delta u &= 0 \quad \text{in} \; \mathbb{R}^3 \setminus \Omega \\
+  [\![ u ]\!] &= u_\text{ext} \quad \text{on} \; \partial \Omega \\
+  [\![\nabla u \cdot \vec{\mu} \cdot \vec{n} ]\!] &= \left( -\mu_0 \, \vec{H_{ext}} + \vec{B}_\text{r} \right) \cdot \vec{n} \quad \text{on} \; \partial \Omega
+
+Using the direct Johnson-Nedelec FEM-BEM coupling method leads to the following discretized system of equations:
+
+.. math::
+  \begin{pmatrix} M^{11}_{ij} & M^{12}_{in} \\ M^{21}_{mj} & M^{22}_{mn} \end{pmatrix}
+  \begin{pmatrix} u_j \\ \phi_n \end{pmatrix} =
+  \begin{pmatrix} RHS^1_i \\ RHS^2_m \end{pmatrix}
+
+.. math::
+  M^{11}_{ij} &= \int\limits_{\Omega} \mu^+ \, \vec{\nabla} \Lambda_i \cdot \vec{\nabla} \Lambda_j \, d\Omega \\
+  M^{12}_{in} &= -\int\limits_{\Gamma} \Lambda_i \, \mathbb{1}_n \, d\Gamma \\
+  M^{21}_{mj} &= \frac{1}{2} \Lambda_j(\vec{x}_m) - \frac{1}{4 \pi} \int\limits_{\Gamma} \Lambda_j(\vec{y}) \frac{\vec{x}_m - \vec{y}}{\vert \vec{x}_m - \vec{y}\vert^3} \, \vec{n} \, d\Gamma_y \\
+  M^{22}_{mn} &= \frac{1}{4 \pi} \int\limits_{\Gamma} \frac{\mathbb{1}_n(\vec{y})}{\vert \vec{x}_m - \vec{y}\vert} \, d\Gamma_y \\
+  RHS^1_{i}   &= -\int\limits_{\Gamma} \mu_0 \, \vec{H}_\text{ext} \cdot \vec{n} \, \Lambda_i \, d\Gamma + \int\limits_{\Omega} \vec{B}_\text{r} \cdot \nabla \Lambda_i \, d\Omega\\
+  RHS^2_{i}   &= M^{21}_{mj} \, u_j^\text{ext}
+
+.. autoclass:: MaxwellTotal
+   :members:
+
+:class:`StringSolver`
++++++++++++++++++++++
+
+magnum.fe implements the string method as introduced in [E2007]_ for the computation of energy barriers between two defined magnetic states that usually mark local minimia in the energy landscape. The basic working principle of the string method is illustrated in :numref:`string_method`.
+
+.. figure:: /images/string_method.png
+   :name: string_method
+   :width: 60%
+   :align: center
+
+   Visualization of the string method used to find the energy barrier between two energy minima. The dashed line is the start path discretized by 10 images shown as dots. The solid line is the resulting minimum energy path as computed by the string method.
+
+The starting point for the energy barrier minimization is an arbitrary path between the magnetization configurations :math:`\vec{m}_1` and :math:`\vec{m}_2` discretized by a number of transitional magnetization states referred to as images. The minimum energy barrier between :math:`\vec{m}_1` and :math:`\vec{m}_2` is then computed by iteratively relaxing the initial transition path. Each step of this procedure consists of two operations. In the first operation every image is driven towards an energy minimum by a steepest descend method. In a second operation the images on the resulting path are rearanged in an equidistant fashion by a spline interpolation as suggested in [E2007]_. When converged the whole information of the minumum energy path, including both images and energies, is made available to the user.
+
+.. autoclass:: StringSolver
+   :members:
+
+:class:`Minimizer_BB`
++++++++++++++++++++++
+
+.. autoclass:: Minimizer_BB
+   :members:
+
+:class:`Minimizer_LBFGS`
+++++++++++++++++++++++++
+
+.. autoclass:: Minimizer_LBFGS
+   :members:
+
+
+.. [Bruckner2012] 3D FEM–BEM-coupling method to solve magnetostatic Maxwell equations. Journal of Magnetism and Magnetic Materials, 324(10), 1862-1866
+
+.. [Exl2014] Exl, L., Bance, S., Reichel, F., Schrefl, T., Stimming, H. P., & Mauser, N. J. (2014). LaBonte's method revisited: An effective steepest descent method for micromagnetic energy minimization. Journal of Applied Physics, 115(17), 17D118.
+
+.. [E2007] Weinan, E., Ren, W., & Vanden-Eijnden, E. (2007). Simplified and improved string method for computing the minimum energy paths in barrier-crossing events. The Journal of Chemical Physics, 126(16), 164103.

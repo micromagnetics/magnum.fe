@@ -1,0 +1,66 @@
+Installation
+============
+
+There are various ways to install magnum.fe on your computer. By purchasing magnum.fe you are supplied with a virtual machine image for use in `VirtualBox <https://www.virtualbox.org/>`_ and a `Docker <https://www.docker.com/>`_ image. While the easiest way to get started is the virtual machine image, the Docker solution is faster and the better choice for the simulation on dedicated simluation servers.
+
+Virtual Box
++++++++++++
+The magnum.fe virtual box contains a complete Linux system including the meshing software `Gmsh <http://geuz.org/gmsh/>`_ and the postprocessing software `Gnuplot <http://www.gnuplot.info/>`_ and `Paraview <http://www.paraview.org/>`_. In order to run the magnum.fe virtual machine you have to install the free host software `VirtualBox <https://www.virtualbox.org/>`_ that is available for Windows, Linux and Mac OS.
+
+After installing, run VirtualBox and import the magnum.fe image ('OVA' file) by choosing *File -> Import Appliance...*, see :numref:`vb_import`.
+
+.. figure:: images/virtualbox/import2.png
+  :name: vb_import
+  :scale: 60%
+
+  Import magnum.fe image in VirtualBox
+
+You should now be able to start the virtual machine and login with user: 'magnumfe' and password: 'magnumfe'.  After successful login the virtual machine starts in a graphical user session with a terminal opened. You can start your first simulation by running one of the supplied examples in your home directory, e.g. the `standard problem #4 <http://www.ctcms.nist.gov/~rdm/std4/spec4.html>`_ by the MuMag group, see :numref:`vb_sp4`.
+
+.. figure:: images/virtualbox/run_script.png
+  :name: vb_sp4
+  :scale: 60%
+
+  Run the Standard Problem #4 example by the MuMag group
+
+This example produces a PVD file that contains the magnetization configuration for each time step. You can watch the outcome in Paraview by typing :code:`paraview data/m.pvd`. In order to make your simulation results available on your host system you can use shared directories. To use a directory of your host system within the virtual machine add a shared folder by selecting *Devices -> Shared Folder Settings...*, see :numref:`vb_shared_folder`.
+
+.. figure:: images/virtualbox/shared_folder1.png
+  :name: vb_shared_folder
+  :scale: 60%
+
+  Add a shared folder named simulations to the virtual machine
+
+After reboot, the shared folder should be available at :code:`/media/sf_simulations`.
+The supplied image by default will use 2GB of RAM and 2 CPUs. You can improve the performance of magnum.fe by increasing these resources according to your host systems capabilities.
+
+Docker
+++++++
+The second option for the installation of magnum.fe is a `Docker <https://www.docker.com/>`_ container. Docker, in contrast to the virtual machine, does not virtualize the complete operating system, but reuses the Kernel of the host system. The overhead produced by this virtualization is much lower than that of a complete virtual machine and the programs running in the Docker container have full access to the resources of the host system. However, the higher performance comes at the price of a more difficult setup. Like the VirtualBox the Docker client is available for Windows, Linux and Mac OS. After installing Docker you can load the magnum.fe Docker image by running
+
+.. code-block:: bash
+
+  docker load -i magnumfe_master_08_31_15_38ada6b.tar
+
+This creates a new image called 'suessco/magnum.fe'. Now you can run your simulation scripts in the Docker container. A convenient way of doing so, is to mount the current directory in the container then run the script there. The advantage of this procedure is that the simulation results are directly written back to the filesystem of the host system.
+
+.. code-block:: bash
+
+  docker run -v $(pwd):/sim -w /sim -t suessco/magnum.fe python run.py
+
+Additionally it is recommended to mount :code:`/root/.instant` in the host system. This directory is used by the finite-element library FEniCS to cache runtime compiled code. The file :code:`docker_scripts.tar.gz` contains some convenience wrappers for standard tasks.
+
+.. code-block:: bash
+
+  # Call simulation script
+  magnum.fe run.py
+
+  # Open interactive IPython session
+  imagnum.fe
+
+  # Convert mesh from Gmsh format to magnum.fe format
+  magnum.msh sample.msh sample.xml
+
+Installation from Source
+++++++++++++++++++++++++
+If the two virtual approaches do not meet your needs, please contact us to talk about the possibilty to install magnum.fe on your system from source.

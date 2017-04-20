@@ -1,0 +1,138 @@
+.. module:: magnumfe
+.. _field_terms:
+
+Field Terms
+===========
+
+Effective field terms and extensions to the LLG are represented by the :class:`LLGTerm` class. magnum.fe comes with a number of predefined :class:`LLGTerm` classes that cover a variety of use cases. As shown in the previous section, a list of :class:`FieldTerm` objects is usually passed to an LLG integrator object in order to integrate the LLG under the influence of different effects. Moreover each :class:`LLGTerm` object has methods to compute the corresponding effective field and energy for a given :class:`State` object.
+
+.. code:: python
+
+  # initialize state with uniform magnetization configuration
+  state = State(mesh, m = Constant((1.0, 0.0, 0.0)))
+
+  # initialize demagnetization field object
+  demag = DemagField()
+
+  # compute field and save to file
+  File("h.pvd") << demag.h(state)
+
+  # compute energy and print on screen
+  print demag.E(state)
+
+Both, the field method :code:`h` and the energy method :code:`E` can also be used as virtual attribues.
+
+.. code:: python
+
+  state.h_demag = demag.h()
+  state.E_demag = demag.E()
+
+Computation of the field can be restricted to a certain region. Usually, the default region for is the 'magnetic' region. This default can be overriden in the initializer in order to solve for the field in another region.
+
+.. code:: python
+
+  exchange = ExchangeField(region = 'ferromagnetic')
+
+Some of the predefined :class:`LLGTerm` classes describe nonlocal fields, e.g. the :class:`DemagField` and the :class:`OerstedField` class. These classes additionally distinguish between a source region and target region.
+
+.. code:: python
+
+  # compute field generate by the free layer in the free layer
+  DemagField(region = 'free_layer')
+
+  # compute field generate by the fixed layer in the free layer
+  DemagField(source_region = 'fixed_layer', target_region = 'free_layer')
+
+Some :class:`LLGTerm` classes require certain material parameters to be defined, e.g. the exchagne field requires the exchange constant :code:`Aex` and the saturation magnetization :code:`ms`. Please refer to the following reference documentation for detailed information on the individual llg terms.
+
+:class:`LLGTerm`
+++++++++++++++++
+
+.. autoclass:: LLGTerm
+   :members:
+
+:class:`AFCoupling`
++++++++++++++++++++
+
+.. autoclass:: AFCoupling
+   :members:
+
+:class:`CompositeTerm`
+++++++++++++++++++++++
+
+.. autoclass:: CompositeTerm
+   :members:
+
+:class:`CubicAnisotropyField`
++++++++++++++++++++++++++++++
+
+.. autoclass:: CubicAnisotropyField
+   :members:
+
+:class:`DemagField`
+++++++++++++++++++++++
+
+.. autoclass:: DemagField
+   :members:
+
+:class:`ExchangeField`
+++++++++++++++++++++++
+
+.. autoclass:: ExchangeField
+   :members:
+
+:class:`ExternalField`
+++++++++++++++++++++++
+
+.. autoclass:: ExternalField
+   :members:
+
+:class:`InterfaceDMIField`
+++++++++++++++++++++++++++
+
+.. autoclass:: InterfaceDMIField
+   :members:
+
+:class:`InterlayerExchange`
++++++++++++++++++++++++++++
+
+.. autoclass:: InterlayerExchange
+   :members:
+
+:class:`OerstedField`
++++++++++++++++++++++
+
+.. autoclass:: OerstedField
+   :members:
+
+:class:`SAFLayer`
++++++++++++++++++++
+
+.. autoclass:: SAFLayer
+   :members:
+
+:class:`SpinTorque`
++++++++++++++++++++
+
+.. autoclass:: SpinTorque
+   :members:
+
+:class:`SpinTorqueSlonczewski`
+++++++++++++++++++++++++++++++
+
+.. autoclass:: SpinTorqueSlonczewski
+   :members:
+
+:class:`SpinTorqueZhangLi`
+++++++++++++++++++++++++++
+
+.. autoclass:: SpinTorqueZhangLi
+   :members:
+
+:class:`UniaxialAnisotropyField`
+++++++++++++++++++++++++++++++++
+
+.. autoclass:: UniaxialAnisotropyField
+   :members:
+
+.. [Zhang2004] Zhang, S., & Li, Z. (2004). Roles of nonequilibrium conduction electrons on the magnetization dynamics of ferromagnets. Physical Review Letters, 93(12), 127204.
