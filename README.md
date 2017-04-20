@@ -1,6 +1,9 @@
 magnum.fe
 =========
 
+**The open-source version of magnum.fe is currently not maintained any more.
+Please have a look at the documentation of the commercial branch at [http://micromagnetics.org/magnum.fe](http://micromagnetics.org/magnum.fe) and [contact us](http://micromagnetics.org/about/) if you are interesed in an evaluation copy of magnum.fe.**
+
 magnum.fe is a finite-element package for the solution of dynamical micromagnetic problems. It is written in Python and C++ and largely relies on the multi purpose finite-element library [FEniCS](http://fenicsproject.org/). For the solution of open-boundary problems a hybrid FEM/BEM method is implemented that uses the [BEM++](http://www.bempp.org/) library. magnum.fe is free software and can be extended to your needs.
 
 To get started, visit http://micromagnetics.org/magnum.fe .
