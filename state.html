@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>State and Materials &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>State and Materials &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Meshing" href="meshing.html"/>
-        <link rel="prev" title="Getting Started" href="getting_started.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Integrators for the Landau-Lifshitz-Gilbert Equation" href="llg.html"/>
+        <link rel="prev" title="A Simple Spin-Torque Oscillator" href="oscillator.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,75 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">State and Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#domain-management">Domain Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#material-definition">Material Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-attributes">Virtual Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#masked-state">Masked State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-reference">Class Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#state"><code class="docutils literal"><span class="pre">State</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#material"><code class="docutils literal"><span class="pre">Material</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,124 +131,344 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
     <li>State and Materials</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/state.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/state.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <span class="target" id="module-magnumfe"></span><div class="section" id="state-and-materials">
 <h1>State and Materials<a class="headerlink" href="#state-and-materials" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> class plays a central role in every simulation. It&#8217;s main purpose is to keep track of the current simulation state, such as the magentization and the time. Moreover, the <code class="code docutils literal"><span class="pre">state</span></code> object holds the mesh along with domain information and helps to connect the different solver modules through virtual attributes.</p>
+<div class="section" id="domain-management">
+<h2>Domain Management<a class="headerlink" href="#domain-management" title="Permalink to this headline">¶</a></h2>
+<p>In the simplest case, a <code class="code docutils literal"><span class="pre">state</span></code> object is generated with a plain <code class="code docutils literal"><span class="pre">mesh</span></code> object</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">mesh</span>  <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;sample.xml&quot;</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Typical structures simulated with magnum.fe have a size of nanometers to microns. Since magnum.fe expects all quantities to be given in SI units, the mesh size should be given in meters. However, meshes with dimensions of <span class="math">\(1 \cdot 10^{-9}\)</span> lead to problems both at mesh generation and solution of finite-element systems. Hence it is recommended to use nanometers as mesh scale and set a proper scaling in the <a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> initializer.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">mesh</span>  <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;sample.xml&quot;</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are two possibilties to define domains in the mesh. Either the domain information is embedded directly in the mesh XML file or the domain markers are provided in separate <code class="xref py py-class docutils literal"><span class="pre">MeshFunction</span></code> objects. For details, see <a class="reference internal" href="meshing.html#meshes"><span class="std std-ref">Meshes and domains</span></a>.</p>
+<p>Domains in the mesh files are addressed by integer IDs. The <a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> class can be initialized with a domain name mapping for convenient access
+A more convenient way to address domains is by</p>
+<p>In order to address domains by given names the <a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> class can be provided with a mapping of domain names to IDs. This significantly increases the readability of simulation scripts. Moreover, some domain names are of special importance since different magnum.fe module solve problems on certain regions, e.g. the LLG is by default solved on the region named &#8216;magnetic&#8217;. Naming domains is done on intialization of the <code class="code docutils literal"><span class="pre">state</span></code> object.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">cell_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span>   <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;conducting&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;fixed&#39;</span>     <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;free&#39;</span>      <span class="p">:</span> <span class="mi">4</span>
+  <span class="p">},</span>
+  <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;contact1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;contact2&#39;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The naming of cell domains (volumes) and facet domains (areas) is defined by distinct Python dictionaries. The given names can be used in a variety of methods of the <a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> class.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># integrate function f over &#39;fixed&#39; domain</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">())</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s1">&#39;fixed&#39;</span><span class="p">))</span>
+
+<span class="c1"># Compute volume of &#39;free&#39; domain</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">volume</span><span class="p">(</span><span class="s1">&#39;free&#39;</span><span class="p">)</span>
+
+<span class="c1"># Compute area of &#39;contact1&#39; domain</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="s1">&#39;contact1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Besides these generic uses of the domain names almost every solver class (e.g. field terms, time integrators) can be configured to solve on certain domains. For instance the <a class="reference internal" href="llg.html#magnumfe.LLGCvode" title="magnumfe.LLGCvode"><code class="xref py py-class docutils literal"><span class="pre">LLGCvode</span></code></a> class solves the LLG on the &#8216;magnetic&#8217; region be default, but can easily be configured to solve on another region. The same applies to the effective field contributions.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># solve the LLG with exchange field only on &#39;some_region&#39;</span>
+<span class="n">exchange</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">(</span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;some_region&#39;</span><span class="p">)</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange</span><span class="p">],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;some_region&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Furthermore, nonlocal field terms such as the demagnetization field and the Oersted field can be configured with a source and a target region.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># solve the demag field generated by region &#39;a&#39; on region &#39;b&#39;</span>
+<span class="n">demag</span> <span class="o">=</span> <span class="n">DemagField</span><span class="p">(</span><span class="n">source_region</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">target_region</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This feature is for instance useful for the simulation of multilayer structures with a free and fixed magnetic layer that acts as spin polarizer. By restricting the source region to the free layer, the demagnetization generated by the fixed layer can be neglected while still considering its magnetic properties for the computation of the spin accumulation.</p>
+<p>When using the FEM/BEM method for the solution of the nonlocal field terms, see <a class="reference internal" href="open_boundary.html#open-boundary"><span class="std std-ref">Open Boundary Problems</span></a>, an additional <code class="code docutils literal"><span class="pre">compute_region</span></code> can be defined. This region has to contain both the source and the target region and defines the area that is solved with pure FEM. In the case of multilayer structures with alternating magnetic and nonmagnetic layers, setting the compute region to &#8216;all&#8217; usually reduces the boundary that has to be considered for the boundary element method. Furthermore, by an appropriate choice of the compute region, small distances of boundary elements, that lead to inaccurate BEM coefficients, can be avoided. For further information refer to the reference of the <a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a> and <a class="reference internal" href="field_terms.html#magnumfe.OerstedField" title="magnumfe.OerstedField"><code class="xref py py-class docutils literal"><span class="pre">OerstedField</span></code></a> class.</p>
+</div>
+<div class="section" id="material-definition">
+<h2>Material Definition<a class="headerlink" href="#material-definition" title="Permalink to this headline">¶</a></h2>
+<p>Material parameters are managed by the <a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> class and made accessible via the <code class="code docutils literal"><span class="pre">material</span></code> attribute. They can be set either globally or in a specific domain.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># global assignment of multiple parameters</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+  <span class="n">ms</span>    <span class="o">=</span> <span class="mi">8</span><span class="n">e5</span>
+<span class="p">)</span>
+
+<span class="c1"># global assignment of single paramter</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># assign multiple parameters in region named &#39;fixed&#39;</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;fixed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span>
+  <span class="n">K_uni</span>      <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span><span class="p">,</span>
+  <span class="n">K_uni_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># assign single parameter in region named &#39;free&#39;</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;free&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">K_uni</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># assign spatially varying parameter</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">K_uni</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">(</span><span class="s2">&quot;x[0]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Depending on the applied modules, a multitude of material parameters has to be set. Internally, all material parameters are discretized by elementwise constant functions. The parameters are applied in the order of appearance in the script, so the subsequent call of</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+<p>will lead to <code class="code docutils literal"><span class="pre">alpha</span></code> = 0.1. The attribute getters of <code class="code docutils literal"><span class="pre">state.material</span></code> return a FEniCS <code class="xref py py-class docutils literal"><span class="pre">Function</span></code> object, so proper assignment can be checked by writing the material function to a file.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;alpha.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code docutils literal"><span class="pre">state</span></code> object is used to communicate any simulation state between the different modules and classes of magnum.fe. Different modules require the state to provide different attributes. For instance the <a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a> module requires the <code class="code docutils literal"><span class="pre">state</span></code> object to provide the magnetization <code class="code docutils literal"><span class="pre">state.m</span></code>, while the <a class="reference internal" href="field_terms.html#magnumfe.OerstedField" title="magnumfe.OerstedField"><code class="xref py py-class docutils literal"><span class="pre">OerstedField</span></code></a> module depends on the electric current <code class="code docutils literal"><span class="pre">state.j</span></code>.</p>
+<p>Setting an attribute on the <code class="code docutils literal"><span class="pre">state</span></code> object is as easy as calling <code class="code docutils literal"><span class="pre">state.j</span> <span class="pre">=</span> <span class="pre">Constant((1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0))</span></code>. Note that attributes can be either simple scalars or <code class="xref py py-class docutils literal"><span class="pre">GenericFunction</span></code> objects, see <a class="reference external" href="http://fenicsproject.org/documentation/">FEniCS manual</a>. <code class="xref py py-class docutils literal"><span class="pre">GenericFunction</span></code> is a superclass to <code class="xref py py-class docutils literal"><span class="pre">Constant</span></code>, <code class="xref py py-class docutils literal"><span class="pre">Expression</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Function</span></code> objects. Any <code class="xref py py-class docutils literal"><span class="pre">GenericFunction</span></code> object will be automatically converted to a <code class="xref py py-class docutils literal"><span class="pre">Function</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Each of these commands will result in state.m being a Function object</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s2">&quot;x[0]&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">))</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="xref py py-class docutils literal"><span class="pre">GenericFunction</span></code> object are not only converted to <code class="xref py py-class docutils literal"><span class="pre">Function</span></code> objects, but also decorated with some useful methods that are aware of the named domains.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Return function m restricted on the &#39;fixed&#39; region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;fixed&#39;</span><span class="p">]</span>
+
+<span class="c1"># Compute componentwise average of m</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+
+<span class="c1"># Compute componentwise average of m on &#39;free&#39; region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;free&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="virtual-attributes">
+<span id="id1"></span><h2>Virtual Attributes<a class="headerlink" href="#virtual-attributes" title="Permalink to this headline">¶</a></h2>
+<p>Once set, simple attributes as introduced in the preceding section remain constant. However, attributes are often required to change depending on the simulation state. For instance, in case of an AC current, the electric current obviously depends on the time. In order to provide attributes depending on other attributes, magnum.fe provides the concept of virtual attributes. Virtual attribues can be defined by a function that takes the state as single parameter and returns either a scalar or a <code class="xref py py-class docutils literal"><span class="pre">GenericFunction</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Define an AC current with amplitude A and frequency freq</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="n">A</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The main purpose of virtual attributes is to provide certain attributes to certain solvers, e.g. the <a class="reference internal" href="field_terms.html#magnumfe.OerstedField" title="magnumfe.OerstedField"><code class="xref py py-class docutils literal"><span class="pre">OerstedField</span></code></a> requires <code class="code docutils literal"><span class="pre">state.j</span></code> to be defined. However, you may define arbitrary virtual attributes for your own convenience.</p>
+<p>While virtual attributes are very useful to define simple time dependencies, e.g. for the definition of an AC current as shown above, they might also be used to describe complicated dependencies of the attribute from the complete simulation state. For instance the electric current might depend on a potential difference between two contacts and additionally on the magnetization configuration when dealing with spin diffusion models. magnum.fe offers a number of predefined functions that can be used as virtual attributes. Simply speaking virtual attributes provide an interface for the flexible combination of different models.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Compute currect j with spin diffusion model</span>
+<span class="n">spin_acc</span> <span class="o">=</span> <span class="n">SpinAccumulationForPotential</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">j</span><span class="p">()</span>
+
+<span class="c1"># Compute Oersted field</span>
+<span class="n">oersted</span> <span class="o">=</span> <span class="n">OerstedField</span><span class="p">()</span>
+<span class="n">oersted</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Alternatively register Oersted field computation as virtual attribute</span>
+<span class="n">state</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">oersted</span><span class="o">.</span><span class="n">h</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Sometimes multiple modules will require the same virtual attribute in a single time step. If the computation of the virtual attribute is expensive, the virtual attribute should only be computed once and the result should be reused as long as possible. For this purpose virtual attribues provide a simple caching mechanism. If the virtual attributes depends on one are more other attributes, caching can be enabled by returning not the result itself, but a tuple containing the results as first entry and the names of the depending attributes as further entries.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># compute energy -inner(m, h) and recompute only on change of state.m</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="p">(</span><span class="n">assemble</span><span class="p">(</span><span class="o">-</span><span class="n">inner</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span><span class="p">),</span> <span class="s2">&quot;m&quot;</span><span class="p">)</span>
+
+<span class="c1"># set m</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">E</span> <span class="c1"># trigger computation of E</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">E</span> <span class="c1"># takes E from cache</span>
+
+<span class="c1"># reset m</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">E</span> <span class="c1"># trigger computation of E</span>
+</pre></div>
+</div>
+<p>Predefined virtual attributes of magnum.fe usually implement reasonable caching so you dont&#8217; have to worry about that.</p>
+</div>
+<div class="section" id="masked-state">
+<h2>Masked State<a class="headerlink" href="#masked-state" title="Permalink to this headline">¶</a></h2>
+<p>Complex micromagnetic models might consist of a multitude of regions and some subproblems, i.e. partial differential equations, might be defined only on certains regions. For this use case, magnum.fe provides the possibility to mask a state to a certain domain. A masked state acts exactly like a regular state, except that the mesh and all function valued attributes are region to the masked region.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Create a masked state for region &#39;magnetic&#39;</span>
+<span class="n">masked_state</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;magnetic&#39;</span><span class="p">]</span>
+
+<span class="c1"># Override values of attribute j only in &#39;magnetic&#39; region</span>
+<span class="n">masked_state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># This returns True</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s1">&#39;magnetic&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="n">assemble</span><span class="p">(</span><span class="n">Contant</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span><span class="o">*</span><span class="n">masked_state</span><span class="o">.</span><span class="n">dx</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-reference">
+<h2>Class Reference<a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="state">
-<h2><a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a><a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h2>
+<h3><a class="reference internal" href="#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a><a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="magnumfe.State">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">State</tt><big>(</big><em>mesh</em>, <em>celldomains={'magnetic': 1</em>, <em>'conducting': 1}</em>, <em>facetdomains={'outermagnet': 1}</em>, <em>material=None</em>, <em>scale=1.0</em>, <em>t=0.0</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.State" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">State</code><span class="sig-paren">(</span><em>mesh</em>, <em>cell_domains={}</em>, <em>facet_domains={}</em>, <em>celldomains={}</em>, <em>facetdomains={}</em>, <em>cell_markers=None</em>, <em>facet_markers=None</em>, <em>material=None</em>, <em>maxwell_material=None</em>, <em>scale=1.0</em>, <em>t=0.0</em>, <em>check_mesh=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class holds the complete state of the simulation and provides some
-convenience wrappers for the handling of multiple domains. Furthermore
+convenience wrappers for the handling of named domains. Furthermore
 it provides an interface for attribute handling and caching.</p>
 <dl class="docutils">
 <dt><em>Domain/Material Examples</em></dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
-  <span class="n">celldomains</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;magnetic&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s">&#39;conducting&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;iron&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;cobalt&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">cell_domains</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;magnetic&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&#39;conducting&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;iron&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;cobalt&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+  <span class="n">facet_domains</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;contact2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
   <span class="n">m</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="c"># Set materials for different regions</span>
-<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s">&#39;iron&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s">&#39;cobalt&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s">&#39;conducting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="c1"># Set materials for different regions</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;iron&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;cobalt&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="p">[</span><span class="s1">&#39;conducting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 
-<span class="c"># Use integration measures with named domains</span>
-<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">))</span>       <span class="c"># All named domains</span>
-<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;magnetic&#39;</span><span class="p">))</span>  <span class="c"># Magnetic region</span>
-<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s">&#39;!magnetic&#39;</span><span class="p">))</span> <span class="c"># Nonmagnetic region</span>
-<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>           <span class="c"># Region by ID</span>
+<span class="c1"># Use integration measures with named domains</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">))</span>       <span class="c1"># All named domains</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s1">&#39;magnetic&#39;</span><span class="p">))</span>  <span class="c1"># Magnetic region</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="s1">&#39;!magnetic&#39;</span><span class="p">))</span> <span class="c1"># Nonmagnetic region</span>
+<span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>           <span class="c1"># Region by ID</span>
 
-<span class="c"># Compute average of magnetization m</span>
-<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>       <span class="c"># Over whole space</span>
-<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s">&#39;iron&#39;</span><span class="p">)</span> <span class="c"># Over iron region</span>
+<span class="c1"># Compute average of magnetization m</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>       <span class="c1"># Over whole space</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="s1">&#39;iron&#39;</span><span class="p">)</span> <span class="c1"># Over iron region</span>
 
-<span class="c"># Crop magnetization to subdomain and save as PVD</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;m_iron.pvd&quot;</span><span class="p">)</span>
-<span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="s">&#39;iron&#39;</span><span class="p">)</span>
+<span class="c1"># Crop magnetization to subdomain and save as PVD</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;m_iron.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;iron&#39;</span><span class="p">]</span>
 
-<span class="c"># Normalize the magnetization</span>
+<span class="c1"># Normalize the magnetization</span>
 <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd>
 <dt><em>Attribute Examples</em></dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="c"># initialize state with constant magnetization. m is automatically</span>
-<span class="c"># interpolated on a suitable discrete function space.</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># initialize state with constant magnetization. m is automatically</span>
+<span class="c1"># interpolated on a suitable discrete function space.</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span>
   <span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
 <span class="p">)</span>
 
-<span class="c"># define a current as function of the time</span>
+<span class="c1"># define a current as function of the time</span>
 <span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">*</span> <span class="mf">1e12</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
 
-<span class="c"># define some functional depending on m</span>
-<span class="n">state</span><span class="o">.</span><span class="n">E</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="p">(</span><span class="n">assemble</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">()),</span> <span class="s">&quot;m&quot;</span><span class="p">)</span>
+<span class="c1"># define some functional depending on m</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="p">(</span><span class="n">assemble</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">dx</span><span class="p">()),</span> <span class="s2">&quot;m&quot;</span><span class="p">)</span>
 
-<span class="c"># dependencies can be arbirtrarily nested</span>
-<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="s">&quot;E&quot;</span><span class="p">)</span>
+<span class="c1"># dependencies can be arbirtrarily nested</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">)</span>
 
-<span class="c"># all values are cached according to their dependencies</span>
-<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span>  <span class="c"># triggers computation of E_times_2</span>
-<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span>  <span class="c"># taken from cache, no computation</span>
+<span class="c1"># all values are cached according to their dependencies</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span>  <span class="c1"># triggers computation of E_times_2</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span>  <span class="c1"># taken from cache, no computation</span>
 
 <span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
 
-<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span>  <span class="c"># triggers computation of E_times_2</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E_times_2</span>  <span class="c1"># triggers computation of E_times_2</span>
 </pre></div>
 </div>
 </dd>
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt>)</dt>
-<dd>The mesh including all subdomains as <tt class="xref py py-class docutils literal"><span class="pre">dolfin.MeshDomains</span></tt></dd>
-<dt>celldomains (<tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt>)</dt>
+<dt>mesh (<code class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></code>)</dt>
+<dd>The mesh including all subdomains as <code class="xref py py-class docutils literal"><span class="pre">dolfin.MeshDomains</span></code></dd>
+<dt>cell_domains (<code class="xref py py-class docutils literal"><span class="pre">dict</span></code>)</dt>
 <dd>naming of the cell subdomains, at least the subdomains &#8216;magnetic&#8217; and &#8216;conducting&#8217; should be defined.</dd>
-<dt>facetdomains (<tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt>)</dt>
+<dt>facet_domains (<code class="xref py py-class docutils literal"><span class="pre">dict</span></code>)</dt>
 <dd>naming of the facet subdomains</dd>
-<dt>material (<a class="reference internal" href="#magnumfe.Material" title="magnumfe.Material"><tt class="xref py py-class docutils literal"><span class="pre">Material</span></tt></a>)</dt>
+<dt>cell_markers (<code class="xref py py-class docutils literal"><span class="pre">dolfin.MeshFunction</span></code>)</dt>
+<dd>cell domain markers as MeshFunction if domains are not embedded in mesh</dd>
+<dt>facet_markers (<code class="xref py py-class docutils literal"><span class="pre">dolfin.MeshFunction</span></code>)</dt>
+<dd>facet domain markers as MeshFunction if domains are not embedded in mesh</dd>
+<dt>material (<a class="reference internal" href="#magnumfe.Material" title="magnumfe.Material"><code class="xref py py-class docutils literal"><span class="pre">Material</span></code></a>)</dt>
 <dd>the material of the sample. If material differs from subdomain to subdomain, use material setters instead.</dd>
-<dt>scale (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>scale (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>the spatial scaling of the mesh. Use 1e-9 if you use nanometers as length measure.</dd>
-<dt>t (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>t (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>the time</dd>
-<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs (<tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt>)</dt>
+<dt>check_mesh (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Check mesh quality and print warning if quality is bad</dd>
+<dt><a href="#id2"><span class="problematic" id="id3">**</span></a>kwargs (<code class="xref py py-class docutils literal"><span class="pre">dict</span></code>)</dt>
 <dd>add any state variables like magnetization (m) or spin diffusion (s).
 Expressions are automatically interpolated on the corresponding discrete spaces.</dd>
 </dl>
 </dd>
 </dl>
 <dl class="method">
+<dt id="magnumfe.State.FunctionAssigner">
+<code class="descname">FunctionAssigner</code><span class="sig-paren">(</span><em>family='Lagrange'</em>, <em>degree=1</em>, <em>rank=1</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.FunctionAssigner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a function assigner</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>family (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>element type of the function space: &#8220;CG&#8221;, &#8220;DG&#8221;, ...</dd>
+<dt>degree (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>the degree of the function space (default=1)</dd>
+<dt>rank (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>the rank of the target function space (0 for scalar space, 1 for vector space(default))</dd>
+</dl>
+</dd>
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="n">assigner_V_to_VV</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">FunctionAssigner</span><span class="p">()</span>
+<span class="n">assigner_VV_to_V</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">FunctionAssigner</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.FunctionAssigner</span></code></dt>
+<dd>the function assigner</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="magnumfe.State.FunctionSpace">
-<tt class="descname">FunctionSpace</tt><big>(</big><em>mesh=None</em>, <em>rank=0</em><big>)</big><a class="headerlink" href="#magnumfe.State.FunctionSpace" title="Permalink to this definition">¶</a></dt>
+<code class="descname">FunctionSpace</code><span class="sig-paren">(</span><em>family='Lagrange'</em>, <em>degree=1</em>, <em>rank=0</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.FunctionSpace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a function space for a mesh.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt>)</dt>
-<dd>the mesh, defaults to mesh of the state if set to <tt class="code docutils literal"><span class="pre">None</span></tt></dd>
-<dt>rank (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>family (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>element type of the function space</dd>
+<dt>degree (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>the degree of the function space (default=1)</dd>
+<dt>rank (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>the rank of the function space (0 for scalar space, 1 for vector space)</dd>
 </dl>
 </dd>
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="s2">&quot;CG&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">VV</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="s2">&quot;CG&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.FunctionSpace</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.FunctionSpace</span></code></dt>
 <dd>the function space</dd>
 </dl>
 </dd>
@@ -255,17 +477,21 @@ Expressions are automatically interpolated on the corresponding discrete spaces.
 
 <dl class="method">
 <dt id="magnumfe.State.M_inv_diag">
-<tt class="descname">M_inv_diag</tt><big>(</big><em>domain='all'</em><big>)</big><a class="headerlink" href="#magnumfe.State.M_inv_diag" title="Permalink to this definition">¶</a></dt>
+<code class="descname">M_inv_diag</code><span class="sig-paren">(</span><em>domain='all'</em>, <em>weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.M_inv_diag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the inverse lumped mass matrix for the vector function space.
-The result ist cached.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This method requires the PETSc Backend to be enabled.</p>
-</div>
+The result is cached.</p>
 <dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>the domain on which the mass matrix is restricted</dd>
+<dt>weight (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>weight to be used for assembly, either name of material attribute (e.g. &#8220;ms&#8221;) or None</dd>
+</dl>
+</dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Matrix</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Matrix</span></code></dt>
 <dd>the matrix</dd>
 </dl>
 </dd>
@@ -274,18 +500,20 @@ The result ist cached.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.VectorFunctionSpace">
-<tt class="descname">VectorFunctionSpace</tt><big>(</big><em>mesh=None</em><big>)</big><a class="headerlink" href="#magnumfe.State.VectorFunctionSpace" title="Permalink to this definition">¶</a></dt>
+<code class="descname">VectorFunctionSpace</code><span class="sig-paren">(</span><em>family='Lagrange'</em>, <em>degree=1</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.VectorFunctionSpace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the vector-function space for a mesh.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt>)</dt>
-<dd>the mesh, defaults to mesh of the state if set to <tt class="code docutils literal"><span class="pre">None</span></tt></dd>
+<dt>family (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>element type of the function space</dd>
+<dt>degree (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>the degree of the function space (default=1)</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.FunctionSpace</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.FunctionSpace</span></code></dt>
 <dd>the function space</dd>
 </dl>
 </dd>
@@ -293,20 +521,42 @@ The result ist cached.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="magnumfe.State.area">
+<code class="descname">area</code><span class="sig-paren">(</span><em>domain='all'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the area of a certain facet domain.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>domain identifier (either string or id)</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">float</span></code></dt>
+<dd>the area of the region</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="magnumfe.State.dP">
-<tt class="descname">dP</tt><big>(</big><em>domain='all'</em><big>)</big><a class="headerlink" href="#magnumfe.State.dP" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dP</code><span class="sig-paren">(</span><em>domain='all'</em>, <em>domaintype='cell'</em>, <em>graceful=False</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.dP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience wrapper for integral-point measure. If the mesh does not contain
 any cell domains, the measure for the whole mesh is returned.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>name or ID of domain</dd>
+<dt>domaintype (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>either &#8216;cell&#8217; or &#8216;facet&#8217;</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code></dt>
 <dd>the measure</dd>
 </dl>
 </dd>
@@ -315,21 +565,21 @@ any cell domains, the measure for the whole mesh is returned.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.dS">
-<tt class="descname">dS</tt><big>(</big><em>domain='all'</em>, <em>dS=None</em><big>)</big><a class="headerlink" href="#magnumfe.State.dS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dS</code><span class="sig-paren">(</span><em>domain='all'</em>, <em>dS=None</em>, <em>graceful=False</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.dS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience wrapper for integral-interior-facet measure. If the mesh does
 not contain any cell domains, the measure for the whole mesh is returned.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>name or ID of domain</dd>
-<dt>dS (<tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt>)</dt>
+<dt>dS (<code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code>)</dt>
 <dd>alternative measure</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code></dt>
 <dd>the measure</dd>
 </dl>
 </dd>
@@ -338,20 +588,20 @@ not contain any cell domains, the measure for the whole mesh is returned.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.domain_ids">
-<tt class="descname">domain_ids</tt><big>(</big><em>domain</em>, <em>domaintype='cell'</em><big>)</big><a class="headerlink" href="#magnumfe.State.domain_ids" title="Permalink to this definition">¶</a></dt>
+<code class="descname">domain_ids</code><span class="sig-paren">(</span><em>domain</em>, <em>domaintype='cell'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.domain_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the domain IDs for a named domain.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>/ <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>/ <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>name or ID of domain</dd>
-<dt>domaintype (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>)</dt>
+<dt>domaintype (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
 <dd>domain type, (cell, facet)</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">[int]</span></code></dt>
 <dd>List of domain IDs</dd>
 </dl>
 </dd>
@@ -360,23 +610,23 @@ not contain any cell domains, the measure for the whole mesh is returned.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.ds">
-<tt class="descname">ds</tt><big>(</big><em>domain='all'</em>, <em>ds=None</em>, <em>intersect=None</em><big>)</big><a class="headerlink" href="#magnumfe.State.ds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ds</code><span class="sig-paren">(</span><em>domain='all'</em>, <em>ds=None</em>, <em>intersect=None</em>, <em>graceful=False</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.ds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience wrapper for integral-facet measure. If the mesh does not
 contain any cell domains, the measure for the whole mesh is returned.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>name or ID of domain</dd>
-<dt>ds (<tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt>)</dt>
+<dt>ds (<code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code>)</dt>
 <dd>alternative measure</dd>
-<dt>intersect (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>intersect (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>name or ID of anothe domain to intersect with</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code></dt>
 <dd>the measure</dd>
 </dl>
 </dd>
@@ -385,21 +635,21 @@ contain any cell domains, the measure for the whole mesh is returned.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.dx">
-<tt class="descname">dx</tt><big>(</big><em>domain='all'</em>, <em>dx=None</em><big>)</big><a class="headerlink" href="#magnumfe.State.dx" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dx</code><span class="sig-paren">(</span><em>domain='all'</em>, <em>dx=None</em>, <em>graceful=False</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.dx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience wrapper for integral-cell measure. If the mesh does not contain
 any cell domains, the measure for the whole mesh is returned.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>name or ID of domain</dd>
-<dt>dx (<tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt>)</dt>
+<dt>dx (<code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code>)</dt>
 <dd>alternative measure</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin:Measure</span></code></dt>
 <dd><p class="first">the measure</p>
 <p># Compute volume of magnetic domain
 assemble(Constant(1.0) * state.dx(&#8216;magnetic&#8217;))</p>
@@ -412,27 +662,44 @@ assemble(Constant(1.0) * state.dx(3))</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="magnumfe.State.get_or_create">
+<code class="descname">get_or_create</code><span class="sig-paren">(</span><em>key</em>, <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.get_or_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple cache helper that checks for a cache hit in the generic state.cache
+dict and populates the cache with the result of func evaluation otherwise.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>key (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>cache key</dd>
+<dt>func (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>function call to be cached</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="magnumfe.State.interpolate">
-<tt class="descname">interpolate</tt><big>(</big><em>expressions</em><big>)</big><a class="headerlink" href="#magnumfe.State.interpolate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">interpolate</code><span class="sig-paren">(</span><em>expressions</em>, <em>family='Lagrange'</em>, <em>degree=1</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolates a collection of expressions, each defined for a specific domain,
 on a suitable function space. Also works for a single expression.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>expressions (<tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt>)</dt>
+<dt>expressions (<code class="xref py py-class docutils literal"><span class="pre">dict</span></code>)</dt>
 <dd>Expressions to be interpolated.</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code></dt>
 <dd>Interpolated function</dd>
 </dl>
 </dd>
 <dt><em>Example</em></dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="n">f1</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span>
-  <span class="s">&#39;magnetic&#39;</span><span class="p">:</span>  <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
-  <span class="s">&#39;!magnetic&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">({</span>
+  <span class="s1">&#39;magnetic&#39;</span><span class="p">:</span>  <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+  <span class="s1">&#39;!magnetic&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
 <span class="p">})</span>
 
 <span class="n">f2</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
@@ -443,14 +710,51 @@ on a suitable function space. Also works for a single expression.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="magnumfe.State.mesh_has_domains">
-<tt class="descname">mesh_has_domains</tt><big>(</big><big>)</big><a class="headerlink" href="#magnumfe.State.mesh_has_domains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if mesh contains cell-domain data.</p>
+<dt id="magnumfe.State.intersect">
+<code class="descname">intersect</code><span class="sig-paren">(</span><em>*domains</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.intersect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the intersection of multiple domains and returns the IDs.</p>
 <dl class="docutils">
+<dt><em>Examples</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># compute the intersection volume of the regions &#39;fixed&#39; and &#39;free&#39;</span>
+<span class="n">state</span><span class="o">.</span><span class="n">volume</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="s1">&#39;magnetic&#39;</span><span class="p">,</span> <span class="s1">&#39;free&#39;</span><span class="p">))</span>
+
+<span class="c1"># compute the intersection area of the regions &#39;contact1&#39; and &#39;contact2&#39;</span>
+<span class="n">state</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="s1">&#39;contact1&#39;</span><span class="p">,</span> <span class="s1">&#39;contact2&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>domains (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>/ <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>name or ID of domain</dd>
+<dt>domaintype (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>type of domain (&#8216;cell&#8217; or &#8216;facet&#8217;, default is &#8216;cell&#8217;)</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd>the intersection region</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.State.mask">
+<code class="descname">mask</code><span class="sig-paren">(</span><em>domain</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return masked state on a certain region.</p>
+<dl class="docutils">
+<dt><em>Argument</em></dt>
+<dd><dl class="first last docutils">
+<dt>domain</dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">str</span></code></dt>
+<dd>domain name</dd>
+</dl>
+</dd>
+</dl>
+</dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></dt>
-<dd>True if mesh contains cell-domain data</dd>
+<dt><code class="xref py py-class docutils literal"><span class="pre">MaskedState</span></code></dt>
+<dd>the masked state</dd>
 </dl>
 </dd>
 </dl>
@@ -458,12 +762,12 @@ on a suitable function space. Also works for a single expression.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.step">
-<tt class="descname">step</tt><big>(</big><em>integrators</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.State.step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calls the step method on every integrator and increases <tt class="code docutils literal"><span class="pre">t</span></tt>.</p>
+<code class="descname">step</code><span class="sig-paren">(</span><em>integrators</em>, <em>dt</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the step method on every integrator and increases <code class="code docutils literal"><span class="pre">t</span></code>.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>integrators (<tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">Integrator</span></tt>)</dt>
+<dt>integrators (<code class="xref py py-class docutils literal"><span class="pre">list</span></code> or <code class="xref py py-class docutils literal"><span class="pre">Integrator</span></code>)</dt>
 <dd>Integrator on which the step method is called.
 Can be either a list of integrators or a single integrator.</dd>
 </dl>
@@ -472,14 +776,56 @@ Can be either a list of integrators or a single integrator.</dd>
 </dd></dl>
 
 <dl class="method">
+<dt id="magnumfe.State.union">
+<code class="descname">union</code><span class="sig-paren">(</span><em>*domains</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.union" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the union of multiple domains and returns the IDs.</p>
+<dl class="docutils">
+<dt><em>Examples</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># compute the total volume of the regions &#39;fixed&#39; and &#39;free&#39;</span>
+<span class="n">state</span><span class="o">.</span><span class="n">volume</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="s1">&#39;fixed&#39;</span><span class="p">,</span> <span class="s1">&#39;free&#39;</span><span class="p">))</span>
+
+<span class="c1"># compute the total area of the regions &#39;contact1&#39; and &#39;contact2&#39;</span>
+<span class="n">state</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="s1">&#39;contact1&#39;</span><span class="p">,</span> <span class="s1">&#39;contact2&#39;</span><span class="p">,</span> <span class="n">domaintype</span><span class="o">=</span><span class="s1">&#39;facet&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>domains (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>/ <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>name or ID of domain</dd>
+<dt>domaintype (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>type of domain (&#8216;cell&#8217; or &#8216;facet&#8217;, default is &#8216;cell&#8217;)</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd>the union region</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.State.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>*names</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visits the given attributes in order to update them if needed. This function
+should be called if references to attributes are cached.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>*names (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>list of attribute names</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="magnumfe.State.uuid">
-<tt class="descname">uuid</tt><big>(</big><em>*names</em><big>)</big><a class="headerlink" href="#magnumfe.State.uuid" title="Permalink to this definition">¶</a></dt>
+<code class="descname">uuid</code><span class="sig-paren">(</span><em>*names</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a uuid for a given list of attributes. The uuid changes if the
 attribute if reset.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>names ([<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>])</dt>
+<dt>*names (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
 <dd>list of attribute names</dd>
 </dl>
 </dd>
@@ -490,41 +836,19 @@ attribute if reset.</p>
 
 <dl class="method">
 <dt id="magnumfe.State.volume">
-<tt class="descname">volume</tt><big>(</big><em>domain='all'</em><big>)</big><a class="headerlink" href="#magnumfe.State.volume" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the volume of a certain domain.</p>
+<code class="descname">volume</code><span class="sig-paren">(</span><em>domain='all'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.State.volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the volume of a certain cell domain.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>domain (<code class="xref py py-class docutils literal"><span class="pre">string</span></code> / <code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>domain identifier (either string or id)</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">float</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">float</span></code></dt>
 <dd>the volume of the region</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="magnumfe.State.wrapped_mesh_for">
-<tt class="descname">wrapped_mesh_for</tt><big>(</big><em>domain</em><big>)</big><a class="headerlink" href="#magnumfe.State.wrapped_mesh_for" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a <a class="reference internal" href="meshing.html#magnumfe.WrappedMesh" title="magnumfe.WrappedMesh"><tt class="xref py py-class docutils literal"><span class="pre">WrappedMesh</span></tt></a> object for a certain domain. This can be
-used to crop certain state values like the magnetization to a region of
-interest.</p>
-<dl class="docutils">
-<dt><em>Arguments</em></dt>
-<dd><dl class="first last docutils">
-<dt>domain (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt> / <tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
-<dd>domain identifier (either string or id)</dd>
-</dl>
-</dd>
-<dt><em>Returns</em></dt>
-<dd><dl class="first last docutils">
-<dt><a class="reference internal" href="meshing.html#magnumfe.WrappedMesh" title="magnumfe.WrappedMesh"><tt class="xref py py-class docutils literal"><span class="pre">WrappedMesh</span></tt></a></dt>
-<dd>the wrapped mesh</dd>
 </dl>
 </dd>
 </dl>
@@ -534,15 +858,47 @@ interest.</p>
 
 </div>
 <div class="section" id="material">
-<h2><a class="reference internal" href="#magnumfe.Material" title="magnumfe.Material"><tt class="xref py py-class docutils literal"><span class="pre">Material</span></tt></a><a class="headerlink" href="#material" title="Permalink to this headline">¶</a></h2>
+<h3><a class="reference internal" href="#magnumfe.Material" title="magnumfe.Material"><code class="xref py py-class docutils literal"><span class="pre">Material</span></code></a><a class="headerlink" href="#material" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="magnumfe.Material">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">Material</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.Material" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class defines a material with micromagnetic properties.</p>
-<p>Create a material.</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">Material</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Material" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a material.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create simple material</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">ms</span> <span class="o">=</span> <span class="mi">8</span><span class="n">e5</span><span class="p">)</span>
+
+<span class="c1"># create material with material a as template</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>*args</dt>
+<dd>templates</dd>
+<dt>**kwargs</dt>
+<dd>material constants</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.Material.parameters">
+<code class="descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Material.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all material parameters as dict.</p>
+<dl class="docutils">
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></dt>
+<dd>the parameters</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="magnumfe.Material.py">
-<em class="property">static </em><tt class="descname">py</tt><big>(</big><big>)</big><a class="headerlink" href="#magnumfe.Material.py" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">py</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.Material.py" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an instance of Material with the material properties
 similar to Permalloy.</p>
 </dd></dl>
@@ -551,17 +907,19 @@ similar to Permalloy.</p>
 
 </div>
 </div>
+</div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="meshing.html" class="btn btn-neutral float-right" title="Meshing"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="llg.html" class="btn btn-neutral float-right" title="Integrators for the Landau-Lifshitz-Gilbert Equation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="oscillator.html" class="btn btn-neutral" title="A Simple Spin-Torque Oscillator" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -570,12 +928,14 @@ similar to Permalloy.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -590,7 +950,7 @@ similar to Permalloy.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

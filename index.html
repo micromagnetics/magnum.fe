@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to magnum.fe’s documentation! &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Welcome to magnum.fe’s documentation! &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,11 +28,16 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="#"/>
-        <link rel="next" title="Installation" href="installation.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="#"/>
+        <link rel="next" title="Introduction" href="introduction.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -42,78 +47,63 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="#" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -128,130 +118,169 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="#">Docs</a> &raquo;</li>
       
     <li>Welcome to magnum.fe&#8217;s documentation!</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
-  <img src="_images/logo.svg" /><div class="section" id="welcome-to-magnum-fe-s-documentation">
+  <img alt="_images/logo.svg" src="_images/logo.svg" /><div class="section" id="welcome-to-magnum-fe-s-documentation">
 <h1>Welcome to magnum.fe&#8217;s documentation!<a class="headerlink" href="#welcome-to-magnum-fe-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>magnum.fe is a finite-element package for the solution of dynamical micromagnetic problems. It is written in Python and C++ and largely relies on the multi purpose finite-element library <a class="reference external" href="http://fenicsproject.org/">FEniCS</a>. For the solution of open-boundary problems a hybrid FEM/BEM method is implemented that uses the <a class="reference external" href="http://www.bempp.org/">BEM++</a> library. magnum.fe is free software and can be extended to your needs.</p>
-<div class="section" id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Integration of the Landau-Lifshitz-Gilbert Equation</li>
-<li>Demagnetization-field computation via shell transformation or hybrid FEM/BEM method</li>
-<li>Oersted-field computation via shell transformation or hybrid FEM/BEM method</li>
-<li>Solution of the spin-diffusion model</li>
-</ul>
-</div>
-<div class="section" id="download">
-<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
-<p>Visit our <a class="reference external" href="https://github.com/micromagnetics/magnum.fe">GitHub page</a> to download magnum.fe.</p>
-</div>
-<div class="section" id="citing">
-<h2>Citing<a class="headerlink" href="#citing" title="Permalink to this headline">¶</a></h2>
-<p>If you use results from magnum.fe for scientific publications, we would be very grateful if you would cite the following paper:</p>
-<blockquote>
-<div>Abert, C., Exl, L., Bruckner, F., Drews, A., &amp; Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.</div></blockquote>
-</div>
-<div class="section" id="license-and-disclaimer">
-<h2>License and Disclaimer<a class="headerlink" href="#license-and-disclaimer" title="Permalink to this headline">¶</a></h2>
-<p>magnum.fe is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>magnum.fe is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU Lesser General Public License for more details.</p>
-</div>
-<div class="section" id="alternatives">
-<h2>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></h2>
-<p>You might also want to have a look at these open-source finite-element micromagnetic codes:</p>
-<ul class="simple">
-<li>Nmag (<a class="reference external" href="http://nmag.soton.ac.uk/nmag/">http://nmag.soton.ac.uk/nmag/</a>)</li>
-<li>magpar (<a class="reference external" href="http://www.magpar.net/">http://www.magpar.net/</a>)</li>
-</ul>
-<p>You code is not listed here, but should be? Drop us a line (<a class="reference external" href="mailto:claas&#46;abert&#37;&#52;&#48;tuwien&#46;ac&#46;at">claas<span>&#46;</span>abert<span>&#64;</span>tuwien<span>&#46;</span>ac<span>&#46;</span>at</a>).</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#features">Features</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#virtual-box">Virtual Box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#id2">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-source">Installation from Source</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#the-standard-problem-4">The Standard Problem #4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#watch-the-results">Watch the Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#the-next-steps">The Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#built-in-meshing-tools">Built-in meshing tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#marking-domains-in-meshes">Marking domains in meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#converting-meshes">Converting meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#creating-a-shell-for-the-shell-transformation-method">Creating a shell for the shell transformation method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#creating-a-multilayer-structure-with-gmsh">Creating a multilayer structure with Gmsh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#creating-a-multilayer-structure-with-salome">Creating a multilayer structure with Salome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meshing.html#alternatives-to-gmsh-and-salome">Alternatives to Gmsh and Salome</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="oscillator.html#load-mesh-and-name-regions">Load Mesh and Name Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oscillator.html#define-material-constants">Define Material Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oscillator.html#initialize-and-relax-magnetization">Initialize and Relax Magnetization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oscillator.html#couple-spin-diffusion-model-to-llg">Couple Spin-Diffusion Model to LLG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oscillator.html#results">Results</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#domain-management">Domain Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#material-definition">Material Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#virtual-attributes">Virtual Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#masked-state">Masked State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html#class-reference">Class Reference</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgcvode"><code class="docutils literal"><span class="pre">LLGCvode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><code class="docutils literal"><span class="pre">LLGAlougesProject</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><code class="docutils literal"><span class="pre">LLGAlougesLagrange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="llg.html#llgstochastic"><code class="docutils literal"><span class="pre">LLGStochastic</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loggers.html#logger"><code class="docutils literal"><span class="pre">Logger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggers.html#scalarlogger"><code class="docutils literal"><span class="pre">ScalarLogger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggers.html#fieldlogger"><code class="docutils literal"><span class="pre">FieldLogger</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><code class="docutils literal"><span class="pre">LLGTerm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#afcoupling"><code class="docutils literal"><span class="pre">AFCoupling</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#compositeterm"><code class="docutils literal"><span class="pre">CompositeTerm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#cubicanisotropyfield"><code class="docutils literal"><span class="pre">CubicAnisotropyField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><code class="docutils literal"><span class="pre">DemagField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><code class="docutils literal"><span class="pre">ExchangeField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><code class="docutils literal"><span class="pre">ExternalField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#interfacedmifield"><code class="docutils literal"><span class="pre">InterfaceDMIField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#interlayerexchange"><code class="docutils literal"><span class="pre">InterlayerExchange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><code class="docutils literal"><span class="pre">OerstedField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#saflayer"><code class="docutils literal"><span class="pre">SAFLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><code class="docutils literal"><span class="pre">SpinTorque</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorqueslonczewski"><code class="docutils literal"><span class="pre">SpinTorqueSlonczewski</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorquezhangli"><code class="docutils literal"><span class="pre">SpinTorqueZhangLi</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><code class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#legacy-material-parameters">Legacy material parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#cell-and-facet-regions">Cell and facet regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><code class="docutils literal"><span class="pre">SpinDiffusion</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spinaccumulationforcurrent"><code class="docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spinaccumulationforpotential"><code class="docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spinaccumulationwithspinhall"><code class="docutils literal"><span class="pre">SpinAccumulationWithSpinhall</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#electric-potential">Electric Potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#maxwell-solvers">Maxwell Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#stringsolver"><code class="docutils literal"><span class="pre">StringSolver</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#minimizer-bb"><code class="docutils literal"><span class="pre">Minimizer_BB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#minimizer-lbfgs"><code class="docutils literal"><span class="pre">Minimizer_LBFGS</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#direct-fem-bem-method-johnson-and-nedelec">Direct FEM-BEM Method (Johnson and Nedelec)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#units">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#constants"><code class="docutils literal"><span class="pre">Constants</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#read-vtk"><code class="docutils literal"><span class="pre">read_vtk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#timeinterpolator"><code class="docutils literal"><span class="pre">TimeInterpolator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><code class="docutils literal"><span class="pre">Timer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><code class="docutils literal"><span class="pre">Cache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#screen-logging">Screen logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#mesh-generation-and-domain-management">Mesh generation and domain management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#virtual-attributes-and-field-terms">Virtual attributes and field terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#spin-torque-oscillator-with-restricted-integration-domain">Spin-torque oscillator with restricted integration domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#spin-torque-oscillator-with-slonczewski-spin-torque">Spin-torque oscillator with Slonczewski spin torque</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#energy-barrier-computation-of-magnetic-multilayer-with-the-string-method">Energy barrier computation of magnetic multilayer with the string method</a></li>
 </ul>
 </li>
 </ul>
-</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 </ul>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -261,12 +290,14 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -281,7 +312,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

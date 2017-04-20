@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Spin Diffusion &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Spin diffusion &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Open Boundary Problems" href="open_boundary.html"/>
-        <link rel="prev" title="Landau-Lifshitz-Gilbert Equation" href="llg.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Solvers" href="solvers.html"/>
+        <link rel="prev" title="Field Terms" href="field_terms.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,71 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spin diffusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#legacy-material-parameters">Legacy material parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cell-and-facet-regions">Cell and facet regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spindiffusion"><code class="docutils literal"><span class="pre">SpinDiffusion</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spinaccumulationforcurrent"><code class="docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spinaccumulationforpotential"><code class="docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spinaccumulationwithspinhall"><code class="docutils literal"><span class="pre">SpinAccumulationWithSpinhall</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,38 +127,45 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Spin Diffusion</li>
+    <li>Spin diffusion</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/spin_diffusion.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/spin_diffusion.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <span class="target" id="module-magnumfe"></span><div class="section" id="spin-diffusion">
-<span id="id1"></span><h1>Spin Diffusion<a class="headerlink" href="#spin-diffusion" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Spin diffusion<a class="headerlink" href="#spin-diffusion" title="Permalink to this headline">¶</a></h1>
 <p>The interaction of spin polarized currents with the magnetization can be described by a spin-accumulation model described in <a class="reference internal" href="#zhang2002" id="id2">[Zhang2002]</a> and <a class="reference internal" href="#garcia2007" id="id3">[Garcia2007]</a>.
 In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</span> exerts a torque on the magnetization by an additional term to the LLG</p>
 <div class="math">
 \[\frac{\partial \vec{m}}{\partial t} =
-- \gamma \vec{m} \times (\vec{h}_\text{eff} + \frac{c}{\mu_0} \vec{s})
+- \gamma \vec{m} \times (\vec{h}_\text{eff} + \frac{J}{\hbar \gamma M_\text{s}} \vec{s})
 + \alpha \vec{m} \times \frac{\partial \vec{m}}{\partial t}\]</div>
-<p>where <span class="math">\(c\)</span> is a coupling constant. The spin accumulation itself depends on the magnetization by the diffusion equation</p>
+<p>where <span class="math">\(J\)</span> the coupling strength between itinerant and lattice magentic moments. The spin accumulation itself depends on the magnetization by the diffusion equation</p>
 <div class="math">
 \[\frac{\partial \vec{s}}{\partial t} =
 - \vec{\nabla} \cdot \mat{J}_\text{s}
-- 2 D_0 \left[
-  \frac{\vec{s}}{\lambda_\text{sf}^2}
-  + \frac{\vec{s} \times \vec{m}}{\lambda_\text{J}^2}
-\right]\]</div>
-<p>where <span class="math">\(D_0\)</span> is the diffusion constant, <span class="math">\(\lambda_\text{sf}\)</span> is the characteristic length for spin-flip relaxation, <span class="math">\(\lambda_\text{J}\)</span> depends on the electron&#8217;s mean free path and <span class="math">\(\mat{J}_\text{s}\)</span> is the matrix valued spin current given by</p>
+- \frac{\vec{s}}{\tau_\text{sf}}
+- J \frac{\vec{s} \times \vec{m}}{\hbar}\]</div>
+<p>where <span class="math">\(D_0\)</span> is the diffusion constant, <span class="math">\(\tau_\text{sf}\)</span> is the spin-flip relaxation time, and <span class="math">\(\mat{J}_\text{s}\)</span> is the matrix valued spin current given by</p>
 <div class="math">
 \[\mat{J}_\text{s} =
 \frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{J}_\text{e}
@@ -168,41 +173,559 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
   \vec{\nabla} \vec{s}
   - \beta \beta' \vec{m} \otimes \left( (\vec{\nabla}\vec{s})^T \vec{m} \right)
 \right].\]</div>
-<p>Here <span class="math">\(\beta\)</span> and <span class="math">\(beta'\)</span> are dimensionless polarization parameters and <span class="math">\(\mat{J}_\text{e}\)</span> is the electrical current density. As shown in <a class="reference internal" href="#abert2014b" id="id4">[Abert2014b]</a> this method is able to reproduce the results of both the spin torque model by Slonczewski, see <a class="reference internal" href="#slonczewski1996" id="id5">[Slonczewski1996]</a>, and the model by Zhang and Li, see <a class="reference internal" href="#zhang2004" id="id6">[Zhang2004]</a>.</p>
+<p>Here <span class="math">\(\beta\)</span> and <span class="math">\(\beta'\)</span> are dimensionless polarization parameters and <span class="math">\(\mat{J}_\text{e}\)</span> is the electrical current density. As shown in <a class="reference internal" href="#abert2014b" id="id4">[Abert2014b]</a> this method is able to reproduce the results of both the spin torque model by Slonczewski, see <a class="reference internal" href="#slonczewski1996" id="id5">[Slonczewski1996]</a>, and the model by Zhang and Li, see <a class="reference internal" href="#zhang2004" id="id6">[Zhang2004]</a>.</p>
+<p>magnum.fe provides different methods for the solution of the spin diffusion model. The <a class="reference internal" href="#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><code class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></code></a> class integrates the dynamic spin diffusion equation. Combined with an Alouges type integrator it can be shown that the resulting scheme is unconditionally convergent, see <a class="reference internal" href="#abert2014a" id="id7">[Abert2014a]</a>, <a class="reference internal" href="#abert2015" id="id8">[Abert2015]</a>.</p>
+<p>The typical time scale of the motion of the spin accumulation is two orders of magnitude faster than that of the magnetic motion. Hence, if one is only interested in the magnetization dynamics it is reasonable to treat the spin accumulation in equilibrium by solving for the static case. This model is provided by the <a class="reference internal" href="#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a> class. It basically offers a method <code class="code docutils literal"><span class="pre">s()</span></code> that can be registered as virtual attribute in order to provide the equilibrium spin accumulation for a given magnetization and current distribution.</p>
+<p>Both models mentioned above require the prescription of an electric current density. However, the electric conductivity and thus also the current density is known to depend on the magnetization. A fully self-consistent model would therefore not only solve for the spin accumulation, but also for the electric current. The spin-diffusion model introduced above has its origin in a more general model, that was also introduced in <a class="reference internal" href="#zhang2002" id="id9">[Zhang2002]</a> where the electric current <span class="math">\(\vec{J}_\text{e}\)</span> and the spin current <span class="math">\(\vec{J}_\text{s}\)</span> are given by the coupled system</p>
+<div class="math">
+\[\begin{split}\vec{J}_\text{s} &amp;= 2 C_0 \frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{E} - 2 D_0 \nabla \vec{s} \\
+\vec{J}_\text{e} &amp;= 2 C_0 \vec{E} - 2 D_0 \frac{\beta' e}{\mu_\text{B}} (\nabla \vec{s})^T \vec{m}\end{split}\]</div>
+<p>with <span class="math">\(\vec{E}\)</span> being the electric field and <span class="math">\(C_0\)</span> being connected to the electric conductivity <span class="math">\(\sigma\)</span> by <span class="math">\(C_0 = \sigma/2\)</span>. Furthermore it is assumed that the electric field has a scalar potential <span class="math">\(u\)</span> given by <span class="math">\(\vec{E} = - \nabla u\)</span> and that there are no sources of electric current within the considered region <span class="math">\(\nabla \cdot \vec{J}_\text{e} = 0\)</span>. Plugging into the static equation for the spin accumulation <span class="math">\(\frac{\partial \vec{s}}{\partial t} = 0\)</span> yields the system</p>
+<div class="math">
+\[\begin{split}- 2 C_0 \Delta u - 2 \beta' D_0 \frac{e}{\mu_\text{B}} \vec{\nabla} \cdot \left[
+  (\vec{\nabla}\vec{s})^T \vec{m}
+\right] &amp;= 0\\
+ \vec{\nabla} \cdot \left[
+   2 \beta C_0 \frac{\mu_\text{B}}{e} \vec{m} \otimes \vec{\nabla} u
+   + 2 D_0 \vec{\nabla}\vec{s}
+\right]
+- \frac{\vec{s}}{\tau_\text{sf}}
+- J \frac{\vec{s} \times \vec{m}}{\hbar}
+&amp;= 0\end{split}\]</div>
+<p>which can be simultaneously solved for the potential <span class="math">\(u\)</span> and the spin accumulation <span class="math">\(\vec{s}\)</span>. This is done by the <a class="reference internal" href="#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a> class that provides methods for the computation of <span class="math">\(u\)</span>, <span class="math">\(\vec{s}\)</span> and the electric current <span class="math">\(\vec{J}_\text{e}\)</span>. The details of this method are described in <a class="reference internal" href="#abert2016" id="id10">[Abert2016]</a>.</p>
+<p>The <a class="reference internal" href="#magnumfe.SpinAccumulationWithSpinhall" title="magnumfe.SpinAccumulationWithSpinhall"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationWithSpinhall</span></code></a> solver extends the <a class="reference internal" href="#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a> solver by the spin Hall and invsere spin Hall effect. The spin current and electric current without spin Hall <span class="math">\(\vec{J}_\text{s}^0\)</span> and <span class="math">\(\vec{J}_\text{e}^0\)</span> are defined along the lines of the self-consistent model</p>
+<div class="math">
+\[\begin{split}\vec{J}_\text{s}^0 &amp;= 2 C_0 \frac{\beta \mu_\text{B}}{e} \vec{m} \otimes \vec{E} - 2 D_0 \nabla \vec{s} \\
+\vec{J}_\text{e}^0 &amp;= 2 C_0 \vec{E} - 2 D_0 \frac{\beta' e}{\mu_\text{B}} (\nabla \vec{s})^T \vec{m}.\end{split}\]</div>
+<p>According to <a class="reference internal" href="#dyakonov2007" id="id11">[Dyakonov2007]</a> the system including spin Hall effects is then given by</p>
+<div class="math">
+\[\begin{split}J_{\text{s},ij} &amp;= J_{\text{s},ij}^0 + \epsilon_{ijk} \theta \frac{\mu_\text{B}}{e} J_{\text{e},k}^0\\
+J_{\text{e},i}  &amp;= J_{\text{e},i}^0 - \epsilon_{ijk} \theta \frac{e}{\mu_\text{B}} J_{\text{s},jk}^0.\end{split}\]</div>
+<p>where <span class="math">\(\theta\)</span> is the dimensionless spin Hall angle.</p>
+<p>Any of these solvers provide methods to compute the spin accumulation for a given magnetization. In order to account for the influence of the spin accumulation onto the magnetization dynamics you have to include the <a class="reference internal" href="field_terms.html#magnumfe.SpinTorque" title="magnumfe.SpinTorque"><code class="xref py py-class docutils literal"><span class="pre">SpinTorque</span></code></a> term in the list of effective field contributions and make sure that the computed value for the spin accumulation is accessible via <code class="code docutils literal"><span class="pre">state.s</span></code>.</p>
+<p>An overview over the different spin diffusion classes is given in the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="31%" />
+<col width="16%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>Class</strong></th>
+<th class="head"><span class="math">\(\text{d}\vec{s}/\text{d}t = 0\)</span></th>
+<th class="head"><strong>self-consistent</strong></th>
+<th class="head"><strong>(inverse) spin Hall</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><code class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></code></a></td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a></td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a></td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#magnumfe.SpinAccumulationWithSpinhall" title="magnumfe.SpinAccumulationWithSpinhall"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationWithSpinhall</span></code></a></td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="legacy-material-parameters">
+<h2>Legacy material parameters<a class="headerlink" href="#legacy-material-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Until version 1.1.x, magnum.fe implemented all spin diffusion models with a different set of material parameters. Namely instead of the coupling strength <span class="math">\(J\)</span> and the spin-flip relaxation time <span class="math">\(\tau_\text{sf}\)</span> the former formulation includes the coupling constant <span class="math">\(c\)</span> and the diffusion lengths <span class="math">\(\lambda_\text{sf}\)</span> and <span class="math">\(\lambda_\text{J}\)</span>. With these parameters the extended LLG reads</p>
+<div class="math">
+\[\frac{\partial \vec{m}}{\partial t} =
+- \gamma \vec{m} \times (\vec{h}_\text{eff} + \frac{c}{\mu_0} \vec{s})
++ \alpha \vec{m} \times \frac{\partial \vec{m}}{\partial t}\]</div>
+<p>and the dynamics of the spin accumulation <span class="math">\(\vec{s}\)</span> are described by</p>
+<div class="math">
+\[\frac{\partial \vec{s}}{\partial t} =
+- \vec{\nabla} \cdot \mat{J}_\text{s}
+- 2 D_0 \left[
+  \frac{\vec{s}}{\lambda_\text{sf}^2}
+  + \frac{\vec{s} \times \vec{m}}{\lambda_\text{J}^2}
+\right]\]</div>
+<p>where <span class="math">\(\lambda_\text{sf}\)</span> is the characteristic length for spin-flip relaxation and <span class="math">\(\lambda_\text{J}\)</span> depends on the electron’s mean free path. Note, that three legacy parameters (<span class="math">\(c\)</span>, <span class="math">\(\lambda_\text{sf}\)</span>, and <span class="math">\(\lambda_\text{J}\)</span>) are substituted by two parameters (<span class="math">\(J\)</span> and <span class="math">\(\tau_\text{sf}\)</span>) which means, that the legacy set of parameters is overdefined. The old parameters are still supported, but magnum.fe will print a legacy warning and it is recommended to switch to the new set of parameters. The following relations between old and new parameters hold</p>
+<div class="math">
+\[\begin{split}\lambda_\text{sf} &amp;= \sqrt{2 D_0 \tau_\text{sf}}\\
+\lambda_\text{J}  &amp;= \sqrt{2 D_0 \hbar / J}\\
+c                 &amp;= J \mu_0 / \hbar \gamma M_\text{s}\end{split}\]</div>
+</div>
+<div class="section" id="cell-and-facet-regions">
+<h2>Cell and facet regions<a class="headerlink" href="#cell-and-facet-regions" title="Permalink to this headline">¶</a></h2>
+<p>All spin diffusion related classes require the definition of certain cell and facet regions, see <a class="reference internal" href="#spin-diffusion-regions"><span class="std std-numref">Fig. 17</span></a>. As usual, regions containing magnetic material have to be included in the <code class="code docutils literal"><span class="pre">magnetic</span></code> region. Moreover, all conducting materials have to be included in the <code class="code docutils literal"><span class="pre">conducting</span></code> region. Note that conducting magnetic regions have to be included in this region, too.</p>
+<div class="figure align-center" id="spin-diffusion-regions">
+<a class="reference internal image-reference" href="_images/spin_diffusion_regions.png"><img alt="_images/spin_diffusion_regions.png" src="_images/spin_diffusion_regions.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Regions required by the different spin diffusion classes. The facet regions <code class="code docutils literal"><span class="pre">contact1</span></code> and <code class="code docutils literal"><span class="pre">contact2</span></code> are only required by the <a class="reference internal" href="#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a> class in order to apply a potential to the stack.</span></p>
+</div>
+<p>Besides the cell regions all spin diffusion classes require the definition of a <code class="code docutils literal"><span class="pre">outermagnet</span></code> facet region. This region should contain all interfaces between air and magnetic material. In the case of a magnetic multilayer that is surrounded contacted with nonmagnetic electrodes, this region includes the side facets of the magnetic layers (not the metal-magnetic interfaces).
+Note that the definition of the <code class="code docutils literal"><span class="pre">outermagnet</span></code> region only influences the simulation if the region is passed by an electric current. The defintion can be omitted if this is not the case.</p>
+<p>See the figure for the proper definition of both cell and facet regions for a magnetic/nonmagnetic multilayer stack.</p>
+</div>
 <div class="section" id="spindiffusion">
-<h2><a class="reference internal" href="#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a><a class="headerlink" href="#spindiffusion" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><code class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></code></a><a class="headerlink" href="#spindiffusion" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.SpinDiffusion">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinDiffusion</tt><a class="headerlink" href="#magnumfe.SpinDiffusion" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solver for the spin-diffusion equation according to <a class="reference internal" href="#abert2014a" id="id7">[Abert2014a]</a>. The spin diffusion <span class="math">\(\vec{s}\)</span> is computed from the current magnetization <span class="math">\(\vec{m}\)</span> by</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinDiffusion</code><span class="sig-paren">(</span><em>magnetic_region='magnetic'</em>, <em>conducting_region='conducting'</em>, <em>outermagnet_region='outermagnet'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinDiffusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver for the spin-diffusion equation according to <a class="reference internal" href="#abert2014a" id="id12">[Abert2014a]</a>. The spin diffusion <span class="math">\(\vec{s}\)</span> is computed from the current magnetization <span class="math">\(\vec{m}\)</span> by</p>
 <div class="math">
 \[\begin{split}\int_{\Omega} \;\text{d}_{t} \boldsymbol{s}^{k+1} \cdot \boldsymbol{\zeta} \;\text{d}\boldsymbol{x}
-\;+\; 2 D_0 \, a(\boldsymbol{s}^{k+1}, \boldsymbol{\zeta})
+\;+\; a(\boldsymbol{s}^{k+1}, \boldsymbol{\zeta})
 =\\
 \frac{\beta \mu_\text{B}}{e} \int_{\omega} \left[ \boldsymbol{m}^{k+1} \otimes \boldsymbol{j}^{k+1} \right] : \boldsymbol{\nabla} \boldsymbol{\zeta} \;\text{d}\boldsymbol{x}
 - \frac{\beta \mu_\text{B}}{e} \int_{\partial \Omega \cap \partial \omega} (\boldsymbol{j}^{k+1} \cdot \boldsymbol{n}) (\boldsymbol{m}^{k+1} \cdot \boldsymbol{\zeta}) \;\text{d}\boldsymbol{x}\end{split}\]</div>
 <p>where <span class="math">\(\text{d}_t \vec{s}^{k+1} = (\vec{s}^{k+1} - \vec{s}^k)\)</span> and the bilinear form <span class="math">\(a(\zeta_1, \zeta_2)\)</span> is defined as</p>
 <div class="math">
 \[\begin{split}a(\boldsymbol{\zeta_1}, \boldsymbol{\zeta_2}) =
-\frac{1}{\lambda_\text{sf}^2} \int_{\Omega} \boldsymbol{\zeta}_1 \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
-+ \int_{\Omega} \boldsymbol{\nabla} \boldsymbol{\zeta}_1 : \boldsymbol{\nabla} \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
+\frac{1}{\tau_\text{sf}} \int_{\Omega} \boldsymbol{\zeta}_1 \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
++ 2 D_0 \int_{\Omega} \boldsymbol{\nabla} \boldsymbol{\zeta}_1 : \boldsymbol{\nabla} \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
 \\
-- \beta \beta' \int_{\omega} \left[ \boldsymbol{m}^{k+1} \otimes \left((\boldsymbol{\nabla} \boldsymbol{\zeta}_1)^T \boldsymbol{m}^{k+1} \right) \right] : \boldsymbol{\nabla} \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
-+ \frac{1}{\lambda_\text{J}^2} \int_{\omega} \left( \boldsymbol{\zeta}_1 \times \boldsymbol{m}^{k+1} \right) \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}.\end{split}\]</div>
+- 2 D_0 \beta \beta' \int_{\omega} \left[ \boldsymbol{m}^{k+1} \otimes \left((\boldsymbol{\nabla} \boldsymbol{\zeta}_1)^T \boldsymbol{m}^{k+1} \right) \right] : \boldsymbol{\nabla} \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}
++ \frac{J}{\hbar} \int_{\omega} \left( \boldsymbol{\zeta}_1 \times \boldsymbol{m}^{k+1} \right) \cdot \boldsymbol{\zeta}_2 \;\text{d}\boldsymbol{x}.\end{split}\]</div>
 <p>The region <span class="math">\(\Omega\)</span> corresponds to the &#8220;conducting&#8221; cell domain and the region <span class="math">\(\omega\)</span> corresponds to the &#8220;magnetic&#8221; cell domain. The boundary <span class="math">\(\partial \Omega \cap \partial \omega\)</span> has to be defined explicitly as facet domain named &#8220;outermagnet&#8221;.</p>
-<p>The characteric time scale of the spin-diffusion dynamics is orders of magnitude smaller than that of the magnetization dynamics. However, the integration scheme is able to handle very large time steps. Hence the time step can be taken from the integration of the LLG if only the magnetization dynamics are of interest, see <a class="reference internal" href="#abert2014b" id="id8">[Abert2014b]</a>.</p>
-<p>Add the <tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt> to the LLG terms in order to get a bidirectional coupling of spin diffusion and magnetization.</p>
+<p>The characteric time scale of the spin-diffusion dynamics is orders of magnitude smaller than that of the magnetization dynamics. However, the integration scheme is able to handle very large time steps. Hence the time step can be taken from the integration of the LLG if only the magnetization dynamics are of interest, see <a class="reference internal" href="#abert2014b" id="id13">[Abert2014b]</a>.</p>
+<p>Add the <code class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></code> to the LLG terms in order to get a bidirectional coupling of spin diffusion and magnetization.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="c1"># initialize integrators</span>
+<span class="n">llg</span>      <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">()])</span>
+<span class="n">spindiff</span> <span class="o">=</span> <span class="n">SpinDiffusion</span><span class="p">()</span>
+
+<span class="c1"># perform integration step of size 1ps</span>
+<span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">([</span><span class="n">llg</span><span class="p">,</span> <span class="n">spindiff</span><span class="p">],</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>magnetic_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>magnetic region, defaults to &#8216;magnetic&#8217;</dd>
+<dt>conducting_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>conducting region, defaults to &#8216;conducting&#8217;</dd>
+<dt>outermagnet_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>facet region that marks magnet/air interfaces, defaults to &#8216;outermagnet&#8217;</dd>
+</dl>
+</dd>
+</dl>
 <dl class="method">
 <dt id="magnumfe.SpinDiffusion.step">
-<tt class="descname">step</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.SpinDiffusion.step" title="Permalink to this definition">¶</a></dt>
+<code class="descname">step</code><span class="sig-paren">(</span><em>state</em>, <em>dt</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinDiffusion.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate <span class="math">\(\vec{s}(t+\Delta t)\)</span> for a given timestep.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
 <dd>The simulation state.</dd>
-<dt>dt (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>dt (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>The time-step size.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="spinaccumulationforcurrent">
+<h2><a class="reference internal" href="#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a><a class="headerlink" href="#spinaccumulationforcurrent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinAccumulationForCurrent">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinAccumulationForCurrent</code><span class="sig-paren">(</span><em>magnetic_region='magnetic'</em>, <em>conducting_region='conducting'</em>, <em>outermagnet_region='outermagnet'</em>, <em>solver='gmres'</em>, <em>prec='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents the coupling of the magnetization with a spin
+polarized current. The spin accumulation is treated in equilibrium.
+The current has to prescribed in the state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>magnetic_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the magnetic region</dd>
+<dt>conducting_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the conducting region</dd>
+<dt>outermagnet_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the outer-magnet facet region</dd>
+<dt>solver  (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Solver for linear system (&#8220;bicgstab&#8221;, &#8220;gmres&#8221;,...), defaults to &#8220;gmres&#8221;</dd>
+<dt>prec (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Preconditioner for linear system (&#8220;ilu&#8221;, &#8220;amg&#8221;, ...), default to &#8220;ilu&#8221;</dd>
+</dl>
+</dd>
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Initialize state with magnetization</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># Set constant current</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1e12</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># Create solver and hook into state</span>
+<span class="n">spin_acc</span> <span class="o">=</span> <span class="n">SpinAccumulationForCurrent</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">s</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+<dt>j</dt>
+<dd>Electric Current</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>D0</dt>
+<dd>Diffusion constant</dd>
+<dt>beta</dt>
+<dd>Polarization parameter</dd>
+<dt>beta_prime</dt>
+<dd>Polarization parameter</dd>
+<dt>tau_sf</dt>
+<dd>Spin-flip relaxation time</dd>
+<dt>J</dt>
+<dd>exchange strength between itinerant and localized spins</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationForCurrent.js">
+<code class="descname">js</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForCurrent.js" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the spin current for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Spin current or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationForCurrent.s">
+<code class="descname">s</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForCurrent.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the spin accumulation s for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Spin accumulation or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="spinaccumulationforpotential">
+<h2><a class="reference internal" href="#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a><a class="headerlink" href="#spinaccumulationforpotential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinAccumulationForPotential">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinAccumulationForPotential</code><span class="sig-paren">(</span><em>magnetic_region='magnetic'</em>, <em>conducting_region='conducting'</em>, <em>outermagnet_region='outermagnet'</em>, <em>solver='bicgstab'</em>, <em>prec='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForPotential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the equilibrium spin accumulation s, the electric potential u
+and the electric current j for a given magnetization configuration and
+mixed boundary conditions for the potential.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Initialize state with magnetization</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># set a constant current inflow on contact1 facet-region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact1&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)}</span>
+
+<span class="c1"># set a constant potential on contact2 facet-region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">u_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact2&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)}</span>
+
+<span class="c1"># Create solver and hook into state</span>
+<span class="n">spin_acc</span> <span class="o">=</span> <span class="n">SpinAccumulationForPotential</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">s</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">j</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>magnetic_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the magnetic region, defaults to &#8220;magnetic&#8221;</dd>
+<dt>conducting_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the conducting region, defaults to &#8220;conducting&#8221;</dd>
+<dt>outermagnet_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the outer-magnet facet region</dd>
+<dt>solver  (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Solver for linear system (&#8220;bicgstab&#8221;, &#8220;gmres&#8221;,...), defaults to &#8220;bicgstab&#8221;</dd>
+<dt>prec (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Preconditioner for linear system (&#8220;ilu&#8221;, &#8220;amg&#8221;, ...), default to &#8220;ilu&#8221;</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+<dt>u_boundary</dt>
+<dd>Potential boundary conditions</dd>
+<dt>j_boundary</dt>
+<dd>Current boundary conditions</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>D0</dt>
+<dd>Diffusion constant</dd>
+<dt>C0</dt>
+<dd>Connected to the electrical conductivity <span class="math">\(\sigma\)</span> by <span class="math">\(C_0 = \sigma/2\)</span></dd>
+<dt>beta</dt>
+<dd>Polarization parameter</dd>
+<dt>beta_prime</dt>
+<dd>Polarization parameter</dd>
+<dt>tau_sf</dt>
+<dd>Spin-flip relaxation time</dd>
+<dt>J</dt>
+<dd>exchange strength between itinerant and localized spins</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationForPotential.j">
+<code class="descname">j</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForPotential.j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the electric current for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Electric current or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationForPotential.js">
+<code class="descname">js</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForPotential.js" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the spin current for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Spin current or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationForPotential.s">
+<code class="descname">s</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForPotential.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the spin accumulation s for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Spin accumulation or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationForPotential.u">
+<code class="descname">u</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationForPotential.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the electric potential for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Electric potential or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="spinaccumulationwithspinhall">
+<h2><a class="reference internal" href="#magnumfe.SpinAccumulationWithSpinhall" title="magnumfe.SpinAccumulationWithSpinhall"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationWithSpinhall</span></code></a><a class="headerlink" href="#spinaccumulationwithspinhall" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinAccumulationWithSpinhall">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinAccumulationWithSpinhall</code><span class="sig-paren">(</span><em>magnetic_region='magnetic'</em>, <em>conducting_region='conducting'</em>, <em>outermagnet_region='outermagnet'</em>, <em>solver='bicgstab'</em>, <em>prec='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationWithSpinhall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the equilibrium spin accumulation s, the electric potential u
+and the electric current j for a given magnetization configuration and
+mixed boundary conditions for the potential. Takes into account spin Hall
+and inverse spin Hall effect due to the spin Hall angle <span class="math">\(\theta\)</span>.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Initialize state with magnetization</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># set a constant current inflow on contact1 facet-region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact1&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)}</span>
+
+<span class="c1"># set a constant potential on contact2 facet-region</span>
+<span class="n">state</span><span class="o">.</span><span class="n">u_boundary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;contact2&#39;</span><span class="p">:</span> <span class="n">Constant</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)}</span>
+
+<span class="c1"># Create solver and hook into state</span>
+<span class="n">spin_acc</span> <span class="o">=</span> <span class="n">SpinAccumulationForPotential</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">s</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">spin_acc</span><span class="o">.</span><span class="n">j</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>magnetic_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the magnetic region, defaults to &#8220;magnetic&#8221;</dd>
+<dt>conducting_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the conducting region, defaults to &#8220;conducting&#8221;</dd>
+<dt>outermagnet_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the outer-magnet facet region</dd>
+<dt>solver  (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Solver for linear system (&#8220;bicgstab&#8221;, &#8220;gmres&#8221;,...), defaults to &#8220;bicgstab&#8221;</dd>
+<dt>prec (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Preconditioner for linear system (&#8220;ilu&#8221;, &#8220;amg&#8221;, ...), default to &#8220;ilu&#8221;</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+<dt>u_boundary</dt>
+<dd>Potential boundary conditions</dd>
+<dt>j_boundary</dt>
+<dd>Current boundary conditions</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>D0</dt>
+<dd>Diffusion constant</dd>
+<dt>C0</dt>
+<dd>Connected to the electrical conductivity <span class="math">\(\sigma\)</span> by <span class="math">\(C_0 = \sigma/2\)</span></dd>
+<dt>beta</dt>
+<dd>Polarization parameter</dd>
+<dt>beta_prime</dt>
+<dd>Polarization parameter</dd>
+<dt>tau_sf</dt>
+<dd>Spin-flip relaxation time</dd>
+<dt>J</dt>
+<dd>exchange strength between itinerant and localized spins</dd>
+<dt>theta</dt>
+<dd>spin Hall angle</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationWithSpinhall.j">
+<code class="descname">j</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationWithSpinhall.j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the electric current for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Electric current or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationWithSpinhall.s">
+<code class="descname">s</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationWithSpinhall.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the spin accumulation s for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Spin accumulation or lambda</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.SpinAccumulationWithSpinhall.u">
+<code class="descname">u</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinAccumulationWithSpinhall.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the electric potential for a given state.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The state. If state is not provided a lambda for use as virtual
+state attribute is returned.</dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code> or <code class="xref py py-class docutils literal"><span class="pre">lambda</span></code></dt>
+<dd>Electric potential or lambda</dd>
 </dl>
 </dd>
 </dl>
@@ -213,7 +736,7 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 <table class="docutils citation" frame="void" id="zhang2002" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[Zhang2002]</a></td><td>Zhang, S., Levy, P. M., &amp; Fert, A. (2002). Mechanisms of spin-polarized current-driven magnetization switching. Physical review letters, 88(23), 236601.</td></tr>
+<tr><td class="label">[Zhang2002]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id9">2</a>)</em> Zhang, S., Levy, P. M., &amp; Fert, A. (2002). Mechanisms of spin-polarized current-driven magnetization switching. Physical review letters, 88(23), 236601.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="garcia2007" rules="none">
@@ -225,7 +748,7 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 <table class="docutils citation" frame="void" id="abert2014b" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Abert2014b]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Abert, C., Ruggeri M., Bruckner F., Vogler C., Hrkac G., Praetorius D., &amp; Suess D. (2014). Self-consistent micromagnetic simulations including spin diffusion effects. In preparation</td></tr>
+<tr><td class="label">[Abert2014b]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id13">2</a>)</em> Abert, C., Ruggeri M., Bruckner F., Vogler C., Hrkac G., Praetorius D., &amp; Suess D. (2014). Self-consistent micromagnetic simulations including spin diffusion effects. In preparation</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="slonczewski1996" rules="none">
@@ -243,25 +766,44 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 <table class="docutils citation" frame="void" id="abert2014a" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[Abert2014a]</a></td><td><ol class="first last upperalpha simple" start="3">
+<tr><td class="label">[Abert2014a]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id12">2</a>)</em> <ol class="last upperalpha simple" start="3">
 <li>Abert, G. Hrkac, M. Page, D. Praetorius, M. Ruggeri, &amp; D. Suess.  Spin-polarized transport in ferromagnetic multilayers: An unconditionally convergent FEM integrator.  Comput. Math. Appl., 68, 6, 639-654, 2014.</li>
 </ol>
 </td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abert2015" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[Abert2015]</a></td><td>Abert, C., Ruggeri, M., Bruckner, F., Vogler, C., Hrkac, G., Praetorius, D., &amp; Suess, D. (2015). A three-dimensional spin-diffusion model for micromagnetics. Scientific reports, 5.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abert2016" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[Abert2016]</a></td><td>Abert, C. to be published</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="dyakonov2007" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11">[Dyakonov2007]</a></td><td>Dyakonov, M. I. (2007). Magnetoresistance due to edge spin accumulation. Physical review letters, 99(12), 126601.</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="open_boundary.html" class="btn btn-neutral float-right" title="Open Boundary Problems"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="solvers.html" class="btn btn-neutral float-right" title="Solvers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="llg.html" class="btn btn-neutral" title="Landau-Lifshitz-Gilbert Equation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="field_terms.html" class="btn btn-neutral" title="Field Terms" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -270,12 +812,14 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -290,7 +834,7 @@ In this model the spin accumulation <span class="math">\(\vec{s}(\vec{x})\)</spa
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

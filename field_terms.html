@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Field Terms &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Field Terms &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Miscellaneous" href="misc.html"/>
-        <link rel="prev" title="Open Boundary Problems" href="open_boundary.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Spin diffusion" href="spin_diffusion.html"/>
+        <link rel="prev" title="Logging" href="loggers.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,80 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Field Terms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#llgterm"><code class="docutils literal"><span class="pre">LLGTerm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#afcoupling"><code class="docutils literal"><span class="pre">AFCoupling</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compositeterm"><code class="docutils literal"><span class="pre">CompositeTerm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cubicanisotropyfield"><code class="docutils literal"><span class="pre">CubicAnisotropyField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#demagfield"><code class="docutils literal"><span class="pre">DemagField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exchangefield"><code class="docutils literal"><span class="pre">ExchangeField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#externalfield"><code class="docutils literal"><span class="pre">ExternalField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interfacedmifield"><code class="docutils literal"><span class="pre">InterfaceDMIField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interlayerexchange"><code class="docutils literal"><span class="pre">InterlayerExchange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><code class="docutils literal"><span class="pre">OerstedField</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saflayer"><code class="docutils literal"><span class="pre">SAFLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spintorque"><code class="docutils literal"><span class="pre">SpinTorque</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spintorqueslonczewski"><code class="docutils literal"><span class="pre">SpinTorqueSlonczewski</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spintorquezhangli"><code class="docutils literal"><span class="pre">SpinTorqueZhangLi</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uniaxialanisotropyfield"><code class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,51 +136,113 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
     <li>Field Terms</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/field_terms.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/field_terms.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <span class="target" id="module-magnumfe"></span><div class="section" id="field-terms">
-<h1>Field Terms<a class="headerlink" href="#field-terms" title="Permalink to this headline">¶</a></h1>
-<p>Each contribution to the effective field is represented by a subclass of <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>.
-A subclass has at least to implement the <tt class="code docutils literal"><span class="pre">form_term_rhs</span></tt> method.</p>
-<p>Available field classes are <a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><tt class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></tt></a>, <a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a>, <a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a>, <tt class="xref py py-class docutils literal"><span class="pre">SpinCurrent</span></tt>, <a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><tt class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a>.</p>
+<span id="id1"></span><h1>Field Terms<a class="headerlink" href="#field-terms" title="Permalink to this headline">¶</a></h1>
+<p>Effective field terms and extensions to the LLG are represented by the <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> class. magnum.fe comes with a number of predefined <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> classes that cover a variety of use cases. As shown in the previous section, a list of <code class="xref py py-class docutils literal"><span class="pre">FieldTerm</span></code> objects is usually passed to an LLG integrator object in order to integrate the LLG under the influence of different effects. Moreover each <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> object has methods to compute the corresponding effective field and energy for a given <a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> object.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># initialize state with uniform magnetization configuration</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)))</span>
+
+<span class="c1"># initialize demagnetization field object</span>
+<span class="n">demag</span> <span class="o">=</span> <span class="n">DemagField</span><span class="p">()</span>
+
+<span class="c1"># compute field and save to file</span>
+<span class="n">File</span><span class="p">(</span><span class="s2">&quot;h.pvd&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">demag</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># compute energy and print on screen</span>
+<span class="nb">print</span> <span class="n">demag</span><span class="o">.</span><span class="n">E</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Both, the field method <code class="code docutils literal"><span class="pre">h</span></code> and the energy method <code class="code docutils literal"><span class="pre">E</span></code> can also be used as virtual attribues.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">h_demag</span> <span class="o">=</span> <span class="n">demag</span><span class="o">.</span><span class="n">h</span><span class="p">()</span>
+<span class="n">state</span><span class="o">.</span><span class="n">E_demag</span> <span class="o">=</span> <span class="n">demag</span><span class="o">.</span><span class="n">E</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Computation of the field can be restricted to a certain region. Usually, the default region for is the &#8216;magnetic&#8217; region. This default can be overriden in the initializer in order to solve for the field in another region.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">exchange</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">(</span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;ferromagnetic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some of the predefined <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> classes describe nonlocal fields, e.g. the <a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a> and the <a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><code class="xref py py-class docutils literal"><span class="pre">OerstedField</span></code></a> class. These classes additionally distinguish between a source region and target region.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># compute field generate by the free layer in the free layer</span>
+<span class="n">DemagField</span><span class="p">(</span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;free_layer&#39;</span><span class="p">)</span>
+
+<span class="c1"># compute field generate by the fixed layer in the free layer</span>
+<span class="n">DemagField</span><span class="p">(</span><span class="n">source_region</span> <span class="o">=</span> <span class="s1">&#39;fixed_layer&#39;</span><span class="p">,</span> <span class="n">target_region</span> <span class="o">=</span> <span class="s1">&#39;free_layer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> classes require certain material parameters to be defined, e.g. the exchagne field requires the exchange constant <code class="code docutils literal"><span class="pre">Aex</span></code> and the saturation magnetization <code class="code docutils literal"><span class="pre">ms</span></code>. Please refer to the following reference documentation for detailed information on the individual llg terms.</p>
 <div class="section" id="llgterm">
-<h2><a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a><a class="headerlink" href="#llgterm" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a><a class="headerlink" href="#llgterm" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.LLGTerm">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGTerm</tt><a class="headerlink" href="#magnumfe.LLGTerm" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="magnumfe.LLGTerm.field">
-<tt class="descname">field</tt><big>(</big><em>state</em>, <em>x=None</em>, <em>lump=True</em>, <em>rhs_func=None</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the effective-field contribution for a given state.</p>
-<p>This method uses a projection method to retrieve the field from the
-RHS-form given by the <tt class="code docutils literal"><span class="pre">form_rhs</span></tt> method. It should be overriden
-for better performance.</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">LLGTerm</code><span class="sig-paren">(</span><em>preconditionable=False</em>, <em>region='magnetic'</em>, <em>lump=True</em>, <em>m_order=None</em>, <em>has_energy=True</em>, <em>weight='ms'</em>, <em>form_cache_keys=set(['material'])</em>, <em>result_cache_keys=set(['m'])</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Superclass of all effective field contributions. Subclasses should at least
+implement the <code class="code docutils literal"><span class="pre">form</span></code> method.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
-<dd>the simulation state</dd>
-<dt>x (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Vector</span></tt>)</dt>
-<dd>the vector to store the result or <tt class="code docutils literal"><span class="pre">None</span></tt></dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if True the projection is computed with a lumped mass matrix (faster)</dd>
+<dt>m_order (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Order of the magnetization in the energy used for automated energy calculation.
+By default this value is guessed from the form, however this might fail if
+auxiliary expressions are used.</dd>
+<dt>has_energy (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Should be set to False by an inheriting class that does not support energy
+computation (e.g. spin torque). In that case the E method throws an exception.</dd>
+<dt>weight (<code class="xref py py-class docutils literal"><span class="pre">function</span></code>)</dt>
+<dd>A function that returns a multiplicator for the field projection method. Defaults
+to material.ms which should be the correct choice for eny local energy contribution,
+e.g. exchange field.</dd>
+<dt>form_cache_keys (<code class="xref py py-class docutils literal"><span class="pre">set</span></code>)</dt>
+<dd>Cache keys for the matrix/vector assembly from the form for the field computation</dd>
+<dt>result_cache_keys(<code class="xref py py-class docutils literal"><span class="pre">set</span></code>)</dt>
+<dd>Cache keys for the result of the field computation</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.LLGTerm.E">
+<code class="descname">E</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the energy connected with the field contribution, if implemented in the
+subclass. This method can either be called directly or registered as virtual
+attribute.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>the state</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt></dt>
-<dd>the effective-field contribution</dd>
+<dt><code class="xref py py-class docutils literal"><span class="pre">float</span></code></dt>
+<dd>the energy</dd>
 </dl>
 </dd>
 </dl>
@@ -181,23 +250,21 @@ for better performance.</p>
 
 <dl class="method">
 <dt id="magnumfe.LLGTerm.form_lhs">
-<tt class="descname">form_lhs</tt><big>(</big><em>state</em>, <em>w</em>, <em>dt_v</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_lhs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">form_lhs</code><span class="sig-paren">(</span><em>state</em>, <em>dt_v</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.form_lhs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the left-hand-side contribution of the effective field
 for Alouges-type integration schemes.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
 <dd>The simulation state.</dd>
-<dt>w (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.TestFunction</span></tt>)</dt>
-<dd>The test function used in the Alouges integrator.</dd>
-<dt>dt_v (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.TrialFunction</span></tt>)</dt>
+<dt>dt_v (<code class="xref py py-class docutils literal"><span class="pre">dolfin.TrialFunction</span></code>)</dt>
 <dd>The trial function multiplied with the timestep and theta.</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Form</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Form</span></code></dt>
 <dd>the form contribution for the LHS</dd>
 </dl>
 </dd>
@@ -206,21 +273,19 @@ for Alouges-type integration schemes.</p>
 
 <dl class="method">
 <dt id="magnumfe.LLGTerm.form_rhs">
-<tt class="descname">form_rhs</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.form_rhs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">form_rhs</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.form_rhs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the right-hand-side contribution of the effective field
 for Alouges-type integration schemes.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
 <dd>The simulation state.</dd>
-<dt>w (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.TestFunction</span></tt>)</dt>
-<dd>The test function used in the Alouges integrator.</dd>
 </dl>
 </dd>
 <dt><em>Returns</em></dt>
 <dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Form</span></tt></dt>
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Form</span></code></dt>
 <dd>the form contribution for the RHS</dd>
 </dl>
 </dd>
@@ -228,46 +293,80 @@ for Alouges-type integration schemes.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="magnumfe.LLGTerm.prec_field">
-<tt class="descname">prec_field</tt><big>(</big><em>state</em>, <em>x=None</em>, <em>lump=False</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.prec_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the constant contribution to the preconditioner. Defaults to
-:code`field`.</p>
+<dt id="magnumfe.LLGTerm.h">
+<code class="descname">h</code><span class="sig-paren">(</span><em>state=None</em>, <em>x=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the effective-field contribution for a given state. This method
+can either be called directly or registered as virtual attribute.</p>
+<p>Uses a projection method to retrieve the field from the
+RHS-form given by the <code class="code docutils literal"><span class="pre">form_rhs</span></code> method. It should be overriden
+for better performance.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>the simulation state</dd>
+<dt>x (<code class="xref py py-class docutils literal"><span class="pre">dolfin.Vector</span></code>)</dt>
+<dd>the vector to store the result or <code class="code docutils literal"><span class="pre">None</span></code></dd>
+</dl>
+</dd>
+<dt><em>Returns</em></dt>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></code></dt>
+<dd>the effective-field contribution</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="magnumfe.LLGTerm.prec_form">
-<tt class="descname">prec_form</tt><big>(</big><em>state</em>, <em>w</em><big>)</big><a class="headerlink" href="#magnumfe.LLGTerm.prec_form" title="Permalink to this definition">¶</a></dt>
+<code class="descname">prec_form</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.prec_form" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the m-dependent contribution to the preconditioner. Defaults to
 :code`form_rhs`.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.LLGTerm.prec_region">
+<code class="descname">prec_region</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.prec_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns additional regions that have to be taken into account for preconditioning.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.LLGTerm.prec_setup">
+<code class="descname">prec_setup</code><span class="sig-paren">(</span><em>state</em>, <em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGTerm.prec_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocesses RHS of preconditioning system.</p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="demagfield">
-<h2><a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a><a class="headerlink" href="#demagfield" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="afcoupling">
+<h2><a class="reference internal" href="#magnumfe.AFCoupling" title="magnumfe.AFCoupling"><code class="xref py py-class docutils literal"><span class="pre">AFCoupling</span></code></a><a class="headerlink" href="#afcoupling" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="magnumfe.DemagField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">DemagField</tt><big>(</big><em>method='Shell Transform'</em>, <em>order=1</em>, <em>solver='LU'</em>, <em>region='magnetic'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solves for the magnetic demagnetization field.</p>
+<dt id="magnumfe.AFCoupling">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">AFCoupling</code><span class="sig-paren">(</span><em>A</em>, <em>direction</em>, <em>interface='af'</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.AFCoupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents the coupling of a ferromagnetic interface to an
+antiferromagnet. The antiferromagnet is usually not included in the
+&#8216;magnetic&#8217; region. It might even be omitted completely if it is not
+required for other computations such as the electric current distribution.</p>
+<p>The coupling is initialized by defining an interface, a coupling direction
+(preferred direction of the magnetization in the magnetic region) and a
+coupling constant.</p>
+<div class="figure" id="id3">
+<a class="reference internal image-reference" href="_images/afcoupling.png"><img alt="_images/afcoupling.png" src="_images/afcoupling.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Interface definition for antiferromagnetic coupling.</span></p>
+</div>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>method (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
-<dd>Method for the solution of the open-boundary problem.
-Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
-<dt>order (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
-<dd>The order of CG function used for the potential calculation.
-Currently only affects ST method.</dd>
-<dt>solver (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
-<dd>Solver type for FEM systems (either &#8220;LU&#8221; or &#8220;CG&#8221;).
-Currently only affects FK method.</dd>
-<dt>region (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
-<dd>Name of the region considered for field computation</dd>
-<dt>aca_eps (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
-<dd>Accuracy of ACA algorithm. FK method only.</dd>
-<dt>loglevel (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
-<dd>Loglevel of Bem++ (low, default, high). FK method only.</dd>
+<dt>A (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Coupling constant in <span class="math">\(J/m^2\)</span></dd>
+<dt>direction (<code class="xref py py-class docutils literal"><span class="pre">dolfin.GenericFunction</span></code>)</dt>
+<dd>Direction of the coupling, e.g. <code class="code docutils literal"><span class="pre">Constant((1,</span> <span class="pre">0,</span> <span class="pre">0))</span></code></dd>
+<dt>interface (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the facet domain where the coupling is applied</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
 </dl>
 </dd>
 <dt><em>Required fields</em></dt>
@@ -277,30 +376,176 @@ Currently only affects FK method.</dd>
 </dl>
 </dd>
 </dl>
-<dl class="method">
-<dt id="magnumfe.DemagField.u">
-<tt class="descname">u</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.u" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the demagnetization-field potential u for a given simulation state</p>
+</dd></dl>
+
+</div>
+<div class="section" id="compositeterm">
+<h2><a class="reference internal" href="#magnumfe.CompositeTerm" title="magnumfe.CompositeTerm"><code class="xref py py-class docutils literal"><span class="pre">CompositeTerm</span></code></a><a class="headerlink" href="#compositeterm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.CompositeTerm">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">CompositeTerm</code><span class="sig-paren">(</span><em>*terms</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.CompositeTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class combines multiple <a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> objects to a single object for the
+convenient calculation of the overall field and energy.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The resulting object is not suitable for use in <a class="reference internal" href="llg.html#magnumfe.LLGCvode" title="magnumfe.LLGCvode"><code class="xref py py-class docutils literal"><span class="pre">LLGCvode</span></code></a> since preconditioning capabilities are lost.</p>
+</div>
 <dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="n">exchange</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">()</span>
+<span class="n">demag</span>    <span class="o">=</span> <span class="n">DemagField</span><span class="p">()</span>
+<span class="n">total</span>    <span class="o">=</span> <span class="n">CompositeTerm</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span> <span class="n">demag</span><span class="p">)</span>
+
+<span class="n">total</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">total</span><span class="o">.</span><span class="n">E</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
-<dd>The simulation state</dd>
+<dt>*terms (<a class="reference internal" href="#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>)</dt>
+<dd>The LLGTerms to be combined to a single term.</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="staticmethod">
-<dt id="magnumfe.DemagField.wrap_mesh">
-<em class="property">static </em><tt class="descname">wrap_mesh</tt><big>(</big><em>mesh</em><big>)</big><a class="headerlink" href="#magnumfe.DemagField.wrap_mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a WrappedMesh object from a mesh with cuboid shell as created by
-the magnum-msh script.</p>
+</div>
+<div class="section" id="cubicanisotropyfield">
+<h2><a class="reference internal" href="#magnumfe.CubicAnisotropyField" title="magnumfe.CubicAnisotropyField"><code class="xref py py-class docutils literal"><span class="pre">CubicAnisotropyField</span></code></a><a class="headerlink" href="#cubicanisotropyfield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.CubicAnisotropyField">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">CubicAnisotropyField</code><span class="sig-paren">(</span><em>region='magnetic'</em>, <em>lump=True</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.CubicAnisotropyField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a second order uniaxial anisotropy field.</p>
+<div class="math">
+\[\begin{split}\vec{H} = - \frac{2 K_1}{\mu_0 M_\text{s}} \mat{A}(\alpha, \beta, \gamma)
+           \begin{pmatrix}
+           m_1 m_2^2 + m_1 m_3^2\\
+           m_2 m_3^2 + m_2 m_1^2\\
+           m_3 m_1^2 + m_3 m_2^2
+           \end{pmatrix}
+          - \frac{2 K_2}{\mu_0 M_\text{s}} \mat{A}(\alpha, \beta, \gamma)
+           \begin{pmatrix}
+           m_1   m_2^2 m_3^2 \\
+           m_1^2 m_2   m_3^2 \\
+           m_1^2 m_2^2 m_3  
+           \end{pmatrix}\end{split}\]</div>
+<p>where <span class="math">\(\mat{A}(\alpha, \beta, \gamma)\)</span> is a rotation matrix with <span class="math">\(\alpha\)</span>, <span class="math">\(\beta\)</span> and <span class="math">\(\gamma\)</span> being the Euler angles:</p>
+<div class="math">
+\[\begin{split}\mat{A}(\alpha, \beta, \gamma) = \begin{pmatrix}
+   \cos \alpha \cos \gamma  - \sin \alpha \cos \beta \sin \gamma &amp;
+  -\cos \alpha \sin \gamma  - \sin \alpha \cos \beta \cos \gamma &amp;
+   \sin \alpha \sin \beta \\
+   \sin \alpha \cos \gamma + \cos \alpha \cos \beta \sin \gamma &amp;
+  -\sin \alpha \sin \gamma + \cos \alpha \cos \beta \cos \gamma &amp;
+  -\cos \alpha \sin \beta \\
+   \sin \beta \sin \gamma &amp;
+   \sin \beta \cos \gamma &amp;
+   \cos \beta
+\end{pmatrix}\end{split}\]</div>
+<p>The Euler angles are optional. If not provided, the are assumed to be zero and the easy axes coincide with the coordinate axes.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>))</dt>
-<dd>The mesh including the cuboid shell (either mesh object or path to mesh file)</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if True the projection is computed with a lumped mass matrix (faster)</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>magnetization</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>ms</dt>
+<dd>saturation magnetization</dd>
+<dt>K1_cubic</dt>
+<dd>anisotropy constant</dd>
+<dt>K2_cubic</dt>
+<dd>anisotropy constant</dd>
+<dt>K_cubic_alpha (optional)</dt>
+<dd>Euler angle alpha</dd>
+<dt>K_cubic_beta (optional)</dt>
+<dd>Euler angle beta</dd>
+<dt>K_cubic_gamma (optional)</dt>
+<dd>Euler angle gamma</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="demagfield">
+<h2><a class="reference internal" href="#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a><a class="headerlink" href="#demagfield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.DemagField">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">DemagField</code><span class="sig-paren">(</span><em>method='Fredkin Koehler'</em>, <em>order=1</em>, <em>solver='LU'</em>, <em>region=None</em>, <em>lump=True</em>, <em>source_region=None</em>, <em>target_region=None</em>, <em>compute_region=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.DemagField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves for the magnetic demagnetization field. The connected open boundary
+problem can either be solved with a hybrid FEM/BEM method (Fredkin Koehler)
+or a shell transformation method (Shell Transform). For most cases the
+FEM/BEM coupling is preferrable. For details, see <a class="reference internal" href="open_boundary.html#open-boundary"><span class="std std-ref">Open Boundary Problems</span></a>.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if True the projection is computed with a lumped mass matrix (faster)</dd>
+<dt>method (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Method for the solution of the open-boundary problem.
+Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
+<dt>order (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>The order of CG function used for the potential calculation.
+Currently only affects ST method.</dd>
+<dt>solver (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Solver type for FEM systems (either &#8220;LU&#8221; or &#8220;CG&#8221;).
+Currently only affects FK method.</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Region where sources are considered and the field is evaluated.
+Defaults to &#8216;magnetic&#8217; if non of region, source_region and target_region are given.</dd>
+<dt>source_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>If given, only sources in this region are considered for field computation.
+Requires definition of target_region.</dd>
+<dt>target_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>If given, field is only evaluated in this region.
+Requires definition of source_region.</dd>
+<dt>compute_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>If given, FEM/BEM problem is solved in this region.
+Must contain both source_region and target_region.</dd>
+<dt>aca_eps (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Accuracy of ACA algorithm. FK method only.</dd>
+<dt>bem_quad_degree_near (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>BEM quadrature degree for triangles with small distance, defaults to 4</dd>
+<dt>bem_quad_degree_medium (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>BEM quadrature degree for triangles with medium distance, defaults to 3</dd>
+<dt>bem_quad_degree_far (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>BEM quadrature degree for triangles with large distance, defaults to 2</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>ms</dt>
+<dd>saturation magnetization in A/m</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.DemagField.u">
+<code class="descname">u</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.DemagField.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the demagnetization-field potential u for a given simulation state</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The simulation state</dd>
 </dl>
 </dd>
 </dl>
@@ -310,12 +555,20 @@ the magnum-msh script.</p>
 
 </div>
 <div class="section" id="exchangefield">
-<h2><a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><tt class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></tt></a><a class="headerlink" href="#exchangefield" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.ExchangeField" title="magnumfe.ExchangeField"><code class="xref py py-class docutils literal"><span class="pre">ExchangeField</span></code></a><a class="headerlink" href="#exchangefield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.ExchangeField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExchangeField</tt><a class="headerlink" href="#magnumfe.ExchangeField" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">ExchangeField</code><span class="sig-paren">(</span><em>region='magnetic'</em>, <em>lump=True</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ExchangeField" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents the micromagnetic exchange field.</p>
 <dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if True the projection is computed with a lumped mass matrix (faster)</dd>
+</dl>
+</dd>
 <dt><em>Required fields</em></dt>
 <dd><dl class="first last docutils">
 <dt>m</dt>
@@ -324,8 +577,10 @@ the magnum-msh script.</p>
 </dd>
 <dt><em>Required material parameters</em></dt>
 <dd><dl class="first last docutils">
+<dt>ms</dt>
+<dd>saturation magnetization in A/m</dd>
 <dt>Aex</dt>
-<dd>Exchange constant</dd>
+<dd>exchange constant in J/m</dd>
 </dl>
 </dd>
 </dl>
@@ -333,18 +588,127 @@ the magnum-msh script.</p>
 
 </div>
 <div class="section" id="externalfield">
-<h2><a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><tt class="xref py py-class docutils literal"><span class="pre">ExternalField</span></tt></a><a class="headerlink" href="#externalfield" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.ExternalField" title="magnumfe.ExternalField"><code class="xref py py-class docutils literal"><span class="pre">ExternalField</span></code></a><a class="headerlink" href="#externalfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.ExternalField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">ExternalField</tt><big>(</big><em>h_ext=None</em><big>)</big><a class="headerlink" href="#magnumfe.ExternalField" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents an external field. The field value is either
-taken from state class or provided directly as argument. In the latter
-case the attribute state.h_ext is set accordingly.</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">ExternalField</code><span class="sig-paren">(</span><em>h=Coefficient(FunctionSpace(None</em>, <em>VectorElement(FiniteElement('Real'</em>, <em>None</em>, <em>0)</em>, <em>dim=3))</em>, <em>0)</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ExternalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents an external field. The field value can either
+be a constant or a lambda depending on the time.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Define a constant field of 1T in x direction</span>
+<span class="n">external</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="mf">1.0</span><span class="o">/</span><span class="n">Contants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)))</span>
+
+<span class="c1"># Define a field linearly varying in x direction</span>
+<span class="n">external</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Expression</span><span class="p">((</span><span class="s1">&#39;x[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0&#39;</span><span class="p">)))</span>
+
+<span class="c1"># Define an oscillating field</span>
+<span class="n">external</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">Constant</span><span class="p">((</span><span class="n">A</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span><span class="o">*</span><span class="n">t</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)))</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>h (<code class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></code>/<code class="xref py py-class docutils literal"><span class="pre">lambda</span></code>)</dt>
+<dd>The external field (GenericFunction or lambda)</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="magnumfe.ExternalField.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>h</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.ExternalField.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the field to a new value.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>h_ext (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.cpp.GenericFunction</span></tt>)</dt>
-<dd>The external field (GenericFunction or lambda)</dd>
+<dt>h (<code class="xref py py-class docutils literal"><span class="pre">dolfin.GenericFunction</span></code>/<code class="xref py py-class docutils literal"><span class="pre">lambda</span></code>)</dt>
+<dd>the field</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="interfacedmifield">
+<h2><a class="reference internal" href="#magnumfe.InterfaceDMIField" title="magnumfe.InterfaceDMIField"><code class="xref py py-class docutils literal"><span class="pre">InterfaceDMIField</span></code></a><a class="headerlink" href="#interfacedmifield" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.InterfaceDMIField">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">InterfaceDMIField</code><span class="sig-paren">(</span><em>region='magnetic'</em>, <em>lump=True</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.InterfaceDMIField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents the interface Dzyaloshinskii-Moriya interaction corresponding to the energy</p>
+<div class="math">
+\[E = D [ m_\text{n} \vec{\nabla} \cdot \vec{m} - (\vec{m} \cdot \vec{\nabla}) m_\text{n} ]\]</div>
+<p>with the coupling constant <span class="math">\(D\)</span> and the projected magnetization <span class="math">\(m_\text{n}\)</span> defined by</p>
+<div class="math">
+\[m_\text{n} = \vec{m} \cdot \vec{n}\]</div>
+<p>where <span class="math">\(\vec{n}\)</span> is a normalized direction vector (usually the interface normal).</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+<dt>lump (<code class="xref py py-class docutils literal"><span class="pre">bool</span></code>)</dt>
+<dd>Flag, if True the projection is computed with a lumped mass matrix (faster)</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>D_inter</dt>
+<dd>DMI coupling constant</dd>
+<dt>D_inter_axis</dt>
+<dd>DMI axis (usually the interface normal)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="interlayerexchange">
+<h2><a class="reference internal" href="#magnumfe.InterlayerExchange" title="magnumfe.InterlayerExchange"><code class="xref py py-class docutils literal"><span class="pre">InterlayerExchange</span></code></a><a class="headerlink" href="#interlayerexchange" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.InterlayerExchange">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">InterlayerExchange</code><span class="sig-paren">(</span><em>A</em>, <em>layer_region='interlayer_region'</em>, <em>interface1='interface1'</em>, <em>interface2='interface2'</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.InterlayerExchange" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a Heisenberg-type coupling of two neighboring interfaces
+and can be used to model e.g. synthetic antiferromagnets.</p>
+<p>The volume between these interfaces has to be meshed and marked as nonmagnetic.
+While the interfaces are not required to have the same number of nodes, they should
+be more or less in parallel and have the same size. Furthermore it is recommended
+to avoid interal mesh nodes within the coupling region since this requires an
+additional solver step for the evaluation of the effective field. The coupling
+constant is provided in J/m^2 and a positive constant means ferromagnetic
+coupling (negative constant means antiferromagnetic coupling).</p>
+<div class="figure" id="id4">
+<a class="reference internal image-reference" href="_images/interlayer_exchange.png"><img alt="_images/interlayer_exchange.png" src="_images/interlayer_exchange.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Interface and region definition for a SAF layer. (a) interfaces (b) region.</span></p>
+</div>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>A (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Coupling constant in J/m^2 (positive constant means ferromagnetic coupling)</dd>
+<dt>saf_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the cell domain of the SAF layer</dd>
+<dt>interface1 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the facet domain of SAF layer interface 1</dd>
+<dt>interface2 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the facet domain of SAF layer interface 2</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
 </dl>
 </dd>
 </dl>
@@ -352,26 +716,45 @@ case the attribute state.h_ext is set accordingly.</p>
 
 </div>
 <div class="section" id="oerstedfield">
-<h2><a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a><a class="headerlink" href="#oerstedfield" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.OerstedField" title="magnumfe.OerstedField"><code class="xref py py-class docutils literal"><span class="pre">OerstedField</span></code></a><a class="headerlink" href="#oerstedfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.OerstedField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">OerstedField</tt><big>(</big><em>method='transform'</em>, <em>order=1</em>, <em>solver='LU'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solves for the current induced Oersted field.</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">OerstedField</code><span class="sig-paren">(</span><em>method='Fredkin Koehler'</em>, <em>order=1</em>, <em>solver='LU'</em>, <em>region=None</em>, <em>source_region=None</em>, <em>target_region=None</em>, <em>compute_region=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.OerstedField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves for the current indeced Oersted field. The connected open boundary
+problem can either be solved with a hybrid FEM/BEM method (Fredkin Koehler)
+or a shell transformation method (Shell Transform). For most cases the
+FEM/BEM coupling is preferrable. For details, see <a class="reference internal" href="open_boundary.html#open-boundary"><span class="std std-ref">Open Boundary Problems</span></a>.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>method (<tt class="xref py py-class docutils literal"><span class="pre">string</span></tt>)</dt>
+<dt>method (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
 <dd>Method for the solution of the open-boundary problem.
 Possible Values are &#8220;Fredkin Koehler&#8221;/&#8221;FK&#8221; and &#8220;Shell Transform&#8221;/&#8221;ST&#8221;</dd>
-<dt>order (<tt class="xref py py-class docutils literal"><span class="pre">int</span></tt>)</dt>
+<dt>order (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
 <dd>The order of CG function used for the potential calculation.</dd>
-<dt>solver (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
+<dt>solver (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
 <dd>Solver type for FEM systems (either &#8220;LU&#8221; or &#8220;CG&#8221;).
 Currently only affects FK method.</dd>
-<dt>aca_eps (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Region where sources are considered and the field is evaluated.
+Defaults to &#8216;conducting&#8217; if non of region, source_region and target_region are given.</dd>
+<dt>source_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>If given, only sources in this region are considered for field computation.
+Requires definition of target_region.</dd>
+<dt>target_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>If given, field is only evaluated in this region.
+Requires definition of source_region.</dd>
+<dt>compute_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>If given, FEM/BEM problem is solved in this region.
+Must contain both source_region and target_region.</dd>
+<dt>aca_eps (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>Accuracy of ACA algorithm. FK method only.</dd>
-<dt>loglevel (<tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>)</dt>
-<dd>Loglevel of Bem++ (low, default, high). FK method only.</dd>
+<dt>bem_quad_degree_near (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>BEM quadrature degree for triangles with small distance, defaults to 4</dd>
+<dt>bem_quad_degree_medium (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>BEM quadrature degree for triangles with medium distance, defaults to 3</dd>
+<dt>bem_quad_degree_far (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>BEM quadrature degree for triangles with large distance, defaults to 2</dd>
 </dl>
 </dd>
 <dt><em>Required fields</em></dt>
@@ -381,35 +764,61 @@ Currently only affects FK method.</dd>
 </dl>
 </dd>
 </dl>
-<dl class="method">
-<dt id="magnumfe.OerstedField.calculate_field">
-<tt class="descname">calculate_field</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#magnumfe.OerstedField.calculate_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Oersted-field for a given simulation state.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="saflayer">
+<h2><a class="reference internal" href="#magnumfe.SAFLayer" title="magnumfe.SAFLayer"><code class="xref py py-class docutils literal"><span class="pre">SAFLayer</span></code></a><a class="headerlink" href="#saflayer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SAFLayer">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SAFLayer</code><span class="sig-paren">(</span><em>A</em>, <em>saf_region='saf'</em>, <em>interface1='saf1'</em>, <em>interface2='saf2'</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SAFLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents an antiferromagnetic coupling of two neighboring interfaces.</p>
+<p>This class is deprecated. Use <a class="reference internal" href="#magnumfe.InterlayerExchange" title="magnumfe.InterlayerExchange"><code class="xref py py-class docutils literal"><span class="pre">InterlayerExchange</span></code></a> instead (note that
+<a class="reference internal" href="#magnumfe.InterlayerExchange" title="magnumfe.InterlayerExchange"><code class="xref py py-class docutils literal"><span class="pre">InterlayerExchange</span></code></a> uses a different sign for the coupling constant
+<code class="code docutils literal"><span class="pre">A</span></code>.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
-<dd>The simulation state</dd>
+<dt>A (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Coupling constant in J/m^2 (positive constant means antiferromagnetic coupling)</dd>
+<dt>saf_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the cell domain of the SAF layer</dd>
+<dt>interface1 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the facet domain of SAF layer interface 1</dd>
+<dt>interface2 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Name of the facet domain of SAF layer interface 2</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>Magnetization</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
-</dd></dl>
-
 </div>
 <div class="section" id="spintorque">
-<h2><a class="reference internal" href="#magnumfe.SpinTorque" title="magnumfe.SpinTorque"><tt class="xref py py-class docutils literal"><span class="pre">SpinTorque</span></tt></a><a class="headerlink" href="#spintorque" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.SpinTorque" title="magnumfe.SpinTorque"><code class="xref py py-class docutils literal"><span class="pre">SpinTorque</span></code></a><a class="headerlink" href="#spintorque" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.SpinTorque">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">SpinTorque</tt><a class="headerlink" href="#magnumfe.SpinTorque" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinTorque</code><span class="sig-paren">(</span><em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinTorque" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents the coupling of the magnetization with a spin
 polarized current. It requires the spin accumulation s to be set in the
 state. The spin accumulation s has to be prescribed in the state, either
-by direct integration with <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><tt class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></tt></a> or by equilibrium
-treatment with <tt class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></tt> or
-<tt class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></tt>.</p>
+by direct integration with <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinDiffusion" title="magnumfe.SpinDiffusion"><code class="xref py py-class docutils literal"><span class="pre">SpinDiffusion</span></code></a> or by equilibrium
+treatment with <a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForCurrent" title="magnumfe.SpinAccumulationForCurrent"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForCurrent</span></code></a> or
+<a class="reference internal" href="spin_diffusion.html#magnumfe.SpinAccumulationForPotential" title="magnumfe.SpinAccumulationForPotential"><code class="xref py py-class docutils literal"><span class="pre">SpinAccumulationForPotential</span></code></a>.</p>
 <dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the LLG is solved, defaults to &#8216;magnetic&#8217;</dd>
+</dl>
+</dd>
 <dt><em>Required fields</em></dt>
 <dd><dl class="first last docutils">
 <dt>s</dt>
@@ -418,8 +827,161 @@ treatment with <tt class="xref py py-class docutils literal"><span class="pre">S
 </dd>
 <dt><em>Required material parameters</em></dt>
 <dd><dl class="first last docutils">
-<dt>c</dt>
-<dd>Spin diffusion coupling constant</dd>
+<dt>J</dt>
+<dd>exchange strength between itinerant and localized spins in J</dd>
+<dt>ms</dt>
+<dd>saturation magnetization in A/m</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="spintorqueslonczewski">
+<h2><a class="reference internal" href="#magnumfe.SpinTorqueSlonczewski" title="magnumfe.SpinTorqueSlonczewski"><code class="xref py py-class docutils literal"><span class="pre">SpinTorqueSlonczewski</span></code></a><a class="headerlink" href="#spintorqueslonczewski" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinTorqueSlonczewski">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinTorqueSlonczewski</code><span class="sig-paren">(</span><em>layer_region='interlayer_region'</em>, <em>interface1='interface1'</em>, <em>interface2='interface2'</em>, <em>interface=None</em>, <em>region='magnetic'</em>, <em>method1=None</em>, <em>method2=None</em>, <em>method=None</em>, <em>M=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinTorqueSlonczewski" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the spin torque between two interfaces according to the model of Slonczewski.
+The interacting layers have to be connected by a nonmagnetic region as in the <a class="reference internal" href="#magnumfe.SAFLayer" title="magnumfe.SAFLayer"><code class="xref py py-class docutils literal"><span class="pre">SAFLayer</span></code></a>
+class. There are two predefined couplings which can be defined per interface. both couplings
+provide an effective field contribution of the form</p>
+<div class="math">
+\[\vec{h} = \eta(\theta) \frac{j_\text{e} \hbar}{2 e \mu_0 M_\text{s} t} \vec{m} \times \vec{M}\]</div>
+<p>where <span class="math">\(j_\text{e}\)</span> is the current directed towards the target interface, <span class="math">\(M\)</span> is the
+magnetization in the source interface, and <span class="math">\(t\)</span> is the local thickness of the simulation cell.
+The angular dependency <span class="math">\(\eta\)</span> in the predefined models &#8220;default&#8221; and &#8220;general&#8221; is defined
+as follows:</p>
+<p><strong>default</strong></p>
+<div class="math">
+\[\eta(\theta) = \frac{P \Gamma}{(\Gamma + 1) + (\Gamma - 1) \cos(\theta)}\]</div>
+<dl class="docutils">
+<dt><em>additional Arguments (float)</em></dt>
+<dd><ul class="first last simple">
+<li>P (<span class="math">\(P\)</span>) for symmetric coupling or P1,P2 for asymmetric coupling</li>
+<li>Gamma (<span class="math">\(\Gamma\)</span>) for symmetric coupling or Gamma1,Gamma2 for asymmetric coupling</li>
+</ul>
+</dd>
+</dl>
+<p><strong>general</strong></p>
+<div class="math">
+\[\eta(\theta) = \frac{q^+}{A + B \cos(\theta)} + \frac{q^-}{A - B \cos(\theta)}\]</div>
+<dl class="docutils">
+<dt><em>additional Arguments (float)</em></dt>
+<dd><ul class="first last simple">
+<li>qm (<span class="math">\(q^-\)</span>) for symmetric coupling or qm1,qm2 for asymmetric coupling</li>
+<li>qp (<span class="math">\(q^+\)</span>) for symmetric coupling or qp1,qp2 for asymmetric coupling</li>
+<li>A (<span class="math">\(A\)</span>) for symmetric coupling or A1,A2 for asymmetric coupling</li>
+<li>B (<span class="math">\(B\)</span>) for symmetric coupling or B1,B2 for asymmetric coupling</li>
+</ul>
+</dd>
+</dl>
+<p>The class can also be used to compute the torque on a single interface for a given
+polarization <span class="math">\(\vec{M}\)</span>. In this case there is no need for a layer region or a
+second interface.</p>
+<dl class="docutils">
+<dt><em>Example</em></dt>
+<dd><div class="code python first last highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Default model, symmetric spin torque</span>
+<span class="n">spintorque</span> <span class="o">=</span> <span class="n">SpinTorqueSlonczewski</span><span class="p">(</span>
+               <span class="n">layer_region</span> <span class="o">=</span> <span class="s2">&quot;spacer&quot;</span><span class="p">,</span>
+               <span class="n">interface1</span> <span class="o">=</span> <span class="s2">&quot;i1&quot;</span><span class="p">,</span>
+               <span class="n">interface2</span> <span class="o">=</span> <span class="s2">&quot;i2&quot;</span><span class="p">,</span>
+               <span class="n">P</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">Gamma</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Default model, asymmetric spin torque</span>
+<span class="n">spintorque</span> <span class="o">=</span> <span class="n">SpinTorqueSlonczewski</span><span class="p">(</span>
+               <span class="n">layer_region</span> <span class="o">=</span> <span class="s2">&quot;spacer&quot;</span><span class="p">,</span>
+               <span class="n">interface1</span> <span class="o">=</span> <span class="s2">&quot;i1&quot;</span><span class="p">,</span>
+               <span class="n">interface2</span> <span class="o">=</span> <span class="s2">&quot;i2&quot;</span><span class="p">,</span>
+               <span class="n">P1</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">Gamma1</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+               <span class="n">P2</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">Gamma2</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># General model applied only to interface 2</span>
+<span class="n">spintorque</span> <span class="o">=</span> <span class="n">SpinTorqueSlonczewski</span><span class="p">(</span>
+               <span class="n">layer_region</span> <span class="o">=</span> <span class="s2">&quot;spacer&quot;</span><span class="p">,</span>
+               <span class="n">interface1</span> <span class="o">=</span> <span class="s2">&quot;i1&quot;</span><span class="p">,</span>
+               <span class="n">interface2</span> <span class="o">=</span> <span class="s2">&quot;i2&quot;</span><span class="p">,</span>
+               <span class="n">method2</span> <span class="o">=</span> <span class="s2">&quot;general&quot;</span><span class="p">,</span>
+               <span class="n">qm</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">qp</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Simple model with predefined polarization M defined on single interface</span>
+<span class="c1"># No need to set interface1, interface2 or layer_region</span>
+<span class="n">spintorque</span> <span class="o">=</span> <span class="n">SpinTorqueSlonczewski</span><span class="p">(</span>
+               <span class="n">interface</span> <span class="o">=</span> <span class="s2">&quot;i1&quot;</span><span class="p">,</span>
+               <span class="n">M</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)),</span>
+               <span class="n">P</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">Gamma</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>layer_region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Region separating the involved interfaces</dd>
+<dt>interface1 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>First interface of spin torque junction</dd>
+<dt>interface2 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Second interface of spin torque junction</dd>
+<dt>interface (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>Interface for static torque (provided by M)</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;</dd>
+<dt>method (<code class="xref py py-class docutils literal"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal"><span class="pre">function</span></code>)</dt>
+<dd>Specific spin-torque model. Applies to both interfaces.
+Possible values are &#8220;default&#8221; or &#8220;general&#8221; for predefined methods,
+see above, or functions implementing a custom method.</dd>
+<dt>method1 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal"><span class="pre">function</span></code>)</dt>
+<dd>Spin-torque model for interface 1</dd>
+<dt>method2 (<code class="xref py py-class docutils literal"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal"><span class="pre">function</span></code>)</dt>
+<dd>Spin-torque model for interface 2</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>magnetization</dd>
+<dt>j</dt>
+<dd>electric current</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="spintorquezhangli">
+<h2><a class="reference internal" href="#magnumfe.SpinTorqueZhangLi" title="magnumfe.SpinTorqueZhangLi"><code class="xref py py-class docutils literal"><span class="pre">SpinTorqueZhangLi</span></code></a><a class="headerlink" href="#spintorquezhangli" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.SpinTorqueZhangLi">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">SpinTorqueZhangLi</code><span class="sig-paren">(</span><em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.SpinTorqueZhangLi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the the spin torque model of Zhang and LI <a class="reference internal" href="spin_diffusion.html#zhang2004" id="id2">[Zhang2004]</a>.
+This model extends the LLG as follows</p>
+<div class="math">
+\[\partial_t \vec{m} =
+- \gamma ( \vec{m} \times \vec{H}_\text{eff} )
++ \alpha ( \vec{m} \times \partial_t \vec{m} )
+- b \vec{m} \times [\vec{m} \times (\vec{J} \cdot \nabla) \vec{m}]
+- b \xi \vec{m} \times (\vec{J} \cdot \nabla) \vec{m}\]</div>
+<p>in order to describe the interaction of an electric current with the magnetization.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;</dd>
+</dl>
+</dd>
+<dt><em>Required fields</em></dt>
+<dd><dl class="first last docutils">
+<dt>m</dt>
+<dd>magnetization</dd>
+<dt>j</dt>
+<dd>electric current</dd>
+</dl>
+</dd>
+<dt><em>Required material parameters</em></dt>
+<dd><dl class="first last docutils">
+<dt>xi</dt>
+<dd>degree of nonadiabacity</dd>
+<dt>b</dt>
+<dd>coupling constant</dd>
 </dl>
 </dd>
 </dl>
@@ -427,42 +989,61 @@ treatment with <tt class="xref py py-class docutils literal"><span class="pre">S
 
 </div>
 <div class="section" id="uniaxialanisotropyfield">
-<h2><a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><tt class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a><a class="headerlink" href="#uniaxialanisotropyfield" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.UniaxialAnisotropyField" title="magnumfe.UniaxialAnisotropyField"><code class="xref py py-class docutils literal"><span class="pre">UniaxialAnisotropyField</span></code></a><a class="headerlink" href="#uniaxialanisotropyfield" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.UniaxialAnisotropyField">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">UniaxialAnisotropyField</tt><a class="headerlink" href="#magnumfe.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents an uniaxial anisotropy field.</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">UniaxialAnisotropyField</code><span class="sig-paren">(</span><em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.UniaxialAnisotropyField" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a second order uniaxial anisotropy field.</p>
+<div class="math">
+\[\vec{H} = \frac{2 K_\text{uni}}{\mu_0 M_\text{s}} \vec{K}_\text{axis}
+(\vec{K}_\text{axis} \cdot \vec{m})\]</div>
+<p>where <span class="math">\(\vec{K}_\text{axis}\)</span> is the anisotropy axis.</p>
 <dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">str</span></code>)</dt>
+<dd>The region where the field is evaluated, defaults to &#8216;magnetic&#8217;.</dd>
+</dl>
+</dd>
 <dt><em>Required fields</em></dt>
 <dd><dl class="first last docutils">
 <dt>m</dt>
-<dd>Magnetization</dd>
+<dd>magnetization</dd>
 </dl>
 </dd>
 <dt><em>Required material parameters</em></dt>
 <dd><dl class="first last docutils">
+<dt>ms</dt>
+<dd>saturation magnetization</dd>
 <dt>K_uni</dt>
-<dd>Anisotropy constant</dd>
+<dd>anisotropy constant</dd>
 <dt>K_uni_axis</dt>
-<dd>Anisotropy axis, e.g. (1.0, 0.0, 0.0)</dd>
+<dd>anisotropy axis, e.g. (1, 0, 0)</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
+<table class="docutils citation" frame="void" id="zhang2004" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Zhang2004]</a></td><td>Zhang, S., &amp; Li, Z. (2004). Roles of nonequilibrium conduction electrons on the magnetization dynamics of ferromagnets. Physical Review Letters, 93(12), 127204.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="misc.html" class="btn btn-neutral float-right" title="Miscellaneous"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="spin_diffusion.html" class="btn btn-neutral float-right" title="Spin diffusion" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="open_boundary.html" class="btn btn-neutral" title="Open Boundary Problems"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="loggers.html" class="btn btn-neutral" title="Logging" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -471,12 +1052,14 @@ treatment with <tt class="xref py py-class docutils literal"><span class="pre">S
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -491,7 +1074,7 @@ treatment with <tt class="xref py py-class docutils literal"><span class="pre">S
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

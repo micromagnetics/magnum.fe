@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Open Boundary Problems &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Open Boundary Problems &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Field Terms" href="field_terms.html"/>
-        <link rel="prev" title="Spin Diffusion" href="spin_diffusion.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Miscellaneous" href="misc.html"/>
+        <link rel="prev" title="Solvers" href="solvers.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,68 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Open Boundary Problems</a><ul>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Open Boundary Problems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#shell-transformation-method">Shell-Transformation Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#direct-fem-bem-method-johnson-and-nedelec">Direct FEM-BEM Method (Johnson and Nedelec)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,24 +124,33 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
     <li>Open Boundary Problems</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/open_boundary.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/open_boundary.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <span class="target" id="module-magnumfe"></span><div class="section" id="open-boundary-problems">
 <span id="open-boundary"></span><h1>Open Boundary Problems<a class="headerlink" href="#open-boundary-problems" title="Permalink to this headline">¶</a></h1>
-<p>Multiple effective-field terms, namely the demagnetization field (<a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><tt class="xref py py-class docutils literal"><span class="pre">DemagField</span></tt></a>) and the Oersted field (<a class="reference internal" href="field_terms.html#magnumfe.OerstedField" title="magnumfe.OerstedField"><tt class="xref py py-class docutils literal"><span class="pre">OerstedField</span></tt></a>) involve the solution of so called open-boundary problems of the form</p>
+<p>Multiple effective-field terms, namely the demagnetization field (<a class="reference internal" href="field_terms.html#magnumfe.DemagField" title="magnumfe.DemagField"><code class="xref py py-class docutils literal"><span class="pre">DemagField</span></code></a>) and the Oersted field (<a class="reference internal" href="field_terms.html#magnumfe.OerstedField" title="magnumfe.OerstedField"><code class="xref py py-class docutils literal"><span class="pre">OerstedField</span></code></a>) involve the solution of so called open-boundary problems of the form</p>
 <div class="math">
 \[\begin{split}\Delta u                                         &amp;= \nabla \cdot \vec{f}     \quad \text{in} \quad \omega \\
 \Delta u                                         &amp;= 0                        \quad \text{in} \quad \mathbb{R}^3 \setminus \omega \\
@@ -171,7 +175,7 @@ The untransformed region <span class="math">\(\omega_\text{notrans}\)</span> doe
 </div>
 <div class="section" id="hybrid-fem-bem-method-fredkin-and-koehler">
 <span id="fem-bem"></span><h2>Hybrid FEM-BEM Method (Fredkin and Koehler)<a class="headerlink" href="#hybrid-fem-bem-method-fredkin-and-koehler" title="Permalink to this headline">¶</a></h2>
-<p>A hybrid FEM-BEM approach for the solution of open-boundary problems was propsed by Fredkin and Koehler <a class="reference internal" href="#fredkin1990" id="id3">[Fredkin1990]</a>. Consider the following splitting of the solution <span class="math">\(u\)</span>:</p>
+<p>A hybrid FEM-BEM approach for the solution of open-boundary problems was proposed by Fredkin and Koehler <a class="reference internal" href="#fredkin1990" id="id3">[Fredkin1990]</a>. Consider the following splitting of the solution <span class="math">\(u\)</span>:</p>
 <div class="math">
 \[u = u_1 + u_2\]</div>
 <p><span class="math">\(u_1\)</span> is defined by</p>
@@ -189,12 +193,29 @@ This jump is compensated by <span class="math">\(u_2\)</span> which is defined a
 u_2(\vec{x})                                       &amp;= \mathcal{O}(1/|\vec{x}|) \quad \text{if} \quad |\vec{x}| \rightarrow \infty\end{split}\]</div>
 <p>This system is solved by the double-layer potential</p>
 <div class="math">
-\[\begin{align}
-  u_2 = \int_{\partial \omega} u_1 \frac{\partial}{\partial \vec{n}} \frac{1}{|\vec{x} - \vec{x}'|} \dx
-\end{align}\]</div>
-<p>The double-layer potential is computed on the boundary <span class="math">\(\partial \omega\)</span> with the boundary-element method.
-These values are used as Dirichlet boundary conditions to solve <span class="math">\(u_2\)</span> within <span class="math">\(\omega\)</span> with the finite-element method.
-For a detailed description of the method, see <a class="reference internal" href="#fredkin1990" id="id4">[Fredkin1990]</a>.</p>
+\[u_2 = \int_{\partial \omega} u_1 \frac{\partial}{\partial \vec{n}} \frac{1}{|\vec{x} - \vec{x}'|} \dx\]</div>
+<p>The double-layer potential is computed on the boundary <span class="math">\(\partial \omega\)</span> with the boundary-element method. This can be done either by numeric integration of a Galerkin-BEM approach (<code class="docutils literal"><span class="pre">bem_method</span> <span class="pre">=</span> <span class="pre">&quot;BEM++&quot;</span></code>) or by analytic integration of the Collocation-BEM operators (<code class="docutils literal"><span class="pre">bem_method</span> <span class="pre">=</span> <span class="pre">&quot;H2LIB&quot;</span></code>) <a class="reference internal" href="#lindholm1984" id="id4">[Lindholm1984]</a>. The collocation method uses <span class="math">\(H^2\)</span>-matrices provided by H2Lib, whereas the Galerkin method uses <span class="math">\(H\)</span>-matrices provided by BEM++.</p>
+<p>These values are used as Dirichlet boundary conditions to solve <span class="math">\(u_2\)</span> within <span class="math">\(\omega\)</span> with the finite-element method.
+For a detailed description of the method, see <a class="reference internal" href="#fredkin1990" id="id5">[Fredkin1990]</a>.</p>
+</div>
+<div class="section" id="direct-fem-bem-method-johnson-and-nedelec">
+<h2>Direct FEM-BEM Method (Johnson and Nedelec)<a class="headerlink" href="#direct-fem-bem-method-johnson-and-nedelec" title="Permalink to this headline">¶</a></h2>
+<p>The solution of (magnetostatic) Maxwell equations requires to handle more complicated jump conditions than the ones assumed for the methods above.</p>
+<p>A general open-boundary problem with arbitrary jump-conditions may be solved by the method proposed by Johnson and Nedelec <a class="reference internal" href="#johnson1980" id="id6">[Johnson1980]</a>. Compared with the methods presented above it is able to handle arbitrary (scaled) boundary jump conditions for the potential <span class="math">\(u\)</span> as well as for the normal derivative <span class="math">\(\phi = \frac{\partial u}{\partial \vec{n}}\)</span> The current implementation assumes non-scaled boundary jump conditions for the potential <span class="math">\(u\)</span>) whereas the jump of the normal derivative may be scaled by a function <span class="math">\(\mu\)</span>:</p>
+<div class="math">
+\[\begin{split}L u                         &amp;= f                        \quad \text{in} \quad \omega \\
+L u                         &amp;= 0                        \quad \text{in} \quad \mathbb{R}^3 \setminus \omega \\
+[u]                         &amp;= u_0                      \quad \text{on} \quad \partial\omega \\
+\left[\mu \, \phi \right]   &amp;= \phi_0                   \quad \text{on} \quad \partial\omega \\
+u(\vec{x})                  &amp;= \mathcal{O}(1/|\vec{x}|) \quad \text{if} \quad |\vec{x}| \rightarrow \infty\end{split}\]</div>
+<p>The problem is solved by combining FEM and BEM equations and solve them simultaneously by means of an iterative method like GMRES. The BEM part is based on the external representation formula derived from Green&#8217;s second identity, whereas the FEM part directly follows from a Galerkin FEM approach, where the Neumann boundary condition are left as unknowns. The combined Galerkin formulation of the upper problem results in the following system of equations</p>
+<div class="math">
+\[\begin{split}a(u, v) - \left\langle \phi, v \right\rangle_\Gamma &amp;= \left\langle f, v\right\rangle_\Omega + \left\langle\phi_0, v\right\rangle_\Gamma \\
+\left\langle \left(\frac{1}{2} - K \right) u, \psi \right\rangle_\Gamma + \left\langle V \, \phi, \psi \right\rangle_\Gamma &amp;= \left\langle \left(\frac{1}{2} - K \right) u_0, \psi \right\rangle_\Gamma\end{split}\]</div>
+<p>with the weak form <span class="math">\(a(u,v)\)</span> of the differential operator <span class="math">\(L\)</span>, the unknown potential <span class="math">\(u\)</span> and (outer) normal derivative <span class="math">\(\phi\)</span>. The scalar product <span class="math">\(\langle u , v \rangle_D\)</span> stands for the integral of the function <span class="math">\(u\)</span> weighted by the test function <span class="math">\(v\)</span> over a domain <span class="math">\(D\)</span>. The occuring single-layer operator <span class="math">\(V\)</span> as well as the double-layer operator <span class="math">\(K\)</span> are defined as</p>
+<div class="math">
+\[\begin{split}V \phi(x) &amp;= \int_\Gamma G(x,x') \, \phi(x') \, d\Gamma(x') \\
+K u(x)    &amp;= \int_\Gamma \partial_{n(x')} G(x,x') \, u(x') \, d\Gamma(x')\end{split}\]</div>
 <p>References:</p>
 <table class="docutils citation" frame="void" id="brunotte1992" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -211,22 +232,35 @@ For a detailed description of the method, see <a class="reference internal" href
 <table class="docutils citation" frame="void" id="fredkin1990" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Fredkin1990]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> Fredkin, D. R., &amp; Koehler, T. R. (1990). Hybrid method for computing demagnetizing fields. Magnetics, IEEE Transactions on, 26(2), 415-417.</td></tr>
+<tr><td class="label">[Fredkin1990]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> Fredkin, D. R., &amp; Koehler, T. R. (1990). Hybrid method for computing demagnetizing fields. IEEE Transactions on Magnetics, 26(2), 415-417.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="lindholm1984" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[Lindholm1984]</a></td><td>Lindholm, D. A. (1984). Three-Dimensional Magnetostatic Fields from Point-Matched Integral Equations with Linearly Varying Scalar Sources. IEEE Transactions on Magnetics, 20(5), 2025-2032.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="johnson1980" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[Johnson1980]</a></td><td>Johnson, C., &amp; Nedelec, J. C. (1980). On the Coupling of Boundary Integral and Finite Element Methods, Mathematics of Computation, 35(152).</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="field_terms.html" class="btn btn-neutral float-right" title="Field Terms"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="misc.html" class="btn btn-neutral float-right" title="Miscellaneous" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="spin_diffusion.html" class="btn btn-neutral" title="Spin Diffusion"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="solvers.html" class="btn btn-neutral" title="Solvers" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -235,12 +269,14 @@ For a detailed description of the method, see <a class="reference internal" href
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -255,7 +291,7 @@ For a detailed description of the method, see <a class="reference internal" href
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Installation &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Getting Started" href="getting_started.html"/>
-        <link rel="prev" title="Welcome to magnum.fe’s documentation!" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Getting Started" href="getting_started.html"/>
+        <link rel="prev" title="Introduction" href="introduction.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,68 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-docker-container">Create docker container</a></li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-box">Virtual Box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-from-source">Installation from Source</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,90 +124,93 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
     <li>Installation</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/installation.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>magnum.fe requires the following software/libraries to be installed:</p>
-<ul class="simple">
-<li>FEniCS &gt;= 1.5</li>
-<li>CMake &gt;= 2.8</li>
-<li>SWIG &gt;= 2.0</li>
-<li>G++ &gt;= 4.0</li>
-<li>dev-version of CBC.Block (optional)</li>
-<li>BEM++ 2.0.3 python-pseudoinverse branch (optional)</li>
-</ul>
+<p>There are various ways to install magnum.fe on your computer. By purchasing magnum.fe you are supplied with a virtual machine image for use in <a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> and a <a class="reference external" href="https://www.docker.com/">Docker</a> image. While the easiest way to get started is the virtual machine image, the Docker solution is faster and the better choice for the simulation on dedicated simluation servers.</p>
+<div class="section" id="virtual-box">
+<h2>Virtual Box<a class="headerlink" href="#virtual-box" title="Permalink to this headline">¶</a></h2>
+<p>The magnum.fe virtual box contains a complete Linux system including the meshing software <a class="reference external" href="http://geuz.org/gmsh/">Gmsh</a> and the postprocessing software <a class="reference external" href="http://www.gnuplot.info/">Gnuplot</a> and <a class="reference external" href="http://www.paraview.org/">Paraview</a>. In order to run the magnum.fe virtual machine you have to install the free host software <a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> that is available for Windows, Linux and Mac OS.</p>
+<p>After installing, run VirtualBox and import the magnum.fe image (&#8216;OVA&#8217; file) by choosing <em>File -&gt; Import Appliance...</em>, see <a class="reference internal" href="#vb-import"><span class="std std-numref">Fig. 1</span></a>.</p>
+<div class="figure" id="vb-import">
+<a class="reference internal image-reference" href="_images/import2.png"><img alt="_images/import2.png" src="_images/import2.png" style="width: 553.2px; height: 423.6px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Import magnum.fe image in VirtualBox</span></p>
 </div>
-<div class="section" id="install-from-source">
-<h2>Install from source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h2>
-<p>The current version of magnum.fe can be downloaded from GitHub via</p>
-<div class="code highlight-python"><div class="highlight"><pre>$ git clone https://github.com/micromagnetics/magnum.fe.git
+<p>You should now be able to start the virtual machine and login with user: &#8216;magnumfe&#8217; and password: &#8216;magnumfe&#8217;.  After successful login the virtual machine starts in a graphical user session with a terminal opened. You can start your first simulation by running one of the supplied examples in your home directory, e.g. the <a class="reference external" href="http://www.ctcms.nist.gov/~rdm/std4/spec4.html">standard problem #4</a> by the MuMag group, see <a class="reference internal" href="#vb-sp4"><span class="std std-numref">Fig. 2</span></a>.</p>
+<div class="figure" id="vb-sp4">
+<a class="reference internal image-reference" href="_images/run_script.png"><img alt="_images/run_script.png" src="_images/run_script.png" style="width: 657.6px; height: 480.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Run the Standard Problem #4 example by the MuMag group</span></p>
+</div>
+<p>This example produces a PVD file that contains the magnetization configuration for each time step. You can watch the outcome in Paraview by typing <code class="code docutils literal"><span class="pre">paraview</span> <span class="pre">data/m.pvd</span></code>. In order to make your simulation results available on your host system you can use shared directories. To use a directory of your host system within the virtual machine add a shared folder by selecting <em>Devices -&gt; Shared Folder Settings...</em>, see <a class="reference internal" href="#vb-shared-folder"><span class="std std-numref">Fig. 3</span></a>.</p>
+<div class="figure" id="vb-shared-folder">
+<a class="reference internal image-reference" href="_images/shared_folder1.png"><img alt="_images/shared_folder1.png" src="_images/shared_folder1.png" style="width: 657.6px; height: 480.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Add a shared folder named simulations to the virtual machine</span></p>
+</div>
+<p>After reboot, the shared folder should be available at <code class="code docutils literal"><span class="pre">/media/sf_simulations</span></code>.
+The supplied image by default will use 2GB of RAM and 2 CPUs. You can improve the performance of magnum.fe by increasing these resources according to your host systems capabilities.</p>
+</div>
+<div class="section" id="id2">
+<h2>Docker<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>The second option for the installation of magnum.fe is a <a class="reference external" href="https://www.docker.com/">Docker</a> container. Docker, in contrast to the virtual machine, does not virtualize the complete operating system, but reuses the Kernel of the host system. The overhead produced by this virtualization is much lower than that of a complete virtual machine and the programs running in the Docker container have full access to the resources of the host system. However, the higher performance comes at the price of a more difficult setup. Like the VirtualBox the Docker client is available for Windows, Linux and Mac OS. After installing Docker you can load the magnum.fe Docker image by running</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker load -i magnumfe_master_08_31_15_38ada6b.tar
 </pre></div>
 </div>
-<p>To build und install magnum.fe with CMake do</p>
-<div class="code highlight-python"><div class="highlight"><pre>$ cd /path/to/magnum.fe
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
-$ sudo make install
+<p>This creates a new image called &#8216;suessco/magnum.fe&#8217;. Now you can run your simulation scripts in the Docker container. A convenient way of doing so, is to mount the current directory in the container then run the script there. The advantage of this procedure is that the simulation results are directly written back to the filesystem of the host system.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker run -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/sim -w /sim -t suessco/magnum.fe python run.py
+</pre></div>
+</div>
+<p>Additionally it is recommended to mount <code class="code docutils literal"><span class="pre">/root/.instant</span></code> in the host system. This directory is used by the finite-element library FEniCS to cache runtime compiled code. The file <code class="code docutils literal"><span class="pre">docker_scripts.tar.gz</span></code> contains some convenience wrappers for standard tasks.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Call simulation script</span>
+magnum.fe run.py
+
+<span class="c1"># Open interactive IPython session</span>
+imagnum.fe
+
+<span class="c1"># Convert mesh from Gmsh format to magnum.fe format</span>
+magnum.msh sample.msh sample.xml
 </pre></div>
 </div>
 </div>
-<div class="section" id="install-dependencies-in-ubuntu-14-04">
-<h2>Install dependencies in Ubuntu 14.04<a class="headerlink" href="#install-dependencies-in-ubuntu-14-04" title="Permalink to this headline">¶</a></h2>
-<p>Install FEniCS</p>
-<div class="code highlight-python"><div class="highlight"><pre>$ sudo add-apt-repository ppa:fenics-packages/fenics
-$ sudo apt-get update
-$ sudo apt-get install fenics
-</pre></div>
-</div>
-<p>Install CBC.Block</p>
-<div class="code highlight-python"><div class="highlight"><pre>$ git clone https://bitbucket.org/fenics-apps/cbc.block.git
-$ cd cbc.block
-$ sudo python setup.py install
-</pre></div>
-</div>
-<p>For installation of BEM++, see <a class="reference external" href="http://www.bempp.org/">http://www.bempp.org/</a>.</p>
-</div>
-<div class="section" id="create-docker-container">
-<h2>Create docker container<a class="headerlink" href="#create-docker-container" title="Permalink to this headline">¶</a></h2>
-<p>magnum.fe can be virtualized with docker (<a class="reference external" href="http://www.docker.com">http://www.docker.com</a>) for easy deployment to other machines.
-In order to create a docker container run</p>
-<div class="code highlight-python"><div class="highlight"><pre>$ cd /path/to/magnum.fe
-$ sudo docker build .
-</pre></div>
-</div>
-<p>This procedure should download all necessary software and install magnum.fe into the container.
-You need Docker &gt;= 1.0 to build the container.</p>
+<div class="section" id="installation-from-source">
+<h2>Installation from Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+<p>If the two virtual approaches do not meet your needs, please contact us to talk about the possibilty to install magnum.fe on your system from source.</p>
 </div>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to magnum.fe’s documentation!"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="introduction.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -221,12 +219,14 @@ You need Docker &gt;= 1.0 to build the container.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -241,7 +241,7 @@ You need Docker &gt;= 1.0 to build the container.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

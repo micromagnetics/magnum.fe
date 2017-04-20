@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Meshing &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Meshes and domains &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Landau-Lifshitz-Gilbert Equation" href="llg.html"/>
-        <link rel="prev" title="State and Materials" href="state.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="A Simple Spin-Torque Oscillator" href="oscillator.html"/>
+        <link rel="prev" title="Getting Started" href="getting_started.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,72 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Meshes and domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#built-in-meshing-tools">Built-in meshing tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#marking-domains-in-meshes">Marking domains in meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#converting-meshes">Converting meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-shell-for-the-shell-transformation-method">Creating a shell for the shell transformation method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-multilayer-structure-with-gmsh">Creating a multilayer structure with Gmsh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-multilayer-structure-with-salome">Creating a multilayer structure with Salome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternatives-to-gmsh-and-salome">Alternatives to Gmsh and Salome</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,119 +128,231 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Meshing</li>
+    <li>Meshes and domains</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/meshing.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/meshing.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
-  <span class="target" id="module-magnumfe"></span><div class="section" id="meshing">
-<h1>Meshing<a class="headerlink" href="#meshing" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="magnum-msh">
-<h2>magnum.msh<a class="headerlink" href="#magnum-msh" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center">
-<a class="reference internal image-reference" href="_images/mesh.png"><img alt="_images/mesh.png" src="_images/mesh.png" style="width: 100%;" /></a>
-<p class="caption">Mesh of a sphere including cuboid shell for the solution of open-boundary problems.
+  <span class="target" id="module-magnumfe"></span><div class="section" id="meshes-and-domains">
+<span id="meshes"></span><h1>Meshes and domains<a class="headerlink" href="#meshes-and-domains" title="Permalink to this headline">¶</a></h1>
+<p>Like many finite element codes, magnum.fe solves problems on arbitrary tetrahedral meshes. Depending on the complexity of the geometry, the creation of suitable meshes can be quite challenging. magnum.fe comes with built-in meshing capabilities for simple geometries. For complex geometries it is recommended to use specialized external meshing tools. Meshes generated this way can be converted to magnum.fe compatible files with the conversion tool magnum.msh.</p>
+<div class="section" id="built-in-meshing-tools">
+<h2>Built-in meshing tools<a class="headerlink" href="#built-in-meshing-tools" title="Permalink to this headline">¶</a></h2>
+<p>Since magnum.fe is built on top of the finite-element library <a class="reference external" href="http://fenicsproject.org/">FEniCS</a> the meshing capabilities of FEniCS are also available in magnum.fe. Regular box shaped mesh can be generated in the simulation file by</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">BoxMesh</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More complex geometries can be generated with the library <a class="reference external" href="https://bitbucket.org/benjamik/mshr">mshr</a> that is part of the FEniCS distribution that comes with magnum.fe. With mshr the geometry can be defined by combining simple geometric shapes, e.g.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">mshr</span>
+
+<span class="c1"># Define 3D geometry</span>
+<span class="n">sphere</span> <span class="o">=</span> <span class="n">mshr</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="n">dolfin</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">cone</span>   <span class="o">=</span> <span class="n">mshr</span><span class="o">.</span><span class="n">Cylinder</span><span class="p">(</span><span class="n">dolfin</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">cone</span> <span class="o">+</span> <span class="n">sphere</span>
+
+<span class="c1"># Create mesh</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">generate_mesh</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;cgal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More examples can be found in the demo directory of mshr.</p>
+</div>
+<div class="section" id="marking-domains-in-meshes">
+<h2>Marking domains in meshes<a class="headerlink" href="#marking-domains-in-meshes" title="Permalink to this headline">¶</a></h2>
+<p>Micromagnetic problems often involve different materials. For instance a magnetic sample might be composed of layers with different magnetic material parameters. That means that magnum.fe has to be aware of different regions within the mesh. These regions can be either volumes (cell domains) or areas (facet domains).</p>
+<p>FEniCS and hence also magnum.fe offers two possibilties to attach domain information to meshes. The first one is to store the information in the mesh as a <code class="code docutils literal"><span class="pre">MeshDomains</span></code> object. The other possibilty is to keep the domain information apart from the mesh in so-called <code class="code docutils literal"><span class="pre">MeshFunction</span></code> objects. For details please refer to the FEniCS manual that is available under <a class="reference external" href="http://fenicsproject.org/documentation/">http://fenicsproject.org/documentation/</a>. However, if you use external meshing programs and convert the meshes the domain information is automatically generated and you will not have to deal with the details of <code class="code docutils literal"><span class="pre">MeshDomains</span></code> and <code class="code docutils literal"><span class="pre">MeshFunction</span></code> classes.</p>
+</div>
+<div class="section" id="converting-meshes">
+<span id="meshes-convert"></span><h2>Converting meshes<a class="headerlink" href="#converting-meshes" title="Permalink to this headline">¶</a></h2>
+<p>If you use external programs for the mesh generation, there are two ways to convert the generated meshes in order to use them in your magnum.fe simulation. FEniCS comes with the conversion tool <code class="code docutils literal"><span class="pre">dolfin-convert</span></code> that is able to convert a number of different formats to the required XML format. Type <code class="code docutils literal"><span class="pre">dolfin-convert</span> <span class="pre">-h</span></code> in a terminal to get a help along with a list of supported formats. Note, that <code class="code docutils literal"><span class="pre">dolfin-convert</span></code> stores domain information as <code class="code docutils literal"><span class="pre">MeshFunction</span></code> in distinct files. Conversion of sample.msh to sample.xml can be done with</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">dolfin</span><span class="o">-</span><span class="n">convert</span> <span class="n">sample</span><span class="o">.</span><span class="n">msh</span> <span class="n">sample</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>which creates the files sample.xml, sample_facet_region.xml, and sample_physical_region.xml. While sample.xml contains the mesh information, sample_facet_region.xml and sample_physical_region.xml contain the facet domain and the cell domain data respectively. In order to load the mesh information into a magnum.fe state, call</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="s2">&quot;sample.xml&quot;</span><span class="p">)</span>
+<span class="n">cell_regions</span>  <span class="o">=</span> <span class="n">MeshFunction</span><span class="p">(</span><span class="s2">&quot;size_t&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="s2">&quot;sample_physical_region.xml&quot;</span><span class="p">)</span>
+<span class="n">facet_regions</span> <span class="o">=</span> <span class="n">MeshFunction</span><span class="p">(</span><span class="s2">&quot;size_t&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="s2">&quot;sample_facet_region.xml&quot;</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">cell_markers</span> <span class="o">=</span> <span class="n">cell_regions</span><span class="p">,</span> <span class="n">facet_markers</span> <span class="o">=</span> <span class="n">facet_regions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, the recommended way to convert a mesh into magnum.fe XML format is to use the meshing tool magnum.msh that ships with magnum.fe. magnum.msh supports a variety of mesh formats and is able to create a single XML file that contains not only the mesh, but also the domain information. To convert sample.msh, type</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">magnum</span><span class="o">.</span><span class="n">msh</span> <span class="n">sample</span><span class="o">.</span><span class="n">msh</span> <span class="n">sample</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>Since magnum.msh includes the domain information in the XML file, the state can simply be initialized with</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>magnum.fe uses numerical IDs to address different domains. In the case of named domains, like for instance in MED files, magnum.msh will show the mapping of the named to the numered domains:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Read</span> <span class="n">sample</span><span class="o">.</span><span class="n">med</span> <span class="o">...</span> <span class="n">done</span>
+
+<span class="mi">9</span> <span class="n">named</span> <span class="n">domains</span> <span class="n">found</span><span class="p">:</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Type</span>  <span class="o">|</span> <span class="n">ID</span>  <span class="o">|</span> <span class="n">Name</span>
+<span class="o">------+---------------------------------</span>
+<span class="n">facet</span> <span class="o">|</span>   <span class="mi">1</span> <span class="o">|</span> <span class="n">contact</span><span class="o">-</span><span class="n">top</span>
+<span class="n">facet</span> <span class="o">|</span>   <span class="mi">2</span> <span class="o">|</span> <span class="n">contact</span><span class="o">-</span><span class="n">bottom</span>
+<span class="n">cell</span>  <span class="o">|</span>   <span class="mi">1</span> <span class="o">|</span> <span class="n">electrode</span><span class="o">-</span><span class="n">bottom</span>
+<span class="n">cell</span>  <span class="o">|</span>   <span class="mi">2</span> <span class="o">|</span> <span class="n">FePt</span>
+<span class="n">cell</span>  <span class="o">|</span>   <span class="mi">3</span> <span class="o">|</span> <span class="n">pinned</span>
+<span class="n">cell</span>  <span class="o">|</span>   <span class="mi">4</span> <span class="o">|</span> <span class="n">Cu</span>
+<span class="n">cell</span>  <span class="o">|</span>   <span class="mi">5</span> <span class="o">|</span> <span class="n">free</span>
+<span class="n">cell</span>  <span class="o">|</span>   <span class="mi">6</span> <span class="o">|</span> <span class="n">electrode</span><span class="o">-</span><span class="n">top</span>
+
+<span class="n">Write</span> <span class="n">sample</span><span class="o">.</span><span class="n">xml</span> <span class="o">...</span> <span class="n">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-shell-for-the-shell-transformation-method">
+<h2>Creating a shell for the shell transformation method<a class="headerlink" href="#creating-a-shell-for-the-shell-transformation-method" title="Permalink to this headline">¶</a></h2>
+<p>Besides format conversion, magnum.msh is also able to create a cuboid shell around a given mesh as required by the shell transformation method. In order to create a cuboid shell around a mesh you have to prescribe the discretization of the shell and the margin bewteen original mesh and shell</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">magnum</span><span class="o">.</span><span class="n">msh</span> <span class="o">-</span><span class="n">s</span> <span class="mi">3</span><span class="n">x4x4x4</span> <span class="o">-</span><span class="n">m</span> <span class="mf">1.0</span> <span class="n">sphere</span><span class="o">.</span><span class="n">msh</span> <span class="n">sphere</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>This command reads a mesh from sample.msh and generates a shell with 3 layers and <span class="math">\(4 \times 4 \times 4\)</span> cells that has a margin of 1.0 to the original mesh. The resulting mesh is shown in <a class="reference internal" href="#mesh-with-shell"><span class="std std-numref">Fig. 5</span></a>.</p>
+<div class="figure align-center" id="mesh-with-shell">
+<a class="reference internal image-reference" href="_images/mesh_with_shell.png"><img alt="_images/mesh_with_shell.png" src="_images/mesh_with_shell.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Mesh of a sphere including cuboid shell for the solution of open-boundary problems.
 (a) Explosion view
-(b) Cross section</p>
-</div>
-<p>magnum.fe requires mesh files in the FEniCS XML format. Domain information may either be included in the mesh file or defined in additional XML files as <tt class="xref py py-class docutils literal"><span class="pre">dolfin.MeshFuntion</span></tt>. To convert your existing mesh files, you can either use the FEniCS tool <tt class="code docutils literal"><span class="pre">dolfin-convert</span></tt> or the magnum.fe tool <a class="reference external" href="https://github.com/micromagnetics/magnum.msh">magnum.msh</a>.</p>
-<p>Application of the shell-transformation method for the solution of open-boundary problems requires meshes with properly defined shell elements, see figure. Given a mesh of the magnetic sample, magnum.msh is able to automatically create a mesh including the required shell elements.</p>
-</div>
-<div class="section" id="wrappedmesh">
-<h2><a class="reference internal" href="#magnumfe.WrappedMesh" title="magnumfe.WrappedMesh"><tt class="xref py py-class docutils literal"><span class="pre">WrappedMesh</span></tt></a><a class="headerlink" href="#wrappedmesh" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="magnumfe.WrappedMesh">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">WrappedMesh</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents a mesh with a certain submesh and defines
-methods for the fast interpolation between the two meshes.</p>
-<dl class="staticmethod">
-<dt id="magnumfe.WrappedMesh.create">
-<em class="property">static </em><tt class="descname">create</tt><big>(</big><em>mesh</em>, <em>domain_ids</em>, <em>invert=False</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a wrapped mesh from a super mesh for a given collection
-of domain IDs.</p>
-<dl class="docutils">
-<dt><em>Arguments</em></dt>
-<dd><dl class="first last docutils">
-<dt>mesh (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Mesh</span></tt>)</dt>
-<dd>The mesh.</dd>
-<dt>domain_ids (<tt class="xref py py-class docutils literal"><span class="pre">[int]</span></tt>)</dt>
-<dd>List of domain IDs</dd>
-<dt>invert (<tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt>)</dt>
-<dd>Invert list of domain IDs</dd>
-</dl>
-</dd>
-<dt><em>Returns</em></dt>
-<dd><dl class="first last docutils">
-<dt><a class="reference internal" href="#magnumfe.WrappedMesh" title="magnumfe.WrappedMesh"><tt class="xref py py-class docutils literal"><span class="pre">WrappedMesh</span></tt></a></dt>
-<dd>The wrapped mesh</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="magnumfe.WrappedMesh.cut">
-<tt class="descname">cut</tt><big>(</big><em>f</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh.cut" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes a function defined on the super mesh and returns a truncated
-function defined on the sub mesh.</p>
-<dl class="docutils">
-<dt><em>Arguments</em></dt>
-<dd><dl class="first last docutils">
-<dt>f (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt>)</dt>
-<dd>The function on the super mesh.</dd>
-</dl>
-</dd>
-<dt><em>Returns</em></dt>
-<dd><dl class="first last docutils">
-<dt><tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt></dt>
-<dd>The function on the sub mesh.</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="magnumfe.WrappedMesh.expand">
-<tt class="descname">expand</tt><big>(</big><em>f</em>, <em>target=None</em><big>)</big><a class="headerlink" href="#magnumfe.WrappedMesh.expand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes a function defined on the sub mesh and returns a function
-defined on the super mesh with unknown values set to zero.</p>
-<dl class="docutils">
-<dt><em>Arguments</em></dt>
-<dd><dl class="first last docutils">
-<dt>f (<tt class="xref py py-class docutils literal"><span class="pre">dolfin.Function</span></tt>)</dt>
-<dd>The function on the sub mesh.</dd>
-</dl>
-</dd>
-<dt><em>Returns</em></dt>
-<dd>The function on the super mesh.</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+(b) Cross section</span></p>
 </div>
 </div>
+<div class="section" id="creating-a-multilayer-structure-with-gmsh">
+<span id="meshes-gmsh"></span><h2>Creating a multilayer structure with Gmsh<a class="headerlink" href="#creating-a-multilayer-structure-with-gmsh" title="Permalink to this headline">¶</a></h2>
+<p>A very powerful open source mesh generation tool is <a class="reference external" href="http://geuz.org/gmsh/">Gmsh</a>. In this section the generation of a simple circular multilayer stack with Gmsh is described in detail. The geometry in Gmsh is usually defined dimension by dimension. That means that points are connected to lines, lines are connected to surfaces and surfaces are connected to volumes.</p>
+<p>In order to create the geometry, create an empty ASCII file called stack.geo and open it in the editor of your choice. We start by defining a meshing constant <code class="code docutils literal"><span class="pre">cl</span></code> that gives a measure for the edge length of the tetrahedra.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">cl</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next we define a couple of points that we need to describe the circular base area of the stack.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">30</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+<span class="n">Point</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>  <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>Note that every point has a unique ID (<code class="code docutils literal"><span class="pre">Point(ID)</span></code>) and besides the three spatial coordinates it is assigned the discretization constant <code class="code docutils literal"><span class="pre">cl</span></code>.  In the next step the points are used to define the segments of the circular base area.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Ellipse</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">Ellipse</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>The ellipse command requires four arguments, namely the start point of the arc, the center of the arc, an arbitrary point on the major axis of the ellipse, and the end point of the arc. The segments are now connect to a line loop and the line loop is used to define a surface.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Line</span> <span class="n">Loop</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+<span class="n">Plane</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>A simple possibilty to create a stack from a base area is extrusion, which is done with in <code class="code docutils literal"><span class="pre">Extrude</span></code> command in Gmsh</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">s0</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">2</span><span class="p">};};</span>
+</pre></div>
+</div>
+<p>As first argument the <code class="code docutils literal"><span class="pre">Extrude</span></code> command expects a vector that gives direction and length of the extrusion. In the second argument the surface to be extruded is given. The additional <code class="code docutils literal"><span class="pre">Layers</span></code> command tells Gmsh to extrude the surface mesh in a regular fashion using a defined number of cell layers. The surfaces and regions created by the extrusion are returned in a list and saved to the variable <code class="code docutils literal"><span class="pre">s0</span></code>. Subsequent layers are generated by</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">2</span><span class="p">};};</span>
+<span class="n">s2</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">1.5</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">1</span><span class="p">};};</span>
+<span class="n">s3</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">3.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s2</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">5</span><span class="p">};};</span>
+<span class="n">s4</span><span class="p">[]</span> <span class="o">=</span> <span class="n">Extrude</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mf">5.0</span><span class="p">}</span> <span class="p">{</span><span class="n">Surface</span><span class="p">{</span><span class="n">s3</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span> <span class="n">Layers</span><span class="p">{</span><span class="mi">2</span><span class="p">};};</span>
+</pre></div>
+</div>
+<p>Now that all volumes and surfaces are defined they have to be declared as physical volumes and surfaces in order to make them addressable in magnum.fe.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s0</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s1</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s2</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s3</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+<span class="n">Physical</span> <span class="n">Volume</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s4</span><span class="p">[</span><span class="mi">1</span><span class="p">]};</span>
+
+<span class="n">Physical</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="n">Physical</span> <span class="n">Surface</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="n">s4</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span>
+</pre></div>
+</div>
+<p>The numerical IDs defined by <code class="code docutils literal"><span class="pre">Physical</span> <span class="pre">Volume(ID)</span></code> and <cite>Physical Surface(ID)</cite> are available in magnum.fe later on. Save the file and create the mesh from the geo file by calling <code class="code docutils literal"><span class="pre">gmsh</span> <span class="pre">-3</span> <span class="pre">stack.geo</span></code> on the command line. This should create a stack.msh file. Note, that Gmsh sometimes fails to create the mesh especially when it comes to regular extrusion. In this case repeated calls to Gmsh usually fix the problem. In order to use this mesh within magnum.fe you can convert it by calling <code class="code docutils literal"><span class="pre">magnum.msh</span> <span class="pre">stack.msh</span> <span class="pre">stack.xml</span></code>. <a class="reference internal" href="#mesh-simple"><span class="std std-numref">Fig. 6</span></a> shows the resulting mesh with its cell domains and facet domains.</p>
+<div class="figure align-center" id="mesh-simple">
+<a class="reference internal image-reference" href="_images/mesh_simple.png"><img alt="_images/mesh_simple.png" src="_images/mesh_simple.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Simple circular stack generated with Gmsh
+(a) Cell domains
+(b) Facet domains</span></p>
+</div>
+<p>For a complete reference to Gmsh please refer to the Gmsh manual that is available under <a class="reference external" href="http://geuz.org/gmsh/doc/texinfo/gmsh.html">http://geuz.org/gmsh/doc/texinfo/gmsh.html</a>.</p>
+</div>
+<div class="section" id="creating-a-multilayer-structure-with-salome">
+<h2>Creating a multilayer structure with Salome<a class="headerlink" href="#creating-a-multilayer-structure-with-salome" title="Permalink to this headline">¶</a></h2>
+<p>In contrast to Gmsh, <a class="reference external" href="http://www.salome-platform.org/">Salome</a> is a general pre- and postprocessing tool that has a comprehensive graphical user interface for the generation of geometries. Salome supports a number of backends for the actual mesh generation including Netgen and Tetgen.
+Salome has different user interfaces for building geometries and meshing.
+In order to build the multilayer structure presented in the preceding section with Salome, select <em>Geomtry</em> from the drop-down menu from the main program window as shown in <a class="reference internal" href="#salome-first-view"><span class="std std-numref">Fig. 7</span></a> and open a <em>New</em> project.</p>
+<div class="figure align-center" id="salome-first-view">
+<a class="reference internal image-reference" href="_images/salome_first_view.png"><img alt="_images/salome_first_view.png" src="_images/salome_first_view.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Salome main program window. Select <em>Geometry</em> from dropdown menu in order to create your model.</span></p>
+</div>
+<p>Next we create a cylinder with a height of 1 that will serve a template for the stack layers. Click <em>Create a cylinder</em> in the toolbox as illustrated in <a class="reference internal" href="#salome-create-cylinder"><span class="std std-numref">Fig. 8</span></a>. Select the right radio button in the register <em>Cylinder</em> and enter a <em>Radius</em> of 30 and a <em>Height</em> of 1 in the register <em>Dimensions At Origin</em>. Press <em>Apply and Close</em> to apply the scaling.</p>
+<div class="figure align-center" id="salome-create-cylinder">
+<a class="reference internal image-reference" href="_images/salome_create_cylinder_final.png"><img alt="_images/salome_create_cylinder_final.png" src="_images/salome_create_cylinder_final.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Create generic cylinder with height 1 as template for the different layers of the stack.</span></p>
+</div>
+<p>In the next step the template cylinder is used to create the induvidual layers with different thicknesses. Select <em>Operations -&gt; Transformation -&gt; Scale Transform</em> in the menu bar as shown in the <a class="reference internal" href="#salome-scale-cylinder"><span class="std std-numref">Fig. 9</span></a>. Select the right radio button in the register <em>Scale</em>. Under <em>Objects</em> choose the template cylinder as basis object of the transformation. Use a <em>Scale Factor</em> of 1 in the x and y direction and 5 in the z-direction. Press <em>Apply</em> to create the new cylinder. Consecutively change the <em>Scale Factor Z</em> to 10, 1.5, 3 and 5 and press <em>Apply</em> to construct layers with the desired thicknesses. Afterwards close the window. The <em>Object Browser</em> on the left now contains the basis and 5 scaled layers.</p>
+<div class="figure align-center" id="salome-scale-cylinder">
+<a class="reference internal image-reference" href="_images/salome_scale_cylinder_final.png"><img alt="_images/salome_scale_cylinder_final.png" src="_images/salome_scale_cylinder_final.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Copy and scale the template cylinder in order to create the individual layers.</span></p>
+</div>
+<p>Next, we have to move the layers along the z-direction to construct the final model. Choose <em>Operations -&gt; Transformation -&gt; Translation</em> in the menu bar as shown in <a class="reference internal" href="#salome-translate-cylinder"><span class="std std-numref">Fig. 10</span></a>. Select the left radio button in the register <em>Translation</em> and choose layer <em>Scale_2</em> with 10 height under <em>Objects</em>. Set <em>Dx</em> to 0, <em>Dy</em> to 0 and <em>Dz</em> to 5 for a shift of 5 in the z-direction. Uncheck <em>Create a copy</em> in order to merely transform the layer without duplicating it. Press <em>Apply</em> and shift layer <em>Scale_3</em> by 15, <em>Scale_4</em> by 16.5 and <em>Scale_5</em> by 19.5 in the same way. Then close the window.</p>
+<div class="figure align-center" id="salome-translate-cylinder">
+<a class="reference internal image-reference" href="_images/salome_translate_cylinder_final.png"><img alt="_images/salome_translate_cylinder_final.png" src="_images/salome_translate_cylinder_final.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Move cylinders vertically to create the complete multilayer stack.</span></p>
+</div>
+<p>So far the layers are not linked to each other. Hence, during the mesh process the borders between the layers would be treated separately and same surfaces would be discretized more than once. Click <em>Partition</em> in the toolbox as shown in <a class="reference internal" href="#salome-create-partition"><span class="std std-numref">Fig. 11</span></a>, select the left radio button in the first register and choose the 5 scaled layers as <em>Objects</em>. Click <em>Apply and Close</em> to create the partition and then close the window. In order to generate IDs for different regions, we have to create groups.</p>
+<div class="figure align-center" id="salome-create-partition">
+<a class="reference internal image-reference" href="_images/salome_create_partition_final.png"><img alt="_images/salome_create_partition_final.png" src="_images/salome_create_partition_final.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Merge induvidual layers in order to generate a solid model of the multilayer stack that is aware of its layer structure when meshed.</span></p>
+</div>
+<p>Select the <em>Partition_1</em> in the <em>Object Browser</em> and click <em>New Entry -&gt; Group -&gt; Create Group</em> in the menu bar as illustrated in <a class="reference internal" href="#salome-create-group"><span class="std std-numref">Fig. 12</span></a>. Under <em>Shape Type</em> choose the right radio button to use volumes for the grouping. The <em>Main Shape</em> has to be <em>Partition_1</em>. Next, click at the bottom layer in the viewer and press <em>Add</em>. Note, that you have to hide the original cylinder objects in the object browser in order to ensure that the member objects of the partition are selectable in the viewer window. Click <em>Apply</em> to create the group. Repeat for every layer of the model. The partition should then have 5 groups. The geometry is now ready to get meshed.</p>
+<div class="figure align-center" id="salome-create-group">
+<a class="reference internal image-reference" href="_images/salome_create_group_final.png"><img alt="_images/salome_create_group_final.png" src="_images/salome_create_group_final.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Create a group for each layer to make the meshing module aware of the layers structure of the stack.</span></p>
+</div>
+<p>Change to the <em>Mesh</em> mode of Salome in the drop-down menu from the beginning. Click <em>Mesh -&gt; Create Mesh</em>. Choose <em>Partition_1</em> as <em>Geometry</em>. In the <em>3D</em> register use <em>Tetrahedron (Netgen)</em> as <em>Algorithm</em>. Click <em>Assign a set of hypotheses -&gt; 3D: Automatic Tetrahedralization</em> to determine a mesh length for the discretization. In the next window enter 5 under <em>Length</em> and close the window. Press <em>Apply and Close</em> to accept the mesh. In order to mark the mesh cells with IDs according to the generated groups, select <em>Mesh_1</em> in the <em>Object Browser</em> and click <em>Mesh -&gt; Create Groups from Geometry</em> in the menu bar as illustrated <a class="reference internal" href="#salome-create-mesh-groups"><span class="std std-numref">Fig. 13</span></a>. Insert the 5 groups of <em>Partition_1</em> under the register <em>Elements</em> and click <em>Apply and Close</em> as shown in the figure. Now the mesh can be created. Right click <em>Mesh_1</em> in the <em>Object Browser</em> and select <em>Compute</em>. This should give you a of your geometry.</p>
+<div class="figure align-center" id="salome-create-mesh-groups">
+<a class="reference internal image-reference" href="_images/salome_create_mesh_groups_final.png"><img alt="_images/salome_create_mesh_groups_final.png" src="_images/salome_create_mesh_groups_final.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Create mesh groups in order to mark the mesh cells of the individual layers with the layer ID.</span></p>
+</div>
+<p>The resulting mesh is best save a med file which can be converted by magnum.msh. Right click <em>Mesh_1</em> in the <em>Object Browser</em> and select <em>Export -&gt; MED file</em> to save the mesh. Don&#8217;t forget to save your Salome project. The MED file can be converted to a XML file with magnum.msh as described in Section <a class="reference internal" href="#meshes-convert"><span class="std std-ref">Converting meshes</span></a>.</p>
+</div>
+<div class="section" id="alternatives-to-gmsh-and-salome">
+<h2>Alternatives to Gmsh and Salome<a class="headerlink" href="#alternatives-to-gmsh-and-salome" title="Permalink to this headline">¶</a></h2>
+<p>Open source alternatives to Gmsh and Salome include <a class="reference external" href="http://www.hpfem.jku.at/netgen/">Netgen</a> and <a class="reference external" href="http://wias-berlin.de/software/tetgen/">TetGen</a>. Netgen and TetGen, like Gmsh, are pure meshing tools, that require the geometry definition as input file.</p>
+</div>
+</div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="llg.html" class="btn btn-neutral float-right" title="Landau-Lifshitz-Gilbert Equation"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="oscillator.html" class="btn btn-neutral float-right" title="A Simple Spin-Torque Oscillator" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="state.html" class="btn btn-neutral" title="State and Materials"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -250,12 +361,14 @@ defined on the super mesh with unknown values set to zero.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -270,7 +383,7 @@ defined on the super mesh with unknown values set to zero.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

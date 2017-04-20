@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Landau-Lifshitz-Gilbert Equation &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Integrators for the Landau-Lifshitz-Gilbert Equation &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="Spin Diffusion" href="spin_diffusion.html"/>
-        <link rel="prev" title="Meshing" href="meshing.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Logging" href="loggers.html"/>
+        <link rel="prev" title="State and Materials" href="state.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,69 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Integrators for the Landau-Lifshitz-Gilbert Equation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#llgcvode"><code class="docutils literal"><span class="pre">LLGCvode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llgalougesproject"><code class="docutils literal"><span class="pre">LLGAlougesProject</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llgalougeslagrange"><code class="docutils literal"><span class="pre">LLGAlougesLagrange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llgstochastic"><code class="docutils literal"><span class="pre">LLGStochastic</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-code">Complete code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#more-examples">More Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,24 +125,33 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Landau-Lifshitz-Gilbert Equation</li>
+    <li>Integrators for the Landau-Lifshitz-Gilbert Equation</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/llg.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/llg.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
-  <span class="target" id="module-magnumfe"></span><div class="section" id="landau-lifshitz-gilbert-equation">
-<h1>Landau-Lifshitz-Gilbert Equation<a class="headerlink" href="#landau-lifshitz-gilbert-equation" title="Permalink to this headline">¶</a></h1>
-<p>The Landau-Lifshitz-Gilbert equation (LLG) describes the motion of the magnetization configuration in micromagnetics:</p>
+  <span class="target" id="module-magnumfe"></span><div class="section" id="integrators-for-the-landau-lifshitz-gilbert-equation">
+<h1>Integrators for the Landau-Lifshitz-Gilbert Equation<a class="headerlink" href="#integrators-for-the-landau-lifshitz-gilbert-equation" title="Permalink to this headline">¶</a></h1>
+<p>One of the key features of magnum.fe is the time integration of the Landau-Lifshitz-Gilbert equation (LLG). The LLG describes the motion of the magnetization configuration in micromagnetics:</p>
 <div class="math">
 \[\partial_t \vec{m} =
 - \gamma ( \vec{m} \times \vec{H}_\text{eff} )
@@ -155,64 +160,129 @@
 <div class="math">
 \[\vec{H}_\text{eff} =
 - \frac{1}{\mu_0 M_\text{s}} \frac{\delta U(\vec{m})}{\delta \vec{m}}.\]</div>
-<p>For a detailed discussion on the LLG see <a class="reference internal" href="#brown1963" id="id1">[Brown1963]</a>. magnum.fe implements different algorithms for the integration of the LLG. Note that some algorithms depend on a specific linear backend and/or additional packages.</p>
-<div class="section" id="llgalougesproject">
-<h2><a class="reference internal" href="#magnumfe.LLGAlougesProject" title="magnumfe.LLGAlougesProject"><tt class="xref py py-class docutils literal"><span class="pre">LLGAlougesProject</span></tt></a><a class="headerlink" href="#llgalougesproject" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="magnumfe.LLGAlougesProject">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesProject</tt><big>(</big><em>terms=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesProject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id2">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
-<div class="math">
-\[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
-+ \frac{2 A_\text{ex} \gamma}{\mu_0 M_\text{s}} \int_\Omega \nabla (\vec{m} + \frac{1}{2} k \vec{v}) \cdot \nabla \vec{w} \dx
-+ \gamma \int_\Omega \vec{H}_\text{eff} \cdot \vec{w} \dx
-= 0 \quad \forall \quad \vec{w} \in T_{\vec{m}}\]</div>
-<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> <a class="reference internal" href="#abert2013b" id="id3">[Abert2013b]</a>. As suggested in <a class="reference internal" href="#goldenits2012" id="id4">[Goldenits2012]</a> the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a projection method</p>
-<div class="math">
-\[(\mat{I} - \mat{B}^T \mat{B}) \mat{A} \vec{v} = 
-(\mat{I} - \mat{B}^T \mat{B}) \vec{b}\]</div>
-<p>where <span class="math">\(\mat{A}\)</span> and <span class="math">\(\vec{b}\)</span> are the discretized bilinear and linear part of the weak formulation above and <span class="math">\(\mat{B}\)</span> is a matrix that delivers the node-wise scalar product with <span class="math">\(\vec{m}\)</span> if applied to a vector field (e.g. <span class="math">\(\vec{v}\)</span>).</p>
-<p>The integration step itself is performed by application of a node-wise renormalization as proposed by Alouges in <a class="reference internal" href="#alouges2008" id="id5">[Alouges2008]</a>:</p>
-<div class="math">
-\[\vec{m}_i(t+k) = \frac{\vec{m}_i(t) + k \vec{v}_i}{|\vec{m}_i(t) + k \vec{v}_i|}\]</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This class requires the PETSc Backend to be enabled.</p>
+<p>For a detailed discussion on the LLG, see <a class="reference internal" href="#brown1963" id="id1">[Brown1963]</a>. magnum.fe implements different algorithms for the integration of the LLG. For most situations the <a class="reference internal" href="#magnumfe.LLGCvode" title="magnumfe.LLGCvode"><code class="xref py py-class docutils literal"><span class="pre">LLGCvode</span></code></a> integrator will provide by far the best performance.</p>
+<p>All LLG integrators are configured with a list of <a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a> objects. Each of these objects represents either an effective field contribution, e.g. the demagnetization field, or a more general contribution to the LLG, e.g. the spin-torque term.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create LLG integrator that incorporates the demagnetization field</span>
+<span class="c1"># and the exchange field as effective field</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">DemagField</span><span class="p">(),</span> <span class="n">ExchangeField</span><span class="p">()])</span>
+</pre></div>
 </div>
+<p>By default all integrators solve the LLG on the &#8216;magnetic&#8217; region. This default can be changed by passing a <code class="code docutils literal"><span class="pre">region</span></code> parameter to the initializer.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># solve LLG on region named &#39;some_region_name&#39;</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">DemagField</span><span class="p">(),</span> <span class="n">ExchangeField</span><span class="p">()],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;some_region_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The integration is then performed stepwise by calling the <code class="code docutils literal"><span class="pre">step</span></code> method on the solver object.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># perform timestep with dt = 1ps</span>
+<span class="n">llg</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively you can use the <code class="code docutils literal"><span class="pre">step</span></code> method of the <code class="code docutils literal"><span class="pre">state</span></code> object. This method does not only call the <code class="code docutils literal"><span class="pre">step</span></code> method of the integrator, but also increases the time <code class="code docutils literal"><span class="pre">state.t</span></code> appropriately.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># perform timestep with dt = 1ps and increase state.t</span>
+<span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Depending on the type of LLG integrator, different additional options might be passed to the initializer. Please refer to the following class reference for details.</p>
+<div class="section" id="llgcvode">
+<h2><a class="reference internal" href="#magnumfe.LLGCvode" title="magnumfe.LLGCvode"><code class="xref py py-class docutils literal"><span class="pre">LLGCvode</span></code></a><a class="headerlink" href="#llgcvode" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.LLGCvode">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">LLGCvode</code><span class="sig-paren">(</span><em>terms=[]</em>, <em>prec_solver='LU'</em>, <em>region='magnetic'</em>, <em>normtol=0.005</em>, <em>no_precession=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGCvode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver for the Landau-Lifshitz-Gilbert equation using Sundials CVODE for integration.
+The right-hand-side of the LLG is evaluated nodewise.</p>
+<p>If the BDF method is used, the linear solver is preconditioned as described in <a class="reference internal" href="#suess2002" id="id2">[Suess2002]</a> with</p>
+<div class="math">
+\[\mat{P} = \mat{I} - \phi \frac{\delta}{\delta \vec{m}} \left[
+- \gamma' ( \vec{m} \times \vec{H}_\text{prec}(\vec{m}) )
+- \alpha' ( \vec{m} \times (\vec{m} \times \vec{H}_\text{prec}(\vec{m}) )
+\right]\]</div>
+<p>where <span class="math">\(\phi\)</span> is the scalar parameter in the Newton matrix <span class="math">\(\mat{M} = \mat{I} - \phi \mat{J}\)</span>
+and <span class="math">\(\vec{H}_\text{prec}\)</span> contains all effective-field terms but the demagnetization field.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>)</dt>
+<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>)</dt>
 <dd>Effective Field terms to be considered.</dd>
+<dt>prec_solver (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>Solver for preconditioning system, either &#8216;LU&#8217; or &#8216;GMRES&#8217;, defaults to &#8216;LU&#8217;</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The region where the LLG is solved, defaults to &#8216;magnetic&#8217;</dd>
+<dt>normtol (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Threshold for the renormalization of the magnetization</dd>
+<dt>rtol (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>relative tolerance of CVODE integrator, defaults to 1e-5</dd>
+<dt>atol (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>absolute tolerance of CVODE integrator, defaults to 1e-5</dd>
+<dt>**kwargs</dt>
+<dd>Additional options for the CVODE solver (e.g. order, maxl)</dd>
 </dl>
 </dd>
 </dl>
 <dl class="method">
-<dt id="magnumfe.LLGAlougesProject.calculate_v">
-<tt class="descname">calculate_v</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesProject.calculate_v" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate <span class="math">\(\vec{v}\)</span> according to the algorithm introduced above.</p>
+<dt id="magnumfe.LLGCvode.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGCvode.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the CVode solver. This method should be called after hard resets
+of input values, e.g. after calling <code class="code docutils literal"><span class="pre">set</span></code> on an external field object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="magnumfe.LLGCvode.step">
+<code class="descname">step</code><span class="sig-paren">(</span><em>state</em>, <em>dt</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGCvode.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate <span class="math">\(\vec{m}(t+\Delta t)\)</span> for a given timestep.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
-<dd>The simulation state containing the magnetization configuration.</dd>
-<dt>dt (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The magnetization configuration.</dd>
+<dt>dt (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>The time-step size.</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="llgalougesproject">
+<h2><a class="reference internal" href="#magnumfe.LLGAlougesProject" title="magnumfe.LLGAlougesProject"><code class="xref py py-class docutils literal"><span class="pre">LLGAlougesProject</span></code></a><a class="headerlink" href="#llgalougesproject" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.LLGAlougesProject">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">LLGAlougesProject</code><span class="sig-paren">(</span><em>terms=[]</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGAlougesProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id3">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
+<div class="math">
+\[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
++ \frac{2 A_\text{ex} \gamma}{\mu_0 M_\text{s}} \int_\Omega \nabla (\vec{m} + \frac{1}{2} k \vec{v}) \cdot \nabla \vec{w} \dx
++ \gamma \int_\Omega \vec{H}_\text{eff} \cdot \vec{w} \dx
+= 0 \quad \forall \quad \vec{w} \in T_{\vec{m}}\]</div>
+<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> <a class="reference internal" href="#abert2013b" id="id4">[Abert2013b]</a>. As suggested in <a class="reference internal" href="#goldenits2012" id="id5">[Goldenits2012]</a> the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a projection method</p>
+<div class="math">
+\[(\mat{I} - \mat{B}^T \mat{B}) \mat{A} \vec{v} = 
+(\mat{I} - \mat{B}^T \mat{B}) \vec{b}\]</div>
+<p>where <span class="math">\(\mat{A}\)</span> and <span class="math">\(\vec{b}\)</span> are the discretized bilinear and linear part of the weak formulation above and <span class="math">\(\mat{B}\)</span> is a matrix that delivers the node-wise scalar product with <span class="math">\(\vec{m}\)</span> if applied to a vector field (e.g. <span class="math">\(\vec{v}\)</span>).</p>
+<p>The integration step itself is performed by application of a node-wise renormalization as proposed by Alouges in <a class="reference internal" href="#alouges2008" id="id6">[Alouges2008]</a>:</p>
+<div class="math">
+\[\vec{m}_i(t+k) = \frac{\vec{m}_i(t) + k \vec{v}_i}{|\vec{m}_i(t) + k \vec{v}_i|}\]</div>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>)</dt>
+<dd>Effective Field terms to be considered.</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The region where the LLG is solved, defaults to &#8216;magnetic&#8217;</dd>
+</dl>
+</dd>
+</dl>
 <dl class="method">
 <dt id="magnumfe.LLGAlougesProject.step">
-<tt class="descname">step</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesProject.step" title="Permalink to this definition">¶</a></dt>
+<code class="descname">step</code><span class="sig-paren">(</span><em>state</em>, <em>dt</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGAlougesProject.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate <span class="math">\(\vec{m}(t+\Delta t)\)</span> for a given timestep.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
 <dd>The magnetization configuration.</dd>
-<dt>dt (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>dt (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>The time-step size.</dd>
 </dl>
 </dd>
@@ -223,17 +293,17 @@
 
 </div>
 <div class="section" id="llgalougeslagrange">
-<h2><a class="reference internal" href="#magnumfe.LLGAlougesLagrange" title="magnumfe.LLGAlougesLagrange"><tt class="xref py py-class docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a><a class="headerlink" href="#llgalougeslagrange" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="#magnumfe.LLGAlougesLagrange" title="magnumfe.LLGAlougesLagrange"><code class="xref py py-class docutils literal"><span class="pre">LLGAlougesLagrange</span></code></a><a class="headerlink" href="#llgalougeslagrange" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="magnumfe.LLGAlougesLagrange">
-<em class="property">class </em><tt class="descclassname">magnumfe.</tt><tt class="descname">LLGAlougesLagrange</tt><big>(</big><em>terms=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesLagrange" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id6">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">LLGAlougesLagrange</code><span class="sig-paren">(</span><em>terms=[]</em>, <em>region='magnetic'</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGAlougesLagrange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver for the Landau-Lifshitz-Gilbert equation according to Alouges <a class="reference internal" href="#alouges2008" id="id7">[Alouges2008]</a>. In this two-step algorithm <span class="math">\(\partial_t \vec{m} = \vec{v}\)</span> is computed as</p>
 <div class="math">
 \[\int_\Omega ( \alpha \vec{v} + \vec{m} \times \vec{v}) \cdot \vec{w} \dx
 + \frac{2 A_\text{ex} \gamma}{\mu_0 M_\text{s}} \int_\Omega \nabla (\vec{m} + \frac{1}{2} k \vec{v}) \cdot \nabla \vec{w} \dx
 + \gamma \int_\Omega \vec{H}_\text{eff} \cdot \vec{w} \dx
 = 0 \quad \forall \quad \vec{w} \in T_{\vec{m}}\]</div>
-<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> <a class="reference internal" href="#abert2013b" id="id7">[Abert2013b]</a>. As suggested in <a class="reference internal" href="#goldenits2012" id="id8">[Goldenits2012]</a> the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a Lagrange multiplier ansatz as proposed in <a class="reference internal" href="#goldenits2012" id="id9">[Goldenits2012]</a>.</p>
+<p>where both the trial and test functions are restricted to <span class="math">\(T_{\vec{m}}\)</span> which is the tangent space of <span class="math">\(\vec{m}\)</span> <a class="reference internal" href="#abert2013b" id="id8">[Abert2013b]</a>. As suggested in <a class="reference internal" href="#goldenits2012" id="id9">[Goldenits2012]</a> the exchange field is integrated implicitly whereas all other contributions to the effective field <span class="math">\(\vec{H}_\text{eff}\)</span> are integrated explicitly. This class implements the tangent-space restriction through a Lagrange multiplier ansatz as proposed in <a class="reference internal" href="#goldenits2012" id="id10">[Goldenits2012]</a>.</p>
 <div class="math">
 \[\begin{split}\begin{pmatrix}
     \mat{A} &amp; \mat{B} \\ \mat{B}^T &amp; 0
@@ -249,44 +319,99 @@
 <p>The integration step itself is performed by application of a node-wise renormalization as proposed by Alouges in [1]:</p>
 <div class="math">
 \[\vec{m}_i(t+k) = \frac{\vec{m}_i(t) + k \vec{v}_i}{|\vec{m}_i(t) + k \vec{v}_i|}\]</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This class requires CBC.Block and the PETSc linear-algebra backend.</p>
-</div>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><tt class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></tt></a>)</dt>
+<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>)</dt>
 <dd>Effective Field terms to be considered.</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The region where the LLG is solved, defaults to &#8216;magnetic&#8217;</dd>
 </dl>
 </dd>
 </dl>
 <dl class="method">
-<dt id="magnumfe.LLGAlougesLagrange.calculate_v">
-<tt class="descname">calculate_v</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesLagrange.calculate_v" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate <span class="math">\(\vec{v}\)</span> according to the algorithm introduced above.</p>
+<dt id="magnumfe.LLGAlougesLagrange.step">
+<code class="descname">step</code><span class="sig-paren">(</span><em>state</em>, <em>dt</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGAlougesLagrange.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate <span class="math">\(\vec{m}(t+\Delta t)\)</span> for a given timestep.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
-<dd>The simulation state containing the magnetization configuration.</dd>
-<dt>dt (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The simulation state.</dd>
+<dt>dt (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>The time-step size.</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="llgstochastic">
+<h2><a class="reference internal" href="#magnumfe.LLGStochastic" title="magnumfe.LLGStochastic"><code class="xref py py-class docutils literal"><span class="pre">LLGStochastic</span></code></a><a class="headerlink" href="#llgstochastic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="magnumfe.LLGStochastic">
+<em class="property">class </em><code class="descclassname">magnumfe.</code><code class="descname">LLGStochastic</code><span class="sig-paren">(</span><em>terms=[]</em>, <em>region='magnetic'</em>, <em>normtol=0.005</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGStochastic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solver for the Landau-Lifshitz-Gilbert equation using semi-implicit integrator suitable for
+stochastic integration. The right-hand-side of the LLG is evaluated nodewise.</p>
+<p>Stochastic LLG equation:</p>
+<div class="math">
+\[\partial_t \vec{m} =
+- \frac{\gamma}{1+\alpha^2} \vec{m} \times \left( \vec{h}_\text{eff} + \vec{h}_\text{th}\right)
++ \frac{\alpha \gamma}{1+\alpha^2} \vec{m} \times \vec{m} \times \left( \vec{h}_\text{eff} + \vec{h}_\text{th} \right)\]</div>
+<p>where the fluctuating magnetic fields <span class="math">\(\vec{h}_\text{th}\)</span> are uncorrelated Gaussian white noises
+interpreted in the sense of Stratonovich and</p>
+<div class="math">
+\[\begin{split}\langle \vec{h}_\text{th}^{i,l}(t) \rangle &amp;= 0 \\
+\langle \vec{h}_\text{th}^{i,m}(t) \; \vec{h}_\text{th}^{j,n}(t_0) \rangle &amp;= 2D \; \delta_{ij} \; \delta_{mn} \; \delta(t-t_0)\end{split}\]</div>
+<p>with <span class="math">\(D=\frac{\alpha \, k_b \, T}{\gamma \, \mu_0 \, m_s \, V}\)</span>, <span class="math">\(i,j = 1, \dots, N\)</span> and <span class="math">\(m,n \in {x,y,z}\)</span>.
+Integration of the thermal field over a timeinterval <span class="math">\(\Delta t\)</span> leads to a fluctuating field <span class="math">\(\Delta W\)</span>, with the following
+properties:</p>
+<div class="math">
+\[\begin{split}\langle \Delta W^{i,m}(t) \rangle &amp;= 0 \\
+\langle \Delta W^{i,m}(t) \; \Delta W^{j,n}(t_0) \rangle &amp;= 2D \; \delta_{ij} \; \delta_{mn} \; \delta(t-t_0) \; \Delta t\end{split}\]</div>
+<p>Using a normally distributed random variable with zero mean and unit variance <span class="math">\(\eta\)</span> allows to
+write <span class="math">\(\Delta W = \sqrt{2 \, D \, \Delta t} \, \eta\)</span></p>
+<p>The stochastic PDE is often split into a deterministic and a stochastic part in order to distinguish the different temporal scaling of the
+contributing fields:</p>
+<div class="math">
+\[\begin{split}\Delta \vec{m} &amp;= A(\vec{m}, t) \; \Delta t + B_k(\vec{m}, t) \; \Delta W_k \\
+                 &amp;= A(\vec{m}, t) \; \Delta t + B_k(\vec{m}, t) \; \sqrt{2 \, D \, \Delta t} \; \eta_k\end{split}\]</div>
+<p>Due to the stochastic nature of the thermal field the second term contributes only with <span class="math">\(\sqrt{\Delta t}\)</span> to the change in the
+magnetization, thereas the deterministic term contributes with <span class="math">\(\Delta t\)</span>. This discrepancy can be hided by moving the different
+scaling into the thermal field.</p>
+<p>Finally the semiimplicit integration method reads as follows:</p>
+<div class="math">
+\[\begin{split}\partial_t \vec{m} &amp;= \left[ A(\vec{m}, t) + B_k(\vec{m}, t) \; \sqrt{\frac{2 \, D}{\Delta t}} \; \eta_k \right] \\
+\vec{m}^0_{t+\Delta t/2} &amp;= \vec{m}_{t} + \frac{\vec{m}_{t}-\vec{m}_{t-\Delta t}}{2} \\
+\vec{m}^p_{t+\Delta t/2} &amp;= \vec{m}_{t} + \partial_t \vec{m} \left(\vec{m}^{p-1}_{t+\Delta t/2} \; , \; t + \Delta t / 2\right) \; \frac{\Delta t}{2} \\
+\vec{m}_{t+\Delta t} &amp;= \vec{m}_{t} + \partial_t \vec{m} \left(\vec{m}^p_{t+\Delta t/2} \; , \; t + \Delta t / 2\right) \; \Delta t\end{split}\]</div>
+<p>where <span class="math">\(p\)</span> is the index of the fixpoint iteration, used to solve the implicit (and nonlinear) equation.</p>
+<dl class="docutils">
+<dt><em>Arguments</em></dt>
+<dd><dl class="first last docutils">
+<dt>terms (<a class="reference internal" href="field_terms.html#magnumfe.LLGTerm" title="magnumfe.LLGTerm"><code class="xref py py-class docutils literal"><span class="pre">LLGTerm</span></code></a>)</dt>
+<dd>Effective Field terms to be considered.</dd>
+<dt>region (<code class="xref py py-class docutils literal"><span class="pre">string</span></code>)</dt>
+<dd>The region where the LLG is solved, defaults to &#8216;magnetic&#8217;</dd>
+<dt>normtol (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
+<dd>Threshold for the renormalization of the magnetization</dd>
+<dt>seed (<code class="xref py py-class docutils literal"><span class="pre">int</span></code>)</dt>
+<dd>Seed for the random number generator (defaults to &#8216;None&#8217; for random seed)</dd>
+</dl>
+</dd>
+</dl>
 <dl class="method">
-<dt id="magnumfe.LLGAlougesLagrange.step">
-<tt class="descname">step</tt><big>(</big><em>state</em>, <em>dt</em><big>)</big><a class="headerlink" href="#magnumfe.LLGAlougesLagrange.step" title="Permalink to this definition">¶</a></dt>
+<dt id="magnumfe.LLGStochastic.step">
+<code class="descname">step</code><span class="sig-paren">(</span><em>state</em>, <em>dt</em><span class="sig-paren">)</span><a class="headerlink" href="#magnumfe.LLGStochastic.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate <span class="math">\(\vec{m}(t+\Delta t)\)</span> for a given timestep.</p>
 <dl class="docutils">
 <dt><em>Arguments</em></dt>
 <dd><dl class="first last docutils">
-<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><tt class="xref py py-class docutils literal"><span class="pre">State</span></tt></a>)</dt>
-<dd>The simulation state.</dd>
-<dt>dt (<tt class="xref py py-class docutils literal"><span class="pre">float</span></tt>)</dt>
+<dt>state (<a class="reference internal" href="state.html#magnumfe.State" title="magnumfe.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>)</dt>
+<dd>The magnetization configuration.</dd>
+<dt>dt (<code class="xref py py-class docutils literal"><span class="pre">float</span></code>)</dt>
 <dd>The time-step size.</dd>
 </dl>
 </dd>
@@ -304,40 +429,41 @@
 <table class="docutils citation" frame="void" id="suess2002" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Suess2002]</td><td>Suess, D., Tsiantos, V., Schrefl, T., Fidler, J., Scholz, W., Forster, H., ... &amp; Miles, J. J. (2002). Time resolved micromagnetics using a preconditioned time integration method. Journal of Magnetism and Magnetic Materials, 248(2), 298-311.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[Suess2002]</a></td><td>Suess, D., Tsiantos, V., Schrefl, T., Fidler, J., Scholz, W., Forster, H., ... &amp; Miles, J. J. (2002). Time resolved micromagnetics using a preconditioned time integration method. Journal of Magnetism and Magnetic Materials, 248(2), 298-311.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="alouges2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Alouges2008]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id6">3</a>)</em> Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.</td></tr>
+<tr><td class="label">[Alouges2008]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>)</em> Alouges, F. (2008). A new finite element scheme for Landau-Lifchitz equations. Discrete Contin. Dyn. Syst. Ser. S, 1(2), 187-196.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="abert2013b" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Abert2013b]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> Abert, C., Exl, L., Bruckner, F., Drews, A., &amp; Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.</td></tr>
+<tr><td class="label">[Abert2013b]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Abert, C., Exl, L., Bruckner, F., Drews, A., &amp; Suess, D. (2013). magnum. fe: A micromagnetic finite-element simulation code based on FEniCS. Journal of Magnetism and Magnetic Materials, 345, 29-35.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="goldenits2012" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Goldenits2012]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>)</em> Goldenits, P., Hrkac, G., Praetorius, D., &amp; Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.</td></tr>
+<tr><td class="label">[Goldenits2012]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id9">2</a>, <a class="fn-backref" href="#id10">3</a>)</em> Goldenits, P., Hrkac, G., Praetorius, D., &amp; Suess, D. (2012, February). An effective integrator for the Landau-Lifshitz-Gilbert equation. In Proceedings of Mathmod 2012 Conference.</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="spin_diffusion.html" class="btn btn-neutral float-right" title="Spin Diffusion"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="loggers.html" class="btn btn-neutral float-right" title="Logging" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="meshing.html" class="btn btn-neutral" title="Meshing"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="state.html" class="btn btn-neutral" title="State and Materials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -346,12 +472,14 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -366,7 +494,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

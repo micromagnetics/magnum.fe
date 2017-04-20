@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started &mdash; magnum.fe 0.0.1 documentation</title>
+  <title>Getting Started &mdash; magnum.fe 2.2.2 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,17 @@
   
 
   
-    <link rel="top" title="magnum.fe 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="State and Materials" href="state.html"/>
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="magnum.fe 2.2.2 documentation" href="index.html"/>
+        <link rel="next" title="Meshes and domains" href="meshing.html"/>
         <link rel="prev" title="Installation" href="installation.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,78 +48,70 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> magnum.fe</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magnum.fe
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-source">Install from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-dependencies-in-ubuntu-14-04">Install dependencies in Ubuntu 14.04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#create-docker-container">Create docker container</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-standard-problem-4">The Standard Problem #4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#complete-code">Complete code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-the-simulation">Run the Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#more-examples">More Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watch-the-results">Watch the Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-next-steps">The Next Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="state.html#state"><tt class="docutils literal"><span class="pre">State</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="state.html#material"><tt class="docutils literal"><span class="pre">Material</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#magnum-msh">magnum.msh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meshing.html#wrappedmesh"><tt class="docutils literal"><span class="pre">WrappedMesh</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="llg.html">Landau-Lifshitz-Gilbert Equation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougesproject"><tt class="docutils literal"><span class="pre">LLGAlougesProject</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="llg.html#llgalougeslagrange"><tt class="docutils literal"><span class="pre">LLGAlougesLagrange</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin Diffusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spin_diffusion.html#spindiffusion"><tt class="docutils literal"><span class="pre">SpinDiffusion</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#shell-transformation-method">Shell-Transformation Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open_boundary.html#hybrid-fem-bem-method-fredkin-and-koehler">Hybrid FEM-BEM Method (Fredkin and Koehler)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#llgterm"><tt class="docutils literal"><span class="pre">LLGTerm</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#demagfield"><tt class="docutils literal"><span class="pre">DemagField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#exchangefield"><tt class="docutils literal"><span class="pre">ExchangeField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#externalfield"><tt class="docutils literal"><span class="pre">ExternalField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#oerstedfield"><tt class="docutils literal"><span class="pre">OerstedField</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#spintorque"><tt class="docutils literal"><span class="pre">SpinTorque</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="field_terms.html#uniaxialanisotropyfield"><tt class="docutils literal"><span class="pre">UniaxialAnisotropyField</span></tt></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#timer"><tt class="docutils literal"><span class="pre">Timer</span></tt></a></li>
-<li class="toctree-l2"><a class="reference internal" href="misc.html#cache"><tt class="docutils literal"><span class="pre">Cache</span></tt></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="meshing.html">Meshes and domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oscillator.html">A Simple Spin-Torque Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State and Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llg.html">Integrators for the Landau-Lifshitz-Gilbert Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggers.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_terms.html">Field Terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spin_diffusion.html">Spin diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open_boundary.html">Open Boundary Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
-        
+            
+          
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -129,139 +126,158 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
     <li>Getting Started</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/getting_started.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>As a first example the standard problem #4 <a class="reference internal" href="#mumag4" id="id1">[MuMag4]</a>, proposed by the MuMag group is computed with magnum.fe. Since magnum.fe is a Python library, a simulation script is a Python script that imports magnum.fe. Thus, every magnum.fe simulation script starts with</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="kn">import</span> <span class="o">*</span>
+<p>As a first example the standard problem #4 <a class="reference internal" href="#mumag4" id="id1">[MuMag4]</a>, proposed by the MuMag group is computed with magnum.fe. This problem describes the switching of a thin strip of permalloy under the influence of an external field.</p>
+<div class="section" id="the-standard-problem-4">
+<h2>The Standard Problem #4<a class="headerlink" href="#the-standard-problem-4" title="Permalink to this headline">¶</a></h2>
+<p>Since magnum.fe is a Python library, a simulation script is a Python script that imports magnum.fe. Thus, every magnum.fe simulation script starts with</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<p>In the next step a mesh for the simulation is created. For simple geometries, the builtin meshing tools of dolfin and magnum.fe are a good choice. More complicated geometries can be meshed with external tools. magnum.fe supports a variety of mesh file formats through the Gmsh library. Depending on the method for the solution of the open-boundary demagnetization field problem the mesh is also required to include a cuboid shell, see <a class="reference internal" href="open_boundary.html#open-boundary"><em>Open Boundary Problems</em></a>.</p>
-<p>Here we use the hybrid FEM-BEM method, see <a class="reference internal" href="open_boundary.html#fem-bem"><em>Hybrid FEM-BEM Method (Fredkin and Koehler)</em></a>, for the computation of the demagnetization field. Hence a simple cuboid mesh as provided by the dolfin meshing tools is sufficient for the solution of the standard problem #4, that requires a cuboid of size <span class="math">\(500 \times 125 \times 3\)</span> nm. The mesh is constructed symmetrically around the coordinate origin and scaled by <span class="math">\(10^9\)</span>.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="o">-</span><span class="mf">500.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">125.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">500.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">125.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<p>In the next step a mesh for the simulation is created. For simple geometries, the meshing tools of FEniCS are a good choice. More complicated geometries can be meshed with external tools. magnum.fe comes with the mesh converter magnum.msh that supports a variety of file formats through the Gmsh library. Depending on the method for the solution of the open-boundary demagnetization field problem, the mesh is also required to include a cuboid shell, see <a class="reference internal" href="open_boundary.html#open-boundary"><span class="std std-ref">Open Boundary Problems</span></a>.</p>
+<p>Here we use the hybrid FEM-BEM method, see <a class="reference internal" href="open_boundary.html#fem-bem"><span class="std std-ref">Hybrid FEM-BEM Method (Fredkin and Koehler)</span></a>, for the computation of the demagnetization field. Hence a simple cuboid mesh as provided by the FEniCS meshing tools is sufficient for the solution of the standard problem #4, that requires a cuboid of size <span class="math">\(500 \times 125 \times 3\)</span> nm. The mesh is constructed symmetrically around the coordinate origin and scaled by <span class="math">\(10^9\)</span>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">250</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mf">62.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A magnetization configuration that is known to relax quickly in a magnetic s-state is defined by an analytical expression.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;sin(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="n">Expression</span><span class="p">(</span><span class="s">&quot;fabs(pi*x[0]/1e3)&quot;</span><span class="p">))</span>
+<p>A magnetization configuration that is known to relax quickly in a magnetic s-state is defined by an analytical expression. Note, that magnum.fe expects the magnetization to be normalized to 1.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m0</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s2">&quot;cos(a)&quot;</span><span class="p">,</span> <span class="s2">&quot;sin(a)&quot;</span><span class="p">,</span> <span class="s2">&quot;0.0&quot;</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="n">Expression</span><span class="p">(</span><span class="s2">&quot;fabs(pi*x[0]/1e3)&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>A simulation state is created and initialized with material paramters and the start magnetization m_start. Note the the <tt class="code docutils literal"><span class="pre">scale</span></tt> parameter is set to <span class="math">\(10^{-9}\)</span> since the problem size is given in nanometers. This scaling is advised to avoid numerical artifacts.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="o">.</span><span class="n">py</span><span class="p">(),</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m_start</span><span class="p">)</span>
+<p>A simulation state is created and initialized with material parameters and the start magnetization <code class="code docutils literal"><span class="pre">m0</span></code>. Note that the <code class="code docutils literal"><span class="pre">scale</span></code> parameter is set to <span class="math">\(10^{-9}\)</span> since the problem size is given in nanometers. This scaling is advised to avoid numerical artifacts.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="o">.</span><span class="n">py</span><span class="p">(),</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For the relaxation of the system, an LLG-solver object is created that includes the exchange field and demagnetization field as only effective field contributions.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">llg</span> <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">(),</span> <span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)])</span>
+<p>For the relaxation of the system, an LLG-solver object is created that includes the exchange field and demagnetization field as only effective field contributions. From the available integration routines the fully implicit <code class="xref py py-class docutils literal"><span class="pre">LLGCvode</span></code> solver is by far the fastest.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">exchange_field</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">()</span>
+<span class="n">demag_field</span>    <span class="o">=</span> <span class="n">DemagField</span><span class="p">()</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The system is relaxed by setting the damping of the material to <span class="math">\(\alpha = 1\)</span> and performing a number of integration steps.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span> <span class="n">llg</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mf">2e-11</span><span class="p">)</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In order to switch the magnetization as required by the standard problem #4, the damping is reduced to <span class="math">\(\alpha = 0.02\)</span>. A new solver object is created that includes an external-field.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span>
-
-<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span>
-    <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mf">24.6e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.3e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))),</span>
-    <span class="n">ExchangeField</span><span class="p">(),</span>
-    <span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)</span>
-<span class="p">])</span>
+<p>In order to switch the magnetization as required by the standard problem #4, the damping is reduced to <span class="math">\(\alpha = 0.02\)</span>. A new solver object is created that reuses the exchange field demagnetization field objects and additionally includes an external field. Furthermore the simulation time is reset to 0.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">external_field</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mf">24.6e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.3e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)))</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>The time loop for the solution of the LLG has to be programmed explicitly by now. Also the logging of the averaged magnetization is realized directly in Python. Note that an LLG step can either be performed by calling <tt class="code docutils literal"><span class="pre">step</span></tt> on the <tt class="xref py py-class docutils literal"><span class="pre">llg</span></tt> object as is done for the relaxation process, or by calling <tt class="code docutils literal"><span class="pre">step</span></tt> on the <tt class="xref py py-class docutils literal"><span class="pre">state</span></tt> object. In contrast to the first method, the latter method increases the time variable <tt class="xref py py-class docutils literal"><span class="pre">t</span></tt> of the state.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># open logfile</span>
-<span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="c"># initialize time variables</span>
-<span class="n">dt</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mf">2e-13</span><span class="p">,</span> <span class="mf">1e-9</span>
-
-<span class="c"># loop, loop, loop</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)):</span>
-
-  <span class="c"># write scalar information</span>
-  <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%f</span><span class="s"> </span><span class="si">%f</span><span class="s"> </span><span class="si">%f</span><span class="s"> </span><span class="si">%f</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">state</span><span class="o">.</span><span class="n">t</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,)</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()))</span>
-
-  <span class="c"># calculate next step</span>
-  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-
-<span class="n">logfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<p>Note that magnum.fe expects all field values to be given in A/m. To convert from Tesla just divide by <code class="code docutils literal"><span class="pre">Constants.mu0</span></code>. The time loop for the solution of the LLG is programmed as Python <code class="code docutils literal"><span class="pre">while</span></code> loop. Before entering the integration loop we define some log files. Here we use two log files. In the first file <code class="code docutils literal"><span class="pre">log.dat</span></code> we want to write the averaged magnetization for every time step. The logging of scalar values in magnum.fe can be realized with the <code class="xref py py-class docutils literal"><span class="pre">ScalarLogger</span></code> class. The second file should contain the complete magnetization configuration for different times, which can be implemented with the <code class="xref py py-class docutils literal"><span class="pre">FieldLogger</span></code> class. Since this leads to the creation of large amounts of data we want this logger to log only every 10th step.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># prepare log files</span>
+<span class="n">logger</span>  <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s2">&quot;log.dat&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">))</span>
+<span class="n">mlogger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s2">&quot;data/m.pvd&quot;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+<p>The loop for integration of 1 ns with logging then reads</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># loop, loop, loop</span>
+<span class="k">while</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span>
+  <span class="n">logger</span>  <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">mlogger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="complete-code">
 <h2>Complete code<a class="headerlink" href="#complete-code" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">magnumfe</span> <span class="k">import</span> <span class="o">*</span>
 
-<span class="c">#######################################</span>
-<span class="c">#### GENERATE MESH WITH SHELL</span>
-<span class="c">#######################################</span>
+<span class="c1"># generate mesh</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">250</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mf">62.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="o">-</span><span class="mf">500.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">125.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">500.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">125.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># define start magnetization</span>
+<span class="n">m0</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s2">&quot;cos(a)&quot;</span><span class="p">,</span> <span class="s2">&quot;sin(a)&quot;</span><span class="p">,</span> <span class="s2">&quot;0.0&quot;</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="n">Expression</span><span class="p">(</span><span class="s2">&quot;fabs(pi*x[0]/1e3)&quot;</span><span class="p">))</span>
 
-<span class="c">#######################################</span>
-<span class="c">#### RELAX SYSTEM TO S-STATE</span>
-<span class="c">#######################################</span>
+<span class="c1"># initialize state</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="o">.</span><span class="n">py</span><span class="p">(),</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m0</span><span class="p">)</span>
 
-<span class="c"># define start magnetization</span>
-<span class="n">m_start</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">((</span><span class="s">&quot;cos(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;sin(alpha)&quot;</span><span class="p">,</span> <span class="s">&quot;0.0&quot;</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="n">Expression</span><span class="p">(</span><span class="s">&quot;fabs(pi*x[0]/1e3)&quot;</span><span class="p">))</span>
+<span class="c1"># create exchange and demag field objects</span>
+<span class="n">exchange_field</span> <span class="o">=</span> <span class="n">ExchangeField</span><span class="p">()</span>
+<span class="n">demag_field</span>    <span class="o">=</span> <span class="n">DemagField</span><span class="p">()</span>
 
-<span class="n">state</span>   <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="o">.</span><span class="n">py</span><span class="p">(),</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m_start</span><span class="p">)</span>
-<span class="n">llg</span>     <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span><span class="n">ExchangeField</span><span class="p">(),</span> <span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)])</span>
-
+<span class="c1"># initialize llg integrator and relax the system to s-state with high alpha</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">])</span>
 <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span> <span class="n">llg</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mf">2e-11</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span> <span class="n">llg</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span>
 
-<span class="c">#######################################</span>
-<span class="c">#### SIMULATE SWITCHING</span>
-<span class="c">#######################################</span>
-
+<span class="c1"># reset alpha and initialize LLG integrator with external field</span>
 <span class="n">state</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">external_field</span> <span class="o">=</span> <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mf">24.6e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.3e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)))</span>
+<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGCvode</span><span class="p">([</span><span class="n">exchange_field</span><span class="p">,</span> <span class="n">demag_field</span><span class="p">,</span> <span class="n">external_field</span><span class="p">])</span>
 
-<span class="n">llg</span> <span class="o">=</span> <span class="n">LLGAlougesProject</span><span class="p">([</span>
-    <span class="n">ExternalField</span><span class="p">(</span><span class="n">Constant</span><span class="p">((</span><span class="o">-</span><span class="mf">24.6e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.3e-3</span><span class="o">/</span><span class="n">Constants</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))),</span>
-    <span class="n">ExchangeField</span><span class="p">(),</span>
-    <span class="n">DemagField</span><span class="p">(</span><span class="s">&quot;FK&quot;</span><span class="p">)</span>
-<span class="p">])</span>
+<span class="c1"># prepare log files</span>
+<span class="n">logger</span>  <span class="o">=</span> <span class="n">ScalarLogger</span><span class="p">(</span><span class="s2">&quot;log.dat&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">))</span>
+<span class="n">mlogger</span> <span class="o">=</span> <span class="n">FieldLogger</span><span class="p">(</span><span class="s2">&quot;data/m.pvd&quot;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">every</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
 
-<span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;sp4.dat&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">dt</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mf">2e-13</span><span class="p">,</span> <span class="mf">1e-9</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)):</span>
-
-  <span class="c"># write scalar information</span>
-  <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.10f</span><span class="s"> </span><span class="si">%f</span><span class="s"> </span><span class="si">%f</span><span class="s"> </span><span class="si">%f</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">state</span><span class="o">.</span><span class="n">t</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,)</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">average</span><span class="p">()))</span>
-
-  <span class="c"># calculate next step</span>
-  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-
-<span class="n">logfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1"># loop, loop, loop</span>
+<span class="k">while</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span>
+  <span class="n">logger</span>  <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">mlogger</span> <span class="o">&lt;&lt;</span> <span class="n">state</span>
+  <span class="n">state</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">llg</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="run-the-simulation">
 <h2>Run the Simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this headline">¶</a></h2>
 <p>Since the simulation file is a simple Python script it is run with the Python interpreter. Save the above program to a file called <cite>sp4.py</cite> and run</p>
-<div class="code highlight-python"><div class="highlight"><pre>$ python sp4.py
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">sp4</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>on the command line.</p>
 </div>
-<div class="section" id="more-examples">
-<h2>More Examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></h2>
-<p>More examples can be found in the <tt class="code docutils literal"><span class="pre">examples</span></tt> directory of the magnum.fe source tree.</p>
+<div class="section" id="watch-the-results">
+<h2>Watch the Results<a class="headerlink" href="#watch-the-results" title="Permalink to this headline">¶</a></h2>
+<p>This simulation produces a textfile with whitespace separated values of the time and the averaged magnetization components in it named log.dat. A simple way to visualize these results is the plotting tool Gnuplot which is installed in magnum.fe virtual machine image. In the simulation directory open Gnuplot by typing</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">gnuplot</span>
+</pre></div>
+</div>
+<p>This opens a gnuplot console. The results from the log.dat file can be plotted by typing the following commands.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">xlabel</span> <span class="s2">&quot;t [s]&quot;</span>
+<span class="nb">set</span> <span class="n">ylabel</span> <span class="s2">&quot;m&quot;</span>
+<span class="n">plot</span> <span class="s2">&quot;log.dat&quot;</span> <span class="n">using</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span> <span class="k">with</span> <span class="n">lines</span> <span class="n">title</span> <span class="s2">&quot;mx&quot;</span><span class="p">,</span> \
+     <span class="s2">&quot;log.dat&quot;</span> <span class="n">using</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span> <span class="k">with</span> <span class="n">lines</span> <span class="n">title</span> <span class="s2">&quot;my&quot;</span><span class="p">,</span> \
+     <span class="s2">&quot;log.dat&quot;</span> <span class="n">using</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="k">with</span> <span class="n">lines</span> <span class="n">title</span> <span class="s2">&quot;mz&quot;</span>
+</pre></div>
+</div>
+<p>This should bring up a window with the averaged magnetization components plottet over time, see <a class="reference internal" href="#sp4-gnuplot"><span class="std std-numref">Fig. 4</span></a>. For more information on Gnuplot, please refer to the online manual at <a class="reference external" href="http://www.gnuplot.info/">http://www.gnuplot.info/</a>.</p>
+<div class="figure" id="sp4-gnuplot">
+<a class="reference internal image-reference" href="_images/sp4_gnuplot.png"><img alt="_images/sp4_gnuplot.png" src="_images/sp4_gnuplot.png" style="width: 453.0px; height: 317.4px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Results for the standard problem #4 plotted with Gnuplot</span></p>
+</div>
+<p>Additionally, the full magnetization configuration is written to a PVD file every 10th time step. This file can be opened with any VTK viewer, e.g. <a class="reference external" href="http://www.paraview.org/">Paraview</a>.</p>
+</div>
+<div class="section" id="the-next-steps">
+<h2>The Next Steps<a class="headerlink" href="#the-next-steps" title="Permalink to this headline">¶</a></h2>
+<p>The following sections of the manual will walk you through more advanced topics such as mesh generation and problem definition on multi-domain structures. These tutorial like sections will be followed by reference sections that give you an overview over all existing classes and functions.</p>
+<p>Since magnum.fe is based on the finite-element library FEniCS, all functionality of FEniCS is also available in magnum.fe simulation scripts. In particular all spatially varying fields such as the magnetization are FEniCS <code class="code docutils literal"><span class="pre">Function</span></code> objects and can be processed by FEniCS routines. Please refer to the FEniCS documentation under <a class="reference external" href="http://fenicsproject.org/documentation/">http://fenicsproject.org/documentation/</a> in order to make use of this functionality.</p>
+<p>If you installed the virtual machine image of magnum.fe, you will find an <code class="code docutils literal"><span class="pre">examples</span></code> directory that contains a number of useful demo simulation scripts, including the examples described in this manual.</p>
 <table class="docutils citation" frame="void" id="mumag4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -272,15 +288,16 @@
 </div>
 
 
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="state.html" class="btn btn-neutral float-right" title="State and Materials"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="meshing.html" class="btn btn-neutral float-right" title="Meshes and domains" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation.html" class="btn btn-neutral" title="Installation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -289,12 +306,14 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, Claas Abert.
+        &copy; Copyright 2017, SuessCo.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -309,7 +328,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'2.2.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
